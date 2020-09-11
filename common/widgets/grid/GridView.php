@@ -6,7 +6,7 @@ namespace rusbeldoor\yii2General\common\widgets\grid;
 /**
  * ...
  */
-class GridView extends yii\grid\GridView;
+class GridView extends yii\grid\GridView
 {
 	public $pager = [
 		'pager' => [
