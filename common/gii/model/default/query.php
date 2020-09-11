@@ -31,11 +31,13 @@ namespace <?= $generator->queryNs ?>;
  */
 class <?= $className ?> extends \rusbeldoor\yii2General\common\models\ActiveQuery
 {
+    /**
+     * ...
+     *
+     * return <?= $className ?>
+     */
     /*
-    // Example
     public function active()
-    {
-        return $this->andWhere('active=1');
-    }
+    { return $this->andWhere("active=1"); }
     */
 }
