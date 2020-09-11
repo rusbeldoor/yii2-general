@@ -13,8 +13,8 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
-use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
 use yii\widgets\Pjax;
+use <?= $generator->indexWidgetType === 'grid' ? "rusbeldoor\yii2General\common\widgets\grid\GridView" : "yii\\widgets\\ListView" ?>;
 
 /* @var $this yii\web\View */
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
