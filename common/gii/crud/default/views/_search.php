@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
     <?= "<?php " ?>$form = ActiveForm::begin([
         'id' => 'panel-search-form',
         'action' => ['index'],
-        'method' => 'get',
+        'method' => 'post',
         'options' => ['data-pjax' => 1],
     ]); ?>
 <?php foreach ($generator->getColumnNames() as $attribute) {
