@@ -13,5 +13,5 @@ echo $form->field($generator, 'indexWidgetType')->dropDownList([
     'list' => 'ListView',
 ]);
 echo $form->field($generator, 'enableI18N')->checkbox();
-echo $form->field($generator, 'enablePjax')->checkbox()->checked()->disabled();
+echo $form->field($generator, 'enablePjax')->checkbox(['checked ' => true, 'readonly' => true]);
 echo $form->field($generator, 'messageCategory');
