@@ -1,7 +1,9 @@
 {
     "name": "rusbeldoor/yii2-general",
     "type": "library",
-    "require": {},
+    "require": {
+        "thomaspark/bootswatch": "^4"
+    },
     "autoload": {
         "psr-4": {
             "rusbeldoor\\yii2General\\": ""
