@@ -65,10 +65,9 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
         $query = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::find();
 
         // add conditions that should always apply here
+        // ...
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
+        $dataProvider = new ActiveDataProvider(['query' => $query]);
 
         $this->load($params);
 
