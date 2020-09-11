@@ -24,12 +24,10 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
         'options' => ['data-pjax' => 1],
     ]); ?>
-<?php
-$count = 0;
-foreach ($generator->getColumnNames() as $attribute) {
+<?php foreach ($generator->getColumnNames() as $attribute) {
+    if (in_array($attribute, ['id'])) { continue; }
     echo "    <?= " . $generator->generateActiveSearchField($attribute) . " ?>\n";
-}
-?>
+} ?>
     <div>
         <?= "<?= " ?>Html::submitButton('Применить', ['class' => 'btn btn-primary']) ?>
         <?= "<?= " ?>Html::resetButton('<i class="fas fa-wind"></i> Сбросить', ['class' => 'btn btn-outline-secondary']) ?>
