@@ -1,0 +1,63 @@
+<?php
+/**
+ * @link http://www.yiiframework.com/
+ * @copyright Copyright (c) 2008 Yii Software LLC
+ * @license http://www.yiiframework.com/license/
+ */
+
+namespace rusbeldoor\yii2-general\common\gii\crud;
+
+use Yii;
+use yii\db\ActiveRecord;
+use yii\db\BaseActiveRecord;
+use yii\db\Schema;
+use yii\gii\CodeFile;
+use yii\helpers\Inflector;
+use yii\helpers\VarDumper;
+use yii\web\Controller;
+
+/**
+ * Generates CRUD
+ *
+ * @property array $columnNames Model column names. This property is read-only.
+ * @property string $controllerID The controller ID (without the module ID prefix). This property is
+ * read-only.
+ * @property string $nameAttribute This property is read-only.
+ * @property array $searchAttributes Searchable attributes. This property is read-only.
+ * @property bool|\yii\db\TableSchema $tableSchema This property is read-only.
+ * @property string $viewPath The controller view path. This property is read-only.
+ *
+ * @author Qiang Xue <qiang.xue@gmail.com>
+ * @since 2.0
+ */
+class Generator extends \yii\gii\generators\crud\Generator
+{
+    /**
+     * Generates parameter tags for phpdoc
+     * @return array parameter tags for phpdoc
+     */
+    public function generateActionParamComments()
+    {
+        /* @var $class ActiveRecord */
+        $class = $this->modelClass;
+        $pks = $class::primaryKey();
+        if (($table = $this->getTableSchema()) === false) {
+            $params = [];
+            foreach ($pks as $pk) {
+                $params[] = '@param $' . $pk . ' ' . (strtolower(substr($pk, -2)) === 'id' ? 'integer' : 'string');
+            }
+
+            return $params;
+        }
+        if (count($pks) === 1) {
+            return ['@param $id ' . $table->columns[$pks[0]]->phpType];
+        }
+
+        $params = [];
+        foreach ($pks as $pk) {
+            $params[] = '@param $' . $pk . ' ' . $table->columns[$pk]->phpType;
+        }
+
+        return $params;
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "name": "rusbeldoor/yii2-general",
+    "type": "library",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "rusbeldoor\\yii2-general\\": ""
+        }
+    }
+}
