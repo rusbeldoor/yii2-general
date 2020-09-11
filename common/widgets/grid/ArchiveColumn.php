@@ -8,12 +8,18 @@ use yii\grid\DataColumn;
 class ArchiveColumn extends DataColumn
 {
     public $headerOptions = ['class' => 'width-1px'];
-    public $attribute = 'id';
+    public $attribute = 'archive';
     public $label = 'Архив';
 	
     /**
      * @inheritdoc
      */
     protected function renderDataCellContent($model, $key, $index)
-    { return '#' . $model->id; }
+    {
+        switch ($model->archive) {
+            case 0: case false: case '': case '0': return '<i class="fas fa-archive"></i>';
+            case 1: case true: case '1': return '<i class="fas fa-archive"></i>';
+            default: return '';
+        }
+    }
 }
