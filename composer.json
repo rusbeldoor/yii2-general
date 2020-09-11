@@ -4,7 +4,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "rusbeldoor\\yii2-general\\": ""
+            "rusbeldoor\\yii2General\\": ""
         }
     }
 }

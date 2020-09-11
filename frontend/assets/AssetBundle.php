@@ -1,10 +1,10 @@
 <?php
 
-namespace rusbeldoor\yii2-general\frontend\assets;
+namespace rusbeldoor\yii2General\frontend\assets;
 
 /**
  * Class AssetBundle
- * @package rusbeldoor\yii2-general\frontend\assets
+ * @package rusbeldoor\yii2General\frontend\assets
  */
 class AssetBundle extends \yii\web\AssetBundle
 {

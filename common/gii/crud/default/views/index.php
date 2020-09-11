@@ -45,14 +45,14 @@ $this->params['breadcrumbs'][] = $this->title;
 foreach ($generator->getColumnNames() as $name) {
     echo "            ";
     switch ($name) {
-        case 'id': echo "['class' => 'rusbeldoor\yii2-general\common\widgets\grid\IdColumn']"; break;
-        case 'archive': echo "['class' => 'rusbeldoor\yii2-general\common\widgets\grid\ArchiveColumn']"; break;
+        case 'id': echo "['class' => 'rusbeldoor\yii2General\common\widgets\grid\IdColumn']"; break;
+        case 'archive': echo "['class' => 'rusbeldoor\yii2General\common\widgets\grid\ArchiveColumn']"; break;
         default: echo "'" . $name . "'";
     }
     echo ",\n";
 }
 ?>
-            ['class' => 'rusbeldoor\yii2-general\common\widgets\grid\ActionColumn'],
+            ['class' => 'rusbeldoor\yii2General\common\widgets\grid\ActionColumn'],
         ],
     ]); ?>
 <?php else: ?>

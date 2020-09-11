@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2-general\common\models;
+namespace rusbeldoor\yii2General\common\models;
 
 use Yii;
 

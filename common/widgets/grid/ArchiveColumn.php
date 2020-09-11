@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2-general\common\widgets\grid;
+namespace rusbeldoor\yii2General\common\widgets\grid;
 
 use Yii;
 use yii\grid\DataColumn;

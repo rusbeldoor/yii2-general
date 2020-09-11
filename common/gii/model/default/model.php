@@ -43,7 +43,7 @@ use Yii;
  * @property <?= "\${$property} {$data['type']}"  . ($data['comment'] ? ' ' . strtr($data['comment'], ["\n" => ' ']) : '') . "\n" ?>
 <?php endforeach; ?>
  */
-class <?= $className ?> extends \rusbeldoor\yii2-general\common\models\ActiveRecord
+class <?= $className ?> extends \rusbeldoor\yii2General\common\models\ActiveRecord
 {
     /**
      * {@inheritdoc}
