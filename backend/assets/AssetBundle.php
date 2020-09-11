@@ -8,7 +8,7 @@ namespace rusbeldoor\yii2General\backend\assets;
  */
 class AssetBundle extends \yii\web\AssetBundle
 {
-    public $sourcePath = '@vendor/quick-service/yii2/backend/web';
+    public $sourcePath = '@vendor/rusbeldoor/yii2General/backend/web';
     public $css = ['css/main.css'];
     public $js = ['js/main.js'];
 }
