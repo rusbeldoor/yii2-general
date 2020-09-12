@@ -38,25 +38,26 @@ class GridView extends \yii\grid\GridView
         if (!parent::beforeRun()) { return false; }
 
         $this->getView()->registerJs('
-            $("document").ready(function() {
-                $(document).on("submit", "#' . $this->search_form_id . '", function() {
+            $(\'document\').ready(function() {
+                $(document).on(\'submit\', \'#' . $this->search_form_id . '\', function() {
                     $.pjax.reload({
-                        container: "#' . $this->pjax_id . '", 
-                        type: "POST", 
-                        fragment: "#' . $this->fragment_id . '", 
+                        container: \'#' . $this->pjax_id . '\', 
+                        type: \'POST\', 
+                        fragment: \'#' . $this->fragment_id . '\', 
                         data: $(this).serialize()
                     });    
-                    window.scrollTo({top: $(\'#' . $this->fragment_id . '\').offset().top, behavior: "smooth"});
+                    window.scrollTo({top: $(\'#' . $this->fragment_id . '\').offset().top, behavior: \'smooth\'});
                     return false;
                 });
-                $(document).on("reset", "#' . $this->search_form_id . '", function() {
+                $(document).on(\'reset\', \'#' . $this->search_form_id . '\', function() {
                     $.pjax.reload({
-                        container: "#' . $this->pjax_id . '", 
-                        type: "POST", 
-                        fragment: "#' . $this->fragment_id . '", 
+                        container: \'#' . $this->pjax_id . '\', 
+                        type: \'POST\', 
+                        fragment: \'#' . $this->fragment_id . '\', 
                         data: $(this).serialize()
                     });
-                    window.scrollTo({top: $(\'#' . $this->fragment_id . '\').offset().top, behavior: "smooth"});
+                    window.scrollTo({top: $(\'#' . $this->fragment_id . '\').offset().top, behavior: \'smooth\'});
+                    return false;
                 });
             });
         ');
