@@ -110,7 +110,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     }
 
     /**
-     * Редактирование
+     * Изменение
      *
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
      * @return mixed

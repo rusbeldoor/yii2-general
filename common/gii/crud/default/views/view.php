@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="panel-buttons-group clearfix">
         <div class="float-right">
             <?= "<?= " ?>Html::a(
-                '<i class="fas fa-pencil-alt"></i> Редактировать',
+                '<i class="fas fa-pencil-alt"></i> Изменить',
                 ['update', <?= $urlParams ?>],
                 ['class' => 'btn btn-success']
             ) ?>&nbsp;&nbsp;<?= "<?= " ?>Html::a(

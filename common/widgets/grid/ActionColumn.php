@@ -46,7 +46,7 @@ class ActionColumn extends YiiActionColumn
                         break;
 
                     case 'update':
-                        $title = Yii::t('yii', 'Редактировать');
+                        $title = Yii::t('yii', 'Изменить');
                         $class = 'color-green';
                         break;
 
