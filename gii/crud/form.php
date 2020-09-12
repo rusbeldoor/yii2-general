@@ -8,7 +8,7 @@ echo $form->field($generator, 'searchModelClass');
 echo $form->field($generator, 'controllerClass');
 // echo $form->field($generator, 'viewPath');
 // echo $form->field($generator, 'baseControllerClass');
-echo $form->hoddenField($generator, 'indexWidgetType', ['value' => 'grid']);
+echo $form->hiddenField($generator, 'indexWidgetType', ['value' => 'grid']);
 /* echo $form->field($generator, 'indexWidgetType')->dropDownList([
     'grid' => 'GridView',
     'list' => 'ListView',
