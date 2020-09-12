@@ -12,8 +12,5 @@ class GridView extends \yii\grid\GridView
         'class' => 'yii\bootstrap4\LinkPager',
         'firstPageLabel' => 'Первая',
         'lastPageLabel'  => 'Последняя',
-        'listOptions' => [
-            'class' => 'pagination text-right',
-        ],
     ];
 }
