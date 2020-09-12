@@ -14,4 +14,4 @@ echo $form->field($generator, 'controllerClass');
 ]); */
 // echo $form->field($generator, 'enableI18N')->checkbox();
 echo $form->field($generator, 'enablePjax')->checkbox(['checked ' => true, 'disabled' => true]);
-echo $form->field($generator, 'messageCategory');
+// echo $form->field($generator, 'messageCategory');

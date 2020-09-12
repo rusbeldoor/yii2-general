@@ -37,16 +37,18 @@ echo "<?php\n";
 namespace <?= StringHelper::dirname(ltrim($generator->controllerClass, '\\')) ?>;
 
 use Yii;
-<?php if (empty($generator->searchModelClass)): ?>use yii\data\ActiveDataProvider;<?php endif; ?>
+<?php if (empty($generator->searchModelClass)): ?>use yii\data\ActiveDataProvider;
+<?php endif; ?>
 use <?= ltrim($generator->baseControllerClass, '\\') ?>;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use <?= ltrim($generator->modelClass, '\\') ?>;
-<?php if (!empty($generator->searchModelClass)): ?>use <?= ltrim($generator->searchModelClass, '\\') . (isset($searchModelAlias) ? " as $searchModelAlias" : "") ?>;<?php endif; ?>
+<?php if (!empty($generator->searchModelClass)): ?>use <?= ltrim($generator->searchModelClass, '\\') . (isset($searchModelAlias) ? " as $searchModelAlias" : "") ?>;
+<?php endif; ?>
 
 /**
- * <?= $controllerClass ?>
+ * <?= $controllerClass . "\n" ?>
  */
 class <?= $controllerClass ?> extends <?= $baseClass . "\n" ?>
 {
