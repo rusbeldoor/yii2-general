@@ -39,6 +39,7 @@ class GridView extends \yii\grid\GridView
 
         $this->getView()->registerJs('
             $(\'document\').ready(function() {
+                let containerPosition = $(\'#' . $this->fragment_id . '\').offset().top;
                 $(document).on(\'submit\', \'#' . $this->search_form_id . '\', function() {
                     $.pjax.reload({
                         container: \'#' . $this->pjax_id . '\', 
@@ -46,7 +47,7 @@ class GridView extends \yii\grid\GridView
                         fragment: \'#' . $this->fragment_id . '\', 
                         data: $(this).serialize()
                     });    
-                    window.scrollTo({top: $(\'#' . $this->fragment_id . '\').offset().top, behavior: \'smooth\'});
+                    window.scrollTo({top: containerPosition, behavior: \'smooth\'});
                     return false;
                 });
                 $(document).on(\'reset\', \'#' . $this->search_form_id . '\', function() {
@@ -56,7 +57,7 @@ class GridView extends \yii\grid\GridView
                         fragment: \'#' . $this->fragment_id . '\', 
                         data: $(this).serialize()
                     });
-                    window.scrollTo({top: $(\'#' . $this->fragment_id . '\').offset().top, behavior: \'smooth\'});
+                    window.scrollTo({top: containerPosition, behavior: \'smooth\'});
                     return false;
                 });
             });
