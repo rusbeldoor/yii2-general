@@ -39,7 +39,6 @@ class GridView extends \yii\grid\GridView
 
         $this->getView()->registerJs('
             $("document").ready(function() {
-                let container = $(\'#' . $this->fragment_id . '\');
                 $(document).on("submit", "#' . $this->search_form_id . '", function() {
                     $.pjax.reload({
                         container: "#' . $this->pjax_id . '", 
@@ -47,19 +46,17 @@ class GridView extends \yii\grid\GridView
                         fragment: "#' . $this->fragment_id . '", 
                         data: $(this).serialize()
                     });    
-                    window.scrollTo({top: container.offset().top, behavior: "smooth"});
+                    window.scrollTo({top: $(\'#' . $this->fragment_id . '\').offset().top, behavior: "smooth"});
                     return false;
                 });
                 $(document).on("reset", "#' . $this->search_form_id . '", function() {
-                    setTimeout(function() {
-                        $.pjax.reload({
-                            container: "#' . $this->pjax_id . '", 
-                            type: "POST", 
-                            fragment: "#' . $this->fragment_id . '", 
-                            data: $(this).serialize()
-                        });
-                        window.scrollTo({top: container.offset().top, behavior: "smooth"});
-                    }, 1);
+                    $.pjax.reload({
+                        container: "#' . $this->pjax_id . '", 
+                        type: "POST", 
+                        fragment: "#' . $this->fragment_id . '", 
+                        data: $(this).serialize()
+                    });
+                    window.scrollTo({top: $(\'#' . $this->fragment_id . '\').offset().top, behavior: "smooth"});
                 });
             });
         ');
