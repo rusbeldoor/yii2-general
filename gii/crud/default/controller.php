@@ -23,6 +23,14 @@ $urlParams = $generator->generateUrlParams();
 $actionParams = $generator->generateActionParams();
 $actionParamComments = $generator->generateActionParamComments();
 
+$baseClass = explode('\\', $generator->controllerClass);
+switch ($baseClass[0]) {
+    case 'backend': $baseClass = '\rusbeldoor\yii2General\backend\components\Controller'; break;
+    case 'console': $baseClass = '\rusbeldoor\yii2General\console\components\Controller'; break;
+    case 'frontend': $baseClass = '\rusbeldoor\yii2General\frontend\components\Controller'; break;
+    default: $baseClass = '\rusbeldoor\yii2General\common\components\Controller'; break;
+}
+
 echo "<?php\n";
 ?>
 
@@ -42,7 +50,7 @@ use yii\filters\VerbFilter;
 /**
  * <?= $controllerClass ?>
  */
-class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->baseControllerClass) . "\n" ?>
+class <?= $controllerClass ?> extends <?= $baseClass . "\n" ?>
 {
     /**
      * {@inheritdoc}
