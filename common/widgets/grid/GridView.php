@@ -39,13 +39,15 @@ class GridView extends \yii\grid\GridView
 
         $this->getView()->registerJs('
             $("document").ready(function() {
+                let container = $(\'#' . $this->fragment_id . '\');
                 $(document).on("submit", "#' . $this->search_form_id . '", function() {
                     $.pjax.reload({
                         container: "#' . $this->pjax_id . '", 
                         type: "POST", 
                         fragment: "#' . $this->fragment_id . '", 
                         data: $(this).serialize()
-                    });
+                    });    
+                    window.scrollTo({top: container.offset().top, behavior: "smooth"});
                     return false;
                 });
                 $(document).on("reset", "#' . $this->search_form_id . '", function() {
@@ -56,6 +58,7 @@ class GridView extends \yii\grid\GridView
                             fragment: "#' . $this->fragment_id . '", 
                             data: $(this).serialize()
                         });
+                        window.scrollTo({top: container.offset().top, behavior: "smooth"});
                     }, 1);
                 });
             });
@@ -64,7 +67,7 @@ class GridView extends \yii\grid\GridView
         Pjax::begin(['id' => $this->pjax_id]);
 
         // Открываем контейнер-фрагмент для копирования из него при pjax загрузке
-        echo '<div id="' . $this->fragment_id  . '">';
+        echo '<div id="' . $this->fragment_id  . '" name="' . $this->fragment_id  . '">';
 
         return true;
     }
