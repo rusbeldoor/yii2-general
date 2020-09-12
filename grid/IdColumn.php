@@ -4,7 +4,7 @@ namespace rusbeldoor\yii2General\grid;
 
 use Yii;
 
-class IdColumn extends yii\grid\DataColumn
+class IdColumn extends \yii\grid\DataColumn
 {
     public $headerOptions = ['class' => 'width-1px'];
     public $attribute = 'id';

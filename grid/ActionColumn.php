@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /**
  * ...
  */
-class ActionColumn extends yii\grid\ActionColumn
+class ActionColumn extends \yii\grid\ActionColumn
 {
     public $headerOptions = ['class' => 'action-column'];
     public $template = '{view}&nbsp;&nbsp;&nbsp;{update}&nbsp;&nbsp;&nbsp;{delete}';
