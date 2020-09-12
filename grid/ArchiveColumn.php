@@ -1,11 +1,10 @@
 <?php
 
-namespace rusbeldoor\yii2General\common\widgets\grid;
+namespace rusbeldoor\yii2General\grid;
 
 use Yii;
-use yii\grid\DataColumn;
 
-class ArchiveColumn extends DataColumn
+class ArchiveColumn extends yii\grid\DataColumn
 {
     public $headerOptions = ['class' => 'width-1px'];
     public $attribute = 'archive';

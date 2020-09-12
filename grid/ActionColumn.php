@@ -1,15 +1,14 @@
 <?php
 
-namespace rusbeldoor\yii2General\common\widgets\grid;
+namespace rusbeldoor\yii2General\grid;
 
 use Yii;
-use yii\grid\ActionColumn as YiiActionColumn;
 use yii\helpers\Html;
 
 /**
  * ...
  */
-class ActionColumn extends YiiActionColumn
+class ActionColumn extends yii\grid\ActionColumn
 {
     public $headerOptions = ['class' => 'action-column'];
     public $template = '{view}&nbsp;&nbsp;&nbsp;{update}&nbsp;&nbsp;&nbsp;{delete}';

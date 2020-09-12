@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\common\widgets\grid;
+namespace rusbeldoor\yii2General\grid;
 
 use Yii;
 use yii\widgets\Pjax;

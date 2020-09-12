@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace rusbeldoor\yii2General\common\gii\crud;
+namespace rusbeldoor\yii2General\gii\crud;
 
 use Yii;
 use yii\db\ActiveRecord;

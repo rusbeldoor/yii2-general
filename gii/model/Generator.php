@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace rusbeldoor\yii2General\common\gii\model;
+namespace rusbeldoor\yii2General\gii\model;
 
 use Yii;
 use yii\base\NotSupportedException;
