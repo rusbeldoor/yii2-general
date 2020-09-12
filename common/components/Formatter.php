@@ -10,6 +10,6 @@ class Formatter extends \yii\i18n\Formatter
      * @param $value mixed
      * @return string
      */
-    public function id($value)
+    public function asId($value)
     { return '#' . $value; }
 }
