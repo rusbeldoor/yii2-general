@@ -32,7 +32,7 @@ use yii\widgets\ActiveForm;
 } ?>
     <div>
         <?= "<?= " ?>Html::submitButton('Применить', ['class' => 'btn btn-primary']) ?>
-        <?= "<?= " ?>Html::resetButton('<i class="fas fa-wind"></i> Сбросить', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= "<?= " ?>Html::a('<i class="fas fa-wind"></i> Сбросить', '/<?= $name ?>', ['class' => 'btn btn-outline-secondary']) ?>
     </div>
     <?= "<?php " ?>ActiveForm::end(); ?>
 </div>
