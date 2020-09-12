@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 <div class="<?= $name ?>-search panel-search-form">
     <?= "<?php " ?>$form = ActiveForm::begin([
         'id' => 'panel-search-form',
-        'action' => ['<?= $name ?>'],
+        'action' => ['/<?= $name ?>'],
         'method' => 'post',
         'options' => ['data-pjax' => 1],
     ]); ?>
