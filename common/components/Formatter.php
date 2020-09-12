@@ -19,7 +19,7 @@ class Formatter extends \yii\i18n\Formatter
      * @param $value mixed
      * @return string
      */
-    public function aYesNo($value)
+    public function asYesNo($value)
     {
         switch ($value) {
             case 1: case true: case '1': return 'Да';
