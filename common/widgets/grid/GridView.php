@@ -37,31 +37,31 @@ class GridView extends \yii\grid\GridView
     {
         if (!parent::beforeRun()) { return false; }
 
-        $this->getView()->registerJs('
-            $(\'document\').ready(function() {
-                let containerPosition = $(\'#' . $this->fragment_id . '\').offset().top;
-                $(document).on(\'submit\', \'#' . $this->search_form_id . '\', function() {
-                    $.pjax.reload({
-                        container: \'#' . $this->pjax_id . '\', 
-                        type: \'POST\', 
-                        fragment: \'#' . $this->fragment_id . '\', 
-                        data: $(this).serialize()
-                    });    
-                    window.scrollTo({top: containerPosition, behavior: \'smooth\'});
-                    return false;
-                });
-                $(document).on(\'reset\', \'#' . $this->search_form_id . '\', function() {
-                    $.pjax.reload({
-                        container: \'#' . $this->pjax_id . '\', 
-                        type: \'POST\', 
-                        fragment: \'#' . $this->fragment_id . '\', 
-                        data: $(this).serialize()
-                    });
-                    window.scrollTo({top: containerPosition, behavior: \'smooth\'});
-                    return false;
-                });
+        $this->getView()->registerJs(
+'$(\'document\').ready(function() {
+    $(document).on(\'submit\', \'#' . $this->search_form_id . '\', function() {
+        $.pjax.reload({
+            container: \'#' . $this->pjax_id . '\', 
+            type: \'POST\', 
+            fragment: \'#' . $this->fragment_id . '\', 
+            data: $(this).serialize()
+        });
+        window.scrollTo({top: $(\'#' . $this->pjax_id . '\').offset().top, behavior: \'smooth\'});
+        return false;
+    });
+    $(document).on(\'reset\', \'#' . $this->search_form_id . '\', function() {
+        setTimeout(function() {
+            $.pjax.reload({
+                container: \'#' . $this->pjax_id . '\', 
+                type: \'POST\', 
+                fragment: \'#' . $this->fragment_id . '\', 
+                data: $(this).serialize()
             });
-        ');
+            window.scrollTo({top: $(\'#' . $this->pjax_id . '\').offset().top, behavior: \'smooth\'});
+        }, 1);
+    });
+});'
+        );
 
         Pjax::begin(['id' => $this->pjax_id]);
 
