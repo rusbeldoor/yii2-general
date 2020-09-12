@@ -28,7 +28,7 @@ switch ($baseClass[0]) {
     case 'backend': $baseClass = '\rusbeldoor\yii2General\backend\components\Controller'; break;
     case 'console': $baseClass = '\rusbeldoor\yii2General\console\components\Controller'; break;
     case 'frontend': $baseClass = '\rusbeldoor\yii2General\frontend\components\Controller'; break;
-    default: $baseClass = '\rusbeldoor\yii2General\common\components\Controller'; break;
+    default: $baseClass = '\yii\web\Controller'; break;
 }
 
 echo "<?php\n";
@@ -37,7 +37,6 @@ echo "<?php\n";
 namespace <?= StringHelper::dirname(ltrim($generator->controllerClass, '\\')) ?>;
 
 use Yii;
-use <?= ltrim($generator->modelClass, '\\') ?>;
 <?php if (empty($generator->searchModelClass)): ?>use yii\data\ActiveDataProvider;<?php endif; ?>
 use <?= ltrim($generator->baseControllerClass, '\\') ?>;
 use yii\web\NotFoundHttpException;
