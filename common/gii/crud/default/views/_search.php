@@ -12,7 +12,7 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap4\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->searchModelClass, '\\') ?> */
@@ -24,6 +24,7 @@ use yii\widgets\ActiveForm;
         'id' => 'standard-search-form',
         'action' => ['index'],
         'method' => 'post',
+        'layout' => 'horizontal',
     ]); ?>
 <?php foreach ($generator->getColumnNames() as $attribute) {
     if (in_array($attribute, ['id'])) { continue; }
