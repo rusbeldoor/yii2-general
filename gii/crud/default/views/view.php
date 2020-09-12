@@ -51,7 +51,7 @@ foreach ($generator->getColumnNames() as $name) {
     echo "            ";
     switch ($name) {
         case 'id': echo "'id:id'"; break;
-        case 'archive': echo "archive:yesNo"; break;
+        case 'archive': echo "'archive:yesNo'"; break;
         default: echo "'" . $name . "'";
     }
     echo ",\n";
