@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 foreach ($generator->getColumnNames() as $name) {
     echo "            ";
     switch ($name) {
-        case 'id': echo "['class' => 'rusbeldoor\yii2General\grid\IdColumn']"; break;
+        case 'id': echo "'id:id'"; break;
         case 'archive': echo "['class' => 'rusbeldoor\yii2General\grid\ArchiveColumn']"; break;
         default: echo "'" . $name . "'";
     }

@@ -48,7 +48,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
 <?php
 foreach ($generator->getColumnNames() as $name) {
-    echo "            '" . $name . "',\n";
+    echo "            ";
+    switch ($name) {
+        case 'id': echo "'id:id'"; break;
+        case 'archive': echo "archive:yesNo"; break;
+        default: echo "'" . $name . "'";
+    }
+    echo ",\n";
 }
 ?>
         ],

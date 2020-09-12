@@ -12,4 +12,19 @@ class Formatter extends \yii\i18n\Formatter
      */
     public function asId($value)
     { return '#' . $value; }
+
+    /**
+     * Да / Нет
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public function aYesNo($value)
+    {
+        switch ($value) {
+            case 1: case true: case '1': return 'Да';
+            case 0: case false: case '': case '0': return 'Нет';
+            default: return '';
+        }
+    }
 }
