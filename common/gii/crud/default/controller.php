@@ -67,8 +67,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     {
 <?php if (!empty($generator->searchModelClass)): ?>
         $searchModel = new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>();
-        $searchModel->load(Yii::$app->request->post());
-        $dataProvider = $searchModel->search($searchModel->attributes);
+        $dataProvider = $searchModel->search(Yii::$app->request->bodyParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
