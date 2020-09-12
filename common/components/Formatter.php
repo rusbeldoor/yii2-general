@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\common\components;
+namespace rusbeldoor\yiiGeneral\common\components;
 
 class Formatter extends \yii\i18n\Formatter
 {
