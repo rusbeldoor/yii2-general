@@ -18,6 +18,12 @@ class GridView extends \yii\grid\GridView
     // Идентификатор формы фильтра
     public $search_form_id = 'standard-search-form';
 
+    public $pager = [
+        'class' => 'yii\bootstrap4\LinkPager',
+        'firstPageLabel' => 'Первая',
+        'lastPageLabel'  => 'Последняя',
+    ];
+
     public function init() {
         parent::init();
 
