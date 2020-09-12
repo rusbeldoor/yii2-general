@@ -1,16 +1,14 @@
 <?php
 
-namespace common\widgets;
+namespace rusbeldoor\yii2General\common\widgets\grid;
 
 use Yii;
-
-use yii\grid\GridView as YiiGridView;
 use yii\widgets\Pjax;
 
 /**
  * GridView
  */
-class GridView extends YiiGridView
+class GridView extends \yii\grid\GridView
 {
     public static $number = 0;
 

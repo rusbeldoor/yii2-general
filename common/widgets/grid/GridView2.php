@@ -2,7 +2,6 @@
 
 namespace rusbeldoor\yii2General\common\widgets\grid;
 
-
 /**
  * ...
  */
