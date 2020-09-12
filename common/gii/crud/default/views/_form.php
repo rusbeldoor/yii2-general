@@ -35,7 +35,7 @@ use yii\bootstrap4\ActiveForm;
     }
 } ?>
     <div class="form-group">
-        <?= "<?= " ?>Html::submitButton(<?= "((\$model->isNewRecord) ? 'Добавить' : 'Изменить')" ?>, ['class' => 'btn btn-success']) ?>
+        <?= "<?= " ?>Html::submitButton(<?= "((\$model->isNewRecord) ? '<i class=\"fas fa-plus\"></i> Добавить' : '<i class=\"fas fa-pencil-alt\"></i> Изменить')" ?>, ['class' => 'btn btn-success']) ?>
     </div>
     <?= "<?php " ?>ActiveForm::end(); ?>
 </div>
