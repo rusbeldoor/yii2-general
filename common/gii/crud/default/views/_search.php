@@ -6,6 +6,8 @@ use yii\helpers\StringHelper;
 /* @var $this yii\web\View */
 /* @var $generator yii\gii\generators\crud\Generator */
 
+$name = Inflector::camel2id(StringHelper::basename($generator->modelClass));
+
 echo "<?php\n";
 ?>
 
@@ -17,10 +19,10 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-search panel-search-form">
+<div class="<?= $name ?>-search panel-search-form">
     <?= "<?php " ?>$form = ActiveForm::begin([
         'id' => 'panel-search-form',
-        'action' => ['index'],
+        'action' => ['<?= $name ?>'],
         'method' => 'post',
         'options' => ['data-pjax' => 1],
     ]); ?>
