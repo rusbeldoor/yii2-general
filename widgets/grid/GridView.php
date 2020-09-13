@@ -11,14 +11,15 @@ use yii\widgets\Pjax;
 class GridView extends \yii\grid\GridView
 {
     // Идентификатор формы-фильтра влияющей на GridView
-    public $filter_form_selector = 'form.base-filter';
+    public $filterFormSelector = 'form.base-filter';
 
     // Номер для уникальности нескольких GridView на одной странице
     public static $number = 0;
-    // Id Pjax контейнера (без символа "#")
-    public $pjax_id = 'base-pjax-grid';
-    // Id контейнера откуда берутся данные (без символа "#")
-    public $fragment_id = 'base-pjax-fragment';
+
+    // Id Pjax контейнера
+    public $pjaxId = 'panelPjaxGrid';
+    // Id контейнера откуда берутся данные
+    public $fragmentId = 'panelPjaxFragment';
 
     // Шаблон вывода GridView
     public $layout = '<div class="grid-view-header clearfix">{summary}</div>{items}<div class="grid-view-footer clearfix">{pager}</div>';
@@ -40,8 +41,8 @@ class GridView extends \yii\grid\GridView
         parent::init();
 
         self::$number++;
-        $this->pjax_id .= '-' . self::$number;
-        $this->fragment_id .= '-' . self::$number;
+        $this->pjaxId .= self::$number;
+        $this->fragmentId .= self::$number;
     }
 
     /**
@@ -57,34 +58,34 @@ class GridView extends \yii\grid\GridView
 '$(document).ready(function() {
     function pjaxReload(data) {
         $.pjax.reload({
-            container: \'#' . $this->pjax_id . '\', 
+            container: \'#' . $this->pjaxId . '\', 
             type: \'POST\', 
-            fragment: \'#' . $this->fragment_id . '\', 
+            fragment: \'#' . $this->fragmentId . '\', 
             data: data
         });
-        window.scrollTo({top: $(\'#' . $this->pjax_id . '\').offset().top, behavior: \'smooth\'});
+        window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'});
     }
-    $(document).on(\'submit\', \'' . $this->filter_form_selector . '\', function() {
+    $(document).on(\'submit\', \'' . $this->filterFormSelector . '\', function() {
         pjaxReload($(this).serialize());
         return false;
     });
-    $(document).on(\'reset\', \'' . $this->filter_form_selector . '\', function() {
+    $(document).on(\'reset\', \'' . $this->filterFormSelector . '\', function() {
         setTimeout(function() {
             pjaxReload($(this).serialize());
         }, 1);
     });
     
     $(document).on(\'submit\', \'.bulk-action-form\', function() {
-        var keys = $(\'#' . $this->fragment_id . ' .grid-view\').yiiGridView(\'getSelectedRows\');
+        var keys = $(\'#' . $this->fragmentId . ' .grid-view\').yiiGridView(\'getSelectedRows\');
         $(this).children(\'input[name=\'items\']\').val(keys);
     });
 });'
         );
 
-        Pjax::begin(['id' => $this->pjax_id]);
+        Pjax::begin(['id' => $this->pjaxId]);
 
         // Открываем контейнер-фрагмент для копирования из него при pjax загрузке
-        echo '<div id="' . $this->fragment_id  . '">';
+        echo '<div id="' . $this->fragmentId  . '">';
 
         return true;
     }
