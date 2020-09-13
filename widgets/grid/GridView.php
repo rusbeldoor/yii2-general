@@ -54,30 +54,32 @@ class GridView extends \yii\grid\GridView
         // Обработка Pjax обновления
         // Обработка отправки форм bulk-action-form
         $this->getView()->registerJs(
-        '$(document).ready(function() {
-            function pjax_reload(data) {
-                $.pjax.reload({
-                    container: "#' . $this->pjax_id . '", 
-                    type: "POST", 
-                    fragment: "#' . $this->fragment_id . '", 
-                    data: data
-                });
-            }
-            $(document).on("submit", "' . $this->filter_form_selector . '", function() {
-                pjax_reload($(this).serialize());
-                return false;
-            });
-            $(document).on("reset", "' . $this->filter_form_selector . '", function() {
-                setTimeout(function() {
-                    pjax_reload($(this).serialize());
-                }, 1);
-            });
-            
-            $(document).on("submit", ".bulk-action-form", function() {
-                var keys = $("#' . $this->fragment_id . ' .grid-view").yiiGridView("getSelectedRows");
-                $(this).children("input[name=\'items\']").val(keys);
-            });
-        });');
+'$(document).ready(function() {
+    function pjaxReload(data) {
+        $.pjax.reload({
+            container: \'#' . $this->pjax_id . '\', 
+            type: \'POST\', 
+            fragment: \'#' . $this->fragment_id . '\', 
+            data: data
+        });
+        window.scrollTo({top: $(\'#' . $this->pjax_id . '\').offset().top, behavior: \'smooth\'});
+    }
+    $(document).on(\'submit\', \'' . $this->filter_form_selector . '\', function() {
+        pjaxReload($(this).serialize());
+        return false;
+    });
+    $(document).on(\'reset\', \'' . $this->filter_form_selector . '\', function() {
+        setTimeout(function() {
+            pjaxReload($(this).serialize());
+        }, 1);
+    });
+    
+    $(document).on(\'submit\', \'.bulk-action-form\', function() {
+        var keys = $(\'#' . $this->fragment_id . ' .grid-view\').yiiGridView(\'getSelectedRows\');
+        $(this).children(\'input[name=\'items\']\').val(keys);
+    });
+});'
+        );
 
         Pjax::begin(['id' => $this->pjax_id]);
 
