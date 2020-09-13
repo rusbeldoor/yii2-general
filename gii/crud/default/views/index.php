@@ -39,13 +39,13 @@ foreach ($generator->getColumnNames() as $name) {
     echo "            ";
     switch ($name) {
         case 'id': echo "'id:id'"; break;
-        case 'archive': echo "['class' => 'rusbeldoor\yii2General\grid\ArchiveColumn']"; break;
+        case 'archive': echo "['class' => 'rusbeldoor\yii2General\widgets\grid\ArchiveColumn']"; break;
         default: echo "'" . $name . "'";
     }
     echo ",\n";
 }
 ?>
-            ['class' => 'rusbeldoor\yii2General\grid\ActionColumn'],
+            ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
         ],
     ]); ?>
 </div>
