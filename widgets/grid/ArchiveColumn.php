@@ -32,7 +32,7 @@ class ArchiveColumn extends \yii\grid\ActionColumn
         parent::init();
 
         Yii::$app->getView()->registerJs(
-            '$(document).on(\'click\', \'.archive-column-button\', function() {
+'$(document).on(\'click\', \'.archive-column-button\', function() {
     let archive_action = $(this);
     $.post(
         \'/mailing-template/archive\',
