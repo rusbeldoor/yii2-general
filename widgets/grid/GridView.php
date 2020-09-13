@@ -77,7 +77,7 @@ class GridView extends \yii\grid\GridView
     
     $(document).on(\'submit\', \'.bulk-action-form\', function() {
         var keys = $(\'#' . $this->fragmentId . ' .grid-view\').yiiGridView(\'getSelectedRows\');
-        $(this).children(\'input[name=\'items\']\').val(keys);
+        $(this).children(\'input[name="items"]\').val(keys);
     });
 });'
         );
