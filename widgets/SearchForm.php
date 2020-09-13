@@ -14,8 +14,9 @@ class SearchForm extends \yii\bootstrap4\ActiveForm
         'method' => 'post',
         //'id' => 'standard-search-form', todo: x
         //'method' => 'post', todo: x
-        'layout' => 'horizontal',
     ];
+
+    public $layout = 'horizontal';
 
     /**
      * Кнопки
