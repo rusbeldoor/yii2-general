@@ -64,7 +64,7 @@ class GridView extends \yii\grid\GridView
         });
         window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'});
     }
-    $(document).on(\'submit\', \'' . $this->searchFormSelector . '\', function() {
+    $(document).on(\'submit\', \'' . $this->searchFormSelector . ' form\', function() {
         pjaxReload($(this).serialize());
         return false;
     });

@@ -4,7 +4,7 @@
 
 $(document).ready(function() {
     $('.panelSearchFormToggle').click(function () {
-        $('.panelSearchForm').toggle();
+        $('.panelSearchFormContainer').toggle();
         return false;
     });
 });

@@ -64,7 +64,7 @@ a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
 
 .panelButtonsGroup { margin: 0 0 16px 0; }
 .panelSearchFormToggle {}
-.panelSearchForm {
+.panelSearchFormContainer {
     display: none;
     margin: 0 0 16px 0;
     padding: 15px;

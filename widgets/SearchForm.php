@@ -10,10 +10,8 @@ use rusbeldoor\yii2General\common\helpers\BaseUI;
 class SearchForm extends \yii\bootstrap4\ActiveForm
 {
     public $options = [
-        'class' => 'base-filter',
+        'class' => 'panelSearchForm',
         'method' => 'post',
-        //'id' => 'standard-search-form', todo: x
-        //'method' => 'post', todo: x
     ];
 
     public $layout = 'horizontal';

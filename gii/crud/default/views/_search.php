@@ -19,7 +19,7 @@ use rusbeldoor\yii2General\widgets\SearchForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="<?= $name ?>-search panelSearchForm">
+<div class="<?= $name ?>-search panelSearchFormContainer">
     <?= "<?php " ?>$form = SearchForm::begin() ?>
 <?php foreach ($generator->getColumnNames() as $attribute) {
     // Если аттрибут не разрешен к выводу
