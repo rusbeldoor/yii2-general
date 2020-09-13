@@ -12,7 +12,7 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
-use rusbeldoor\yii2General\widgets\grid\DetailView;
+use rusbeldoor\yii2General\widgets\DetailView;
 use rusbeldoor\yii2General\common\helpers\BaseUI;
 
 /* @var $this yii\web\View */
