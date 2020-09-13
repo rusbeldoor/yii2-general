@@ -3,8 +3,8 @@
  *********************************/
 
 $(document).ready(function() {
-    $('.panel-button-search-form').click(function () {
-        $('.panel-search-form').toggle();
+    $('.panelSearchFormToggle').click(function () {
+        $('.panelSearchForm').toggle();
         return false;
     });
 });

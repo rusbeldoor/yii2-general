@@ -49,7 +49,7 @@ class BaseUI
 
         return
             '<div class="base-buttons-manage clearfix">'
-                . ((in_array('filter', $buttons)) ? Html::button('<i class="fas fa-filter"></i>&nbsp;&nbsp;Фильтр', ['class' => 'btn btn-light base-button-filter-form']) : '')
+                . ((in_array('filter', $buttons)) ? Html::button('<i class="fas fa-filter"></i>&nbsp;&nbsp;Фильтр', ['class' => 'btn btn-light panelSearchFormToggle']) : '')
                 . '<div class="float-right">'
                     . implode('&nbsp;&nbsp;&nbsp;', $result)
                 . '</div>'
