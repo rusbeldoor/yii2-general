@@ -64,7 +64,6 @@ class ActionColumn extends \yii\grid\ActionColumn
                 }
                 $options = array_merge([
                     'title' => $title,
-                    'aria-label' => $title,
                 ], $additionalOptions, $this->buttonOptions);
                 $icon = Html::tag('i', '', ['class' => $iconName . ' ' . $class]);
                 return Html::a($icon, $url, $options);

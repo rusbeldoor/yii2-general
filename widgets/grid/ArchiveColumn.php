@@ -91,20 +91,10 @@ class ArchiveColumn extends \yii\grid\ActionColumn
                 }
                 $options = array_merge([
                     'title' => $title,
-                    'aria-label' => $title,
                     'data-id' => $model->id,
                 ], $additionalOptions, $this->buttonOptions);
-                $icon = Html::tag('i', '', ['class' => $iconName . ' ' . $archiveClass]);
+                $icon = Html::tag('i', '', ['class' => $this->span_class . ' ' . $iconName . ' ' . $archiveClass]);
                 return Html::a($icon, $url, $options);
-                /*return Html::tag(
-                    'i',
-                    '',
-                    [
-                        'title' => $title,
-                        'class' => $iconName . ' ' . $archiveClass,
-                        'data-id' => $model->id,
-                    ]
-                );*/
             };
         }
     }
