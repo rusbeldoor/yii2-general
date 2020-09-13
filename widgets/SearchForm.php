@@ -7,7 +7,7 @@ use rusbeldoor\yii2General\common\helpers\BaseUI;
 /**
  * Форма поиска
  */
-class SearchForm extends \yii\widgets\ActiveForm
+class SearchForm extends \yii\bootstrap4\ActiveForm
 {
     public $options = [
         'class' => 'base-filter',
