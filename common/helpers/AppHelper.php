@@ -2,6 +2,8 @@
 
 namespace rusbeldoor\yii2General\common\helpers;
 
+use yii;
+
 class AppHelper
 {
     /**********************************
@@ -14,7 +16,7 @@ class AppHelper
      * @return void
      */
     public static function exitIfNotAjaxRequest()
-    { if (!Yii::$app->request->isAjaxRequest) { exit; } }
+    { if (!Yii::$app->request->isAjax) { exit; } }
 
     /**
      * Завершение, если не post запрос
@@ -22,7 +24,7 @@ class AppHelper
      * @return void
      */
     public static function exitIfNotPostRequest()
-    { if (!Yii::$app->request->isPostRequest) { exit; } }
+    { if (!Yii::$app->request->isPost) { exit; } }
 
     /**
      * Завершение с выводом
