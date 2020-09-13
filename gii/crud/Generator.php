@@ -71,7 +71,7 @@ class Generator extends \yii\gii\generators\crud\Generator
         switch ($attribute) {
             case 'archive':
                 return
-                    "<?= \$form->field(\$model, 'archive', ['inline'=>true])->radioList(
+                    "\$form->field(\$model, 'archive', ['inline'=>true])->radioList(
                         ['' => 'Не важно', '1' => 'Да', '0' => 'Нет'],
                         [
                             'class' => 'btn-group',
@@ -84,7 +84,7 @@ class Generator extends \yii\gii\generators\crud\Generator
                                     . '</label>';
                             },
                         ]
-                    ) ?>";
+                    )";
                 break;
 
             default:
