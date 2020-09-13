@@ -35,7 +35,7 @@ class ArchiveColumn extends \yii\grid\ActionColumn
 '$(document).on(\'click\', \'.archive-column-button\', function() {
     let archive_action = $(this);
     $.post(
-        \'/mailing-template/archive\',
+        \'' . Yii::$app->requestedRoute . '/archive\',
         {id: $(this).data(\'id\')}
     ).done(function(data) {
         if (data.result) {
