@@ -48,8 +48,10 @@ a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
 .grid-view table thead tr th { border-top: 0; }
 .grid-view table tr th, .grid-view table tr td { text-align: center; }
 .grid-view .action-column-header { width: 1px; }
-.grid-view a.action-column-button i, .grid-view i.action-column-button { font-size: 1.35em; }
-.grid-view i.action-column-button { cursor: pointer; }
+.grid-view .action-column-button {
+    font-size: 1.35em;
+    cursor: pointer;
+}
 
 .panelButtonsGroup { margin: 0 0 16px 0; }
 .panelSearchFormToggle {}
