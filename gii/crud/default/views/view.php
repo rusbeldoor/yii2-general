@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= "<?= " ?>DetailView::widget([
         'model' => $model,
-        'options' => ['class' => 'table table-striped table-hover'],
         'attributes' => [
 <?php
 foreach ($generator->getColumnNames() as $name) {
