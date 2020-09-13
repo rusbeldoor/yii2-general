@@ -19,8 +19,6 @@ if ($generator->enableI18N) {
 echo "<?php\n";
 ?>
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 

@@ -16,7 +16,6 @@ if (empty($safeAttributes)) {
 echo "<?php\n";
 ?>
 
-use yii\helpers\Html;
 use rusbeldoor\yii2General\widgets\AddEditForm;
 
 /* @var $this yii\web\View */

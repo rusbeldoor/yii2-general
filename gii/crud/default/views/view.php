@@ -11,7 +11,6 @@ $urlParams = $generator->generateUrlParams();
 echo "<?php\n";
 ?>
 
-use yii\helpers\Html;
 use rusbeldoor\yii2General\widgets\DetailView;
 use rusbeldoor\yii2General\common\helpers\BaseUI;
 
