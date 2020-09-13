@@ -22,7 +22,6 @@ use yii\bootstrap4\ActiveForm;
 <div class="<?= $name ?>-search panel-search-form">
     <?= "<?php " ?>$form = ActiveForm::begin([
         'id' => 'standard-search-form',
-        'action' => ['index'],
         'method' => 'post',
         'layout' => 'horizontal',
     ]); ?>

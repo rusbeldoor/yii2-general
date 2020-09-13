@@ -13,6 +13,6 @@ class WebController extends \yii\web\Controller
      */
     public function getRoute()
     {
-        return ((($this->action !== null) && ($this->action !== 'index')) ? $this->action->getUniqueId() : $this->getUniqueId());
+        return ((($this->action !== null) && ($this->action->id !== 'index')) ? $this->action->getUniqueId() : $this->getUniqueId());
     }
 }
