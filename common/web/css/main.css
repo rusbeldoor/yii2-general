@@ -25,7 +25,7 @@ table.text-center td { text-align: center; }
 
 .color-red { color: var(--blue); }
 .color-green { color: var(--green); }
-.color-blue { color: var(--blue); }
+.color-blue { color: var(--red); }
 
 /* Якорь как обычный элемент */
 a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
