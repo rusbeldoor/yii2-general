@@ -11,6 +11,7 @@ $name = Inflector::camel2id(StringHelper::basename($generator->modelClass));
 echo "<?php\n";
 ?>
 
+use yii\helpers\html;
 use rusbeldoor\yii2General\widgets\SearchForm;
 
 /* @var $this yii\web\View */
