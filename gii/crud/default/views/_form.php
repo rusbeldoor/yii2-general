@@ -17,7 +17,7 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
-use yii\bootstrap4\ActiveForm;
+use rusbeldoor\yii2General\widgets\AddEditForm;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
@@ -25,7 +25,7 @@ use yii\bootstrap4\ActiveForm;
 ?>
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
-    <?= "<?php " ?>$form = ActiveForm::begin() ?>
+    <?= "<?php " ?>$form = AddEditForm::begin() ?>
 <?php foreach ($generator->getColumnNames() as $attribute) {
     if (
         // Если аттрибут не разрешен к массовому присваиванию
@@ -38,5 +38,5 @@ use yii\bootstrap4\ActiveForm;
     echo "\n";
 } ?>
         <?= "<?= " ?>$form->buttons($model) ?>
-    <?= "<?php " ?>ActiveForm::end() ?>
+    <?= "<?php " ?>AddEditForm::end() ?>
 </div>

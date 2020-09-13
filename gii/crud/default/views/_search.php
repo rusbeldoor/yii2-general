@@ -29,5 +29,5 @@ use rusbeldoor\yii2General\widgets\SearchForm;
     echo "\n";
 } ?>
         <?= "<?= " ?>$form->buttons() ?>
-    <?= "<?php " ?>ActiveForm::end() ?>
+    <?= "<?php " ?>SearchForm::end() ?>
 </div>
