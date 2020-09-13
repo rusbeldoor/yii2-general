@@ -13,8 +13,6 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
-use yii\widgets\Pjax;
-use <?= $generator->indexWidgetType === 'grid' ? "rusbeldoor\yii2General\grid\GridView" : "yii\\widgets\\ListView" ?>;
 
 use rusbeldoor\yii2General\common\helpers\BaseUI;
 
@@ -28,13 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index">
     <?= "<?= " ?>BaseUI::buttonsForIndexPage(['filter', 'add', 'delete']) ?>
 
-    <?= "<?php " ?>Pjax::begin(); ?>
 <?php if(!empty($generator->searchModelClass)): ?>
 <?= "    <?= " ?>$this->render('_search', ['model' => $searchModel]); ?>
 <?php endif; ?>
 
-<?php if ($generator->indexWidgetType === 'grid'): ?>
-    <?= "<?= " ?>GridView::widget([
+    <?= "<?= " ?>\rusbeldoor\yii2General\widgets\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'tableOptions' => ['class' => 'table table-striped table-hover'],
         'columns' => [
@@ -52,15 +48,4 @@ foreach ($generator->getColumnNames() as $name) {
             ['class' => 'rusbeldoor\yii2General\grid\ActionColumn'],
         ],
     ]); ?>
-<?php else: ?>
-    <?= "<?= " ?>ListView::widget([
-        'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model-><?= $nameAttribute ?>), ['view', <?= $urlParams ?>]);
-        },
-    ]) ?>
-<?php endif; ?>
-
-    <?= "<?php " ?>Pjax::end(); ?>
 </div>

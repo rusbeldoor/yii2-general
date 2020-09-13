@@ -1,16 +1,14 @@
 <?php
 
-namespace backend\widgets;
+namespace rusbeldoor\yii2General\widgets\grid;
 
 use yii;
-
-use yii\grid\GridView as YiiGridView;
 use yii\widgets\Pjax;
 
 /**
  * GridView
  */
-class GridView extends YiiGridView
+class GridView extends \yii\grid\GridView
 {
     // Идентификатор формы-фильтра влияющей на GridView
     public $filter_form_selector = 'form.base-filter';
