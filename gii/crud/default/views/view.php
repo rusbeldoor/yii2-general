@@ -12,6 +12,7 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
+use rusbeldoor\yii2General\widgets\grid\DetailView;
 use rusbeldoor\yii2General\common\helpers\BaseUI;
 
 /* @var $this yii\web\View */
@@ -25,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
     <?= "<?= " ?>BaseUI::buttonsForViewPage($model, ['add', 'delete']) ?>
 
-    <?= "<?= " ?>\rusbeldoor\yii2General\widgets\grid\DetailView::widget([
+    <?= "<?= " ?>DetailView::widget([
         'model' => $model,
         'options' => ['class' => 'table table-striped table-hover'],
         'attributes' => [

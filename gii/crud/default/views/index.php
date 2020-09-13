@@ -13,6 +13,7 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
+use rusbeldoor\yii2General\widgets\grid\GridView;
 use rusbeldoor\yii2General\common\helpers\BaseUI;
 
 /* @var $this yii\web\View */
@@ -29,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= "    <?= " ?>$this->render('_search', ['model' => $searchModel]); ?>
 <?php endif; ?>
 
-    <?= "<?= " ?>\rusbeldoor\yii2General\widgets\grid\GridView::widget([
+    <?= "<?= " ?>GridView::widget([
         'dataProvider' => $dataProvider,
         'tableOptions' => ['class' => 'table table-striped table-hover'],
         'columns' => [
