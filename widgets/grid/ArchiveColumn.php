@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /**
  *
  */
-class ArchiveActionColumn extends \yii\grid\ActionColumn
+class ArchiveColumn extends \yii\grid\ActionColumn
 {
     const ARCHIVE_CLASS = 'color-archive';
     const NOT_ARCHIVE_CLASS = 'color-not-archive';
