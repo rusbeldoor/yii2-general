@@ -16,7 +16,7 @@ use yii\helpers\Html;
 use yii\widgets\Pjax;
 use <?= $generator->indexWidgetType === 'grid' ? "rusbeldoor\yii2General\grid\GridView" : "yii\\widgets\\ListView" ?>;
 
-use rusbeldoor\yii2General\common\helpers\BaseUi;
+use rusbeldoor\yii2General\common\helpers\BaseUI;
 
 /* @var $this yii\web\View */
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>

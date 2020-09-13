@@ -14,7 +14,7 @@ echo "<?php\n";
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-use rusbeldoor\yii2General\common\helpers\BaseUi;
+use rusbeldoor\yii2General\common\helpers\BaseUI;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */

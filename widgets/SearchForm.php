@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\widgets;
 
-use rusbeldoor\yii2General\common\helpers\BaseUi;
+use rusbeldoor\yii2General\common\helpers\BaseUI;
 
 /**
  * Форма поиска
