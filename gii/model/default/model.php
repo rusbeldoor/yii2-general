@@ -34,7 +34,7 @@ echo "<?php\n";
 
 namespace <?= $generator->ns ?>;
 
-use Yii;
+use yii;
 
 /**
  * <?= ucfirst($generator->generateTableName($tableName)) ?> (ActiveRecord)

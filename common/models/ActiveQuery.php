@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\common\models;
 
-use Yii;
+use yii;
 
 /**
  * Common ActiveQuery

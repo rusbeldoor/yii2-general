@@ -7,7 +7,7 @@
 
 namespace rusbeldoor\yii2General\gii\crud;
 
-use Yii;
+use yii;
 use yii\db\ActiveRecord;
 use yii\db\BaseActiveRecord;
 use yii\db\Schema;

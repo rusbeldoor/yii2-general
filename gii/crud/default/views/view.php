@@ -23,25 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
-    <div class="panel-buttons-group clearfix">
-        <div class="float-right">
-            <?= "<?= " ?>Html::a(
-                '<i class="fas fa-pencil-alt"></i> Изменить',
-                ['update', <?= $urlParams ?>],
-                ['class' => 'btn btn-success']
-            ) ?>&nbsp;&nbsp;<?= "<?= " ?>Html::a(
-                '<i class="far fa-trash-alt"></i> Удалить',
-                ['delete', <?= $urlParams ?>],
-                [
-                    'class' => 'btn btn-danger',
-                    'data' => [
-                        'confirm' => <?= $generator->generateString('Вы уверены, что хотите удалить этот элемент?') ?>,
-                        'method' => 'post',
-                    ],
-                ]
-            ) ?>
-        </div>
-    </div>
+    <?= "<?= " ?>BaseUI::buttonsManageForView() ?>
+
     <?= "<?= " ?>DetailView::widget([
         'model' => $model,
         'options' => ['class' => 'table table-striped table-hover'],

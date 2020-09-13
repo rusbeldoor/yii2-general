@@ -7,7 +7,7 @@
 
 namespace rusbeldoor\yii2General\gii\model;
 
-use Yii;
+use yii;
 use yii\base\NotSupportedException;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;

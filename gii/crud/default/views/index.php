@@ -24,12 +24,7 @@ $this->title = <?= $generator->generateString(Inflector::pluralize(Inflector::ca
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index">
-    <div class="panel-buttons-group clearfix">
-        <?= "<?= " ?>Html::button('<i class="fas fa-filter"></i> Фильтр', ['class' => 'btn btn-light panel-button-search-form']) ?>
-        <div class="float-right">
-            <?= "<?= " ?>Html::a('<i class="fas fa-plus"></i> Добавить', ['create'], ['class' => 'btn btn-success']) ?>
-        </div>
-    </div>
+    <?= "<?= " ?>BaseUI::buttonsManageForIndex() ?>
 
     <?= "<?php " ?>Pjax::begin(); ?>
 <?php if(!empty($generator->searchModelClass)): ?>

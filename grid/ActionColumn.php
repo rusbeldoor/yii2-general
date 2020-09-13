@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\grid;
 
-use Yii;
+use yii;
 use yii\helpers\Html;
 
 /**
