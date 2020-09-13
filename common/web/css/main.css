@@ -62,9 +62,9 @@ a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
 .grid-view .action-column { width: 1px; }
 .grid-view a.action-button i { font-size: 1.35em; }
 
-.panel-buttons-group { margin: 0 0 16px 0; }
-.panel-button-search-form {}
-.panel-search-form {
+.panelButtonsGroup { margin: 0 0 16px 0; }
+.panelSearchFormToggle {}
+.panelSearchForm {
     display: none;
     margin: 0 0 16px 0;
     padding: 15px;
