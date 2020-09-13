@@ -1,6 +1,6 @@
 <?php
 
-namespace common\helpers;
+namespace rusbeldoor\yii2General\common\helpers;
 
 use yii;
 use yii\helpers\Html;
