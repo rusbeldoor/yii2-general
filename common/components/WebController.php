@@ -2,6 +2,8 @@
 
 namespace rusbeldoor\yii2General\common\components;
 
+use rusbeldoor\yii2General\common\helpers\AppHelper;
+
 /**
  * Контроллер
  */
@@ -14,5 +16,29 @@ class WebController extends \yii\web\Controller
     public function getRoute()
     {
         return ((($this->action !== null) && ($this->action->id !== 'index')) ? $this->action->getUniqueId() : $this->getUniqueId());
+    }
+
+    /**
+     * Архивация
+     * backend\widgets\ArchiveActionColumn
+     *
+     * @return void
+     */
+    public function actionArchive()
+    {
+        AppHelper::exitIfNotAjaxRequest();
+        AppHelper::exitIfNotPostRequest();
+
+        // Загружаем модель
+        $model = $this->findModel((int)Yii::$app->request->post('id'));
+
+        // Если в модели не существует поля архив
+        if (!isset($model->archive)) { AppHelper::exitWithJsonResult(false); }
+
+        // Изменяем поле архив на противоположное значение
+        $model->archive = (int)!$model->archive;
+        $model->update();
+
+        AppHelper::exitWithJsonResult(true);
     }
 }
