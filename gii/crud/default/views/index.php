@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'tableOptions' => ['class' => 'table table-striped table-hover'],
         'columns' => [
+            ['class' => 'backend\widgets\CheckboxColumn'],
 <?php
 foreach ($generator->getColumnNames() as $name) {
     echo "            ";
