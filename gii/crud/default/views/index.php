@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'tableOptions' => ['class' => 'table table-striped table-hover'],
         'columns' => [
-            ['class' => 'rusbeldoor\yii2General\widgets\CheckboxColumn'],
+            ['class' => 'rusbeldoor\yii2General\widgets\grid\CheckboxColumn'],
 <?php
 foreach ($generator->getColumnNames() as $name) {
     echo "            ";
