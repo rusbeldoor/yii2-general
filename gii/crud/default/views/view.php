@@ -14,6 +14,8 @@ echo "<?php\n";
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+use rusbeldoor\yii2General\common\helpers\BaseUi;
+
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 
@@ -23,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
-    <?= "<?= " ?>BaseUI::buttonsManageForView() ?>
+    <?= "<?= " ?>BaseUI::buttonsForViewPage($model, ['add', 'delete']) ?>
 
     <?= "<?= " ?>DetailView::widget([
         'model' => $model,

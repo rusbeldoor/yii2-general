@@ -12,7 +12,7 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
-use yii\bootstrap4\ActiveForm;
+use rusbeldoor\yii2General\widgets\SearchForm;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->searchModelClass, '\\') ?> */
@@ -20,18 +20,14 @@ use yii\bootstrap4\ActiveForm;
 ?>
 
 <div class="<?= $name ?>-search panel-search-form">
-    <?= "<?php " ?>$form = ActiveForm::begin([
-        'id' => 'standard-search-form',
-        'method' => 'post',
-        'layout' => 'horizontal',
-    ]); ?>
+    <?= "<?php " ?>$form = SearchForm::begin() ?>
 <?php foreach ($generator->getColumnNames() as $attribute) {
+    // Если аттрибут не разрешен к выводу
     if (in_array($attribute, ['id'])) { continue; }
-    echo "    <?= " . $generator->generateActiveSearchField($attribute) . " ?>\n";
+    echo "        ";
+    echo "<?= " . $generator->generateActiveSearchField($attribute) . " ?>";
+    echo "\n";
 } ?>
-    <div>
-        <?= "<?= " ?>Html::submitButton('Применить', ['class' => 'btn btn-primary']) ?>
-        <?= "<?= " ?>Html::resetButton('<i class="fas fa-wind"></i> Сбросить', ['class' => 'btn btn-outline-secondary']) ?>
-    </div>
-    <?= "<?php " ?>ActiveForm::end(); ?>
+        <?= "<?= " ?>$form->buttons() ?>
+    <?= "<?php " ?>ActiveForm::end() ?>
 </div>

@@ -16,6 +16,8 @@ use yii\helpers\Html;
 use yii\widgets\Pjax;
 use <?= $generator->indexWidgetType === 'grid' ? "rusbeldoor\yii2General\grid\GridView" : "yii\\widgets\\ListView" ?>;
 
+use rusbeldoor\yii2General\common\helpers\BaseUi;
+
 /* @var $this yii\web\View */
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -24,7 +26,7 @@ $this->title = <?= $generator->generateString(Inflector::pluralize(Inflector::ca
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index">
-    <?= "<?= " ?>BaseUI::buttonsManageForIndex() ?>
+    <?= "<?= " ?>BaseUI::buttonsForIndexPage(['filter', 'add', 'delete']) ?>
 
     <?= "<?php " ?>Pjax::begin(); ?>
 <?php if(!empty($generator->searchModelClass)): ?>

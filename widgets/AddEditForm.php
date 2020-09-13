@@ -1,0 +1,22 @@
+<?php
+
+namespace rusbeldoor\yii2General\widgets;
+
+use rusbeldoor\yii2General\common\helpers\BaseUi;
+
+/**
+ *
+ */
+class AddEditForm extends \yii\widgets\ActiveForm
+{
+    public $options = [
+        'layout' => 'horizontal',
+    ];
+
+    /**
+     * @param $model
+     * @return string
+     */
+    public function buttons($model)
+    { return BaseUI::buttonsForAddEditForm($model);}
+}
