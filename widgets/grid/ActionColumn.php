@@ -10,9 +10,15 @@ use yii\helpers\Html;
  */
 class ActionColumn extends \yii\grid\ActionColumn
 {
-    public $headerOptions = ['class' => 'action-column'];
+    // Атрибуты тега th
+    public $headerOptions = ['class' => 'action-column-header'];
+    // Атрибуты тега td
+    public $contentOptions = ['class' => 'action-column'];
+    // Атрибуты тега button
+    public $buttonOptions = ['class' => 'action-column-button'];
+
+    // Шаблон вывода
     public $template = '{view}&nbsp;&nbsp;{update}&nbsp;&nbsp;{delete}';
-    public $buttonOptions = ['class' => 'action-button'];
 
     /**
      * Initializes the default button rendering callbacks.
@@ -36,22 +42,22 @@ class ActionColumn extends \yii\grid\ActionColumn
      */
     protected function initDefaultButton($name, $iconName, $additionalOptions = [])
     {
-        if (!isset($this->buttons[$name]) && strpos($this->template, '{' . $name . '}') !== false) {
+        if (!isset($this->buttons[$name]) && (strpos($this->template, '{' . $name . '}') !== false)) {
             $this->buttons[$name] = function ($url, $model, $key) use ($name, $iconName, $additionalOptions) {
                 switch ($name) {
                     case 'view':
                         $title = Yii::t('yii', 'Просмотр');
-                        $class = 'color-blue';
+                        $class = 'color-view';
                         break;
 
                     case 'update':
                         $title = Yii::t('yii', 'Изменить');
-                        $class = 'color-green';
+                        $class = 'color-edit';
                         break;
 
                     case 'delete':
                         $title = Yii::t('yii', 'Удалить');
-                        $class = 'color-red';
+                        $class = 'color-remove';
                         break;
 
                     default: $title = ucfirst($name);
@@ -59,7 +65,6 @@ class ActionColumn extends \yii\grid\ActionColumn
                 $options = array_merge([
                     'title' => $title,
                     'aria-label' => $title,
-                    'data-pjax' => '0',
                 ], $additionalOptions, $this->buttonOptions);
                 $icon = Html::tag('i', '', ['class' => $iconName . ' ' . $class]);
                 return Html::a($icon, $url, $options);
