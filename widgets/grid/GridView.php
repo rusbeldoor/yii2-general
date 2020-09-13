@@ -10,12 +10,11 @@ use yii\widgets\Pjax;
  */
 class GridView extends \yii\grid\GridView
 {
-    // Идентификатор формы-фильтра влияющей на GridView
-    public $filterFormSelector = 'form.base-filter';
-
     // Номер для уникальности нескольких GridView на одной странице
     public static $number = 0;
 
+    // Селектор формы поиска
+    public $searchFormSelector = '.panelSearchForm';
     // Id Pjax контейнера
     public $pjaxId = 'panelPjaxGrid';
     // Id контейнера откуда берутся данные
@@ -65,11 +64,11 @@ class GridView extends \yii\grid\GridView
         });
         window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'});
     }
-    $(document).on(\'submit\', \'' . $this->filterFormSelector . '\', function() {
+    $(document).on(\'submit\', \'' . $this->searchFormSelector . '\', function() {
         pjaxReload($(this).serialize());
         return false;
     });
-    $(document).on(\'reset\', \'' . $this->filterFormSelector . '\', function() {
+    $(document).on(\'reset\', \'' . $this->searchFormSelector . '\', function() {
         setTimeout(function() {
             pjaxReload($(this).serialize());
         }, 1);

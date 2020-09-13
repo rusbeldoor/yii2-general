@@ -5,7 +5,7 @@ namespace rusbeldoor\yii2General\widgets;
 use rusbeldoor\yii2General\common\helpers\BaseUI;
 
 /**
- *
+ * Форма добавления/изменения
  */
 class AddEditForm extends \yii\bootstrap4\ActiveForm
 {
