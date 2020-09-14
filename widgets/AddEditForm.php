@@ -7,7 +7,7 @@ use rusbeldoor\yii2General\common\helpers\BaseUI;
 /**
  * Форма добавления/изменения
  */
-class AddEditForm extends \yii\bootstrap4\ActiveForm
+class AddEditForm extends \rusbeldoor\yii2General\widgets\ActiveForm
 {
     public $layout = 'horizontal';
 

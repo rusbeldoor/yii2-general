@@ -7,7 +7,7 @@ use rusbeldoor\yii2General\common\helpers\BaseUI;
 /**
  * Форма поиска
  */
-class SearchForm extends \yii\bootstrap4\ActiveForm
+class SearchForm extends \rusbeldoor\yii2General\widgets\ActiveForm
 {
     public $options = [
         'class' => 'panelSearchForm',
