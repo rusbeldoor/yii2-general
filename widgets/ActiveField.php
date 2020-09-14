@@ -2,6 +2,8 @@
 
 namespace rusbeldoor\yii2General\widgets;
 
+use yii\helpers\html;
+
 /**
  * ...
  */
