@@ -69,23 +69,7 @@ class Generator extends \yii\gii\generators\crud\Generator
     public function generateActiveSearchField($attribute)
     {
         switch ($attribute) {
-            case 'archive':
-                return
-                    "\$form->field(\$model, 'archive', ['inline'=>true])->radioList(
-                        ['' => 'Не важно', '1' => 'Да', '0' => 'Нет'],
-                        [
-                            'class' => 'btn-group',
-                            'data-toggle' => 'buttons',
-                            'unselect' => null,
-                            'item' => function (\$index, \$label, \$name, \$checked, \$value) {
-                                return
-                                    '<label class=\"btn btn-secondary' . (\$checked ? ' active' : '') . '\">'
-                                        . Html::radio(\$name, \$checked, ['value' => \$value, 'class' => 'project-status-btn']) . ' ' . \$label
-                                    . '</label>';
-                            },
-                        ]
-                    )";
-                break;
+            case 'archive': return "\$form->field(\$model, 'archive')->searchArchive()"; break;
 
             default:
                 $tableSchema = $this->getTableSchema();
