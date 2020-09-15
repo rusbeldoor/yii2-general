@@ -3,7 +3,7 @@
 namespace rusbeldoor\yii2General\common\components;
 
 use yii;
-use rusbeldoor\yii2General\common\helpers\AppHelper;
+use rusbeldoor\yii2General\helpers\AppHelper;
 
 /**
  * Контроллер

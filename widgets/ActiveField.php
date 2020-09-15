@@ -4,7 +4,7 @@ namespace rusbeldoor\yii2General\widgets;
 
 use yii\helpers\html;
 
-use rusbeldoor\yii2General\common\helpers\ArrayHelper;
+use rusbeldoor\yii2General\helpers\ArrayHelper;
 
 /**
  * ...

@@ -13,7 +13,7 @@ echo "<?php\n";
 ?>
 
 use rusbeldoor\yii2General\widgets\grid\GridView;
-use rusbeldoor\yii2General\common\helpers\BaseUI;
+use rusbeldoor\yii2General\helpers\BaseUI;
 
 /* @var $this yii\web\View */
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>

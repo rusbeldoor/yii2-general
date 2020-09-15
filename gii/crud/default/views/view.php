@@ -12,7 +12,7 @@ echo "<?php\n";
 ?>
 
 use rusbeldoor\yii2General\widgets\DetailView;
-use rusbeldoor\yii2General\common\helpers\BaseUI;
+use rusbeldoor\yii2General\helpers\BaseUI;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */

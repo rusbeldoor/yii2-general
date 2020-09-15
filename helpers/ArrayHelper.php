@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\common\helpers;
+namespace rusbeldoor\yii2General\helpers;
 
 class ArrayHelper extends \yii\helpers\ArrayHelper
 {

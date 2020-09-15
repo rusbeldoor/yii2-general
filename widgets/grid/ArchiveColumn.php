@@ -67,16 +67,16 @@ class ArchiveColumn extends \yii\grid\ActionColumn
                     case 'archive':
                         if ($model->archive) {
                             $archiveClass = self::ARCHIVE_CLASS;
-                            $title = 'В архиве';
+                            $title = 'Разархивировать (в архиве)';
                         } else {
                             $archiveClass = self::NOT_ARCHIVE_CLASS;
-                            $title = 'Не в архиве';
+                            $title = 'Архивировать (не в архиве)';
                         }
                         break;
 
                     default:
                         $archiveClass = self::NOT_ARCHIVE_CLASS;
-                        $title = 'Не в архиве';
+                        $title = 'Архивировать (не в архиве)';
                 }
                 return Html::tag(
                     'i',
