@@ -18,7 +18,15 @@ class ActiveField extends \yii\bootstrap4\ActiveField
      * @return ActiveField
      */
     public function searchTextInput($options = [])
-    { return self::textInput(['placeholder' => 'Не важно']); }
+    {
+        $options = ArrayHelper::merge(
+            [
+                'placeholder' => 'Не важно',
+            ],
+            $options
+        );
+        return self::textInput($options);
+    }
 
     /**
      * ...
@@ -29,27 +37,23 @@ class ActiveField extends \yii\bootstrap4\ActiveField
      */
     public function radioButtonsList($items, $options = [])
     {
-        parent::radioList(
-            $items,
-            ArrayHelper::merge(
-                [
-                    'class' => 'btn-group',
-                    'data-toggle' => 'buttons',
-                    'unselect' => null,
-                    'value' => 1,
-                    'item' => function ($index, $label, $name, $checked, $value) {
-                        return
-                            '<label class="btn btn-secondary' . ($checked ? ' active' : '') . '">'
-                            . Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
-                            . ' '
-                            . $label
-                            . '</label>';
-                    },
-                ],
-                $options
-            )
+        $options = ArrayHelper::merge(
+            [
+                'class' => 'btn-group',
+                'data-toggle' => 'buttons',
+                'unselect' => null,
+                'item' => function ($index, $label, $name, $checked, $value) {
+                    return
+                        '<label class="btn btn-secondary' . ($checked ? ' active' : '') . '">'
+                        . Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
+                        . ' '
+                        . $label
+                        . '</label>';
+                },
+            ],
+            $options
         );
-        return $this;
+        return self::radioList($items, $options);
     }
 
     /**
