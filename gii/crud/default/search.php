@@ -34,12 +34,20 @@ use <?= ltrim($generator->modelClass, '\\') . (isset($modelAlias) ? " as $modelA
 class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $modelClass ?>
 
 {
-<?php foreach ($labels as $name => $label) {
+<?php
+$echo = false;
+foreach ($labels as $name => $label) {
     switch ($name) {
-        case 'archive': echo '        public $archive = \'0\';' . "\n"; break;
+        case 'archive':
+            echo '    public $archive = \'0\';' . "\n";
+            $echo = true;
+            break;
+
         default:
     }
-} ?>
+}
+if ($echo) { echo "\n"; }
+?>
     /**
      * {@inheritdoc}
      */
