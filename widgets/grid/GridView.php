@@ -62,7 +62,9 @@ class GridView extends \yii\grid\GridView
             fragment: \'#' . $this->fragmentId . '\', 
             data: data
         });
-        window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'});
+        setTimeout(function() { 
+            window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'});
+        }, 1000);
     }
     $(document).on(\'submit\', \'' . $this->searchFormSelector . '\', function() {
         pjaxReload($(this).serialize());
@@ -73,7 +75,6 @@ class GridView extends \yii\grid\GridView
             pjaxReload($(this).serialize());
         }, 1);
     });
-    
     $(document).on(\'submit\', \'.bulk-action-form\', function() {
         var keys = $(\'#' . $this->fragmentId . ' .grid-view\').yiiGridView(\'getSelectedRows\');
         $(this).children(\'input[name="items"]\').val(keys);
