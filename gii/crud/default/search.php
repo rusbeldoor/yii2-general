@@ -44,13 +44,6 @@ foreach ($labels as $attribute => $label) {
             break;
 
         default:
-            $tableSchema = $this->getTableSchema();
-            if ($tableSchema === false) { continue; }
-            switch ($tableSchema->columns[$attribute]->phpType) {
-                case 'string': /* ... */ break;
-                case 'boolean': /* ... */ break;
-                default:
-            }
     }
 }
 if ($echo) { echo "\n"; }
