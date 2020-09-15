@@ -62,18 +62,14 @@ class GridView extends \yii\grid\GridView
             fragment: \'#' . $this->fragmentId . '\', 
             data: data
         });
-        setTimeout(function() { 
-            window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'});
-        }, 1000);
+        setTimeout(function() { window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'}); }, 100);
     }
     $(document).on(\'submit\', \'' . $this->searchFormSelector . '\', function() {
         pjaxReload($(this).serialize());
         return false;
     });
     $(document).on(\'reset\', \'' . $this->searchFormSelector . '\', function() {
-        setTimeout(function() {
-            pjaxReload($(this).serialize());
-        }, 1);
+        setTimeout(function() { pjaxReload($(this).serialize()); }, 1);
     });
     $(document).on(\'submit\', \'.bulk-action-form\', function() {
         var keys = $(\'#' . $this->fragmentId . ' .grid-view\').yiiGridView(\'getSelectedRows\');
