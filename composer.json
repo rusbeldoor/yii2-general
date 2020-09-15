@@ -1,5 +1,6 @@
 {
     "name": "rusbeldoor/yii2-general",
+    "version": "1.0.0",
     "type": "library",
     "require": {
         "thomaspark/bootswatch": "^4",
