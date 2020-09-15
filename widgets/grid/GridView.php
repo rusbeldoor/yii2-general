@@ -51,10 +51,13 @@ class GridView extends \yii\grid\GridView
     {
         if (!parent::beforeRun()) { return false; }
 
-        // Обработка Pjax обновления
+        // Pjax обновлениие
+        // Отправка формы
+        // Сброс формы (отправка формы по умолчанию)
+        // Реакция на успешное Pjax обновление (переход к таблице)
         // Обработка отправки форм bulk-action-form
         $this->getView()->registerJs(
-'$(document).ready(function() {
+            '$(document).ready(function() {
     function pjaxReload(data) {
         $.pjax.reload({
             container: \'#' . $this->pjaxId . '\', 
@@ -62,7 +65,6 @@ class GridView extends \yii\grid\GridView
             fragment: \'#' . $this->fragmentId . '\', 
             data: data
         });
-        setTimeout(function() { window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'}); }, 1000);
     }
     $(document).on(\'submit\', \'' . $this->searchFormSelector . '\', function() {
         pjaxReload($(this).serialize());
@@ -70,6 +72,9 @@ class GridView extends \yii\grid\GridView
     });
     $(document).on(\'reset\', \'' . $this->searchFormSelector . '\', function() {
         setTimeout(function() { pjaxReload($(this).serialize()); }, 1);
+    });
+    $(document).on("pjax:success", "#' . $this->pjaxId . '",  function(event) { 
+        window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'});
     });
     $(document).on(\'submit\', \'.bulk-action-form\', function() {
         var keys = $(\'#' . $this->fragmentId . ' .grid-view\').yiiGridView(\'getSelectedRows\');
