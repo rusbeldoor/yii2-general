@@ -32,6 +32,7 @@ $attributeLabels = [
     'publish' => 'Публикация',
     'datetime_create' => 'Дата и время создания',
     'datetime_update' => 'Дата и время обновления',
+    'datetime_remove' => 'Дата и время удаления',
     'archive' => 'Архив',
 ];
 
