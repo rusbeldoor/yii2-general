@@ -20,12 +20,18 @@ $attributeLabels = [
     'name' => 'Название',
     'status' => 'Статус',
     'title' => 'Заголовок',
+    'description' => 'Описание',
     'email' => 'Электронная почта',
     'phone' => 'Телефон',
     'firstname' => 'Имя',
     'lastname' => 'Фамилия',
     'middlename' => 'Отчество',
+    'sex' => 'Пол',
+    'datetime_birthday' => 'День рождения',
+    'age' => 'Возраст',
+    'publish' => 'Публикация',
     'datetime_create' => 'Дата и время создания',
+    'datetime_update' => 'Дата и время обновления',
     'archive' => 'Архив',
 ];
 
@@ -73,32 +79,11 @@ class <?= $className ?> extends \rusbeldoor\yii2General\common\models\ActiveReco
     public function attributeLabels()
     {
         return [
-<?php
-foreach ($labels as $name => $label) {
+<?php foreach ($labels as $name => $label) {
     echo "            ";
-    if (isset($attributeLabels[$name])) {
-        echo "'" . $name . "' => '" . $label . "'";
-    } else { echo "'$name' => " . $generator->generateString($label); }
-
-/*    switch ($name) {
-        case 'id': echo "'id' => 'Ид'"; break;
-        case 'alias': echo "'alias' => 'Алиас'"; break;
-        case 'name': echo "'name' => 'Название'"; break;
-        case 'status': echo "'status' => 'Статус'"; break;
-        case 'title': echo "'title' => 'Заголовок'"; break;
-        case 'email': echo "'email' => 'Электронная почта'"; break;
-        case 'phone': echo "'phone' => 'Телефон'"; break;
-        case 'firstname': echo "'firstname' => 'Имя'"; break;
-        case 'lastname': echo "'lastname' => 'Фамилия'"; break;
-        case 'middlename': echo "'middlename' => 'Отчество'"; break;
-        case 'datetime_create': echo "'datetime_create' => 'Дата и время создания'"; break;
-        case 'archive': echo "'archive' => 'Архив'"; break;
-        default: echo "'$name' => " . $generator->generateString($label);
-    } */
-
+    echo ((isset($attributeLabels[$name])) ? "'" . $name . "' => '" . $label . "'" : "'$name' => " . $generator->generateString($label));
     echo ",\n";
-}
-?>
+} ?>
         ];
     }
 <?php if ($queryClassName): ?>
