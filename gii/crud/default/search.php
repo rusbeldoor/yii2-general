@@ -36,14 +36,21 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
 {
 <?php
 $echo = false;
-foreach ($labels as $name => $label) {
-    switch ($name) {
+foreach ($labels as $attribute => $label) {
+    switch ($attribute) {
         case 'archive':
             echo '    public $archive = \'0\';' . "\n";
             $echo = true;
             break;
 
         default:
+            $tableSchema = $this->getTableSchema();
+            if ($tableSchema === false) { continue; }
+            switch ($tableSchema->columns[$attribute]->phpType) {
+                case 'string': /* ... */ break;
+                case 'boolean': /* ... */ break;
+                default:
+            }
     }
 }
 if ($echo) { echo "\n"; }

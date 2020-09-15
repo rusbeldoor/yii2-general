@@ -69,15 +69,15 @@ class Generator extends \yii\gii\generators\crud\Generator
     public function generateActiveSearchField($attribute)
     {
         switch ($attribute) {
-            case 'archive': return "\$form->field(\$model, 'archive')->searchNumberYesNo()"; break;
+            case 'archive': return "\$form->field(\$model, 'archive')->searchNumberYesNo()";
 
             default:
                 $tableSchema = $this->getTableSchema();
                 if ($tableSchema === false) { return "\$form->field(\$model, '$attribute')"; }
                 switch ($tableSchema->columns[$attribute]->phpType) {
-                    case 'string': return "\$form->field(\$model, '$attribute')->searchTextInput()"; break;
-                    case 'boolean': return "\$form->field(\$model, '$attribute')->checkbox()"; break;
-                    default: return "\$form->field(\$model, '$attribute')"; break;
+                    case 'string': return "\$form->field(\$model, '$attribute')->searchTextInput()";
+                    case 'boolean': return "\$form->field(\$model, '$attribute')->checkbox()";
+                    default: return "\$form->field(\$model, '$attribute')";
                 }
         }
     }

@@ -21,7 +21,6 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     {
         $options = ArrayHelper::merge(
             [
-                'value' => '',
                 'placeholder' => 'Не важно',
             ],
             $options
@@ -73,13 +72,5 @@ class ActiveField extends \yii\bootstrap4\ActiveField
      * @return ActiveField
      */
     public function searchNumberYesNo($options = [])
-    {
-        $options = ArrayHelper::merge(
-            [
-                'value' => '0',
-            ],
-            $options
-        );
-        return self::radioButtonsList(['' => 'Не важно', '1' => 'Да', '0' => 'Нет'], $options);
-    }
+    { return self::radioButtonsList(['' => 'Не важно', '1' => 'Да', '0' => 'Нет'], $options); }
 }
