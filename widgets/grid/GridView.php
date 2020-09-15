@@ -62,7 +62,7 @@ class GridView extends \yii\grid\GridView
             fragment: \'#' . $this->fragmentId . '\', 
             data: data
         });
-        setTimeout(function() { window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'}); }, 100);
+        setTimeout(function() { window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'}); }, 300);
     }
     $(document).on(\'submit\', \'' . $this->searchFormSelector . '\', function() {
         pjaxReload($(this).serialize());
