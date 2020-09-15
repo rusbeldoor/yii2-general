@@ -12,6 +12,12 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     /**
      * ...
      */
+    public function searchTextInput()
+    { return self::textInput(['placeholder' => 'Не важно']); }
+
+    /**
+     * ...
+     */
     public function radioButtonsList($items)
     {
         parent::radioList($items, [

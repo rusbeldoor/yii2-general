@@ -74,9 +74,11 @@ class Generator extends \yii\gii\generators\crud\Generator
             default:
                 $tableSchema = $this->getTableSchema();
                 if ($tableSchema === false) { return "\$form->field(\$model, '$attribute')"; }
-                $column = $tableSchema->columns[$attribute];
-                if ($column->phpType === 'boolean') { return "\$form->field(\$model, '$attribute')->checkbox()"; }
-                return "\$form->field(\$model, '$attribute')";
+                switch ($tableSchema->columns[$attribute]->phpType) {
+                    case 'string': return "\$form->field(\$model, '$attribute')->searchTextInput()"; break;
+                    case 'boolean': return "\$form->field(\$model, '$attribute')->checkbox()"; break;
+                    default: return "\$form->field(\$model, '$attribute')"; break;
+                }
         }
     }
 }
