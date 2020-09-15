@@ -64,15 +64,6 @@ class ActiveField extends \yii\bootstrap4\ActiveField
      * @return ActiveField
      */
     public function numberYesNo($options = [])
-    { return self::radioButtonsList([1 => 'Да', 0 => 'Нет'], $options); }
-
-    /**
-     * ...
-     *
-     * @param $options array
-     * @return ActiveField
-     */
-    public function stringNumberYesNo($options = [])
     { return self::radioButtonsList(['1' => 'Да', '0' => 'Нет'], $options); }
 
     /**
@@ -81,23 +72,14 @@ class ActiveField extends \yii\bootstrap4\ActiveField
      * @param $options array
      * @return ActiveField
      */
-    public function booleanYesNo($options = [])
-    { return self::radioButtonsList([true => 'Да', false => 'Нет'], $options); }
-
-    /**
-     * ...
-     *
-     * @param $options array
-     * @return ActiveField
-     */
-    public function searchStringNumberYesNo($options = [])
+    public function searchNumberYesNo($options = [])
     {
         $options = ArrayHelper::merge(
             [
-                'value' => '',
+                'value' => '0',
             ],
             $options
         );
-        return self::radioButtonsList(['' => 'Не важно', 1 => 'Да', 0 => 'Нет'], $options);
+        return self::radioButtonsList(['' => 'Не важно', '1' => 'Да', '0' => 'Нет'], $options);
     }
 }
