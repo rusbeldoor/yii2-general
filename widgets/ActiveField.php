@@ -51,6 +51,6 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     /**
      * ...
      */
-    public function searchArchive()
+    public function searchStringNumberYesNo()
     { return self::radioButtonsList(['' => 'Не важно', 1 => 'Да', 0 => 'Нет']); }
 }
