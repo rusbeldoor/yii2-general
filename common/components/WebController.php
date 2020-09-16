@@ -20,8 +20,66 @@ class WebController extends \yii\web\Controller
     }
 
     /**
+     * Удаление
+     *
+     * @param int|null $id
+     * @return yii\web\Response
+     */
+    public function actionDelete($id = null)
+    {
+        if (!Yii::$app->request->isPost) { return $this->redirect(['index']); }
+
+        // Массив id удаляемых элементов
+        $ids = [];
+        if ($id !== null) { $ids[] = $id; }
+        else {
+            $post = Yii::$app->request->post();
+            if (isset($post['items'])) {
+                $ids = explode(',', $post['items']);
+            }
+        }
+
+        $deletedIds = [];
+        $notDeletedIds = [];
+
+        // Перебираем id удаляемых элемнетов
+        foreach ($ids as $id) {
+            // Получаем модель
+            $model = $this->findModel($id);
+            // Проверяем возможность удаления
+            $check = $model->checkCanDelete($id);
+            if ($check['result']) {
+                // Удаляем
+                $model->delete();
+                // Запоминаем id как удалённый
+                $deletedIds[] = $id;
+            } else {
+                // Запоминаем id как не удалённый
+                $notDeletedIds[$id] = $check['reason'];
+            }
+        }
+
+        // Формируем результат
+        $not_deleted_html = '';
+        if (count($notDeletedIds)) {
+            foreach ($notDeletedIds as $id => $reson) {
+                $not_deleted_html .= '<br>#' . $id . ' — ' . $reson;
+            }
+        }
+        if (count($deletedIds)) {
+            $flashs['success'] = 'Элементы #' . implode(', #', $deletedIds) . ' успешно удалены.';
+            $flashs['warning'] = 'Не удалось удалить некоторые элементы:' . $not_deleted_html;
+        } else {
+            $flashs['error'] = 'Не удалось удалить элементы:' . $not_deleted_html;
+        }
+
+        self::setFlashs($flashs);
+
+        return $this->redirect(['index']);
+    }
+
+    /**
      * Архивация
-     * backend\widgets\ArchiveActionColumn
      *
      * @return void
      */
