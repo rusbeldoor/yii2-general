@@ -86,7 +86,18 @@ class ActiveField extends \kartik\form\ActiveField
     public function dateTimePicker($options)
     {
         $this->addon = ['prepend' => ['content' => '<i class="fas fa-calendar-alt"></i>']];
-        return $this->widget('kartik\daterange\DateRangePicker', $options);
+        return $this->widget(
+            'kartik\daterange\DateRangePicker',
+            ArrayHelper::merge(
+                [
+                    'convertFormat' => true,
+                    'pluginOptions' => [
+                        'timePicker24Hour' => true,
+                    ],
+                ],
+                $options
+            )
+        );
     }
 
     /**
@@ -96,11 +107,9 @@ class ActiveField extends \kartik\form\ActiveField
      */
     public function dateTime()
     { return self::dateTimePicker([
-        'convertFormat' => true,
         'readonly' => true,
         'pluginOptions' => [
             'timePicker' => true,
-            'timePicker24Hour' => true,
             'timePickerIncrement' => 5,
             'locale' => ['format' => 'H:i d.m.Y'],
             'singleDatePicker' => true,
