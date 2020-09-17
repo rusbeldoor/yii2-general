@@ -11,6 +11,9 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
  */
 class ActiveField extends \kartik\form\ActiveField
 {
+    public $addon = ['prepend'=>['content'=>'<i class="fas fa-calendar-alt"></i>']];
+    public $options = ['class'=>'drp-container form-group'];
+
     /**
      * ...
      *
@@ -73,4 +76,20 @@ class ActiveField extends \kartik\form\ActiveField
      */
     public function searchNumberYesNo($options = [])
     { return self::radioButtonsList(['' => 'Не важно', '1' => 'Да', '0' => 'Нет'], $options); }
+
+    public function dateTime()
+    {
+        return $this->widget('kartik\daterange\DateRangePicker', [
+            'useWithAddon' => true,
+            'convertFormat' => true,
+            'readonly' => true,
+            'pluginOptions' => [
+                'timePicker' => true,
+                'timePickerIncrement' => 5,
+                'locale' => ['format' => 'H:i d.m.Y'],
+                'singleDatePicker' => true,
+                'showDropdowns' => true
+            ]
+        ]);
+    }
 }
