@@ -76,6 +76,13 @@ class GridView extends \yii\grid\GridView
     $(document).on("pjax:success", "#' . $this->pjaxId . '",  function(event) { 
         window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'});
     });
+    $(document).on(\'change\', \'.bulkActionColumnCheckbox\', function() {
+        if ($(\'#' . $this->fragmentId . ' .grid-view\').childs(\'.bulkActionColumnCheckbox:checked\').length) {
+            $(\'.bulkActionFormButton\').prop(\'disabled\', false);
+        } else {
+            $(\'.bulkActionFormButton\').prop(\'disabled\', true);
+        }
+    });
     $(document).on(\'submit\', \'.bulkActionForm\', function() {
         var keys = $(\'#' . $this->fragmentId . ' .grid-view\').yiiGridView(\'getSelectedRows\');
         $(this).children(\'input[name="items"]\').val(keys);

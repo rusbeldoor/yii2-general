@@ -12,7 +12,7 @@ class bulkActionColumn extends \yii\grid\CheckboxColumn
     // Атрибуты тега td
     public $contentOptions = ['class' => 'bulkActionColumn'];
     // Атрибуты тега button
-    public $buttonOptions = ['class' => 'bulkActionColumn-checkbox'];
+    public $buttonOptions = ['class' => 'bulkActionColumnCheckbox'];
 
     public $cssClass = 'check';
 }
