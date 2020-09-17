@@ -4,7 +4,7 @@
     "require": {
         "thomaspark/bootswatch": "^4",
         "fortawesome/font-awesome": "^5.14.0",
-        "kartik-v/yii2-date-range": "~1.7.2"
+        "kartik-v/yii2-date-range": "^1.7.2"
     },
     "autoload": {
         "psr-4": {
