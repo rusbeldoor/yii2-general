@@ -28,7 +28,7 @@ class BaseUI
 
                 case 'delete':
                     $result[] =
-                        Html::beginForm(['delete'],'post', ['class' => 'bulk-action-form display-inline-block'])
+                        Html::beginForm(['delete'],'post', ['class' => 'bulkActionForm display-inline-block'])
                             . Html::submitButton(
                                 '<i class="far fa-trash-alt"></i>&nbsp;&nbsp;Удалить',
                                 [

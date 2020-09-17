@@ -55,9 +55,9 @@ class GridView extends \yii\grid\GridView
         // Отправка формы
         // Сброс формы (отправка формы по умолчанию)
         // Реакция на успешное Pjax обновление (переход к таблице)
-        // Обработка отправки форм bulk-action-form
+        // Обработка отправки форм bulkActionForm
         $this->getView()->registerJs(
-            '$(document).ready(function() {
+'$(document).ready(function() {
     function pjaxReload(data) {
         $.pjax.reload({
             container: \'#' . $this->pjaxId . '\', 
@@ -76,7 +76,7 @@ class GridView extends \yii\grid\GridView
     $(document).on("pjax:success", "#' . $this->pjaxId . '",  function(event) { 
         window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'});
     });
-    $(document).on(\'submit\', \'.bulk-action-form\', function() {
+    $(document).on(\'submit\', \'.bulkActionForm\', function() {
         var keys = $(\'#' . $this->fragmentId . ' .grid-view\').yiiGridView(\'getSelectedRows\');
         $(this).children(\'input[name="items"]\').val(keys);
     });
