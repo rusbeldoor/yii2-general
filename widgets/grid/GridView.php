@@ -76,8 +76,8 @@ class GridView extends \yii\grid\GridView
     $(document).on("pjax:success", "#' . $this->pjaxId . '",  function(event) { 
         window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'});
     });
-    $(document).on(\'change\', \'.bulkActionColumnCheckbox\', function() {
-        if ($(\'#' . $this->fragmentId . ' .grid-view\').childs(\'.bulkActionColumnCheckbox:checked\').length) {
+    $(document).on(\'change\', \'.BulkActionColumnCheckbox\', function() {
+        if ($(\'#' . $this->fragmentId . ' .grid-view\').childs(\'.BulkActionColumnCheckbox:checked\').length) {
             $(\'.bulkActionFormButton\').prop(\'disabled\', false);
         } else {
             $(\'.bulkActionFormButton\').prop(\'disabled\', true);
