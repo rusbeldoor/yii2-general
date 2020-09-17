@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'tableOptions' => ['class' => 'table table-striped table-hover'],
         'columns' => [
-            ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'],
+            ['class' => 'rusbeldoor\yii2General\widgets\grid\bulkActionColumn'],
 <?php
 foreach ($generator->getColumnNames() as $name) {
     echo "            ";

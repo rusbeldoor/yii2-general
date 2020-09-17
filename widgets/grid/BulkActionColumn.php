@@ -5,14 +5,14 @@ namespace rusbeldoor\yii2General\widgets\grid;
 /**
  *
  */
-class BulkActionColumn extends \yii\grid\CheckboxColumn
+class bulkActionColumn extends \yii\grid\CheckboxColumn
 {
     // Атрибуты тега th
-    public $headerOptions = ['class' => 'bulkactionColumnHeader'];
+    public $headerOptions = ['class' => 'bulkActionColumnHeader'];
     // Атрибуты тега td
-    public $contentOptions = ['class' => 'bulkactionColumn'];
+    public $contentOptions = ['class' => 'bulkActionColumn'];
     // Атрибуты тега button
-    public $buttonOptions = ['class' => 'bulkactionColumn-checkbox'];
+    public $buttonOptions = ['class' => 'bulkActionColumn-checkbox'];
 
     public $cssClass = 'check';
 }
