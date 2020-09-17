@@ -87,6 +87,7 @@ class ActiveField extends \kartik\form\ActiveField
             'kartik\daterange\DateRangePicker',
             ArrayHelper::merge(
                 [
+                    'showDropdowns' => true,
                     'convertFormat' => true,
                     'pluginOptions' => [
                         'timePicker24Hour' => true,
