@@ -32,7 +32,7 @@ class BaseUI
                             . Html::submitButton(
                                 '<i class="far fa-trash-alt"></i>&nbsp;&nbsp;Удалить',
                                 [
-                                    'class' => 'btn btn-danger',
+                                    'class' => 'btn btn-danger bulkActionFormButton',
                                     'data' => [
                                         'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                                         'method' => 'post',
