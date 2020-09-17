@@ -10,19 +10,14 @@ use rusbeldoor\yii2General\helpers\AppHelper;
  */
 class WebController extends \yii\web\Controller
 {
-    /**
-     * Returns the route of the current request.
-     * @return string the route (module ID, controller ID and action ID) of the current request.
-     */
-    public function getRoute()
-    {
-        return ((($this->action !== null) && ($this->action->id !== 'index')) ? $this->action->getUniqueId() : $this->getUniqueId());
-    }
+    /**************************************
+     *** *** *** Общие действия *** *** ***
+     **************************************/
 
     /**
      * Удаление
      *
-     * @param int|null $id
+     * @param $id int|null
      * @return yii\web\Response
      */
     public function actionDelete($id = null)
@@ -34,47 +29,40 @@ class WebController extends \yii\web\Controller
         if ($id !== null) { $ids[] = $id; }
         else {
             $post = Yii::$app->request->post();
-            if (isset($post['items'])) {
-                $ids = explode(',', $post['items']);
-            }
+            if (isset($post['items'])) { $ids = explode(',', $post['items']); }
         }
 
+        // id удалённых элементов
         $deletedIds = [];
+        // id не удалённых элементов
         $notDeletedIds = [];
 
         // Перебираем id удаляемых элемнетов
         foreach ($ids as $id) {
             // Получаем модель
             $model = $this->findModel($id);
-            // Проверяем возможность удаления
-            $check = $model->checkCanDelete($id);
-            if ($check['result']) {
-                // Удаляем
-                $model->delete();
-                // Запоминаем id как удалённый
-                $deletedIds[] = $id;
-            } else {
-                // Запоминаем id как не удалённый
-                $notDeletedIds[$id] = $check['reason'];
+            // Пытаемся удалить элемент
+            $result = $model->delete();
+            // Если ошибок при удалении нет
+            if (!$model->hasErrors()) { $deletedIds[] = $id; }
+            else { $notDeletedIds[$id] = $model->getErrorSummary(); }
+        }
+
+        // Формируем результат по не удалённым элементам
+        $notDeletedHtml = '';
+        if (count($notDeletedIds)) {
+            foreach ($notDeletedIds as $id => $errors) {
+                $notDeletedHtml .= '<br>' . implode('<br>', $errors);
             }
         }
 
-        // Формируем результат
-        $not_deleted_html = '';
-        if (count($notDeletedIds)) {
-            foreach ($notDeletedIds as $id => $reson) {
-                $not_deleted_html .= '<br>#' . $id . ' — ' . $reson;
-            }
-        }
+        // Если есть удалённые элементы
         if (count($deletedIds)) {
             $flashs['success'] = 'Элементы #' . implode(', #', $deletedIds) . ' успешно удалены.';
-            $flashs['warning'] = 'Не удалось удалить некоторые элементы:' . $not_deleted_html;
-        } else {
-            $flashs['error'] = 'Не удалось удалить элементы:' . $not_deleted_html;
-        }
+            $flashs['warning'] = 'Не удалось удалить некоторые элементы:' . $notDeletedHtml;
+        } else { $flashs['error'] = 'Не удалось удалить элементы:' . $notDeletedHtml; }
 
         self::setFlashs($flashs);
-
         return $this->redirect(['index']);
     }
 
@@ -99,5 +87,33 @@ class WebController extends \yii\web\Controller
         $model->update();
 
         AppHelper::exitWithJsonResult(true);
+    }
+
+    /***********************************
+     *** *** *** Свои методы *** *** ***
+     ***********************************/
+
+    /**
+     * Установка сообщений
+     *
+     * @param $flashs array
+     */
+    public static function setFlashs($flashs) {
+        foreach($flashs as $key => $text) {
+            Yii::$app->session->setFlash($key, $text);
+        }
+    }
+
+    /******************************************************
+     *** *** *** Изменение родителських методов *** *** ***
+     ******************************************************/
+
+    /**
+     * Returns the route of the current request.
+     * @return string the route (module ID, controller ID and action ID) of the current request.
+     */
+    public function getRoute()
+    {
+        return ((($this->action !== null) && ($this->action->id !== 'index')) ? $this->action->getUniqueId() : $this->getUniqueId());
     }
 }
