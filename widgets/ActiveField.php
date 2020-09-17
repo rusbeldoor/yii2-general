@@ -82,7 +82,7 @@ class ActiveField extends \kartik\form\ActiveField
      */
     public function dateTimePicker($options)
     {
-        $this->addon = ['prepend' => ['content' => '<i class="fas fa-calendar-alt"></i>']];
+        $this->addon['prepend'] = ['content' => '<i class="fas fa-calendar-alt"></i>'];
         return $this->widget(
             'kartik\daterange\DateRangePicker',
             ArrayHelper::merge(
@@ -104,7 +104,7 @@ class ActiveField extends \kartik\form\ActiveField
      */
     public function dateTime()
     {
-        $this->inputOptions['class'] .= ' widthDateTime';
+        $this->addon['groupOptions'] = ['class' => 'widthDateTime'];
         return self::dateTimePicker([
             'readonly' => true,
             'pluginOptions' => [
@@ -123,7 +123,7 @@ class ActiveField extends \kartik\form\ActiveField
      */
     public function date()
     {
-        $this->inputOptions['class'] .= ' widthDate';
+        $this->addon['groupOptions'] = ['class' => 'widthDate'];
         return self::dateTimePicker([
             'readonly' => true,
             'pluginOptions' => [

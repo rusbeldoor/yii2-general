@@ -64,5 +64,5 @@ a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
     background-color: #f8f9fa;
 }
 
-.widthDateTime { width: 207px !important; }
-.widthDate { width: 180px !important; }
+.widthDateTime { width: 207px; }
+.widthDate { width: 180px; }
