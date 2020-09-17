@@ -11,9 +11,6 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
  */
 class ActiveField extends \kartik\form\ActiveField
 {
-    public $addon = ['prepend'=>['content'=>'<i class="fas fa-calendar-alt"></i>']];
-    public $options = ['class'=>'drp-container form-group'];
-
     /**
      * ...
      *
