@@ -115,4 +115,18 @@ class ActiveField extends \kartik\form\ActiveField
             'singleDatePicker' => true,
         ]
     ]); }
+
+    /**
+     * ...
+     *
+     * @return ActiveField
+     */
+    public function date()
+    { return self::dateTimePicker([
+        'readonly' => true,
+        'pluginOptions' => [
+            'locale' => ['format' => 'd.m.Y'],
+            'singleDatePicker' => true,
+        ]
+    ]); }
 }
