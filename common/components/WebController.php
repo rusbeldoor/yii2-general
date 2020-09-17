@@ -45,24 +45,23 @@ class WebController extends \yii\web\Controller
             $result = $model->delete();
             // Если ошибок при удалении нет
             if (!$model->hasErrors()) { $deletedIds[] = $id; }
-            else { $notDeletedIds[$id] = $model->getErrorSummary(); }
-        }
-
-        // Формируем результат по не удалённым элементам
-        $notDeletedHtml = '';
-        if (count($notDeletedIds)) {
-            foreach ($notDeletedIds as $id => $errors) {
-                $notDeletedHtml .= '<br>' . implode('<br>', $errors);
-            }
+            else { $notDeletedIds[$id] = $model->getErrorSummary(true); }
         }
 
         // Если есть удалённые элементы
         if (count($deletedIds)) {
             $flashs['success'] = 'Элементы #' . implode(', #', $deletedIds) . ' успешно удалены.';
-            $flashs['warning'] = 'Не удалось удалить некоторые элементы:' . $notDeletedHtml;
-        } else { $flashs['error'] = 'Не удалось удалить элементы:' . $notDeletedHtml; }
+        }
+
+        // Если есть не удалённые элементы
+        if (count($notDeletedIds)) {
+            $notDeletedErrors = '';
+            foreach ($notDeletedIds as $id => $errors) { $notDeletedErrors .= '<li>' . implode('</li><li>', $errors) . '</li>'; }
+            $flashs[((count($deletedIds)) ? 'warning' : 'error')] = 'Не удалось удалить' . ((count($deletedIds)) ? ' некоторые' : '') . ' элементы:<ul>' . $notDeletedErrors . '</ul>';
+        }
 
         self::setFlashs($flashs);
+
         return $this->redirect(['index']);
     }
 
