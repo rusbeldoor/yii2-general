@@ -3,7 +3,6 @@
     "type": "library",
     "require": {
         "php": ">=5.6.0",
-        "yiisoft/yii2": "~2.0.14",
         "thomaspark/bootswatch": "^4",
         "fortawesome/font-awesome": "^5.14.0",
         "kartik-v/yii2-widget-activeform": "@dev",
