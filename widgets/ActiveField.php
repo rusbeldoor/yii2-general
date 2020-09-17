@@ -87,10 +87,11 @@ class ActiveField extends \kartik\form\ActiveField
             'kartik\daterange\DateRangePicker',
             ArrayHelper::merge(
                 [
-                    'showDropdowns' => true,
                     'convertFormat' => true,
+                    'readonly' => true,
                     'pluginOptions' => [
                         'timePicker24Hour' => true,
+                        'showDropdowns' => true,
                     ],
                 ],
                 $options
@@ -107,7 +108,6 @@ class ActiveField extends \kartik\form\ActiveField
     {
         $this->addon['groupOptions'] = ['class' => 'widthDateTime'];
         return self::dateTimePicker([
-            'readonly' => true,
             'pluginOptions' => [
                 'timePicker' => true,
                 'timePickerIncrement' => 5,
@@ -126,8 +126,8 @@ class ActiveField extends \kartik\form\ActiveField
     {
         $this->addon['groupOptions'] = ['class' => 'widthDate'];
         return self::dateTimePicker([
-            'readonly' => true,
             'pluginOptions' => [
+                'autoApply' => true,
                 'locale' => ['format' => 'd.m.Y'],
                 'singleDatePicker' => true,
             ]
