@@ -61,6 +61,26 @@ class Generator extends \yii\gii\generators\crud\Generator
         return $params;
     }
 
+
+    /**
+     * Generates code for active field
+     * @param string $attribute
+     * @return string
+     */
+    public function generateActiveField($attribute)
+    {
+        switch ($attribute) {
+            default:
+                $tableSchema = $this->getTableSchema();
+                if ($tableSchema === false) { return "\$form->field(\$model, '$attribute')"; }
+                switch ($tableSchema->columns[$attribute]->type) {
+                    case 'datetime': return "\$form->field(\$model, '$attribute')->dateTime()";
+                    case 'date': return "\$form->field(\$model, '$attribute')->date()";
+                    default: return "\$form->field(\$model, '$attribute')";
+                }
+        }
+    }
+
     /**
      * Generates code for active search field
      * @param string $attribute
@@ -74,9 +94,9 @@ class Generator extends \yii\gii\generators\crud\Generator
             default:
                 $tableSchema = $this->getTableSchema();
                 if ($tableSchema === false) { return "\$form->field(\$model, '$attribute')"; }
-                switch ($tableSchema->columns[$attribute]->phpType) {
-                    case 'string': return "\$form->field(\$model, '$attribute')->searchTextInput()";
-                    case 'boolean': return "\$form->field(\$model, '$attribute')->checkbox()";
+                switch ($tableSchema->columns[$attribute]->type) {
+                    case 'datetime': return "\$form->field(\$model, '$attribute')->dateTime()";
+                    case 'date': return "\$form->field(\$model, '$attribute')->date()";
                     default: return "\$form->field(\$model, '$attribute')";
                 }
         }
