@@ -1,35 +1,37 @@
-.width-1px { width: 1px; }
-.width-100per { width: 100%; }
+.width1px { width: 1px; }
+.width100p { width: 100%; }
 
-.no-margin { margin: 0 !important; }
-.margin-top-10px { margin-top: 10px; }
-.margin-bottom-10px { margin-bottom: 10px; }
-.margin-top-bottom-10px { margin-top: 10px; margin-bottom: 10px; }
+.noMargin { margin: 0 !important; }
+.margin10px { margin: 10px; }
+.marginTop10px { margin-top: 10px; }
+.marginBottom10px { margin-bottom: 10px; }
+.marginTopBottom10px { margin-top: 10px; margin-bottom: 10px; }
 
-.no-padding { padding: 0 !important; }
-.padding-10px { padding: 10px; }
-.padding-bottom-10px { margin-bottom: 10px; }
-.padding-top-bottom-10px { padding-top: 10px; padding-bottom: 10px; }
+.noPadding { padding: 0 !important; }
+.padding10px { padding: 10px; }
+.paddingTop10px { margin-top: 10px; }
+.paddingBottom10px { margin-bottom: 10px; }
+.paddingTopBottom10px { padding-top: 10px; padding-bottom: 10px; }
 
-.float-left { float: left; }
-.float-right { float: right; }
+.floatLeft { float: left; }
+.floatRight { float: right; }
 
-.display-none { display: none !important; }
+.displayNone { display: none !important; }
 
-.overflow-visible { overflow: visible; }
+.overflowVisible { overflow: visible; }
 
-.border-1px-solid-lightgray { border: 1px solid lightgray; }
-.border-radius-025rem { border-radius: 0.25rem; }
+.border1pxSolidLightgray { border: 1px solid lightgray; }
+.borderRadius025rem { border-radius: 0.25rem; }
 
-table.text-center td { text-align: center; }
+table.textCenter td { text-align: center; }
 
-.color-remove { color: var(--red); }
-.color-edit { color: var(--green); }
-.color-view { color: var(--blue); }
-.color-archive { color: var(--yellow); }
-.color-not-archive { color: var(--gray); }
+.colorRemove { color: var(--red); }
+.colorEdit { color: var(--green); }
+.colorView { color: var(--blue); }
+.colorArchive { color: var(--yellow); }
+.colorNotArchiv { color: var(--gray); }
 
-.display-inline-block { display: inline-block !important; }
+.displayInlineBlock { display: inline-block !important; }
 
 /* Якорь как обычный элемент */
 a[name], a[name]:hover { text-decoration: inherit; color: inherit; }

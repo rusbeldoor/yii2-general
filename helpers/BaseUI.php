@@ -28,7 +28,7 @@ class BaseUI
 
                 case 'delete':
                     $result[] =
-                        Html::beginForm(['delete'],'post', ['class' => 'bulkActionForm display-inline-block'])
+                        Html::beginForm(['delete'],'post', ['class' => 'bulkActionForm displayInlineBlock'])
                             . Html::submitButton(
                                 '<i class="far fa-trash-alt"></i>&nbsp;&nbsp;Удалить',
                                 [
@@ -50,7 +50,7 @@ class BaseUI
         return
             '<div class="panelButtonsGroup clearfix">'
                 . ((in_array('filter', $buttons)) ? Html::button('<i class="fas fa-filter"></i>&nbsp;&nbsp;Фильтр', ['class' => 'btn btn-light panelSearchFormToggle']) : '')
-                . '<div class="float-right">'
+                . '<div class="floatRight">'
                     . implode('&nbsp;&nbsp;&nbsp;', $result)
                 . '</div>'
             . '</div>';
@@ -89,7 +89,7 @@ class BaseUI
 
         return
             '<div class="panelButtonsGroup clearfix">'
-                . '<div class="float-right">'
+                . '<div class="floatRight">'
                     . implode('&nbsp;&nbsp;&nbsp;', $result)
                 . '</div>'
             . '</div>';

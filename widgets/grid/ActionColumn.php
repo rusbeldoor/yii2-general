@@ -11,11 +11,11 @@ use yii\helpers\Html;
 class ActionColumn extends \yii\grid\ActionColumn
 {
     // Атрибуты тега th
-    public $headerOptions = ['class' => 'action-column-header'];
+    public $headerOptions = ['class' => 'actionColumnHeader'];
     // Атрибуты тега td
-    public $contentOptions = ['class' => 'action-column'];
+    public $contentOptions = ['class' => 'actionColumn'];
     // Атрибуты тега button
-    public $buttonOptions = ['class' => 'action-column-button'];
+    public $buttonOptions = ['class' => 'actionColumnButton'];
 
     // Шаблон вывода
     public $template = '{view}&nbsp;&nbsp;{update}&nbsp;&nbsp;{delete}';
@@ -47,17 +47,17 @@ class ActionColumn extends \yii\grid\ActionColumn
                 switch ($name) {
                     case 'view':
                         $title = Yii::t('yii', 'Просмотр');
-                        $class = 'color-view';
+                        $class = 'colorView';
                         break;
 
                     case 'update':
                         $title = Yii::t('yii', 'Изменить');
-                        $class = 'color-edit';
+                        $class = 'colorEdit';
                         break;
 
                     case 'delete':
                         $title = Yii::t('yii', 'Удалить');
-                        $class = 'color-remove';
+                        $class = 'colorRemove';
                         break;
 
                     default: $title = ucfirst($name);

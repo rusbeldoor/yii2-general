@@ -10,13 +10,15 @@ use yii\helpers\Html;
  */
 class ArchiveColumn extends \yii\grid\ActionColumn
 {
-    const ARCHIVE_CLASS = 'color-archive';
-    const NOT_ARCHIVE_CLASS = 'color-not-archive';
+    const ARCHIVE_CLASS = 'colorArchive';
+    const NOT_ARCHIVE_CLASS = 'colorNotArchiv';
 
     // Атрибуты тега th
-    public $headerOptions = ['class' => 'action-column-header archive-column-header'];
+    public $headerOptions = ['class' => 'actionColumnHeader archiveColumnHeader'];
     // Атрибуты тега td
-    public $contentOptions = ['class' => 'action-column archive-column'];
+    public $contentOptions = ['class' => 'actionColumn archiveColumn'];
+    // Атрибуты тега button
+    public $buttonOptions = ['class' => 'actionColumnButton archiveColumnButton'];
 
     // Шаблон вывода
     public $template = '{archive}';
@@ -32,7 +34,7 @@ class ArchiveColumn extends \yii\grid\ActionColumn
         parent::init();
 
         Yii::$app->getView()->registerJs(
-'$(document).on(\'click\', \'.archive-column-button\', function() {
+'$(document).on(\'click\', \'.archiveColumnButton\', function() {
     let archive_action = $(this);
     $.post(
         \'' . Yii::$app->requestedRoute . '/archive\',
@@ -83,7 +85,7 @@ class ArchiveColumn extends \yii\grid\ActionColumn
                     '',
                     [
                         'title' => $title,
-                        'class' =>  'action-column-button archive-column-button ' . $iconName . ' ' . $archiveClass,
+                        'class' =>  $this->buttonOptions['class'] . ' ' . $iconName . ' ' . $archiveClass,
                         'data-id' => $model->id,
                     ]
                 );
