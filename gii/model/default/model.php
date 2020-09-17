@@ -82,7 +82,7 @@ class <?= $className ?> extends \rusbeldoor\yii2General\common\models\ActiveReco
         return [
 <?php foreach ($labels as $name => $label) {
     echo "            ";
-    echo ((isset($attributeLabels[$name])) ? "'$name' => " . $generator->generateString($label) : "'" . $name . "' => '" . $label . "'");
+    echo ((isset($attributeLabels[$name])) ? "'$name' => " . $attributeLabels[$name] : "'" . $name . "' => '" . $generator->generateString($label) . "'");
     echo ",\n";
 } ?>
         ];
