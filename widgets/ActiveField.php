@@ -103,15 +103,18 @@ class ActiveField extends \kartik\form\ActiveField
      * @return ActiveField
      */
     public function dateTime()
-    { return self::dateTimePicker([
-        'readonly' => true,
-        'pluginOptions' => [
-            'timePicker' => true,
-            'timePickerIncrement' => 5,
-            'locale' => ['format' => 'H:i d.m.Y'],
-            'singleDatePicker' => true,
-        ]
-    ]); }
+    {
+        $this->inputOptions['class'] .= ' widthDateTime';
+        return self::dateTimePicker([
+            'readonly' => true,
+            'pluginOptions' => [
+                'timePicker' => true,
+                'timePickerIncrement' => 5,
+                'locale' => ['format' => 'H:i d.m.Y'],
+                'singleDatePicker' => true,
+            ]
+        ]);
+    }
 
     /**
      * ...
@@ -119,11 +122,14 @@ class ActiveField extends \kartik\form\ActiveField
      * @return ActiveField
      */
     public function date()
-    { return self::dateTimePicker([
-        'readonly' => true,
-        'pluginOptions' => [
-            'locale' => ['format' => 'd.m.Y'],
-            'singleDatePicker' => true,
-        ]
-    ]); }
+    {
+        $this->inputOptions['class'] .= ' widthDate';
+        return self::dateTimePicker([
+            'readonly' => true,
+            'pluginOptions' => [
+                'locale' => ['format' => 'd.m.Y'],
+                'singleDatePicker' => true,
+            ]
+        ]);
+    }
 }
