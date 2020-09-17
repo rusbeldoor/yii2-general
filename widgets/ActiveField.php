@@ -79,7 +79,7 @@ class ActiveField extends \kartik\form\ActiveField
 
     public function dateTime()
     {
-        return $this->widget('rusbeldoor\yii2General\widgets\kartik\daterange\DateRangePicker', [
+        return $this->widget('kartik\daterange\DateRangePicker', [
             'useWithAddon' => true,
             'convertFormat' => true,
             'readonly' => true,
