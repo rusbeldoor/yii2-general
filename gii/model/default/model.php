@@ -99,5 +99,17 @@ class <?= $className ?> extends \rusbeldoor\yii2General\common\models\ActiveReco
      */
     public static function find()
     { return new <?= $queryClassFullName ?>(get_called_class()); }
+
+    /**
+     * Перед удалением
+     *
+     * @return bool
+     */
+    public function beforeDelete()
+    {
+        // if (true) { $this->addError('id', 'Неовзможно удалить #' . $this->id . '.'); }
+
+        return !$this->hasErrors() && parent::beforeDelete();
+    }
 <?php endif; ?>
 }
