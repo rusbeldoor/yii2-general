@@ -3,7 +3,8 @@
     "type": "library",
     "require": {
         "thomaspark/bootswatch": "^4",
-        "fortawesome/font-awesome": "^5.14.0"
+        "fortawesome/font-awesome": "^5.14.0",
+        "kartik-v/yii2-date-range": "dev-master"
     },
     "autoload": {
         "psr-4": {
