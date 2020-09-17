@@ -36,6 +36,7 @@ class BaseUI
                                     'data' => [
                                         'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                                         'method' => 'post',
+                                        'disabled' => true,
                                     ],
                                 ]
                             )
