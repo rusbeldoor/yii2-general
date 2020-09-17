@@ -33,10 +33,10 @@ class BaseUI
                                 '<i class="far fa-trash-alt"></i>&nbsp;&nbsp;Удалить',
                                 [
                                     'class' => 'btn btn-danger bulkActionFormButton',
+                                    'disabled' => true,
                                     'data' => [
                                         'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                                         'method' => 'post',
-                                        'disabled' => true,
                                     ],
                                 ]
                             )
