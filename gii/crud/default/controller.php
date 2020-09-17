@@ -141,7 +141,7 @@ class <?= $controllerClass ?> extends <?= $baseClass . "\n" ?>
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete(<?= $actionParams ?>)
+    public function actionDelete(<?= $actionParams ?> = null)
     {
         $this->findModel(<?= $actionParams ?>)->delete();
 
