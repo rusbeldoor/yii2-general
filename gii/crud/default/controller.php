@@ -135,20 +135,6 @@ class <?= $controllerClass ?> extends <?= $baseClass . "\n" ?>
     }
 
     /**
-     * Удаление
-     *
-     * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete(<?= $actionParams ?> = null)
-    {
-        $this->findModel(<?= $actionParams ?>)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
      * Получение модели
      *
      * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
