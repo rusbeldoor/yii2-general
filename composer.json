@@ -7,7 +7,7 @@
         "fortawesome/font-awesome": "^5.14.0",
         "kartik-v/yii2-widget-activeform": "@dev",
         "kartik-v/yii2-date-range": "@dev",
-        "kartik-v/yii2-widget-select2": "dev-master"
+        "kartik-v/yii2-widget-select2": "@dev"
     },
     "config": {
         "platform": {"php": "5.6"},
