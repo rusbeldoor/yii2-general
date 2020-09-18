@@ -157,4 +157,25 @@ class ActiveField extends \kartik\form\ActiveField
             )
         );
     }
+
+    /**
+     * ...
+     *
+     * @param $elems array
+     * @param $options array
+     * @return ActiveField
+     */
+    public function multipleSelect($elems, $options = [])
+    {
+        return self::select($elems,
+            ArrayHelper::merge(
+                [
+                    'multiple' => true,
+                    'pluginOptions' => [
+                    ],
+                ],
+                $options
+            )
+        );
+    }
 }
