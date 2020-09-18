@@ -133,4 +133,28 @@ class ActiveField extends \kartik\form\ActiveField
             ]
         ]);
     }
+
+    /**
+     * ...
+     *
+     * @param $elems array
+     * @param $options array
+     * @return ActiveField
+     */
+    public function select($elems, $options)
+    {
+        return $this->widget(
+            'kartik\select2\Select2',
+            ArrayHelper::merge(
+                [
+                    'data' => $elems,
+                    'options' => ['placeholder' => 'Select a state ...'],
+                    'pluginOptions' => [
+                        'allowClear' => true,
+                    ],
+                ],
+                $options
+            )
+        );
+    }
 }
