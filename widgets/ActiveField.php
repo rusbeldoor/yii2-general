@@ -80,7 +80,7 @@ class ActiveField extends \kartik\form\ActiveField
      * @param $options array
      * @return ActiveField
      */
-    public function dateTimePicker($options)
+    public function dateTimePicker($options = [])
     {
         $this->addon['prepend'] = ['content' => '<i class="fas fa-calendar-alt"></i>'];
         return $this->widget(
@@ -141,7 +141,7 @@ class ActiveField extends \kartik\form\ActiveField
      * @param $options array
      * @return ActiveField
      */
-    public function select($elems, $options)
+    public function select($elems, $options = [])
     {
         return $this->widget(
             'kartik\select2\Select2',
