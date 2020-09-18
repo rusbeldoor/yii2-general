@@ -10,6 +10,15 @@ use rusbeldoor\yii2General\helpers\AppHelper;
  */
 class WebController extends \yii\web\Controller
 {
+    /**
+     * Инициализация
+     *
+     * @return void
+     */
+    public function init() {
+        Yii::$app->params['bsVersion'] = '4.x';
+    }
+
     /**************************************
      *** *** *** Общие действия *** *** ***
      **************************************/
