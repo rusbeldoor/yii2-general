@@ -17,9 +17,12 @@
 $attributeLabels = [
     'id' => 'Ид',
     'alias' => 'Алиас',
+    'template_id' => 'Шаблон',
     'name' => 'Название',
     'status' => 'Статус',
+    'from' => 'От',
     'title' => 'Заголовок',
+    'text' => 'Текст',
     'description' => 'Описание',
     'email' => 'Электронная почта',
     'phone' => 'Телефон',
@@ -33,6 +36,9 @@ $attributeLabels = [
     'datetime_create' => 'Дата и время создания',
     'datetime_update' => 'Дата и время обновления',
     'datetime_remove' => 'Дата и время удаления',
+    'datetime_send' => 'Дата и время отправки',
+    'datetime_start' => 'Дата и время начала',
+    'datetime_complete' => 'Дата и время завершения',
     'archive' => 'Архив',
 ];
 
