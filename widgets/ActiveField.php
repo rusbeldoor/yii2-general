@@ -170,8 +170,8 @@ class ActiveField extends \kartik\form\ActiveField
         return self::select($elems,
             ArrayHelper::merge(
                 [
-                    'multiple' => true,
                     'pluginOptions' => [
+                        'multiple' => true,
                     ],
                 ],
                 $options
