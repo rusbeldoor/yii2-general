@@ -63,7 +63,6 @@ a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
  *** *** *** select 2 *** *** ***
  ********************************/
 
-.select2 .select2-selection--single { padding-left: 0; }
 .select2 .select2-selection__choice { padding: 2px 10px 2px 10px !important; }
 .select2 .s2-select-label { display: none; }
 .select2 .s2-unselect-label { display: none; }
