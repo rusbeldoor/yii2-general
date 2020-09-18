@@ -1,3 +1,7 @@
+/********************************
+ *** *** *** Основное *** *** ***
+ ********************************/
+
 .width1px { width: 1px; }
 .width100p { width: 100%; }
 
@@ -42,11 +46,11 @@ a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
 
 .alert ul, alert ol { margin-bottom: 0; }
 
-/*********************************
- *** *** *** Интерфейс *** *** ***
- *********************************/
-
 .form-group .col-form-label { text-align: right; }
+
+/**************************************
+ *** *** *** yii 2, widgets *** *** ***
+ **************************************/
 
 .grid-view .summary { text-align: right; }
 .grid-view table thead tr th { border-top: 0; }
@@ -54,6 +58,16 @@ a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
 .grid-view .actionColumnHeader { width: 1px; }
 .grid-view a.actionColumnButton i, .grid-view i.actionColumnButton { font-size: 1.35em; }
 .grid-view i.actionColumnButton { cursor: pointer; }
+
+/********************************
+ *** *** *** select 2 *** *** ***
+ ********************************/
+
+.select2-selection__rendered { padding: 2px 10px 2px 10px; }
+
+/*********************************
+ *** *** *** Интерфейс *** *** ***
+ *********************************/
 
 .panelButtonsGroup { margin: 0 0 16px 0; }
 .panelSearchFormToggle {}
