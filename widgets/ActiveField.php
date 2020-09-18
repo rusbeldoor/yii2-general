@@ -150,7 +150,7 @@ class ActiveField extends \kartik\form\ActiveField
                     'data' => $elems,
                     'options' => ['placeholder' => 'Select a state ...'],
                     'pluginOptions' => [
-                        'allowClear' => true,
+                        'allowClear' => true, // Кнопка "крестик" очистки выбора
                     ],
                 ],
                 $options
