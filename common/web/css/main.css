@@ -46,6 +46,8 @@ a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
  *** *** *** Интерфейс *** *** ***
  *********************************/
 
+.form-group .col-form-label { text-align: right; }
+
 .grid-view .summary { text-align: right; }
 .grid-view table thead tr th { border-top: 0; }
 .grid-view table tr th, .grid-view table tr td { text-align: center; }
