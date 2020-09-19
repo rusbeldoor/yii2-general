@@ -21,6 +21,9 @@ class WebController extends \yii\web\Controller
 
         // Объявлении версии bootstrap для kartik-v вендора
         Yii::$app->params['bsVersion'] = '4.x';
+
+        \rusbeldoor\yii2General\common\assets\AssetBundle::register($this->view);
+        \rusbeldoor\yii2General\common\assets\FontawesomeAssetBundle::register($this->view);
     }
 
     /**************************************
