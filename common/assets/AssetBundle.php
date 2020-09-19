@@ -20,6 +20,7 @@ class AssetBundle extends \yii\web\AssetBundle
 	];
 
     public $depends = [
+        'yii\web\JqueryAsset',
         'rusbeldoor\yii2General\common\assets\FontawesomeAssetBundle',
     ];
 }

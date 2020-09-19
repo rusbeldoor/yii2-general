@@ -17,4 +17,9 @@ class AssetBundle extends \yii\web\AssetBundle
     public $js = [
         'js/rusbeldoor-yii2-general-frontend.js',
     ];
+
+    public $depends = [
+        'yii\web\JqueryAsset',
+        'rusbeldoor\yii2General\common\assets\AssetBundle',
+    ];
 }
