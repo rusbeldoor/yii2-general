@@ -1,10 +1,10 @@
 <?php
 
-namespace common\assets;
+namespace rusbeldoor\yii2General\common\assets;
 
 /**
  * Class AssetBundle
- * @package common\assets
+ * @package rusbeldoor\yii2General\common\assets
  */
 class FontawesomeAssetBundle extends \yii\web\AssetBundle
 {
