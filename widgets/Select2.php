@@ -21,22 +21,22 @@ class Select2 extends \kartik\select2\select2
             $buttonsCount = 3;
 
             $buttonsHtml .=
-                '&nbsp;'
-                . Html::button(
+                Html::button(
                     '<i class="fas fa-check"></i>',
                     [
                         'type'=> 'button',
                         'class' => 'btn btn-light buttonCheckAllSelect',
+                        'style' => 'margin-left: 5px;',
                         'data-select-id' => '1',
                         'disabled' => false,
                     ]
                 )
-                . '&nbsp;'
                 . Html::button(
                     '<i class="fas fa-retweet"></i>',
                     [
                         'type'=> 'button',
                         'class' => 'btn btn-light buttonReverseSelect',
+                        'style' => 'margin-left: 5px;',
                         'data-select-id' => '2',
                         'disabled' => false,
                     ]
@@ -45,12 +45,12 @@ class Select2 extends \kartik\select2\select2
 
         $this->pluginOptions['width'] = 'calc(100% - ' . ($buttonsCount * (42 + 5)) . 'px)';
         $buttonsHtml .=
-            '&nbsp;'
             . Html::button(
                 '<i class="fas fa-wind"></i>',
                 [
                     'type'=> 'button',
                     'class' => 'btn btn-light buttonResetSelect',
+                    'style' => 'margin-left: 5px;',
                     'data-select-id' => '3',
                     'disabled' => false,
                 ]
