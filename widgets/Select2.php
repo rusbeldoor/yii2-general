@@ -15,13 +15,12 @@ class Select2 extends \kartik\select2\select2
      */
     protected function renderToggleAll()
     {
-        parent::renderToggleAll();
-
         $buttonsCount = 1;
+        $buttonsHtml = '';
         if (ArrayHelper::getValue($this->pluginOptions, 'multiple', false)) {
             $buttonsCount = 3;
 
-            echo
+            $buttonsHtml .=
                 Html::button(
                     '<i class="fas fa-check"></i>',
                     [
@@ -45,7 +44,7 @@ class Select2 extends \kartik\select2\select2
         }
 
         $this->pluginOptions['width'] = 'calc(100% - ' . ($buttonsCount * 42) . 'px)';
-        echo Html::button(
+        $buttonsHtml .= Html::button(
             '<i class="fas fa-wind"></i>',
             [
                 'type'=> 'button',
@@ -54,5 +53,9 @@ class Select2 extends \kartik\select2\select2
                 'disabled' => false,
             ]
         );
+
+        parent::renderToggleAll();
+
+        echo $buttonsHtml;
     }
 }
