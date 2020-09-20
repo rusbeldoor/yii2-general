@@ -17,11 +17,9 @@ class Select2 extends \kartik\select2\select2
     {
         parent::renderToggleAll();
 
-        $multiple = ArrayHelper::getValue($this->pluginOptions, 'multiple', false);
-
-        $width100 = $this->pluginOptions['width'] == '100%';
-        if ($multiple) {
-            if ($width100) { $this->pluginOptions['width'] = 'calc(100% - ' . (3 * 33.384) . 'px)'; }
+        $buttonsCount = 1;
+        if (ArrayHelper::getValue($this->pluginOptions, 'multiple', false)) {
+            $buttonsCount = 3;
 
             echo
                 Html::button(
@@ -44,10 +42,9 @@ class Select2 extends \kartik\select2\select2
                     ]
                 )
                 . '&nbsp;';
-        } else {
-            if ($width100) { $this->pluginOptions['width'] = 'calc(100% - ' . (1 * 33.384) . 'px)'; }
         }
 
+        $this->pluginOptions['width'] = 'calc(100% - ' . ($buttonsCount * 42) . 'px)';
         echo Html::button(
             '<i class="fas fa-wind"></i>',
             [
