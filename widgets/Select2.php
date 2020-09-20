@@ -21,13 +21,13 @@ class Select2 extends \kartik\select2\select2
         Yii::$app->getView()->registerJs(
 '$(document).ready(function() {
     $(document).on(\'click\', \'.select2ButtonReset\', function() {
-        $(\'#\' + $(this).data(\'select-id\')).val(\'\').trigger(\'change\');
+        $(\'#\' + $(this).data(\'select-id\')).val(null).trigger(\'change\');
     });
     $(document).on(\'click\', \'.select2ButtonAll\', function() {
-        $(\'#\' + $(this).data(\'select-id\')).select2(\'data\', null)
+        alert(\'Не реализовано.\');
     });
     $(document).on(\'click\', \'.select2ButtonReverse\', function() {
-        $(\'#\' + $(this).data(\'select-id\')).select2(\'data\', null)
+        alert(\'Не реализовано.\');
     });
 });'
         );
