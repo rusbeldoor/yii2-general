@@ -64,11 +64,16 @@ a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
  ********************************/
 
 .select2 { display: inline-block; }
-.select2 .select2-selection__clear { display: none !important; }
+.select2 .select2-selection__clear, .select2 .select2-selection__arrow { display: none !important; }
 .select2 .select2-selection__choice { padding: 2px 10px 2px 10px !important; }
 .select2-container .s2-togall-button { display: none !important; }
 .select2-container .s2-select-label { display: none !important; }
 .select2-container .s2-unselect-label { display: none !important; }
+.select2Button {
+    width: 46px;
+    margin-left: 5px;
+    float: right;
+}
 
 /*********************************
  *** *** *** Интерфейс *** *** ***

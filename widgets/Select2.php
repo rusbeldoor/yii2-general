@@ -25,8 +25,7 @@ class Select2 extends \kartik\select2\select2
                     '<i class="fas fa-retweet"></i>',
                     [
                         'type'=> 'button',
-                        'class' => 'btn btn-light buttonReverseSelect',
-                        'style' => 'width: 46px; margin-left: 5px; float: right;',
+                        'class' => 'btn btn-light select2Button select2ButtonReverse',
                         'data-select-id' => '2',
                         'disabled' => false,
                     ]
@@ -35,8 +34,7 @@ class Select2 extends \kartik\select2\select2
                     '<i class="fas fa-check"></i>',
                     [
                         'type'=> 'button',
-                        'class' => 'btn btn-light buttonCheckAllSelect',
-                        'style' => 'width: 46px; margin-left: 5px; float: right;',
+                        'class' => 'btn btn-light select2Button select2ButtonAll',
                         'data-select-id' => '1',
                         'disabled' => false,
                     ]
@@ -49,8 +47,7 @@ class Select2 extends \kartik\select2\select2
                 '<i class="fas fa-wind"></i>',
                 [
                     'type'=> 'button',
-                    'class' => 'btn btn-light buttonResetSelect',
-                    'style' => 'width: 46px; margin-left: 5px; float: right;',
+                    'class' => 'btn btn-light select2Button select2ButtonReset',
                     'data-select-id' => '3',
                     'disabled' => false,
                 ]
