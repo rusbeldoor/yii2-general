@@ -43,7 +43,7 @@ class Select2 extends \kartik\select2\select2
                 );
         }
 
-        $this->pluginOptions['width'] = 'calc(100% - ' . ($buttonsCount * 42) . 'px)';
+        $this->pluginOptions['width'] = 'calc(100% - ' . ($buttonsCount * (42 + 5)) . 'px)';
         $buttonsHtml .=
             '&nbsp;'
             . Html::button(
