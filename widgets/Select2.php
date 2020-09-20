@@ -17,27 +17,27 @@ class Select2 extends \kartik\select2\select2
     {
         $buttonsCount = 1;
         $buttonsHtml = '';
-        if (ArrayHelper::getValue($this->pluginOptions, 'multiple', false)) {
+        if (ArrayHelper::getValue($this->options, 'multiple', false)) {
             $buttonsCount = 3;
 
             $buttonsHtml .=
                 Html::button(
-                    '<i class="fas fa-check"></i>',
-                    [
-                        'type'=> 'button',
-                        'class' => 'btn btn-light buttonCheckAllSelect',
-                        'style' => 'margin-left: 5px; float: right;',
-                        'data-select-id' => '1',
-                        'disabled' => false,
-                    ]
-                )
-                . Html::button(
                     '<i class="fas fa-retweet"></i>',
                     [
                         'type'=> 'button',
                         'class' => 'btn btn-light buttonReverseSelect',
                         'style' => 'margin-left: 5px; float: right;',
                         'data-select-id' => '2',
+                        'disabled' => false,
+                    ]
+                )
+                . Html::button(
+                    '<i class="fas fa-check"></i>',
+                    [
+                        'type'=> 'button',
+                        'class' => 'btn btn-light buttonCheckAllSelect',
+                        'style' => 'margin-left: 5px; float: right;',
+                        'data-select-id' => '1',
                         'disabled' => false,
                     ]
                 );
