@@ -11,6 +11,28 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
 class Select2 extends \kartik\select2\select2
 {
     /**
+     *
+     */
+    public function init()
+    {
+        parent::init();
+
+        Yii::$app->getView()->registerJs(
+'$(document).ready(function() {
+    $(document).on(\'click\', \'.select2ButtonReset\', function() {
+        $(\'#\' + $(this).data(\'select-id\')).select2(\'data\', null)
+    });
+    $(document).on(\'click\', \'.select2ButtonAll\', function() {
+        $(\'#\' + $(this).data(\'select-id\')).select2(\'data\', null)
+    });
+    $(document).on(\'click\', \'.select2ButtonReverse\', function() {
+        $(\'#\' + $(this).data(\'select-id\')).select2(\'data\', null)
+    });
+});'
+        );
+    }
+
+    /**
      * ...
      */
     protected function renderToggleAll()
@@ -26,7 +48,7 @@ class Select2 extends \kartik\select2\select2
                     [
                         'type'=> 'button',
                         'class' => 'btn btn-light select2Button select2ButtonReverse',
-                        'data-select-id' => '2',
+                        'data-select-id' => $this->options['id'],
                         'disabled' => false,
                     ]
                 )
@@ -35,7 +57,7 @@ class Select2 extends \kartik\select2\select2
                     [
                         'type'=> 'button',
                         'class' => 'btn btn-light select2Button select2ButtonAll',
-                        'data-select-id' => '1',
+                        'data-select-id' => $this->options['id'],
                         'disabled' => false,
                     ]
                 );
@@ -48,7 +70,7 @@ class Select2 extends \kartik\select2\select2
                 [
                     'type'=> 'button',
                     'class' => 'btn btn-light select2Button select2ButtonReset',
-                    'data-select-id' => '3',
+                    'data-select-id' => $this->options['id'],
                     'disabled' => false,
                 ]
             );
