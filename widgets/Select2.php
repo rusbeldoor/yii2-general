@@ -21,7 +21,8 @@ class Select2 extends \kartik\select2\select2
             $buttonsCount = 3;
 
             $buttonsHtml .=
-                Html::button(
+                '&nbsp;'
+                . Html::button(
                     '<i class="fas fa-check"></i>',
                     [
                         'type'=> 'button',
@@ -39,20 +40,21 @@ class Select2 extends \kartik\select2\select2
                         'data-select-id' => '2',
                         'disabled' => false,
                     ]
-                )
-                . '&nbsp;';
+                );
         }
 
         $this->pluginOptions['width'] = 'calc(100% - ' . ($buttonsCount * 42) . 'px)';
-        $buttonsHtml .= Html::button(
-            '<i class="fas fa-wind"></i>',
-            [
-                'type'=> 'button',
-                'class' => 'btn btn-light buttonResetSelect',
-                'data-select-id' => '3',
-                'disabled' => false,
-            ]
-        );
+        $buttonsHtml .=
+            '&nbsp;'
+            . Html::button(
+                '<i class="fas fa-wind"></i>',
+                [
+                    'type'=> 'button',
+                    'class' => 'btn btn-light buttonResetSelect',
+                    'data-select-id' => '3',
+                    'disabled' => false,
+                ]
+            );
 
         parent::renderToggleAll();
 
