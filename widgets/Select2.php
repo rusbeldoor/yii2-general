@@ -45,7 +45,7 @@ class Select2 extends \kartik\select2\select2
 
         $this->pluginOptions['width'] = 'calc(100% - ' . ($buttonsCount * (42 + 5)) . 'px)';
         $buttonsHtml .=
-            . Html::button(
+            Html::button(
                 '<i class="fas fa-wind"></i>',
                 [
                     'type'=> 'button',
