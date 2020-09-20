@@ -144,7 +144,7 @@ class ActiveField extends \kartik\form\ActiveField
     public function select($elems, $options = [])
     {
         return $this->widget(
-            'kartik\select2\Select2',
+            'rusbeldoor\yii2General\widgets\select2',
             ArrayHelper::merge(
                 [
                     'data' => $elems,

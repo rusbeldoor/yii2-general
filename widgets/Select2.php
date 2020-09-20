@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\widgets\select2;
+namespace rusbeldoor\yii2General\widgets\select2;
 
 use yii\helpers\Html;
 
