@@ -15,7 +15,7 @@ class BaseModule extends \yii\base\Module
      *
      * @return array
      */
-    public function menu()
+    public static function menu()
     {
         $menuItems = [];
         if (Yii::$app->user->isGuest) {
