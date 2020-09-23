@@ -25,9 +25,9 @@ $actionParamComments = $generator->generateActionParamComments();
 
 $baseClass = explode('\\', $generator->controllerClass);
 switch ($baseClass[0]) {
-    case 'backend': $baseClass = '\rusbeldoor\yii2General\backend\components\Controller'; break;
-    case 'console': $baseClass = '\rusbeldoor\yii2General\console\components\ConsoleController'; break;
-    case 'frontend': $baseClass = '\rusbeldoor\yii2General\frontend\components\Controller'; break;
+    case 'backend': $baseClass = 'backend\components\Controller'; break;
+    case 'console': $baseClass = 'console\components\ConsoleController'; break;
+    case 'frontend': $baseClass = 'frontend\components\Controller'; break;
     default: $baseClass = '\yii\web\Controller'; break;
 }
 
