@@ -11,7 +11,7 @@ $pos = strrpos($className, '\\');
 $ns = ltrim(substr($className, 0, $pos), '\\');
 $className = substr($className, $pos + 1);
 
-$baseClass = explode('\\', $generator->controllerClass);
+$baseClass = explode('\\', $generator->moduleClass);
 switch ($baseClass[0]) {
     case 'backend': $baseClass = 'backend\components\Module'; break;
     case 'frontend': $baseClass = 'frontend\components\Module'; break;

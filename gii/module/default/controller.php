@@ -6,7 +6,7 @@
 /* @var $this yii\web\View */
 /* @var $generator yii\gii\generators\module\Generator */
 
-$baseClass = explode('\\', $generator->moduleClass);
+$baseClass = explode('\\', $generator->controllerClass);
 switch ($baseClass[0]) {
     case 'backend': $baseClass = 'backend\components\Controller'; break;
     case 'console': $baseClass = 'console\components\Controller'; break;
