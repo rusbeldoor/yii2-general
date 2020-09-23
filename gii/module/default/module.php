@@ -11,6 +11,13 @@ $pos = strrpos($className, '\\');
 $ns = ltrim(substr($className, 0, $pos), '\\');
 $className = substr($className, $pos + 1);
 
+$baseClass = explode('\\', $generator->controllerClass);
+switch ($baseClass[0]) {
+    case 'backend': $baseClass = 'backend\components\Module'; break;
+    case 'frontend': $baseClass = 'frontend\components\Module'; break;
+    default: $baseClass = 'components\Module'; break;
+}
+
 echo "<?php\n";
 ?>
 
@@ -19,7 +26,7 @@ namespace <?= $ns ?>;
 /**
  * <?= $generator->moduleID ?> module definition class
  */
-class <?= $className ?> extends \yii\base\Module
+class <?= $className ?> extends <?= $baseClass . "\n" ?>
 {
     /**
      * {@inheritdoc}
