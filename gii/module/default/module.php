@@ -13,9 +13,9 @@ $className = substr($className, $pos + 1);
 
 $baseClass = explode('\\', $generator->moduleClass);
 switch ($baseClass[0]) {
-    case 'backend': $baseClass = 'backend\components\Module'; break;
-    case 'frontend': $baseClass = 'frontend\components\Module'; break;
-    default: $baseClass = 'components\Module'; break;
+    case 'backend': $baseClass = '\backend\components\Module'; break;
+    case 'frontend': $baseClass = '\frontend\components\Module'; break;
+    default: $baseClass = '\rusbeldoor\yii2General\components\BaseModule'; break;
 }
 
 echo "<?php\n";
