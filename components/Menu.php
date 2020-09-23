@@ -3,6 +3,7 @@
 namespace rusbeldoor\yii2General\components;
 
 use yii;
+use yii\helpers\Html;
 
 /**
  * Меню
