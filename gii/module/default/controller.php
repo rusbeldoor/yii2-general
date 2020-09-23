@@ -8,10 +8,9 @@
 
 $baseClass = explode('\\', $generator->moduleClass);
 switch ($baseClass[0]) {
-    case 'backend': $baseClass = 'backend\components\Controller'; break;
-    case 'console': $baseClass = 'console\components\Controller'; break;
-    case 'frontend': $baseClass = 'frontend\components\Controller'; break;
-    default: $baseClass = '\yii\web\Controller'; break;
+    case 'backend': $baseClass = '\backend\components\Controller'; break;
+    case 'frontend': $baseClass = '\frontend\components\Controller'; break;
+    default: $baseClass = '\rusbeldoor\yii2General\components\WebController'; break;
 }
 
 echo "<?php\n";
