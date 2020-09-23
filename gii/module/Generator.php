@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\gii\crud;
+namespace rusbeldoor\yii2General\gii\module;
 
 /**
  * ...
