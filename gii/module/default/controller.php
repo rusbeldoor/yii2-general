@@ -11,12 +11,10 @@ echo "<?php\n";
 
 namespace <?= $generator->getControllerNamespace() ?>;
 
-use yii\web\Controller;
-
 /**
  * Default controller for the `<?= $generator->moduleID ?>` module
  */
-class DefaultController extends Controller
+class DefaultController extends \backend\components\Controller
 {
     /**
      * Renders the index view for the module

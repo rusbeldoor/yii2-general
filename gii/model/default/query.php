@@ -29,7 +29,7 @@ namespace <?= $generator->queryNs ?>;
  *
  * @see <?= $modelFullClassName . "\n" ?>
  */
-class <?= $className ?> extends \rusbeldoor\yii2General\common\models\ActiveQuery
+class <?= $className ?> extends \rusbeldoor\yii2General\models\ActiveQuery
 {
     /**
      * ...

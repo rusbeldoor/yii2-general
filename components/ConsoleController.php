@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\common\components;
+namespace rusbeldoor\yii2General\components;
 
 /**
  * Контроллер
