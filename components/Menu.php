@@ -11,7 +11,15 @@ use yii\helpers\Html;
 class Menu
 {
     public $menu = [
-        '' => [],
+        /*
+        '' => [
+            ['label' => 'Главная', 'url' => ['/']],
+        ],
+        'admin' => [
+            ['label' => 'Первая панель', 'url' => ['/first-panel']],
+            ['label' => 'Вторая панель', 'url' => ['/second-panel']],
+        ],
+        */
     ];
 
     /**
