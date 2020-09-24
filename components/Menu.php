@@ -15,7 +15,7 @@ class Menu
     ];
 
     /**
-     * Поучение меню
+     * Получение меню
      *
      * @return array
      */
@@ -43,7 +43,7 @@ class Menu
                     . Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Выход (' . Yii::$app->user->identity->username . ')', ['class' => 'btn nav-link']) . Html::endForm()
                 . '</li>';
         }
-        
+
         return $items;
     }
 }
