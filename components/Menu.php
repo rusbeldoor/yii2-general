@@ -21,7 +21,7 @@ class Menu
      */
     public function get()
     {
-        $items = [];
+        $menu = [];
 
         // Перебираем модули
         foreach ($this->menu as $moduleId => $items) {
@@ -30,20 +30,20 @@ class Menu
                 // Перебираем пункты меню
                 foreach ($items as $item) {
                     // Добавляем пункт меню
-                    $items[] = $item;
+                    $menu[] = $item;
                 }
             }
         }
 
         if (Yii::$app->user->isGuest) {
-            $items[] = ['label' => 'Вход', 'url' => ['/site/login']];
+            $menu[] = ['label' => 'Вход', 'url' => ['/site/login']];
         } else {
-            $items[] =
+            $menu[] =
                 '<li class="nav-item">'
                     . Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Выход (' . Yii::$app->user->identity->username . ')', ['class' => 'btn nav-link']) . Html::endForm()
                 . '</li>';
         }
 
-        return $items;
+        return $menu;
     }
 }
