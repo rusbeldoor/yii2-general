@@ -25,8 +25,8 @@ class Menu
 
         // Перебираем модули
         foreach ($this->menu as $moduleId => $items) {
-            // Если модуль текущий
-            if (Yii::$app->controller->module->id == $moduleId) {
+            // Если модуль текущий или не указан
+            if (in_array($moduleId, ['', Yii::$app->controller->module->id])) {
                 // Перебираем пункты меню
                 foreach ($items as $item) {
                     // Добавляем пункт меню
