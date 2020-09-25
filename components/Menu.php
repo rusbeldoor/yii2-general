@@ -21,15 +21,15 @@ class Menu
     {
         $menu = [];
 
+        // Идентификаторы родительских (текущего и предшествующих) модулей
+        $parentModulesIds = [''];
+        $module = Yii::$app->controller->module;
+        do {
+            if ($module != null) { $parentModulesIds[] = $module->id; }
+        } while (null !== ($module = $module->module));
+
         // Перебираем модули
         foreach ($this->menu as $moduleId => $items) {
-            // Идентификаторы родительских (текущего и предшествующих) модулей
-            $parentModulesIds = [''];
-            $module = Yii::$app->controller->module;
-            do {
-                if ($module != null) { $parentModulesIds[] = $module->id; }
-            } while (null !== ($module = $module->module));
-
             // Если модуль текущий или не указан
             if (in_array($moduleId, $parentModulesIds)) {
                 // Перебираем пункты меню
@@ -39,17 +39,19 @@ class Menu
                 }
             }
         }
-        
-        $menu[] = [
-            'label' => 'Пользователи',
-            'items' => [
-                ['label' => 'Управление', 'url' => ['/admin/user']],
-                '-',
-                ['label' => 'Операции', 'url' => ['/admin/rbac/auth-item']],
-                ['label' => 'Правила', 'url' => ['/admin/rbac/auth-rule']],
-            ]
-        ];
 
+        if (in_array('admin', $parentModulesIds)) {
+            $menu[] = [
+                'label' => 'Пользователи',
+                'items' => [
+                    ['label' => 'Управление', 'url' => ['/admin/user']],
+                    '-',
+                    ['label' => 'Операции', 'url' => ['/admin/rbac/auth-item']],
+                    ['label' => 'Правила', 'url' => ['/admin/rbac/auth-rule']],
+                ]
+            ];
+        }
+        
         $menu[] = ['label' => '|', 'url' => false];
 
         if (Yii::$app->user->isGuest) {
