@@ -15,7 +15,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
         $this->createTable('auth_rule', [
             'id' => $this->primaryKey(11)->unsigned(),
             'name' => $this->string(64)->notNull(),
-            'data' => $this->binary(65537),
+            'data' => $this->binary(65537)->defaultValue(null),
             'datetime_create' => $this->dateTime()->notNull(),
             'datetime_update' => $this->dateTime()->notNull(),
         ]);
@@ -25,9 +25,9 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
             'id' => $this->primaryKey(11)->unsigned(),
             'name' => $this->string(64)->notNull(),
             'type' => $this->tinyInteger(1)->unsigned()->notNull(),
-            'description' => $this->string(255)->default(null),
-            'rule_name' => $this->string(64)->default(null),
-            'data' => $this->binary(65537),
+            'description' => $this->string(255)->defaultValue(null),
+            'rule_name' => $this->string(64)->defaultValue(null),
+            'data' => $this->binary(65537)->defaultValue(null),
             'datetime_create' => $this->dateTime()->notNull(),
             'datetime_update' => $this->dateTime()->notNull(),
         ]);
