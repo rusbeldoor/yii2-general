@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\modules\admin\modules\rbac\controllers;
+namespace rusbeldoor\yii2General\backend\modules\admin\modules\rbac\controllers;
 
 /**
  * Default controller for the `rbac` module

@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\modules\admin\modules\rbac;
+namespace rusbeldoor\yii2General\backend\modules\admin\modules\rbac;
 
 /**
  * rbac module definition class
