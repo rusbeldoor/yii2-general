@@ -12,6 +12,11 @@ class m200101_000000_rusbeldoor_yii2General_modify_rbac extends Migration
      */
     public function safeUp()
     {
+        $this->addColumn('auth_assignment', 'id',  $this->primaryKey(11)->unsigned());
+        $this->addColumn('auth_item', 'id',  $this->primaryKey(11)->unsigned());
+        $this->addColumn('auth_item_child', 'id',  $this->primaryKey(11)->unsigned());
+        $this->addColumn('auth_rule', 'id',  $this->primaryKey(11)->unsigned());
+        
         $this->alterColumn('auth_assignment', 'user_id', $this->integer(11)->unsigned()->notNull());
         $this->renameColumn('auth_assignment', 'created_at', 'datetime_create');
         $this->alterColumn('auth_assignment', 'datetime_create', $this->datetime()->notNull());
