@@ -36,7 +36,7 @@ class RoleController extends \backend\components\Controller
     {
         $searchModel = new AuthItemSearch();
         $post = Yii::$app->request->post();
-        $post['type'] = 1;
+        $post['AuthItemSearch']['type'] = 1;
         $dataProvider = $searchModel->search($post);
 
         return $this->render('index', [
@@ -66,7 +66,7 @@ class RoleController extends \backend\components\Controller
     {
         $model = new AuthItem();
         $post = Yii::$app->request->post();
-        $post['type'] = 1;
+        $post['AuthItemSearch']['type'] = 1;
 
         if (
             $model->load($post)

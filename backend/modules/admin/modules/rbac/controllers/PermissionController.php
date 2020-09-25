@@ -36,7 +36,7 @@ class PermissionController extends \backend\components\Controller
     {
         $searchModel = new AuthItemSearch();
         $post = Yii::$app->request->post();
-        $post['type'] = 2;
+        $post['AuthItemSearch']['type'] = 2;
         $dataProvider = $searchModel->search($post);
 
         return $this->render('index', [
@@ -66,7 +66,7 @@ class PermissionController extends \backend\components\Controller
     {
         $model = new AuthItem();
         $post = Yii::$app->request->post();
-        $post['type'] = 2;
+        $post['AuthItemSearch']['type'] = 2;
 
         if (
             $model->load($post)
