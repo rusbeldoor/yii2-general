@@ -47,13 +47,13 @@ class PermissionController extends \backend\components\Controller
     /**
      * Просмотр
      *
-     * @param $name string
+     * @param $id string
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($name)
+    public function actionView($id)
     {
-        return $this->render('view', ['model' => $this->findModel($name)]);
+        return $this->render('view', ['model' => $this->findModel($id)]);
     }
 
     /**
@@ -70,7 +70,7 @@ class PermissionController extends \backend\components\Controller
         if (
             $model->load(Yii::$app->request->post())
             && $model->save()
-        ) { return $this->redirect(['view', 'name' => $model->name]); }
+        ) { return $this->redirect(['view', 'id' => $model->name]); }
 
         return $this->render('create', ['model' => $model]);
     }
@@ -78,18 +78,18 @@ class PermissionController extends \backend\components\Controller
     /**
      * Изменение
      *
-     * @param $name string
+     * @param $id string
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($name)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($name);
+        $model = $this->findModel($id);
 
         if (
             $model->load(Yii::$app->request->post())
             && $model->save()
-        ) { return $this->redirect(['view', 'name' => $model->name]); }
+        ) { return $this->redirect(['view', 'id' => $model->name]); }
 
         return $this->render('update', ['model' => $model]);
     }
@@ -97,13 +97,13 @@ class PermissionController extends \backend\components\Controller
     /**
      * Получение модели
      *
-     * @param $name string
+     * @param $id string
      * @return AuthItem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($name)
+    protected function findModel($id)
     {
-        if (($model = AuthItem::findOne($name)) !== null) { return $model; }
+        if (($model = AuthItem::findOne($id)) !== null) { return $model; }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
