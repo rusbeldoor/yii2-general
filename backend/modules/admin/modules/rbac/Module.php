@@ -10,7 +10,7 @@ class Module extends \backend\components\Module
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'backend\modules\admin\modules\rbac\controllers';
+    public $controllerNamespace = 'rusbeldoor\yii2General\backend\modules\admin\modules\rbac\controllers';
 
     /**
      * {@inheritdoc}
