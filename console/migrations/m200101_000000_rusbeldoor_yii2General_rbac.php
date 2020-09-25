@@ -14,7 +14,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
     {
         $this->createTable('auth_assignment', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'item_name' => $this->varchar(64)->notNull(),
+            'item_name' => $this->string(64)->notNull(),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
             'datetime_create' => $this->dateTime()->notNull(),
         ]);
@@ -23,10 +23,10 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
 
         $this->createTable('auth_item', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'name' => $this->varchar(64)->notNull(),
+            'name' => $this->string(64)->notNull(),
             'type' => $this->tinyint(1)->unsigned()->notNull(),
-            'description' => $this->varchar(255)->default(null),
-            'rule_name' => $this->varchar(64)->default(null),
+            'description' => $this->string(255)->default(null),
+            'rule_name' => $this->string(64)->default(null),
             'data' => $this->blob()->default(null),
             'datetime_create' => $this->dateTime()->notNull(),
             'datetime_update' => $this->dateTime()->notNull(),
@@ -36,15 +36,15 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
 
         $this->createTable('auth_item_child', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'parent' => $this->varchar(64)->notNull(),
-            'child' => $this->varchar(64)->notNull(),
+            'parent' => $this->string(64)->notNull(),
+            'child' => $this->string(64)->notNull(),
         ]);
         $this->createIndex('unique-parent-child', 'auth_item_child', ['parent', 'child'], true);
         $this->createIndex('index-child', 'auth_item_child', 'child');
 
         $this->createTable('auth_rule', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'name' => $this->varchar(64)->notNull(),
+            'name' => $this->string(64)->notNull(),
             'data' => $this->blob()->default(null),
             'datetime_create' => $this->dateTime()->notNull(),
             'datetime_update' => $this->dateTime()->notNull(),
