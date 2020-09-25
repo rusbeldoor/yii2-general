@@ -18,6 +18,7 @@ $attributeLabels = [
     'id' => 'Ид',
     'alias' => 'Алиас',
     'template_id' => 'Шаблон',
+    'type' => 'Тип',
     'name' => 'Название',
     'status' => 'Статус',
     'from' => 'От',
