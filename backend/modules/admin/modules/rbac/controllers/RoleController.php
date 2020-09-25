@@ -47,13 +47,13 @@ class RoleController extends \backend\components\Controller
     /**
      * Просмотр
      *
-     * @param $id string
+     * @param $name string
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($name)
     {
-        return $this->render('view', ['model' => $this->findModel($id)]);
+        return $this->render('view', ['model' => $this->findModel($name)]);
     }
 
     /**
@@ -70,7 +70,7 @@ class RoleController extends \backend\components\Controller
         if (
             $model->load(Yii::$app->request->post())
             && $model->save()
-        ) { return $this->redirect(['view', 'id' => $model->name]); }
+        ) { return $this->redirect(['view', 'name' => $model->name]); }
 
         return $this->render('create', ['model' => $model]);
     }
@@ -78,18 +78,18 @@ class RoleController extends \backend\components\Controller
     /**
      * Изменение
      *
-     * @param $id string
+     * @param $name string
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($name)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($name);
 
         if (
             $model->load(Yii::$app->request->post())
             && $model->save()
-        ) { return $this->redirect(['view', 'id' => $model->name]); }
+        ) { return $this->redirect(['view', 'name' => $model->name]); }
 
         return $this->render('update', ['model' => $model]);
     }
@@ -97,13 +97,13 @@ class RoleController extends \backend\components\Controller
     /**
      * Получение модели
      *
-     * @param $id string
+     * @param $name string
      * @return AuthItem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($name)
     {
-        if (($model = AuthItem::findOne($id)) !== null) { return $model; }
+        if (($model = AuthItem::findOne($name)) !== null) { return $model; }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
