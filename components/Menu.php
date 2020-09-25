@@ -33,8 +33,15 @@ class Menu
 
         // Перебираем модули
         foreach ($this->menu as $moduleId => $items) {
+            // Идентификаторы родительских (текущего и предшествующих) модулей
+            $parentModulesIds = [''];
+            $module = Yii::$app->controller->module;
+            do {
+                if ($module != null) { $parentModulesIds[] = $module->id; }
+            } while (null !== ($module = $module->module));
+
             // Если модуль текущий или не указан
-            if (in_array($moduleId, ['', Yii::$app->controller->module->id])) {
+            if (in_array($moduleId, $parentModulesIds)) {
                 // Перебираем пункты меню
                 foreach ($items as $item) {
                     // Добавляем пункт меню
@@ -48,7 +55,7 @@ class Menu
         } else {
             $menu[] =
                 '<li class="nav-item">'
-                    . Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Выход (' . Yii::$app->user->identity->username . ')', ['class' => 'btn nav-link']) . Html::endForm()
+                . Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Выход (' . Yii::$app->user->identity->username . ')', ['class' => 'btn nav-link']) . Html::endForm()
                 . '</li>';
         }
 
