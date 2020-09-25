@@ -9,8 +9,8 @@ use yii;
  *
  * @property $name string
  * @property $data resource|null
- * @property $created_at int|null
- * @property $updated_at int|null
+ * @property $datetime_create string
+ * @property $datetime_update string
  */
 class AuthRule extends \rusbeldoor\yii2General\models\ActiveRecord
 {
@@ -26,9 +26,8 @@ class AuthRule extends \rusbeldoor\yii2General\models\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'datetime_create', 'datetime_update'], 'required'],
             [['data'], 'string'],
-            [['created_at', 'updated_at'], 'integer'],
             [['name'], 'string', 'max' => 64],
             [['name'], 'unique'],
         ];
@@ -42,8 +41,8 @@ class AuthRule extends \rusbeldoor\yii2General\models\ActiveRecord
         return [
             'name' => 'Название',
             'data' => 'Data',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'datetime_create' => 'Дата и время создания',
+            'datetime_update' => 'Дата и время обновления',
         ];
     }
 
