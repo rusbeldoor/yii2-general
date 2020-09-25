@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\backend\modules\admin\modules\rbac\models;
+namespace backend\modules\admin\modules\rbac\models;
 
 use yii;
 

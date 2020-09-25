@@ -1,8 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\backend\modules\admin\modules\rbac\models;
-
-use yii;
+namespace backend\modules\admin\modules\rbac\models;
 
 /**
  * Auth_assignment (ActiveRecord)
