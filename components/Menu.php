@@ -46,8 +46,8 @@ class Menu
                 'items' => [
                     ['label' => 'Управление', 'url' => ['/admin/user']],
                     '-',
-                    ['label' => 'Операции', 'url' => ['/admin/rbac/auth-item']],
-                    ['label' => 'Правила', 'url' => ['/admin/rbac/auth-rule']],
+                    ['label' => 'Операции', 'url' => ['/admin/rbac/permission']],
+                    ['label' => 'Роли', 'url' => ['/admin/rbac/role']],
                 ],
             ];
         }
