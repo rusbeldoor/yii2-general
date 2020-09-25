@@ -10,18 +10,23 @@ use yii\helpers\Html;
  */
 class Menu
 {
-    public $menu = [
-        '' => [],
-        'admin' => [
-            'label' => 'Пользователи',
-            'items' => [
-                ['label' => 'Управление', 'url' => ['admin/user']],
-                '---',
-                ['label' => 'Операции', 'url' => ['admin/rbac/auth-item']],
-                ['label' => 'Правила', 'url' => ['admin/rbac/auth-rule']],
-            ]
-        ],
-    ];
+    public $menu = null;
+
+    function __construct()
+    {
+        $this->menu = [
+            '' => [],
+            'admin' => [
+                'label' => 'Пользователи',
+                'items' => [
+                    ['label' => 'Управление', 'url' => ['admin/user']],
+                    '---',
+                    ['label' => 'Операции', 'url' => ['admin/rbac/auth-item']],
+                    ['label' => 'Правила', 'url' => ['admin/rbac/auth-rule']],
+                ]
+            ],
+        ];
+    }
 
     /**
      * Получение меню
