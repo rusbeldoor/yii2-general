@@ -7,7 +7,7 @@ use rusbeldoor\yii2General\helpers\BaseUI;
 /* @var $searchModel backend\modules\admin\modules\rbac\models\AuthItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Auth Items';
+$this->title = 'Операции';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-index">

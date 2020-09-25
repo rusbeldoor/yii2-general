@@ -35,7 +35,9 @@ class RoleController extends \backend\components\Controller
     public function actionIndex()
     {
         $searchModel = new AuthItemSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->post());
+        $post = Yii::$app->request->post();
+        $post['type'] = 1;
+        $dataProvider = $searchModel->search($post);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -63,9 +65,11 @@ class RoleController extends \backend\components\Controller
     public function actionCreate()
     {
         $model = new AuthItem();
+        $post = Yii::$app->request->post();
+        $post['type'] = 1;
 
         if (
-            $model->load(Yii::$app->request->post())
+            $model->load($post)
             && $model->save()
         ) { return $this->redirect(['view', 'id' => $model->name]); }
 
