@@ -67,7 +67,7 @@ class PermissionController extends \backend\components\Controller
         $model = new AuthItem();
         $post = Yii::$app->request->post();
         $post['type'] = 2;
-        
+
         if (
             $model->load($post)
             && $model->save()

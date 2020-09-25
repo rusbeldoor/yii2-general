@@ -19,7 +19,7 @@ class AuthItemSearch extends AuthItem
     {
         return [
             [['name', 'description', 'rule_name', 'data'], 'safe'],
-            [['type', 'created_at', 'updated_at'], 'integer'],
+            [['type'], 'integer'],
         ];
     }
 
@@ -59,8 +59,8 @@ class AuthItemSearch extends AuthItem
         // grid filtering conditions
         $query->andFilterWhere([
             'type' => $this->type,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'datetime_create' => $this->datetime_create,
+            'datetime_update' => $this->datetime_update,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
