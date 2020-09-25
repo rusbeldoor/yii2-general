@@ -7,6 +7,7 @@ use yii;
 /**
  * Auth_item_child (ActiveRecord)
  *
+ * @property $id int
  * @property $parent string
  * @property $child string
  */
@@ -38,6 +39,7 @@ class AuthItemChild extends \rusbeldoor\yii2General\models\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => 'Ид',
             'parent' => 'Parent',
             'child' => 'Child',
         ];

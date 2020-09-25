@@ -7,6 +7,7 @@ use yii;
 /**
  * Auth_item (ActiveRecord)
  *
+ * @property $id int
  * @property $name string
  * @property $type int
  * @property $description string|null
@@ -44,6 +45,7 @@ class AuthItem extends \rusbeldoor\yii2General\models\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => 'Ид',
             'name' => 'Название',
             'type' => 'Тип',
             'description' => 'Описание',

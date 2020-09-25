@@ -7,6 +7,7 @@ use yii;
 /**
  * Auth_rule (ActiveRecord)
  *
+ * @property $id int
  * @property $name string
  * @property $data resource|null
  * @property $datetime_create string
@@ -39,6 +40,7 @@ class AuthRule extends \rusbeldoor\yii2General\models\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => 'Ид',
             'name' => 'Название',
             'data' => 'Data',
             'datetime_create' => 'Дата и время создания',

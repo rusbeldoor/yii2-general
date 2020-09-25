@@ -5,6 +5,7 @@ namespace rusbeldoor\yii2General\backend\modules\admin\modules\rbac\models;
 /**
  * Auth_assignment (ActiveRecord)
  *
+ * @property $id int
  * @property $item_name string
  * @property $user_id int
  * @property $datetime_create string
@@ -36,7 +37,8 @@ class AuthAssignment extends \rusbeldoor\yii2General\models\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'item_name' => 'Item Name',
+            'id' => 'Ид',
+            'item_name' => 'Операция/роль',
             'user_id' => 'Пользователь',
             'datetime_create' => 'Дата и время создания',
         ];
