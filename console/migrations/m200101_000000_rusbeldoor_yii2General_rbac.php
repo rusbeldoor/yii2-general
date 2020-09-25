@@ -12,14 +12,14 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('auth_assignment', [
+        $this->createTable('auth_rule', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'item_name' => $this->string(64)->notNull(),
-            'user_id' => $this->integer(11)->unsigned()->notNull(),
+            'name' => $this->string(64)->notNull(),
+            'data' => $this->blob()->default(null),
             'datetime_create' => $this->dateTime()->notNull(),
+            'datetime_update' => $this->dateTime()->notNull(),
         ]);
-        $this->createIndex('unique-item_name-user_id', 'auth_assignment', ['item_name', 'user_id'], true);
-        $this->addForeignKey('fk-auth_assignment-auth_item', 'auth_assignment', 'item_name', 'auth_item', 'name');
+        $this->createIndex('unique-name', 'auth_rule', 'name', true);
 
         $this->createTable('auth_item', [
             'id' => $this->primaryKey(11)->unsigned(),
@@ -42,14 +42,14 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
         $this->createIndex('unique-parent-child', 'auth_item_child', ['parent', 'child'], true);
         $this->createIndex('index-child', 'auth_item_child', 'child');
 
-        $this->createTable('auth_rule', [
+        $this->createTable('auth_assignment', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'name' => $this->string(64)->notNull(),
-            'data' => $this->blob()->default(null),
+            'item_name' => $this->string(64)->notNull(),
+            'user_id' => $this->integer(11)->unsigned()->notNull(),
             'datetime_create' => $this->dateTime()->notNull(),
-            'datetime_update' => $this->dateTime()->notNull(),
         ]);
-        $this->createIndex('unique-name', 'auth_rule', 'name', true);
+        $this->createIndex('unique-item_name-user_id', 'auth_assignment', ['item_name', 'user_id'], true);
+        $this->addForeignKey('fk-auth_assignment-auth_item', 'auth_assignment', 'item_name', 'auth_item', 'name');
     }
 
     /**
