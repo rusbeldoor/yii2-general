@@ -48,10 +48,10 @@ class Menu
                     '-',
                     ['label' => 'Операции', 'url' => ['/admin/rbac/auth-item']],
                     ['label' => 'Правила', 'url' => ['/admin/rbac/auth-rule']],
-                ]
+                ],
             ];
         }
-        
+
         $menu[] = ['label' => '|', 'url' => false];
 
         if (Yii::$app->user->isGuest) {
