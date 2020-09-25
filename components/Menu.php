@@ -39,9 +39,7 @@ class Menu
                 }
             }
         }
-
-        $menu[] = ['label' => '|', 'url' => false];
-
+        
         $menu[] = [
             'label' => 'Пользователи',
             'items' => [
@@ -51,6 +49,8 @@ class Menu
                 ['label' => 'Правила', 'url' => ['/admin/rbac/auth-rule']],
             ]
         ];
+
+        $menu[] = ['label' => '|', 'url' => false];
 
         if (Yii::$app->user->isGuest) {
             $menu[] = ['label' => 'Вход', 'url' => ['/site/login']];
