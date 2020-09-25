@@ -24,7 +24,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
         $this->createTable('auth_item', [
             'id' => $this->primaryKey(11)->unsigned(),
             'name' => $this->string(64)->notNull(),
-            'type' => $this->tinyint(1)->unsigned()->notNull(),
+            'type' => $this->tinyInteger(1)->unsigned()->notNull(),
             'description' => $this->string(255)->default(null),
             'rule_name' => $this->string(64)->default(null),
             'data' => $this->binary(65537),
