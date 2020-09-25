@@ -12,6 +12,7 @@ class m200101_000000_rusbeldoor_yii2General_modify_rbac extends Migration
      */
     public function safeUp()
     {
+        $this->alterColumn('auth_assignment', 'user_id', $this->int(11)->unsigned()->notNull());
         $this->renameColumn('auth_assignment', 'created_at', 'datetime_create');
         $this->alterColumn('auth_assignment', 'datetime_create', $this->datetime()->notNull());
 

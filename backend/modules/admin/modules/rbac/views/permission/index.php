@@ -21,10 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'],
             'name',
-            'rule_name',
-            'data',
-            'created_at',
-            'updated_at',
             ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
         ],
     ]); ?>
