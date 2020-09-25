@@ -10,19 +10,48 @@ use yii\helpers\Html;
  */
 class Menu
 {
+    public $menu = [
+        /*
+        '' => [
+            ['label' => 'Главная', 'url' => ['/']],
+        ],
+        'admin' => [
+            ['label' => 'Первая панель', 'url' => ['/first-panel']],
+            ['label' => 'Вторая панель', 'url' => ['/second-panel']],
+        ],
+        */
+    ];
+
     /**
-     * Поучение меню
+     * Получение меню
      *
      * @return array
      */
     public function get()
     {
-        $items = [];
-        if (Yii::$app->user->isGuest) {
-            $items[] = ['label' => 'Вход', 'url' => ['/site/login']];
-        } else {
-            $items[] = '<li class="nav-item">' . Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Выход (' . Yii::$app->user->identity->username . ')', ['class' => 'btn nav-link']) . Html::endForm() . '</li>';
+        $menu = [];
+
+        // Перебираем модули
+        foreach ($this->menu as $moduleId => $items) {
+            // Если модуль текущий или не указан
+            if (in_array($moduleId, ['', Yii::$app->controller->module->id])) {
+                // Перебираем пункты меню
+                foreach ($items as $item) {
+                    // Добавляем пункт меню
+                    $menu[] = $item;
+                }
+            }
         }
-        return $items;
+
+        if (Yii::$app->user->isGuest) {
+            $menu[] = ['label' => 'Вход', 'url' => ['/site/login']];
+        } else {
+            $menu[] =
+                '<li class="nav-item">'
+                    . Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Выход (' . Yii::$app->user->identity->username . ')', ['class' => 'btn nav-link']) . Html::endForm()
+                . '</li>';
+        }
+
+        return $menu;
     }
 }
