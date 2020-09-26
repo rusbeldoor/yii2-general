@@ -2,6 +2,7 @@
 
 namespace rusbeldoor\yii2General\backend\modules\admin\modules\rbac\controllers;
 
+use rusbeldoor\yii2General\helpers\AppHelper;
 use yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -83,6 +84,8 @@ class PermissionController extends \backend\components\Controller
      */
     public function actionUpdate($id)
     {
+        //$this->redirect('/admin');
+
         $model = $this->findModel($id);
 
         if (

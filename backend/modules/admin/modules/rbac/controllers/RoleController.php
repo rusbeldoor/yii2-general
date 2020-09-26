@@ -83,6 +83,8 @@ class RoleController extends \backend\components\Controller
      */
     public function actionUpdate($id)
     {
+        //$this->redirect('/admin');
+
         $model = $this->findModel($id);
 
         if (

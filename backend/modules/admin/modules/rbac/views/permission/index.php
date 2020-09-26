@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-index">
     <?= BaseUI::buttonsForIndexPage(['filter', 'add', 'delete']) ?>
+    <?//= BaseUI::buttonsForIndexPage(['filter', 'add']) ?>
 
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -19,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'tableOptions' => ['class' => 'table table-striped table-hover'],
         'columns' => [
-            ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'],
+            //['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'],
             'name',
             'description',
             ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
