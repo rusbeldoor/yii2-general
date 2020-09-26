@@ -3,6 +3,7 @@
 namespace rusbeldoor\yii2General\components;
 
 use yii;
+
 use rusbeldoor\yii2General\helpers\AppHelper;
 
 /**
@@ -73,7 +74,7 @@ class WebController extends \yii\web\Controller
             $flashs[((count($deletedIds)) ? 'warning' : 'error')] = 'Не удалось удалить' . ((count($deletedIds)) ? ' некоторые' : '') . ' элементы:<ul>' . $notDeletedErrors . '</ul>';
         }
 
-        self::setFlashs($flashs);
+        AppHelper::setFlashs($flashs);
 
         return $this->redirect(['index']);
     }
@@ -105,16 +106,7 @@ class WebController extends \yii\web\Controller
      *** *** *** Свои методы *** *** ***
      ***********************************/
 
-    /**
-     * Установка сообщений
-     *
-     * @param $flashs array
-     */
-    public static function setFlashs($flashs) {
-        foreach($flashs as $key => $text) {
-            Yii::$app->session->setFlash($key, $text);
-        }
-    }
+
 
     /******************************************************
      *** *** *** Изменение родителських методов *** *** ***

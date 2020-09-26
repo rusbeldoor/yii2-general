@@ -95,6 +95,36 @@ class AppHelper
         Yii::app()->controller->redirect($url);
     }
 
+    /*************************************
+     *** *** *** Права доступа *** *** ***
+     *************************************/
+
+    /**
+     * Проверка права доступа
+     *
+     * @param $itemName string
+     */
+    public static function forbiddenExceptionIfNotPermission($itemName) {
+        if (!Yii::$app->user->can($itemName)) {
+            throw new ForbiddenHttpException('Доступ запрещён.');
+        }
+    }
+
+    /*******************************
+     *** *** *** Flashes *** *** ***
+     *******************************/
+
+    /**
+     * Установка сообщений
+     *
+     * @param $flashs array
+     */
+    public static function setFlashs($flashs) {
+        foreach($flashs as $key => $text) {
+            Yii::$app->session->setFlash($key, $text);
+        }
+    }
+
     /****************************************
      *** *** *** Работа с файлами *** *** ***
      ****************************************/
