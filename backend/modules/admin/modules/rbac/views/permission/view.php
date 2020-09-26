@@ -18,8 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'name',
-            'datetime_create',
-            'datetime_update',
         ],
     ]) ?>
 </div>
