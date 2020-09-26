@@ -87,7 +87,8 @@ class RoleController extends \backend\components\Controller
         //$this->redirect('/admin');
 
         $model = $this->findModel($id);
-        $authItem = AuthItem::model()->find()->typePermission()->all();
+        $notHaveParentAuthItem = AuthItem::model()->find()->typePermission()->notHaveParentByName($model->name)->all();
+        $haveParentAuthItem = AuthItem::model()->find()->typePermission()->haveParentByName($model->name)->all();
 
         if (
             $model->load(Yii::$app->request->post())
@@ -98,7 +99,8 @@ class RoleController extends \backend\components\Controller
             'update',
             [
                 'model' => $model,
-                'authItemChildes' => $authItemChildes,
+                'notHaveParentAuthItem' => $notHaveParentAuthItem,
+                'haveParentAuthItem' => $haveParentAuthItem,
             ]
         );
     }
