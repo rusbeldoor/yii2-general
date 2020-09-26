@@ -87,7 +87,7 @@ class RoleController extends \backend\components\Controller
         //$this->redirect('/admin');
 
         $model = $this->findModel($id);
-        $authItem = AuthItem::model()->find()->all();
+        $authItem = AuthItem::model()->find()->typePermission()->all();
 
         if (
             $model->load(Yii::$app->request->post())
