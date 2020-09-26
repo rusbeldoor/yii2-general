@@ -1,7 +1,7 @@
 <?php
 
 use rusbeldoor\yii2General\widgets\AddEditForm;
-use kartik\sortable\SortableInput;
+use kartik\sortinput\SortableInput;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\admin\modules\rbac\models\AuthItem */
