@@ -33,4 +33,30 @@ class AuthItemQuery extends \rusbeldoor\yii2General\models\ActiveQuery
      */
     public function typePermission()
     { return $this->type(2); }
+
+    /**
+     * Есть родитель по имени
+     *
+     * @param $name string
+     * @return AuthItemQuery
+     */
+    public function haveParentByName($name)
+    {
+        $this->join('auth_item_child', 'auth_item_child.parent=:parent', [':parent' => $name]);
+        $this->addWhere("auth_item_child.id IS NOT NULL");
+        return $this;
+    }
+
+    /**
+     * Нет родителя по имени
+     *
+     * @param $name string
+     * @return AuthItemQuery
+     */
+    public function notHaveParentByName($name)
+    {
+        $this->join('auth_item_child', 'auth_item_child.parent=:parent', [':parent' => $name]);
+        $this->addWhere("auth_item_child.id IS NULL");
+        return $this;
+    }
 }
