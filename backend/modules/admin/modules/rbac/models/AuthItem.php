@@ -13,8 +13,6 @@ use yii;
  * @property $description string|null
  * @property $rule_name string|null
  * @property $data resource|null
- * @property $datetime_create string
- * @property $datetime_update string
  */
 class AuthItem extends \rusbeldoor\yii2General\models\ActiveRecord
 {
@@ -30,7 +28,7 @@ class AuthItem extends \rusbeldoor\yii2General\models\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'type', 'datetime_create', 'datetime_update'], 'required'],
+            [['name', 'type'], 'required'],
             [['type'], 'integer'],
             [['description', 'data'], 'string'],
             [['name', 'rule_name'], 'string', 'max' => 64],
@@ -51,8 +49,6 @@ class AuthItem extends \rusbeldoor\yii2General\models\ActiveRecord
             'description' => 'Описание',
             'rule_name' => 'Rule Name',
             'data' => 'Data',
-            'datetime_create' => 'Дата и время создания',
-            'datetime_update' => 'Дата и время обновления',
         ];
     }
 

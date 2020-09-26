@@ -16,8 +16,8 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
             'id' => $this->primaryKey(11)->unsigned(),
             'name' => $this->string(64)->notNull(),
             'data' => $this->binary(65537)->defaultValue(null),
-            'datetime_create' => $this->dateTime()->notNull(),
-            'datetime_update' => $this->dateTime()->notNull(),
+            //'datetime_create' => $this->dateTime()->notNull(),
+            //'datetime_update' => $this->dateTime()->notNull(),
         ]);
         $this->createIndex('unique-name', 'auth_rule', 'name', true);
 
@@ -28,8 +28,8 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
             'description' => $this->string(255)->defaultValue(null),
             'rule_name' => $this->string(64)->defaultValue(null),
             'data' => $this->binary(65537)->defaultValue(null),
-            'datetime_create' => $this->dateTime()->notNull(),
-            'datetime_update' => $this->dateTime()->notNull(),
+            //'datetime_create' => $this->dateTime()->notNull(),
+            //'datetime_update' => $this->dateTime()->notNull(),
         ]);
         $this->createIndex('unique-name', 'auth_item', 'name', true);
         $this->addForeignKey('fk-auth_item-auth_rule', 'auth_item', 'rule_name', 'auth_rule', 'name');
@@ -46,7 +46,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
             'id' => $this->primaryKey(11)->unsigned(),
             'item_name' => $this->string(64)->notNull(),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
-            'datetime_create' => $this->dateTime()->notNull(),
+            //'datetime_create' => $this->dateTime()->notNull(),
         ]);
         $this->createIndex('unique-item_name-user_id', 'auth_assignment', ['item_name', 'user_id'], true);
         $this->addForeignKey('fk-auth_assignment-auth_item', 'auth_assignment', 'item_name', 'auth_item', 'name');

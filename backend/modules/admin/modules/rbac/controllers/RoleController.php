@@ -65,7 +65,6 @@ class RoleController extends \backend\components\Controller
     {
         $model = new AuthItem();
         $model->type = 1;
-        $model->datetime_create = $model->datetime_update = date('Y-m-d H:i:s');
 
         if (
             $model->load(Yii::$app->request->post())

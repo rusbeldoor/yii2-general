@@ -8,7 +8,6 @@ namespace rusbeldoor\yii2General\backend\modules\admin\modules\rbac\models;
  * @property $id int
  * @property $item_name string
  * @property $user_id int
- * @property $datetime_create string
  */
 class AuthAssignment extends \rusbeldoor\yii2General\models\ActiveRecord
 {
@@ -24,7 +23,7 @@ class AuthAssignment extends \rusbeldoor\yii2General\models\ActiveRecord
     public function rules()
     {
         return [
-            [['item_name', 'user_id', 'datetime_create'], 'required'],
+            [['item_name', 'user_id'], 'required'],
             [['item_name'], 'string', 'max' => 64],
             [['item_name', 'user_id'], 'unique', 'targetAttribute' => ['item_name', 'user_id']],
             [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::className(), 'targetAttribute' => ['item_name' => 'name']],
@@ -40,7 +39,6 @@ class AuthAssignment extends \rusbeldoor\yii2General\models\ActiveRecord
             'id' => 'Ид',
             'item_name' => 'Операция/роль',
             'user_id' => 'Пользователь',
-            'datetime_create' => 'Дата и время создания',
         ];
     }
 
