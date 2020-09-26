@@ -105,7 +105,7 @@ class AppHelper
      *
      * @param $itemName string
      */
-    public static function forbiddenExceptionIfNotPermission($itemName) {
+    public static function forbiddenExceptionIfNotHavePermission($itemName) {
         if (!Yii::$app->user->can($itemName)) {
             throw new ForbiddenHttpException('Доступ запрещён.');
         }
