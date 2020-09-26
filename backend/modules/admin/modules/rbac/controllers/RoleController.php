@@ -2,6 +2,7 @@
 
 namespace rusbeldoor\yii2General\backend\modules\admin\modules\rbac\controllers;
 
+use rusbeldoor\yii2General\backend\modules\admin\modules\rbac\models\AuthItemChild;
 use yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -86,13 +87,20 @@ class RoleController extends \backend\components\Controller
         //$this->redirect('/admin');
 
         $model = $this->findModel($id);
+        $authItem = AuthItem::model()->find()->all();
 
         if (
             $model->load(Yii::$app->request->post())
             && $model->save()
         ) { return $this->redirect(['view', 'id' => $model->id]); }
 
-        return $this->render('update', ['model' => $model]);
+        return $this->render(
+            'update',
+            [
+                'model' => $model,
+                'authItemChildes' => $authItemChildes,
+            ]
+        );
     }
 
     /**

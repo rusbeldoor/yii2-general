@@ -34,7 +34,7 @@ class <?= $className ?> extends \rusbeldoor\yii2General\models\ActiveQuery
     /**
      * ...
      *
-     * return <?= $className ?>
+     * @return <?= $className . "\n" ?>
      */
     /*
     public function active()
