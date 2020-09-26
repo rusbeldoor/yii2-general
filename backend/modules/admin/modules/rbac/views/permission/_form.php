@@ -10,6 +10,7 @@ use rusbeldoor\yii2General\widgets\AddEditForm;
 <div class="auth-item-form">
     <?php $form = AddEditForm::begin() ?>
         <?= $form->field($model, 'name') ?>
+        <?= $form->field($model, 'description') ?>
         <?= $form->buttons($model) ?>
     <?php AddEditForm::end() ?>
 </div>

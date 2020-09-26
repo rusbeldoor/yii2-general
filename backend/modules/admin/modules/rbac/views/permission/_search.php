@@ -11,6 +11,7 @@ use rusbeldoor\yii2General\widgets\SearchForm;
 <div class="auth-item-search panelSearchFormContainer">
     <?php $form = SearchForm::begin() ?>
         <?= $form->field($model, 'name') ?>
+        <?= $form->field($model, 'description') ?>
         <?= $form->buttons() ?>
     <?php SearchForm::end() ?>
 </div>
