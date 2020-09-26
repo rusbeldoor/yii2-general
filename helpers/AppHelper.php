@@ -3,6 +3,7 @@
 namespace rusbeldoor\yii2General\helpers;
 
 use yii;
+use yii\web\ForbiddenHttpException;
 
 class AppHelper
 {
