@@ -24,7 +24,7 @@ class AuthAssignment extends \rusbeldoor\yii2General\models\ActiveRecord
     {
         return [
             [['item_name', 'user_id'], 'required'],
-            [['item_name'], 'string', 'max' => 128],
+            [['item_name'], 'string', 'max' => 96],
             [['item_name', 'user_id'], 'unique', 'targetAttribute' => ['item_name', 'user_id']],
             [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::className(), 'targetAttribute' => ['item_name' => 'name']],
         ];

@@ -14,14 +14,14 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
     {
         $this->createTable('auth_rule', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'name' => $this->string(128)->notNull(),
+            'name' => $this->string(96)->notNull(),
             'data' => $this->binary(65536)->defaultValue(null),
         ]);
         $this->createIndex('unique-name', 'auth_rule', 'name', true);
 
         $this->createTable('auth_item', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'name' => $this->string(128)->notNull(),
+            'name' => $this->string(96)->notNull(),
             'type' => $this->tinyInteger(1)->unsigned()->notNull(),
             'description' => $this->string(255)->defaultValue(null),
             'rule_name' => $this->string(64)->defaultValue(null),
@@ -32,15 +32,15 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
 
         $this->createTable('auth_item_child', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'parent' => $this->string(128)->notNull(),
-            'child' => $this->string(128)->notNull(),
+            'parent' => $this->string(96)->notNull(),
+            'child' => $this->string(96)->notNull(),
         ]);
         $this->createIndex('unique-parent-child', 'auth_item_child', ['parent', 'child'], true);
         $this->createIndex('index-child', 'auth_item_child', 'child');
 
         $this->createTable('auth_assignment', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'item_name' => $this->string(128)->notNull(),
+            'item_name' => $this->string(96)->notNull(),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
         ]);
         $this->createIndex('unique-item_name-user_id', 'auth_assignment', ['item_name', 'user_id'], true);
