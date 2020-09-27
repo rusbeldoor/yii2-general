@@ -19,6 +19,7 @@ use kartik\sortinput\SortableInput;
             <label class="col-form-label col-md-2">Роли</label>
             <div class="col-md-5">
                 <?= SortableInput::widget([
+                    'name' => 'roles-ids',
                     'items' => $rolesNotOfThisRole,
                     'hideInput' => false,
                     'sortableOptions' => ['connected' => true],
@@ -27,7 +28,7 @@ use kartik\sortinput\SortableInput;
             </div>
             <div class="col-md-5">
                 <?= SortableInput::widget([
-                    'name' => 'roles-ids',
+                    'name' => 'child-roles-ids-',
                     'items' => $rolesOfThisRole,
                     'hideInput' => false,
                     'sortableOptions' => [
@@ -42,6 +43,7 @@ use kartik\sortinput\SortableInput;
             <label class="col-form-label col-md-2">Операции</label>
             <div class="col-md-5">
                 <?= SortableInput::widget([
+                    'name' => 'permissions-ids',
                     'items' => $permissionsNotOfThisRole,
                     'hideInput' => false,
                     'sortableOptions' => ['connected' => true],
@@ -50,7 +52,7 @@ use kartik\sortinput\SortableInput;
             </div>
             <div class="col-md-5">
                 <?= SortableInput::widget([
-                    'name' => 'permissions-ids',
+                    'name' => 'child-permissions-ids',
                     'items' => $permissionsOfThisRole,
                     'hideInput' => false,
                     'sortableOptions' => [
