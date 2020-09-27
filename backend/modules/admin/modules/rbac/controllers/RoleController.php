@@ -76,8 +76,8 @@ class RoleController extends \backend\components\Controller
         $rolesNotOfThisRole = $permissionsNotOfThisRole = [];
         $elems = $model->find()->all();
         foreach ($elems as $elem) {
-            if ($elem->isRole()) { $rolesNotOfThisRole[$elem->id] = ['content' => $elem->name]; }
-            elseif ($elem->isPermission()) { $permissionsNotOfThisRole[$elem->id] = ['content' => $elem->name]; }
+            if ($elem->isRole()) { $rolesNotOfThisRole[$elem->name] = ['content' => $elem->name]; }
+            elseif ($elem->isPermission()) { $permissionsNotOfThisRole[$elem->name] = ['content' => $elem->name]; }
         }
 
         return $this->render(
@@ -113,13 +113,13 @@ class RoleController extends \backend\components\Controller
         $rolesNotOfThisRole = $rolesOfThisRole = $permissionsNotOfThisRole = $permissionsOfThisRole = [];
         $elems = $model->find()->ofRole($model->name)->all();
         foreach ($elems as $elem) {
-            if ($elem->isRole()) { $rolesOfThisRole[$elem->id] = ['content' => $elem->name]; }
-            elseif ($elem->isPermission()) { $permissionsOfThisRole[$elem->id] = ['content' => $elem->name]; }
+            if ($elem->isRole()) { $rolesOfThisRole[$elem->name] = ['content' => $elem->name]; }
+            elseif ($elem->isPermission()) { $permissionsOfThisRole[$elem->name] = ['content' => $elem->name]; }
         }
         $elems = $model->find()->notOfRole($model->name)->all();
         foreach ($elems as $elem) {
-            if ($elem->isRole()) { $rolesNotOfThisRole[$elem->id] = ['content' => $elem->name]; }
-            elseif ($elem->isPermission()) { $permissionsNotOfThisRole[$elem->id] = ['content' => $elem->name]; }
+            if ($elem->isRole()) { $rolesNotOfThisRole[$elem->name] = ['content' => $elem->name]; }
+            elseif ($elem->isPermission()) { $permissionsNotOfThisRole[$elem->name] = ['content' => $elem->name]; }
         }
 
         return $this->render(

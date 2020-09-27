@@ -13,7 +13,7 @@ use kartik\sortinput\SortableInput;
 
 <div class="auth-item-form">
     <? $form = AddEditForm::begin() ?>
-        <?= $form->field($model, 'name') ?>
+        <?= $form->field($model, 'name')->masked(['mask' => 'AAA-999']) ?>
         <?= $form->field($model, 'description') ?>
         <div class="form-group row">
             <label class="col-form-label col-md-2">Роли</label>

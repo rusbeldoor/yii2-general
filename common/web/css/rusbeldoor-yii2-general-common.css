@@ -79,7 +79,7 @@ a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
  *** *** *** sortable *** *** ***
  ********************************/
 
-.sortable { min-height: 42px; }
+.sortable { min-height: 52px; }
 
 /*********************************
  *** *** *** Интерфейс *** *** ***
