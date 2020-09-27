@@ -77,10 +77,10 @@ class RoleController extends \backend\components\Controller
             'create',
             [
                 'model' => $model,
-                'rolesNotOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typeRole()->ofRole($model->name)->all(), 'id', 'name'),
-                'rolesOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typeRole()->notOfRole($model->name)->all(), 'id', 'name'),
-                'permissionsNotOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typePermission()->ofRole($model->name)->all(), 'id', 'name'),
-                'permissionsOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typePermission()->notOfRole($model->name)->all(), 'id', 'name'),
+                'rolesNotOfThisRole' => ArrayHelper::map($model->find()->typeRole()->all(), 'id', 'name'),
+                'rolesOfThisRole' => [],
+                'permissionsNotOfThisRole' => ArrayHelper::map($model->find()->typePermission()->all(), 'id', 'name'),
+                'permissionsOfThisRole' => [],
             ]
         );
     }
@@ -107,10 +107,10 @@ class RoleController extends \backend\components\Controller
             'update',
             [
                 'model' => $model,
-                'rolesNotOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typeRole()->ofRole($model->name)->all(), 'id', 'name'),
-                'rolesOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typeRole()->notOfRole($model->name)->all(), 'id', 'name'),
-                'permissionsNotOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typePermission()->ofRole($model->name)->all(), 'id', 'name'),
-                'permissionsOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typePermission()->notOfRole($model->name)->all(), 'id', 'name'),
+                'rolesNotOfThisRole' => ArrayHelper::map($model->find()->typeRole()->ofRole($model->name)->all(), 'id', 'name'),
+                'rolesOfThisRole' => ArrayHelper::map($model->find()->typeRole()->notOfRole($model->name)->all(), 'id', 'name'),
+                'permissionsNotOfThisRole' => ArrayHelper::map($model->find()->typePermission()->ofRole($model->name)->all(), 'id', 'name'),
+                'permissionsOfThisRole' => ArrayHelper::map($model->find()->typePermission()->notOfRole($model->name)->all(), 'id', 'name'),
             ]
         );
     }
