@@ -73,7 +73,16 @@ class RoleController extends \backend\components\Controller
             && $model->save()
         ) { return $this->redirect(['view', 'id' => $model->id]); }
 
-        return $this->render('create', ['model' => $model]);
+        return $this->render(
+            'create',
+            [
+                'model' => $model,
+                'rolesNotOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typeRole()->ofRole($model->name)->all(), 'id', 'name'),
+                'rolesOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typeRole()->notOfRole($model->name)->all(), 'id', 'name'),
+                'permissionsNotOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typePermission()->ofRole($model->name)->all(), 'id', 'name'),
+                'permissionsOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typePermission()->notOfRole($model->name)->all(), 'id', 'name'),
+            ]
+        );
     }
 
     /**
