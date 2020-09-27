@@ -73,13 +73,20 @@ class RoleController extends \backend\components\Controller
             && $model->save()
         ) { return $this->redirect(['view', 'id' => $model->id]); }
 
+        $rolesNotOfThisRole = $permissionsNotOfThisRole = [];
+        $elems = $model->find()->all();
+        foreach ($elems as $elem) {
+            if ($elem->isRole()) { $rolesNotOfThisRole[$elem->id] = ['content' => $elem->name]; }
+            elseif ($elem->isPermission()) { $permissionsNotOfThisRole[$elem->id] = ['content' => $elem->name]; }
+        }
+
         return $this->render(
             'create',
             [
                 'model' => $model,
-                'rolesNotOfThisRole' => ArrayHelper::map($model->find()->typeRole()->all(), 'id', 'name'),
+                'rolesNotOfThisRole' => $rolesNotOfThisRole,
                 'rolesOfThisRole' => [],
-                'permissionsNotOfThisRole' => ArrayHelper::map($model->find()->typePermission()->all(), 'id', 'name'),
+                'permissionsNotOfThisRole' => $permissionsNotOfThisRole,
                 'permissionsOfThisRole' => [],
             ]
         );
@@ -103,14 +110,26 @@ class RoleController extends \backend\components\Controller
             && $model->save()
         ) { return $this->redirect(['view', 'id' => $model->id]); }
 
+        $rolesNotOfThisRole = $rolesOfThisRole = $permissionsNotOfThisRole = $permissionsOfThisRole = [];
+        $elems = $model->find()->ofRole($model->name)->all();
+        foreach ($elems as $elem) {
+            if ($elem->isRole()) { $rolesOfThisRole[$elem->id] = ['content' => $elem->name]; }
+            elseif ($elem->isPermission()) { $permissionsOfThisRole[$elem->id] = ['content' => $elem->name]; }
+        }
+        $elems = $model->find()->notOfRole($model->name)->all();
+        foreach ($elems as $elem) {
+            if ($elem->isRole()) { $rolesNotOfThisRole[$elem->id] = ['content' => $elem->name]; }
+            elseif ($elem->isPermission()) { $permissionsNotOfThisRole[$elem->id] = ['content' => $elem->name]; }
+        }
+
         return $this->render(
             'update',
             [
                 'model' => $model,
-                'rolesNotOfThisRole' => ArrayHelper::map($model->find()->typeRole()->ofRole($model->name)->all(), 'id', 'name'),
-                'rolesOfThisRole' => ArrayHelper::map($model->find()->typeRole()->notOfRole($model->name)->all(), 'id', 'name'),
-                'permissionsNotOfThisRole' => ArrayHelper::map($model->find()->typePermission()->ofRole($model->name)->all(), 'id', 'name'),
-                'permissionsOfThisRole' => ArrayHelper::map($model->find()->typePermission()->notOfRole($model->name)->all(), 'id', 'name'),
+                'rolesNotOfThisRole' => $rolesNotOfThisRole,
+                'rolesOfThisRole' => $rolesOfThisRole,
+                'permissionsNotOfThisRole' => $permissionsNotOfThisRole,
+                'permissionsOfThisRole' => $permissionsOfThisRole,
             ]
         );
     }

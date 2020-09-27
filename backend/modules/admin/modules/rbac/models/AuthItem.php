@@ -71,4 +71,20 @@ class AuthItem extends \rusbeldoor\yii2General\models\ActiveRecord
 
         return !$this->hasErrors() && parent::beforeDelete();
     }
+
+    /**
+     * Это операция
+     *
+     * @return bool
+     */
+    public function isPermission()
+    { return $this->type == 2; }
+
+    /**
+     * Это роль
+     *
+     * @return bool
+     */
+    public function isRole()
+    { return $this->type == 1; }
 }
