@@ -13,11 +13,14 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id
 $this->params['breadcrumbs'][] = 'Изменение';
 ?>
 <div class="auth-item-update">
-    <?= $this->render('_form', [
-        'model' => $model,
-        'rolesNotOfThisRole' => $rolesNotOfThisRole,
-        'rolesOfThisRole' => $rolesOfThisRole,
-        'permissionsNotOfThisRole' => $permissionsNotOfThisRole,
-        'permissionsOfThisRole' => $permissionsOfThisRole,
-    ]) ?>
+    <?= $this->render(
+        '_form',
+        [
+            'model' => $model,
+            'rolesNotOfThisRole' => $rolesNotOfThisRole,
+            'rolesOfThisRole' => $rolesOfThisRole,
+            'permissionsNotOfThisRole' => $permissionsNotOfThisRole,
+            'permissionsOfThisRole' => $permissionsOfThisRole,
+        ]
+    ) ?>
 </div>
