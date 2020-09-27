@@ -40,7 +40,7 @@ class AuthItemQuery extends \rusbeldoor\yii2General\models\ActiveQuery
      * @param $name string
      * @return AuthItemQuery
      */
-    public function haveParentByName($name)
+    public function notOfRole($name)
     {
         $this->join('auth_item_child', 'auth_item_child.parent=:parent', [':parent' => $name]);
         $this->addWhere("auth_item_child.id IS NOT NULL");
@@ -53,7 +53,7 @@ class AuthItemQuery extends \rusbeldoor\yii2General\models\ActiveQuery
      * @param $name string
      * @return AuthItemQuery
      */
-    public function notHaveParentByName($name)
+    public function ofRole($name)
     {
         $this->join('auth_item_child', 'auth_item_child.parent=:parent', [':parent' => $name]);
         $this->addWhere("auth_item_child.id IS NULL");

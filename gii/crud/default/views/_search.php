@@ -16,7 +16,6 @@ use rusbeldoor\yii2General\widgets\SearchForm;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->searchModelClass, '\\') ?> */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="<?= $name ?>-search panelSearchFormContainer">

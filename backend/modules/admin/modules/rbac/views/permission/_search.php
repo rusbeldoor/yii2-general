@@ -5,7 +5,6 @@ use rusbeldoor\yii2General\widgets\SearchForm;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\admin\modules\rbac\models\AuthItemSearch */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="auth-item-search panelSearchFormContainer">

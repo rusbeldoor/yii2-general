@@ -2,13 +2,14 @@
 
 namespace rusbeldoor\yii2General\backend\modules\admin\modules\rbac\controllers;
 
-use rusbeldoor\yii2General\backend\modules\admin\modules\rbac\models\AuthItemChild;
+use QuickService\general\common\models\QTOrganisation;
 use yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use rusbeldoor\yii2General\backend\modules\admin\modules\rbac\models\AuthItem;
 use rusbeldoor\yii2General\backend\modules\admin\modules\rbac\models\AuthItemSearch;
+use rusbeldoor\yii2General\helpers\ArrayHelper;
 
 /**
  * RoleController
@@ -87,8 +88,6 @@ class RoleController extends \backend\components\Controller
         //$this->redirect('/admin');
 
         $model = $this->findModel($id);
-        $notHaveParentAuthItem = AuthItem::model()->find()->typePermission()->notHaveParentByName($model->name)->all();
-        $haveParentAuthItem = AuthItem::model()->find()->typePermission()->haveParentByName($model->name)->all();
 
         if (
             $model->load(Yii::$app->request->post())
@@ -99,8 +98,10 @@ class RoleController extends \backend\components\Controller
             'update',
             [
                 'model' => $model,
-                'notHaveParentAuthItem' => $notHaveParentAuthItem,
-                'haveParentAuthItem' => $haveParentAuthItem,
+                'rolesNotOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typeRole()->ofRole($model->name)->all(), 'id', 'name'),
+                'rolesOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typeRole()->notOfRole($model->name)->all(), 'id', 'name'),
+                'permissionsNotOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typePermission()->ofRole($model->name)->all(), 'id', 'name'),
+                'permissionsOfThisRole' => ArrayHelper::map(AuthItem::model()->find()->typePermission()->notOfRole($model->name)->all(), 'id', 'name'),
             ]
         );
     }
