@@ -31,8 +31,8 @@ class AuthItem extends \rusbeldoor\yii2General\models\ActiveRecord
             [['name', 'type'], 'required'],
             [['type'], 'integer'],
             [['description', 'data'], 'string'],
-            [['name', 'rule_name'], 'string', 'max' => 96],
-            [['name'], 'match', 'pattern' => '/^\w-+$/'],
+            self::rulesMatchString(['name', 'rule_name'], ['max' => 96]),
+            self::rulesMatchAlias('name'),
             [['name'], 'unique'],
             [['rule_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthRule::className(), 'targetAttribute' => ['rule_name' => 'name']],
         ];
