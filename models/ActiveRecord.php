@@ -2,6 +2,8 @@
 
 namespace rusbeldoor\yii2General\models;
 
+use rusbeldoor\yii2General\helpers\ArrayHelper;
+
 /**
  * Common ActiveRecord
  */

@@ -187,4 +187,13 @@ class ActiveField extends \kartik\form\ActiveField
      */
     public function masked($options = [])
     { return $this->widget('\yii\widgets\MaskedInput', $options); }
+
+    /**
+     * ...
+     *
+     * @param $options array
+     * @return ActiveField
+     */
+    public function maskedAlias($length)
+    { return $this->widget('\yii\widgets\MaskedInput', $options); }
 }
