@@ -17,6 +17,19 @@ class ActiveField extends \kartik\form\ActiveField
      * @param $options array
      * @return ActiveField
      */
+    public function textInputMaxlength($maxlength = null)
+    {
+        $options = [];
+        if ($maxlength) { $options['maxlength'] = $maxlength; }
+        return self::textInput($options);
+    }
+
+    /**
+     * ...
+     *
+     * @param $options array
+     * @return ActiveField
+     */
     public function searchTextInput($options = [])
     {
         $options = ArrayHelper::merge(
@@ -186,14 +199,5 @@ class ActiveField extends \kartik\form\ActiveField
      * @return ActiveField
      */
     public function masked($options = [])
-    { return $this->widget('\yii\widgets\MaskedInput', $options); }
-
-    /**
-     * ...
-     *
-     * @param $options array
-     * @return ActiveField
-     */
-    public function maskedAlias($length)
     { return $this->widget('\yii\widgets\MaskedInput', $options); }
 }

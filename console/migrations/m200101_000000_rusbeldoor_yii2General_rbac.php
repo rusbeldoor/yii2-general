@@ -23,7 +23,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
             'id' => $this->primaryKey(11)->unsigned(),
             'name' => $this->string(96)->notNull(),
             'type' => $this->tinyInteger(1)->unsigned()->notNull(),
-            'description' => $this->string(255)->defaultValue(null),
+            'description' => $this->string(192)->defaultValue(null),
             'rule_name' => $this->string(64)->defaultValue(null),
             'data' => $this->binary(65536)->defaultValue(null),
         ]);
