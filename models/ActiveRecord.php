@@ -46,7 +46,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
      * @return array
      */
     public static function getRuleString($elems, $options)
-    { self::getRule($elems, 'string', $options); }
+    { return self::getRule($elems, 'string', $options); }
 
     /**
      * Правило валидации регулярным выражением
@@ -56,7 +56,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
      * @return array
      */
     public static function getRuleMatch($elems, $pattern)
-    { self::getRule($elems, 'match', ['pattern' => $pattern]); }
+    { return self::getRule($elems, 'match', ['pattern' => $pattern]); }
 
     /**
      * Правило валидации алиаса
@@ -65,7 +65,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
      * @return array
      */
     public static function getRuleMatchAlias($elems)
-    { self::getRuleMatch($elems, '/^[a-z0-9-]+$/'); }
+    { return self::getRuleMatch($elems, '/^[a-z0-9-]+$/'); }
 
     /**
      * Правило валидации ИНН
@@ -74,5 +74,5 @@ class ActiveRecord extends \yii\db\ActiveRecord
      * @return array
      */
     public static function getRuleMatchInn($elems)
-    { self::getRuleMatch($elems, '/^[0-9]{12}$/'); }
+    { return self::getRuleMatch($elems, '/^[0-9]{12}$/'); }
 }
