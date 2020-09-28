@@ -70,7 +70,11 @@ class ActiveRecord extends \yii\db\ActiveRecord
      * @return array
      */
     public static function getRuleMatchAlias($elems)
-    { return self::getRuleMatch($elems, '/^[a-z0-9-]+$/', 'Допустимы только символы: "a"-"z", "0"-"9" и "-".'); }
+    { return self::getRuleMatch(
+        $elems,
+        '/^[a-z0-9-]+$/',
+        'Допустимы только символы: "a"-"z", "0"-"9" и "-".'
+    ); }
 
     /**
      * Правило валидации ИНН
@@ -79,5 +83,8 @@ class ActiveRecord extends \yii\db\ActiveRecord
      * @return array
      */
     public static function getRuleMatchInn($elems)
-    { return self::getRuleMatch($elems, '/^[0-9]{12}$/'); }
+    { return self::getRuleMatch(
+        $elems,
+        '/^[0-9]{12}$/'
+    ); }
 }
