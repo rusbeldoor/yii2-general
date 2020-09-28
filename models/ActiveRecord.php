@@ -53,10 +53,15 @@ class ActiveRecord extends \yii\db\ActiveRecord
      *
      * @param $elems string|array
      * @param $pattern string
+     * @param $message string
      * @return array
      */
-    public static function getRuleMatch($elems, $pattern)
-    { return self::getRule($elems, 'match', ['pattern' => $pattern]); }
+    public static function getRuleMatch($elems, $pattern, $message = null)
+    {
+        $options = ['pattern' => $pattern];
+        if ($message) { $options['message'] = $message; }
+        return self::getRule($elems, 'match', $options);
+    }
 
     /**
      * Правило валидации алиаса
@@ -65,7 +70,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
      * @return array
      */
     public static function getRuleMatchAlias($elems)
-    { return self::getRuleMatch($elems, '/^[a-z0-9-]+$/'); }
+    { return self::getRuleMatch($elems, '/^[a-z0-9-]+$/', 'Допустимы только символы: "a"-"z", "0"-"9" и "-".'); }
 
     /**
      * Правило валидации ИНН
