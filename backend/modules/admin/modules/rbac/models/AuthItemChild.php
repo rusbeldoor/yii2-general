@@ -26,7 +26,8 @@ class AuthItemChild extends \rusbeldoor\yii2General\models\ActiveRecord
     {
         return [
             [['parent', 'child'], 'required'],
-            [['parent', 'child'], 'string', 'max' => 96],
+            self::getRuleString(['parent', 'child'], ['max' => 96]),
+            self::getRuleMatchAlias(['parent', 'child']),
             [['parent', 'child'], 'unique', 'targetAttribute' => ['parent', 'child']],
             [['parent'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::className(), 'targetAttribute' => ['parent' => 'name']],
             [['child'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::className(), 'targetAttribute' => ['child' => 'name']],

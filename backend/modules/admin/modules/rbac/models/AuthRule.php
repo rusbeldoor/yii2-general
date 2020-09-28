@@ -27,7 +27,8 @@ class AuthRule extends \rusbeldoor\yii2General\models\ActiveRecord
         return [
             [['name'], 'required'],
             [['data'], 'string'],
-            [['name'], 'string', 'max' => 96],
+            self::getRuleString(['name'], ['max' => 96]),
+            self::getRuleMatchAlias(['name']),
             [['name'], 'unique'],
         ];
     }
