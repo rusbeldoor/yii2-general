@@ -68,10 +68,16 @@ class RoleController extends \backend\components\Controller
         $model = new AuthItem();
         $model->type = 1;
 
+        $post = Yii::$app->request->post();
         if (
-            $model->load(Yii::$app->request->post())
+            $model->load($post)
             && $model->save()
-        ) { return $this->redirect(['view', 'id' => $model->id]); }
+        ) {
+            $model->deleteAllChilds();
+            $model->addChilds($post['child-roles-names']);
+            $model->addChilds($post['child-permissions-names']);
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
 
         $rolesNotOfThisRole = $permissionsNotOfThisRole = [];
         $elems = $model->find()->all();
@@ -105,10 +111,16 @@ class RoleController extends \backend\components\Controller
 
         $model = $this->findModel($id);
 
+        $post = Yii::$app->request->post();
         if (
-            $model->load(Yii::$app->request->post())
+            $model->load($post)
             && $model->save()
-        ) { return $this->redirect(['view', 'id' => $model->id]); }
+        ) {
+            $model->deleteAllChilds();
+            $model->addChilds($post['child-roles-names']);
+            $model->addChilds($post['child-permissions-names']);
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
 
         $rolesNotOfThisRole = $rolesOfThisRole = $permissionsNotOfThisRole = $permissionsOfThisRole = [];
         $elems = $model->find()->ofRole($model->name)->all();

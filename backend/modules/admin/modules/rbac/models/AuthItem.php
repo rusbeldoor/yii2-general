@@ -74,6 +74,34 @@ class AuthItem extends \rusbeldoor\yii2General\models\ActiveRecord
     }
 
     /**
+     * Удаление всех потомков
+     *
+     * @return void
+     */
+    public function deleteAllChilds()
+    { AuthItemChild::find()->parent($this->name)->delete()->all(); }
+
+    /**
+     * Удаление всех потомков
+     *
+     * @param $names string|array
+     * @return void
+     */
+    public function addChilds($names)
+    {
+        if (!is_array($names)) { $names = [$names]; }
+        foreach ($names as $elems) {
+            $elems = explode(',', $elems);
+            foreach ($elems as $name) {
+                $autItemChild = new AuthItemChild;
+                $autItemChild->parent = $this->name;
+                $autItemChild->child = $name;
+                $autItemChild->save();
+            }
+        }
+    }
+
+    /**
      * Это операция
      *
      * @return bool

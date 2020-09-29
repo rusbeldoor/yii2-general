@@ -10,11 +10,9 @@ namespace rusbeldoor\yii2General\backend\modules\admin\modules\rbac\models;
 class AuthItemChildQuery extends \rusbeldoor\yii2General\models\ActiveQuery
 {
     /**
-     * ...
+     * Родительский элемент
      *
      * return AuthItemChildQuery     */
-    /*
-    public function active()
-    { return $this->andWhere("active=1"); }
-    */
+    public function parent($name)
+    { return $this->andWhere("parent=:parent", [':parent' => $name]); }
 }
