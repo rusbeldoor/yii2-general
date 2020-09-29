@@ -13,56 +13,52 @@ use kartik\sortinput\SortableInput;
 
 <div class="auth-item-form">
     <? $form = AddEditForm::begin() ?>
-        <?= $form->field($model, 'name')->textInput(['maxlength' => 96]) ?>
-        <?= $form->field($model, 'description')->textInput(['maxlength' => 192]) ?>
-        <div class="form-group row">
-            <label class="col-form-label col-md-2">Роли</label>
-            <div class="col-md-5">
-                <?= SortableInput::widget([
-                    'name' => 'roles-ids',
-                    'items' => $rolesNotOfThisRole,
-                    'hideInput' => false,
-                    'sortableOptions' => ['connected' => true],
-                    'options' => ['class' => 'form-control', 'readonly' => true]
-                ]) ?>
-            </div>
-            <div class="col-md-5">
-                <?= SortableInput::widget([
-                    'name' => 'child-roles-ids-',
-                    'items' => $rolesOfThisRole,
-                    'hideInput' => false,
-                    'sortableOptions' => [
-                        'itemOptions' => ['class' => 'alert alert-warning'],
-                        'connected' => true,
-                    ],
-                    'options' => ['class' => 'form-control', 'readonly' => true]
-                ]) ?>
-            </div>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => 96]) ?>
+    <?= $form->field($model, 'description')->textInput(['maxlength' => 192]) ?>
+    <div class="form-group row">
+        <label class="col-form-label col-md-2">Роли</label>
+        <div class="col-md-5">
+            <?= SortableInput::widget([
+                'name' => 'roles-ids',
+                'items' => $rolesNotOfThisRole,
+                'sortableOptions' => ['connected' => 'roles'],
+                'options' => ['class' => 'form-control', 'readonly' => true]
+            ]) ?>
         </div>
-        <div class="form-group row">
-            <label class="col-form-label col-md-2">Операции</label>
-            <div class="col-md-5">
-                <?= SortableInput::widget([
-                    'name' => 'permissions-ids',
-                    'items' => $permissionsNotOfThisRole,
-                    'hideInput' => false,
-                    'sortableOptions' => ['connected' => true],
-                    'options' => ['class' => 'form-control', 'readonly' => true]
-                ]) ?>
-            </div>
-            <div class="col-md-5">
-                <?= SortableInput::widget([
-                    'name' => 'child-permissions-ids',
-                    'items' => $permissionsOfThisRole,
-                    'hideInput' => false,
-                    'sortableOptions' => [
-                        'itemOptions' => ['class' => 'alert alert-warning'],
-                        'connected' => true,
-                    ],
-                    'options' => ['class' => 'form-control', 'readonly' => true]
-                ]) ?>
-            </div>
+        <div class="col-md-5">
+            <?= SortableInput::widget([
+                'name' => 'child-roles-ids-',
+                'items' => $rolesOfThisRole,
+                'sortableOptions' => [
+                    'itemOptions' => ['class' => 'alert alert-warning'],
+                    'connected' => 'roles',
+                ],
+                'options' => ['class' => 'form-control', 'readonly' => true]
+            ]) ?>
         </div>
-        <?= $form->buttons($model) ?>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label col-md-2">Операции</label>
+        <div class="col-md-5">
+            <?= SortableInput::widget([
+                'name' => 'permissions-ids',
+                'items' => $permissionsNotOfThisRole,
+                'sortableOptions' => ['connected' => 'permissions'],
+                'options' => ['class' => 'form-control', 'readonly' => true]
+            ]) ?>
+        </div>
+        <div class="col-md-5">
+            <?= SortableInput::widget([
+                'name' => 'child-permissions-ids',
+                'items' => $permissionsOfThisRole,
+                'sortableOptions' => [
+                    'itemOptions' => ['class' => 'alert alert-warning'],
+                    'connected' => 'permissions',
+                ],
+                'options' => ['class' => 'form-control', 'readonly' => true]
+            ]) ?>
+        </div>
+    </div>
+    <?= $form->buttons($model) ?>
     <? AddEditForm::end() ?>
 </div>
