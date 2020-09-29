@@ -12,7 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-index">
     <?= BaseUI::buttonsForIndexPage(['filter', 'add', 'delete']) ?>
-    <?//= BaseUI::buttonsForIndexPage(['filter', 'add']) ?>
 
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 

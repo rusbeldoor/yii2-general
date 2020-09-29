@@ -41,8 +41,8 @@ class AuthItemChild extends \rusbeldoor\yii2General\models\ActiveRecord
     {
         return [
             'id' => 'Ид',
-            'parent' => 'Parent',
-            'child' => 'Child',
+            'parent' => 'Родительская роль',
+            'child' => 'Дочерняя роль/операция',
         ];
     }
 

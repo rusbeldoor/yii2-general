@@ -40,7 +40,7 @@ class AuthRule extends \rusbeldoor\yii2General\models\ActiveRecord
     {
         return [
             'id' => 'Ид',
-            'name' => 'Название',
+            'name' => 'Алиас',
             'data' => 'Data',
         ];
     }

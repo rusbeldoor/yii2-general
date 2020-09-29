@@ -45,7 +45,7 @@ class AuthItem extends \rusbeldoor\yii2General\models\ActiveRecord
     {
         return [
             'id' => 'Ид',
-            'name' => 'Название',
+            'name' => 'Алиас',
             'type' => 'Тип',
             'description' => 'Описание',
             'rule_name' => 'Rule Name',
