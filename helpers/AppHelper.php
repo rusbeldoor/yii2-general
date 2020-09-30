@@ -92,7 +92,7 @@ class AppHelper
      */
     public static function redirectWitchFlash($url, $flasType, $flasahText)
     {
-        self::setFlashs($flasType, $flasahText);
+        self::setFlashs([$flasType => $flasahText]);
         Yii::$app->controller->redirect($url);
     }
 
