@@ -9,20 +9,25 @@ use rusbeldoor\yii2General\helpers\BaseUI;
 
 $this->title = 'Роли';
 $this->params['breadcrumbs'][] = $this->title;
+
+$buttonsForIndexPage = ['filter', 'add'];
+$gridViewColumns = [];
+if (!Yii::$app->controller->module->onlyMigrations) {
+    $buttonsForIndexPage[] = ['delete'];
+    $gridViewColumns[] = ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'];
+}
+$gridViewColumns[] = 'name';
+$gridViewColumns[] = 'description';
+$gridViewColumns[] = ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'];
 ?>
 <div class="auth-item-index">
-    <?= BaseUI::buttonsForIndexPage(['filter', 'add', 'delete']) ?>
+    <?= BaseUI::buttonsForIndexPage($buttonsForIndexPage) ?>
 
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'tableOptions' => ['class' => 'table table-striped table-hover'],
-        'columns' => [
-            ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'],
-            'name',
-            'description',
-            ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
-        ],
+        'columns' => $gridViewColumns,
     ]); ?>
 </div>

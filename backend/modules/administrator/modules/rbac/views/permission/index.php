@@ -10,21 +10,15 @@ use rusbeldoor\yii2General\helpers\BaseUI;
 $this->title = 'Операции';
 $this->params['breadcrumbs'][] = $this->title;
 
-$buttonsForIndexPage = ['filter', 'add', 'delete'];
-$gridViewColumns = [
-    ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'],
-    'name',
-    'description',
-    ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
-];
-if (Yii::$app->controller->module->onlyMigrations) {
-    $buttonsForIndexPage = ['filter', 'add'];
-    $gridViewColumns = [
-        'name',
-        'description',
-        ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
-    ];
+$buttonsForIndexPage = ['filter', 'add'];
+$gridViewColumns = [];
+if (!Yii::$app->controller->module->onlyMigrations) {
+    $buttonsForIndexPage[] = ['delete'];
+    $gridViewColumns[] = ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'];
 }
+$gridViewColumns[] = 'name';
+$gridViewColumns[] = 'description';
+$gridViewColumns[] = ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'];
 ?>
 <div class="auth-item-index">
     <?= BaseUI::buttonsForIndexPage($buttonsForIndexPage) ?>

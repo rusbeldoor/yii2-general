@@ -64,6 +64,14 @@ class PermissionController extends \backend\components\Controller
      */
     public function actionCreate()
     {
+        if (Yii::$app->controller->module->onlyMigrations) {
+            AppHelper::redirectWitchFlash(
+                '/administrator/rbac/permission',
+                'error',
+                'Создание операций доступно только через миграции.'
+            );
+        }
+
         $model = new AuthItem();
         $model->type = 2;
 
