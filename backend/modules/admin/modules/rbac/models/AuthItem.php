@@ -79,7 +79,10 @@ class AuthItem extends \rusbeldoor\yii2General\models\ActiveRecord
      * @return void
      */
     public function deleteAllChildren()
-    { AuthItemChild::find()->parent($this->name)->deleteAll(); }
+    {
+        $query = AuthItemChild::find()->parent($this->name);
+        AuthItemChild::deleteAll($query->where, $query->params);
+    }
 
     /**
      * Добавление потомков
