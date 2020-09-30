@@ -70,6 +70,7 @@ class PermissionController extends \backend\components\Controller
                 'error',
                 'Создание операций доступно только через миграции.'
             );
+            exit;
         }
 
         $model = new AuthItem();
