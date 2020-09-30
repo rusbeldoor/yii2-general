@@ -74,7 +74,7 @@ class WebController extends \yii\web\Controller
             $flashs[((count($deletedIds)) ? 'warning' : 'error')] = 'Не удалось удалить' . ((count($deletedIds)) ? ' некоторые' : '') . ' элементы:<ul>' . $notDeletedErrors . '</ul>';
         }
 
-        AppHelper::setFlashs($flashs);
+        AppHelper::setFlashes($flashs);
 
         return $this->redirect(['index']);
     }

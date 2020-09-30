@@ -92,7 +92,7 @@ class AppHelper
      */
     public static function redirectWitchFlash($url, $flasType, $flasahText)
     {
-        self::setFlashs([$flasType => $flasahText]);
+        self::setFlashes([$flasType => $flasahText]);
         Yii::$app->controller->redirect($url);
     }
 
@@ -105,7 +105,8 @@ class AppHelper
      *
      * @param $itemName string
      */
-    public static function forbiddenExceptionIfNotHavePermission($itemName) {
+    public static function forbiddenExceptionIfNotHavePermission($itemName)
+    {
         if (!Yii::$app->user->can($itemName)) {
             throw new ForbiddenHttpException('Доступ запрещён.');
         }
@@ -119,8 +120,10 @@ class AppHelper
      * Установка сообщений
      *
      * @param $flashs array
+     * @return void
      */
-    public static function setFlashs($flashs) {
+    public static function setFlashes($flashs)
+    {
         foreach($flashs as $key => $text) {
             Yii::$app->session->setFlash($key, $text);
         }
