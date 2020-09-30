@@ -42,7 +42,7 @@ class AuthItemQuery extends \rusbeldoor\yii2General\models\ActiveQuery
      */
     public function ofRole($name)
     {
-        $this->leftJoin('auth_item_child', 'auth_item_child.parent=:parent', [':parent' => $name]);
+        $this->leftJoin('auth_item_child', "auth_item_child.parent=:parent", [':parent' => $name]);
         $this->andWhere("auth_item_child.id IS NOT NULL");
         return $this;
     }
@@ -55,7 +55,7 @@ class AuthItemQuery extends \rusbeldoor\yii2General\models\ActiveQuery
      */
     public function notOfRole($name)
     {
-        $this->leftJoin('auth_item_child', 'auth_item_child.parent=:parent', [':parent' => $name]);
+        $this->leftJoin('auth_item_child', "auth_item_child.parent=:parent", [':parent' => $name]);
         $this->andWhere("auth_item_child.id IS NULL");
         return $this;
     }
