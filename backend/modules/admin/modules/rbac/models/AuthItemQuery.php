@@ -35,28 +35,28 @@ class AuthItemQuery extends \rusbeldoor\yii2General\models\ActiveQuery
     { return $this->type(2); }
 
     /**
-     * Есть родитель по имени
-     *
-     * @param $name string
-     * @return AuthItemQuery
-     */
-    public function notOfRole($name)
-    {
-        $this->join('auth_item_child', 'auth_item_child.parent=:parent', [':parent' => $name]);
-        $this->andWhere("auth_item_child.id IS NOT NULL");
-        return $this;
-    }
-
-    /**
-     * Нет родителя по имени
+     * Есть родителя по имени
      *
      * @param $name string
      * @return AuthItemQuery
      */
     public function ofRole($name)
     {
-        $this->join('auth_item_child', 'auth_item_child.parent=:parent', [':parent' => $name]);
+        $this->leftJoin('auth_item_child', 'auth_item_child.parent=:parent', [':parent' => $name]);
         $this->andWhere("auth_item_child.id IS NULL");
+        return $this;
+    }
+
+    /**
+     * Нет родитель по имени
+     *
+     * @param $name string
+     * @return AuthItemQuery
+     */
+    public function notOfRole($name)
+    {
+        $this->leftJoin('auth_item_child', 'auth_item_child.parent=:parent', [':parent' => $name]);
+        $this->andWhere("auth_item_child.id IS NOT NULL");
         return $this;
     }
 }
