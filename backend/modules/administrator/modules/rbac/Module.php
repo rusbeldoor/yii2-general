@@ -23,8 +23,8 @@ class Module extends \backend\components\Module
     {
         parent::init();
 
-        if (isset(Yii::$app->params['rusbeldoor']['yii2-general']['rbac']['onlyMigrations'])) {
-            $this->onlyMigrations = Yii::$app->params['rusbeldoor']['yii2-general']['rbac']['onlyMigrations'];
+        if (isset(Yii::$app->params['rusbeldoor']['yii2General']['rbac']['onlyMigrations'])) {
+            $this->onlyMigrations = Yii::$app->params['rusbeldoor']['yii2General']['rbac']['onlyMigrations'];
         }
     }
 }
