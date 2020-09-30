@@ -9,7 +9,7 @@ use yii;
  */
 class Module extends \backend\components\Module
 {
-    public $changeOnlyThroughMigrations = true;
+    public $onlyMigrations = true;
 
     /**
      * {@inheritdoc}
@@ -23,8 +23,8 @@ class Module extends \backend\components\Module
     {
         parent::init();
 
-        if (isset(Yii::$app->params['rusbeldoor']['yii2-general']['rbac']['changeOnlyThroughMigrations'])) {
-            $this->changeOnlyThroughMigrations = Yii::$app->params['rusbeldoor']['yii2-general']['rbac']['changeOnlyThroughMigrations'];
+        if (isset(Yii::$app->params['rusbeldoor']['yii2-general']['rbac']['onlyMigrations'])) {
+            $this->onlyMigrations = Yii::$app->params['rusbeldoor']['yii2-general']['rbac']['onlyMigrations'];
         }
     }
 }

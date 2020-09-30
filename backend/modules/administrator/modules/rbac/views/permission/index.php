@@ -17,7 +17,7 @@ $gridViewColumns = [
     'description',
     ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
 ];
-if ($this->controller->module->changeOnlyThroughMigrations) {
+if (Yii::$app->controller->module->onlyMigrations) {
     $buttonsForIndexPage = ['filter', 'add'];
     $gridViewColumns = [
         'name',
