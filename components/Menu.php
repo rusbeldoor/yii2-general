@@ -40,7 +40,7 @@ class Menu
             }
         }
 
-        if (in_array('admin', $parentModulesIds)) {
+        if (in_array('administrator', $parentModulesIds)) {
             $menu[] = [
                 'label' => 'Пользователи',
                 'items' => [
