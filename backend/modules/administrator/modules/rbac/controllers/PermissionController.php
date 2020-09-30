@@ -68,7 +68,7 @@ class PermissionController extends \backend\components\Controller
             return AppHelper::redirectWitchFlash(
                 '/administrator/rbac/permission',
                 'error',
-                'Создание операций доступно только через миграции.'
+                'Создание операций разрешено только через миграции.'
             );
         }
 
@@ -92,8 +92,6 @@ class PermissionController extends \backend\components\Controller
      */
     public function actionUpdate($id)
     {
-        //$this->redirect('/admin');
-
         $model = $this->findModel($id);
 
         if (
@@ -102,6 +100,25 @@ class PermissionController extends \backend\components\Controller
         ) { return $this->redirect(['view', 'id' => $model->id]); }
 
         return $this->render('update', ['model' => $model]);
+    }
+
+    /**
+     * Удаление
+     *
+     * @param $id int|null
+     * @return yii\web\Response
+     */
+    public function actionDelete($id = null)
+    {
+        if (Yii::$app->controller->module->onlyMigrations) {
+            return AppHelper::redirectWitchFlash(
+                '/administrator/rbac/permission',
+                'error',
+                'Удаление операций разрешено только через миграции.'
+            );
+        }
+
+        parent::actionDelete($id);
     }
 
     /**

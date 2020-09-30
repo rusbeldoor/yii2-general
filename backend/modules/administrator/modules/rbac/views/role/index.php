@@ -10,10 +10,11 @@ use rusbeldoor\yii2General\helpers\BaseUI;
 $this->title = 'Роли';
 $this->params['breadcrumbs'][] = $this->title;
 
-$buttonsForIndexPage = ['filter', 'add'];
+$buttonsForIndexPage = ['filter'];
 $gridViewColumns = [];
 if (!Yii::$app->controller->module->onlyMigrations) {
-    $buttonsForIndexPage[] = ['delete'];
+    $buttonsForIndexPage[] = 'delete';
+    $buttonsForIndexPage[] = 'add';
     $gridViewColumns[] = ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'];
 }
 $gridViewColumns[] = 'name';

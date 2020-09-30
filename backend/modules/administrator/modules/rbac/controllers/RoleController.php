@@ -3,6 +3,7 @@
 namespace rusbeldoor\yii2General\backend\modules\administrator\modules\rbac\controllers;
 
 use QuickService\general\common\models\QTOrganisation;
+use rusbeldoor\yii2General\helpers\AppHelper;
 use yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,6 +66,14 @@ class RoleController extends \backend\components\Controller
      */
     public function actionCreate()
     {
+        if (Yii::$app->controller->module->onlyMigrations) {
+            return AppHelper::redirectWitchFlash(
+                '/administrator/rbac/permission',
+                'error',
+                'Создание ролей разрешено только через миграции.'
+            );
+        }
+
         $model = new AuthItem();
         $model->type = 1;
 
@@ -144,6 +153,25 @@ class RoleController extends \backend\components\Controller
                 'permissionsOfThisRole' => $permissionsOfThisRole,
             ]
         );
+    }
+
+    /**
+     * Удаление
+     *
+     * @param $id int|null
+     * @return yii\web\Response
+     */
+    public function actionDelete($id = null)
+    {
+        if (Yii::$app->controller->module->onlyMigrations) {
+            return AppHelper::redirectWitchFlash(
+                '/administrator/rbac/permission',
+                'error',
+                'Удаление ролей разрешено только через миграции.'
+            );
+        }
+
+        parent::actionDelete($id);
     }
 
     /**
