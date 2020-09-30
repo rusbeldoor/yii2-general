@@ -87,13 +87,15 @@ class AppHelper
     /**
      * ...
      *
-     * @param array $params
-     * @return void
+     * @param $url string
+     * @param $flasType string
+     * @param $flasahText string
+     * @return object
      */
     public static function redirectWitchFlash($url, $flasType, $flasahText)
     {
         self::setFlashes([$flasType => $flasahText]);
-        Yii::$app->controller->redirect($url);
+        return Yii::$app->controller->redirect($url);
     }
 
     /*************************************
