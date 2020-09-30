@@ -73,9 +73,9 @@ class RoleController extends \backend\components\Controller
             $model->load($post)
             && $model->save()
         ) {
-            $model->deleteAllChilds();
-            $model->addChilds($post['child-roles-names']);
-            $model->addChilds($post['child-permissions-names']);
+            $model->deleteAllChildren();
+            $model->addChildren($post['child-roles-names']);
+            $model->addChildren($post['child-permissions-names']);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -116,9 +116,9 @@ class RoleController extends \backend\components\Controller
             $model->load($post)
             && $model->save()
         ) {
-            $model->deleteAllChilds();
-            $model->addChilds($post['child-roles-names']);
-            $model->addChilds($post['child-permissions-names']);
+            $model->deleteAllChildren();
+            $model->addChildren($post['child-roles-names']);
+            $model->addChildren($post['child-permissions-names']);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
