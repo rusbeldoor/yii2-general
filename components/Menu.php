@@ -44,10 +44,10 @@ class Menu
             $menu[] = [
                 'label' => 'Пользователи',
                 'items' => [
-                    ['label' => 'Управление', 'url' => ['/admin/user']],
+                    ['label' => 'Управление', 'url' => ['/administrator/user']],
                     '-',
-                    ['label' => 'Операции', 'url' => ['/admin/rbac/permission']],
-                    ['label' => 'Роли', 'url' => ['/admin/rbac/role']],
+                    ['label' => 'Операции', 'url' => ['/administrator/rbac/permission']],
+                    ['label' => 'Роли', 'url' => ['/administrator/rbac/role']],
                 ],
             ];
         }
