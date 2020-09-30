@@ -2,6 +2,8 @@
 
 namespace rusbeldoor\yii2General\backend\modules\administrator\modules\rbac;
 
+use yii;
+
 /**
  * rbac module definition class
  */
