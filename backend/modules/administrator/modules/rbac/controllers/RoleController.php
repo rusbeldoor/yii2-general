@@ -68,7 +68,7 @@ class RoleController extends \backend\components\Controller
     {
         if (Yii::$app->controller->module->onlyMigrations) {
             return AppHelper::redirectWitchFlash(
-                '/administrator/rbac/permission',
+                '/administrator/rbac/role',
                 'error',
                 'Создание ролей разрешено только через миграции.'
             );
@@ -165,7 +165,7 @@ class RoleController extends \backend\components\Controller
     {
         if (Yii::$app->controller->module->onlyMigrations) {
             return AppHelper::redirectWitchFlash(
-                '/administrator/rbac/permission',
+                '/administrator/rbac/role',
                 'error',
                 'Удаление ролей разрешено только через миграции.'
             );
