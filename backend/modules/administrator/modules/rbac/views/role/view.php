@@ -7,7 +7,7 @@ use rusbeldoor\yii2General\helpers\BaseUI;
 /* @var $model backend\modules\administrator\modules\rbac\models\AuthItem */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Роли', 'url' => ['/admin/rbac/role']];
+$this->params['breadcrumbs'][] = ['label' => 'Роли', 'url' => ['/administrator/rbac/role']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
