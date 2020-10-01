@@ -19,7 +19,14 @@ if (!Yii::$app->controller->module->onlyMigrations) {
 }
 $gridViewColumns[] = 'name';
 $gridViewColumns[] = 'description';
-$gridViewColumns[] = ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'];
+if (!Yii::$app->controller->module->onlyMigrations) {
+    $gridViewColumns[] = ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'];
+} else {
+    $gridViewColumns[] = [
+        'class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn',
+        'template' => '{view}',
+    ];
+}
 ?>
 <div class="auth-item-index">
     <?= BaseUI::buttonsForIndexPage($buttonsForIndexPage) ?>
