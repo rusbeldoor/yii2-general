@@ -92,6 +92,14 @@ class PermissionController extends \backend\components\Controller
      */
     public function actionUpdate($id)
     {
+        if (Yii::$app->controller->module->onlyMigrations) {
+            return AppHelper::redirectWitchFlash(
+                '/administrator/rbac/permission',
+                'error',
+                'Изменение операций разрешено только через миграции.'
+            );
+        }
+
         $model = $this->findModel($id);
 
         if (

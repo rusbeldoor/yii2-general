@@ -116,7 +116,13 @@ class RoleController extends \backend\components\Controller
      */
     public function actionUpdate($id)
     {
-        //$this->redirect('/admin');
+        if (Yii::$app->controller->module->onlyMigrations) {
+            return AppHelper::redirectWitchFlash(
+                '/administrator/rbac/permission',
+                'error',
+                'Изменение ролей разрешено только через миграции.'
+            );
+        }
 
         $model = $this->findModel($id);
 
