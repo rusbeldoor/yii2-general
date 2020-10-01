@@ -13,8 +13,8 @@ $this->params['breadcrumbs'][] = $this->title;
 $buttonsForIndexPage = ['filter'];
 $gridViewColumns = [];
 if (!Yii::$app->controller->module->onlyMigrations) {
-    $buttonsForIndexPage[] = 'delete';
     $buttonsForIndexPage[] = 'add';
+    $buttonsForIndexPage[] = 'delete';
     $gridViewColumns[] = ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'];
 }
 $gridViewColumns[] = 'name';
