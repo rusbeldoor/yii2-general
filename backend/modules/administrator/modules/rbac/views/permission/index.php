@@ -22,7 +22,7 @@ $gridViewColumns[] = 'description';
 if (!Yii::$app->controller->module->onlyMigrations) {
     $gridViewColumns[] = [
         'class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn',
-        'buttons' => ['view', 'edit', 'delete'],
+        'buttons' => ['view', 'update', 'delete'],
     ];
 } else {
     $gridViewColumns[] = [
