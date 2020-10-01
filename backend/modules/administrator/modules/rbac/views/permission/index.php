@@ -20,14 +20,11 @@ if (!Yii::$app->controller->module->onlyMigrations) {
 $gridViewColumns[] = 'name';
 $gridViewColumns[] = 'description';
 if (!Yii::$app->controller->module->onlyMigrations) {
-    $gridViewColumns[] = [
-        'class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn',
-        'buttons' => ['view', 'update', 'delete'],
-    ];
+    $gridViewColumns[] = ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'];
 } else {
     $gridViewColumns[] = [
         'class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn',
-        'buttons' => ['view'],
+        'template' => '{view}',
     ];
 }
 ?>
