@@ -10,9 +10,15 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Операции', 'url' => ['/administrator/rbac/permission']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+
+$buttonsForViewPage = [];
+if (!Yii::$app->controller->module->onlyMigrations) {
+    $buttonsForViewPage[] = 'add';
+    $buttonsForViewPage[] = 'delete';
+}
 ?>
 <div class="auth-item-view">
-    <?= BaseUI::buttonsForViewPage($model, ['add', 'delete']) ?>
+    <?= BaseUI::buttonsForViewPage($model, $buttonsForViewPage) ?>
 
     <?= DetailView::widget([
         'model' => $model,
