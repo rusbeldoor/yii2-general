@@ -21,7 +21,7 @@ if (Yii::$app->controller->module->onlyMigrations) {
     unset($buttonsForIndexPage[array_search('add', $buttonsForIndexPage)]);
     unset($buttonsForIndexPage[array_search('delete', $buttonsForIndexPage)]);
     unset($gridViewColumns[0]);
-    $gridViewColumns[count($gridViewColumns) - 1]['template'] = ['template' => '{view}'];
+    $gridViewColumns[count($gridViewColumns) - 1]['template'] = '{view}';
 }
 ?>
 <div class="auth-item-index">
