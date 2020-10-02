@@ -12,7 +12,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
      */
     public function safeUp()
     {
-        $this->dropTable('auth_rule');
+        if (Yii::$app->db->schema->getTableSchema('auth_rule', true)) { $this->dropTable('auth_rule'); }
         $this->createTable('auth_rule', [
             'id' => $this->primaryKey(11)->unsigned(),
             'name' => $this->string(96)->notNull(),
@@ -20,7 +20,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
         ]);
         $this->createIndex('unique-name', 'auth_rule', 'name', true);
 
-        $this->dropTable('auth_item');
+        if (Yii::$app->db->schema->getTableSchema('auth_item', true)) { $this->dropTable('auth_item'); }
         $this->createTable('auth_item', [
             'id' => $this->primaryKey(11)->unsigned(),
             'name' => $this->string(96)->notNull(),
@@ -32,7 +32,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
         $this->createIndex('unique-name', 'auth_item', 'name', true);
         $this->addForeignKey('fk-auth_item-auth_rule', 'auth_item', 'rule_name', 'auth_rule', 'name');
 
-        $this->dropTable('auth_item_child');
+        if (Yii::$app->db->schema->getTableSchema('auth_item_child', true)) { $this->dropTable('auth_item_child'); }
         $this->createTable('auth_item_child', [
             'id' => $this->primaryKey(11)->unsigned(),
             'parent' => $this->string(96)->notNull(),
@@ -41,7 +41,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
         $this->createIndex('unique-parent-child', 'auth_item_child', ['parent', 'child'], true);
         $this->createIndex('index-child', 'auth_item_child', 'child');
 
-        $this->dropTable('auth_assignment');
+        if (Yii::$app->db->schema->getTableSchema('auth_assignment', true)) { $this->dropTable('auth_assignment'); }
         $this->createTable('auth_assignment', [
             'id' => $this->primaryKey(11)->unsigned(),
             'item_name' => $this->string(96)->notNull(),
