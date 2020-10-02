@@ -11,10 +11,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Операции', 'url' => ['/adm
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
-$buttonsForViewPage = [];
-if (!Yii::$app->controller->module->onlyMigrations) {
-    $buttonsForViewPage[] = 'add';
-    $buttonsForViewPage[] = 'delete';
+$buttonsForViewPage = ['add', 'delete'];
+if (Yii::$app->controller->module->onlyMigrations) {
+    unset($buttonsForViewPage[array_search('add', $buttonsForViewPage)]);
+    unset($buttonsForViewPage[array_search('delete', $buttonsForViewPage)]);
 }
 ?>
 <div class="auth-item-view">
