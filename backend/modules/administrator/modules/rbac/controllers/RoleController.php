@@ -56,7 +56,23 @@ class RoleController extends \backend\components\Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', ['model' => $this->findModel($id)]);
+        $model = $this->findModel($id);
+
+        $rolesOfThisRole = $permissionsOfThisRole = [];
+        $elems = $model->find()->ofRole($model->name)->all();
+        foreach ($elems as $elem) {
+            if ($elem->isRole()) { $rolesOfThisRole[$elem->name] = ['content' => $elem->name]; }
+            elseif ($elem->isPermission()) { $permissionsOfThisRole[$elem->name] = ['content' => $elem->name]; }
+        }
+
+        return $this->render(
+            'view',
+            [
+                'model' => $model,
+                'rolesOfThisRole' => $rolesOfThisRole,
+                'permissionsOfThisRole' => $permissionsOfThisRole,
+            ]
+        );
     }
 
     /**
