@@ -10,22 +10,20 @@ use rusbeldoor\yii2General\helpers\BaseUI;
 $this->title = 'Операции';
 $this->params['breadcrumbs'][] = $this->title;
 
-$buttonsForIndexPage = ['filter'];
-$gridViewColumns = [];
-if (!Yii::$app->controller->module->onlyMigrations) {
-    $buttonsForIndexPage[] = 'add';
-    $buttonsForIndexPage[] = 'delete';
-    $gridViewColumns[] = ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'];
-}
-$gridViewColumns[] = 'name';
-$gridViewColumns[] = 'description';
-if (!Yii::$app->controller->module->onlyMigrations) {
-    $gridViewColumns[] = ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'];
-} else {
-    $gridViewColumns[] = [
-        'class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn',
-        'template' => '{view}',
-    ];
+$buttonsForIndexPage = ['filter', 'add', 'delete'];
+$gridViewColumns = [
+    ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'],
+    'name',
+    'description',
+    ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
+];
+if (Yii::$app->controller->module->onlyMigrations) {
+    unset($buttonsForIndexPage[array_search('add', $buttonsForIndexPage)]);
+    unset($buttonsForIndexPage[array_search('delete', $buttonsForIndexPage)]);
+    unset($gridViewColumns[0]);
+    $actionColumn = array_pop($gridViewColumns);
+    $actionColumn['template'] = '{view}';
+    $gridViewColumns[] = $actionColumn;
 }
 ?>
 <div class="auth-item-index">
