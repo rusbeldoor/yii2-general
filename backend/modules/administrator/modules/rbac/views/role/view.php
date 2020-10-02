@@ -31,11 +31,9 @@ if (Yii::$app->controller->module->onlyMigrations) {
             'roles' => [
                 'value' => function ($rolesOfThisRole) {
                     return SortableInput::widget([
-                        'name' => 'child-roles-names',
                         'items' => $rolesOfThisRole,
                         'sortableOptions' => [
                             'itemOptions' => ['class' => 'alert alert-warning'],
-                            'connected' => 'roles',
                         ],
                         'options' => ['class' => 'form-control', 'readonly' => true]
                     ]);
@@ -44,11 +42,9 @@ if (Yii::$app->controller->module->onlyMigrations) {
             'permissions' => [
                 'value' => function ($permissionsOfThisRole) {
                     return SortableInput::widget([
-                        'name' => 'child-permissions-names',
                         'items' => $permissionsOfThisRole,
                         'sortableOptions' => [
                             'itemOptions' => ['class' => 'alert alert-warning'],
-                            'connected' => 'permissions',
                         ],
                         'options' => ['class' => 'form-control', 'readonly' => true]
                     ]);
