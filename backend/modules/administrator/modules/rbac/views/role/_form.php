@@ -21,7 +21,10 @@ use kartik\sortinput\SortableInput;
             <?= SortableInput::widget([
                 'name' => 'roles-names',
                 'items' => $rolesNotOfThisRole,
-                'sortableOptions' => ['connected' => 'roles'],
+                'sortableOptions' => [
+                    'itemOptions' => ['class' => 'alert alert-secondary'],
+                    'connected' => 'roles',
+                ],
                 'options' => ['class' => 'form-control', 'readonly' => true]
             ]) ?>
         </div>
@@ -30,7 +33,7 @@ use kartik\sortinput\SortableInput;
                 'name' => 'child-roles-names',
                 'items' => $rolesOfThisRole,
                 'sortableOptions' => [
-                    'itemOptions' => ['class' => 'alert alert-warning'],
+                    'itemOptions' => ['class' => 'alert alert-success'],
                     'connected' => 'roles',
                 ],
                 'options' => ['class' => 'form-control', 'readonly' => true]
@@ -43,7 +46,10 @@ use kartik\sortinput\SortableInput;
             <?= SortableInput::widget([
                 'name' => 'permissions-names',
                 'items' => $permissionsNotOfThisRole,
-                'sortableOptions' => ['connected' => 'permissions'],
+                'sortableOptions' => [
+                    'itemOptions' => ['class' => 'alert alert-secondary'],
+                    'connected' => 'permissions',
+                ],
                 'options' => ['class' => 'form-control', 'readonly' => true]
             ]) ?>
         </div>
@@ -52,7 +58,7 @@ use kartik\sortinput\SortableInput;
                 'name' => 'child-permissions-names',
                 'items' => $permissionsOfThisRole,
                 'sortableOptions' => [
-                    'itemOptions' => ['class' => 'alert alert-warning'],
+                    'itemOptions' => ['class' => 'alert alert-success'],
                     'connected' => 'permissions',
                 ],
                 'options' => ['class' => 'form-control', 'readonly' => true]

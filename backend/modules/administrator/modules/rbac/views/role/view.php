@@ -1,8 +1,8 @@
 <?php
 
-use kartik\sortinput\SortableInput;
 use rusbeldoor\yii2General\widgets\DetailView;
 use rusbeldoor\yii2General\helpers\BaseUI;
+use kartik\sortinput\SortableInput;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\administrator\modules\rbac\models\AuthItem */
@@ -28,54 +28,27 @@ if (Yii::$app->controller->module->onlyMigrations) {
         'attributes' => [
             'name',
             'description',
-            'roles' => [
-                'value' => function ($rolesOfThisRole) {
-                    return SortableInput::widget([
-                        'items' => $rolesOfThisRole,
-                        'sortableOptions' => [
-                            'itemOptions' => ['class' => 'alert alert-warning'],
-                        ],
-                        'options' => ['class' => 'form-control', 'readonly' => true]
-                    ]);
-                }
+            [
+                'label' => 'Роли',
+                'format' => 'html',
+                'value' => SortableInput::widget([
+                    'name' => 'child-roles-names',
+                    'items' => $rolesOfThisRole,
+                    'sortableOptions' => ['itemOptions' => ['class' => 'alert alert-success']],
+                    'options' => ['class' => 'form-control', 'readonly' => true]
+                ]),
             ],
-            'permissions' => [
-                'value' => function ($permissionsOfThisRole) {
-                    return SortableInput::widget([
-                        'items' => $permissionsOfThisRole,
-                        'sortableOptions' => [
-                            'itemOptions' => ['class' => 'alert alert-warning'],
-                        ],
-                        'options' => ['class' => 'form-control', 'readonly' => true]
-                    ]);
-                }
+            [
+                //'attribute' => 'permissions',
+                'label' => 'Операции',
+                'format' => 'html',
+                'value' => SortableInput::widget([
+                    'name' => 'child-permissions-names',
+                    'items' => $permissionsOfThisRole,
+                    'sortableOptions' => ['itemOptions' => ['class' => 'alert alert-success']],
+                    'options' => ['class' => 'form-control', 'readonly' => true]
+                ]),
             ],
         ],
     ]) ?>
-</div>
-
-<div class="form-group row">
-
-</div>
-<div class="form-group row">
-    <label class="col-form-label col-md-2">Операции</label>
-    <div class="col-md-5">
-        <?= SortableInput::widget([
-            'name' => 'permissions-names',
-            'items' => $permissionsNotOfThisRole,
-            'sortableOptions' => ['connected' => 'permissions'],
-            'options' => ['class' => 'form-control', 'readonly' => true]
-        ]) ?>
-    </div>
-    <div class="col-md-5">
-        <?= SortableInput::widget([
-            'name' => 'child-permissions-names',
-            'items' => $permissionsOfThisRole,
-            'sortableOptions' => [
-                'itemOptions' => ['class' => 'alert alert-warning'],
-                'connected' => 'permissions',
-            ],
-            'options' => ['class' => 'form-control', 'readonly' => true]
-        ]) ?>
-    </div>
 </div>
