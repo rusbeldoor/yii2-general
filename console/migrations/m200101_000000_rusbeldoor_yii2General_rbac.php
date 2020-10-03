@@ -49,6 +49,14 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
         ]);
         $this->createIndex('unique-item_name-user_id', 'auth_assignment', ['item_name', 'user_id'], true);
         $this->addForeignKey('fk-auth_assignment-auth_item', 'auth_assignment', 'item_name', 'auth_item', 'name');
+
+        $this->insert('auth_item', ['id' => 1, 'name' => 'administrator', 'type' => 1, 'description' => 'Адинистратора']);
+
+        $this->insert('auth_item', ['id' => 1000, 'name' => 'backend_administrator_rbac_role', 'type' => 1, 'description' => 'Бэкэнд, Администратор, RBAC, Роли']);
+        $this->insert('auth_item', ['id' => 1001, 'name' => 'backend_administrator_rbac_permission', 'type' => 1, 'description' => 'Бэкэнд, Администратор, RBAC, Операции']);
+
+        $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'backend_administrator_rbac_role']);
+        $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'backend_administrator_rbac_permission']);
     }
 
     /**

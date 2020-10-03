@@ -31,6 +31,15 @@ class RoleController extends \backend\components\Controller
     }
 
     /**
+     * Инициализация
+     */
+    public function init()
+    {
+        parent::init();
+        AppHelper::forbiddenExceptionIfNotHavePermission('backend_administrator_rbac_permission');
+    }
+
+    /**
      * Список
      *
      * @return mixed
