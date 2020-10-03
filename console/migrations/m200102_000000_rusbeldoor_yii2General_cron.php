@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Class m200102_000000_rusbeldoor_yii2General_cron
  */
-class m200101_000000_rusbeldoor_yii2General_bacr extends Migration
+class m200102_000000_rusbeldoor_yii2General_cron extends Migration
 {
     /**
      * {@inheritdoc}
