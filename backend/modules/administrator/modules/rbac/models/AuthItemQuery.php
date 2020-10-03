@@ -10,15 +10,6 @@ namespace rusbeldoor\yii2General\backend\modules\administrator\modules\rbac\mode
 class AuthItemQuery extends \rusbeldoor\yii2General\models\ActiveQuery
 {
     /**
-     * Тип
-     *
-     * @param $type int
-     * @return AuthItemQuery
-     */
-    public function type($type)
-    { return $this->andWhere("type=:type", [':type' => $type]); }
-
-    /**
      * Тип роли
      *
      * @return AuthItemQuery

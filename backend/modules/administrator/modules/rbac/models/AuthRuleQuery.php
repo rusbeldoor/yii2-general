@@ -9,12 +9,4 @@ namespace rusbeldoor\yii2General\backend\modules\administrator\modules\rbac\mode
  */
 class AuthRuleQuery extends \rusbeldoor\yii2General\models\ActiveQuery
 {
-    /**
-     * ...
-     *
-     * return AuthRuleQuery     */
-    /*
-    public function active()
-    { return $this->andWhere("active=1"); }
-    */
 }
