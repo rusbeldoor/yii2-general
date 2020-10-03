@@ -20,16 +20,16 @@ class m200102_000000_rusbeldoor_yii2General_cron extends Migration
             'name' => $this->string(96)->notNull(),
             'description' => $this->text()->notNull(),
             'status' => 'ENUM("wait", "process") NOT NULL DEFAULT "wait"',
-            'max_duration' => $this->integer(11)->defaultValue(null),
-            'active' => $this->tinyInteger(1)->notNull()->defaultValue(1),
+            'max_duration' => $this->integer(11)->unsigned()->defaultValue(null),
+            'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
         ]);
         $this->createIndex('unique-alias', 'cron', 'alias', true);
 
         // Таблица логов по кронам
         if (Yii::$app->db->schema->getTableSchema('cron_log', true)) { $this->dropTable('cron_log'); }
-        $this->createTable('cron', [
+        $this->createTable('cron_log', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'cron_id' => $this->cron_log(11)->notNull(),
+            'cron_id' => $this->integer(11)->unsigned()->notNull(),
             'datetime_start' => $this->datetime()->notNull(),
             'datetime_complete' => $this->datetime()->defaultValue(null),
         ]);
