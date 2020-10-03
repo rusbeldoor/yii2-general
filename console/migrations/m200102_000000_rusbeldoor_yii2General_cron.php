@@ -17,7 +17,6 @@ class m200102_000000_rusbeldoor_yii2General_cron extends Migration
         $this->createTable('cron', [
             'id' => $this->primaryKey(11)->unsigned(),
             'alias' => $this->string(96)->notNull(),
-            'name' => $this->string(96)->notNull(),
             'description' => $this->text()->notNull(),
             'status' => 'ENUM("wait", "process") NOT NULL DEFAULT "wait"',
             'max_duration' => $this->integer(11)->unsigned()->defaultValue(null),
