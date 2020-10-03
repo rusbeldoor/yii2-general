@@ -12,6 +12,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
      */
     public function safeUp()
     {
+        // Таблица правил
         if (Yii::$app->db->schema->getTableSchema('auth_rule', true)) { $this->dropTable('auth_rule'); }
         $this->createTable('auth_rule', [
             'id' => $this->primaryKey(11)->unsigned(),
@@ -20,6 +21,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
         ]);
         $this->createIndex('unique-name', 'auth_rule', 'name', true);
 
+        // Таблица ролей, операций
         if (Yii::$app->db->schema->getTableSchema('auth_item', true)) { $this->dropTable('auth_item'); }
         $this->createTable('auth_item', [
             'id' => $this->primaryKey(11)->unsigned(),
@@ -32,6 +34,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
         $this->createIndex('unique-name', 'auth_item', 'name', true);
         $this->addForeignKey('fk-auth_item-auth_rule', 'auth_item', 'rule_name', 'auth_rule', 'name');
 
+        // Таблица соответсвия ролей и операций
         if (Yii::$app->db->schema->getTableSchema('auth_item_child', true)) { $this->dropTable('auth_item_child'); }
         $this->createTable('auth_item_child', [
             'id' => $this->primaryKey(11)->unsigned(),
@@ -41,6 +44,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
         $this->createIndex('unique-parent-child', 'auth_item_child', ['parent', 'child'], true);
         $this->createIndex('index-child', 'auth_item_child', 'child');
 
+        // Таюлица соответсвия ролей, операций и пользователей
         if (Yii::$app->db->schema->getTableSchema('auth_assignment', true)) { $this->dropTable('auth_assignment'); }
         $this->createTable('auth_assignment', [
             'id' => $this->primaryKey(11)->unsigned(),
@@ -50,6 +54,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
         $this->createIndex('unique-item_name-user_id', 'auth_assignment', ['item_name', 'user_id'], true);
         $this->addForeignKey('fk-auth_assignment-auth_item', 'auth_assignment', 'item_name', 'auth_item', 'name');
 
+        // Создание ролей, операций
         $this->insert('auth_item', ['id' => 1, 'name' => 'administrator', 'type' => 1, 'description' => 'Адинистратора']);
         $this->insert('auth_item', ['id' => 1000, 'name' => 'backend_administrator_rbac', 'type' => 2, 'description' => 'Бэкэнд, Администратор, Роли и операции']);
         $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'backend_administrator_rbac']);
