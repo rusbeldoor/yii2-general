@@ -41,6 +41,7 @@ $attributeLabels = [
     'datetime_send' => 'Дата и время отправки',
     'datetime_start' => 'Дата и время начала',
     'datetime_complete' => 'Дата и время завершения',
+    'active' => 'Активный',
     'archive' => 'Архив',
 ];
 

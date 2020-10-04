@@ -8,6 +8,15 @@ namespace rusbeldoor\yii2General\models;
 class ActiveQuery extends \yii\db\ActiveQuery
 {
     /**
+     * Алиас
+     *
+     * @param $alias string
+     * @return AuthItemQuery
+     */
+    public function alias($alias)
+    { return $this->andWhere("alias=:alias", [':alias' => $alias]); }
+
+    /**
      * Тип
      *
      * @param $type mixed

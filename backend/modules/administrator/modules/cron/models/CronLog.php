@@ -9,8 +9,10 @@ use yii;
  *
  * @property $id int
  * @property $cron_id int
+ * @property $duration int
  * @property $datetime_start string
  * @property $datetime_complete string|null
+ * @property $pid string
  */
 class CronLog extends \rusbeldoor\yii2General\models\ActiveRecord
 {
@@ -27,7 +29,7 @@ class CronLog extends \rusbeldoor\yii2General\models\ActiveRecord
     {
         return [
             [['cron_id', 'datetime_start'], 'required'],
-            [['cron_id'], 'integer'],
+            [['cron_id', 'duration'], 'integer'],
             [['datetime_start', 'datetime_complete'], 'safe'],
             [['cron_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cron::className(), 'targetAttribute' => ['cron_id' => 'id']],
         ];
@@ -40,9 +42,11 @@ class CronLog extends \rusbeldoor\yii2General\models\ActiveRecord
     {
         return [
             'id' => 'Ид',
-            'cron_id' => 'Cron ID',
+            'cron_id' => 'Крон',
+            'duration' => 'Продолжительность',
             'datetime_start' => 'Дата и время начала',
             'datetime_complete' => 'Дата и время завершения',
+            'pid' => 'Ид процесса в Linux',
         ];
     }
 

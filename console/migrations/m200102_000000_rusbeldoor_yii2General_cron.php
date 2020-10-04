@@ -20,6 +20,8 @@ class m200102_000000_rusbeldoor_yii2General_cron extends Migration
             'description' => $this->text()->notNull(),
             'status' => 'ENUM("wait", "process") NOT NULL DEFAULT "wait"',
             'max_duration' => $this->integer(11)->unsigned()->defaultValue(null),
+            'restart' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
+            'kill' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
             'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
         ]);
         $this->createIndex('unique-alias', 'cron', 'alias', true);
@@ -29,8 +31,10 @@ class m200102_000000_rusbeldoor_yii2General_cron extends Migration
         $this->createTable('cron_log', [
             'id' => $this->primaryKey(11)->unsigned(),
             'cron_id' => $this->integer(11)->unsigned()->notNull(),
+            'duration' => $this->integer(11)->unsigned()->defaultValue(null),
             'datetime_start' => $this->datetime()->notNull(),
             'datetime_complete' => $this->datetime()->defaultValue(null),
+            'pid' => $this->string(32)->defaultValue(null),
         ]);
         $this->addForeignKey('fk-cron-cron_log', 'cron_log', 'cron_id', 'cron', 'id');
 

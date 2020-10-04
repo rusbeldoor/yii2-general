@@ -12,6 +12,8 @@ use yii;
  * @property $description string
  * @property $status string
  * @property $max_duration int|null
+ * @property $restart int
+ * @property $kill int
  * @property $active int
  */
 class Cron extends \rusbeldoor\yii2General\models\ActiveRecord
@@ -30,7 +32,7 @@ class Cron extends \rusbeldoor\yii2General\models\ActiveRecord
         return [
             [['alias', 'description'], 'required'],
             [['description', 'status'], 'string'],
-            [['max_duration', 'active'], 'integer'],
+            [['max_duration', 'restart', 'kill', 'active'], 'integer'],
             [['alias'], 'string', 'max' => 96],
             [['alias'], 'unique'],
         ];
@@ -46,8 +48,10 @@ class Cron extends \rusbeldoor\yii2General\models\ActiveRecord
             'alias' => 'Алиас',
             'description' => 'Описание',
             'status' => 'Статус',
-            'max_duration' => 'Max Duration',
-            'active' => 'Active',
+            'max_duration' => 'Максимальная продолжительность',
+            'restart' => 'Перезапуск',
+            'kill' => 'Уничтожение',
+            'active' => 'Активный',
         ];
     }
 
