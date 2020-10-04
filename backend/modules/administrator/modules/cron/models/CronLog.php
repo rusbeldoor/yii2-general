@@ -12,7 +12,7 @@ use yii;
  * @property $duration int
  * @property $datetime_start string
  * @property $datetime_complete string|null
- * @property $pid string
+ * @property $pid string|null
  */
 class CronLog extends \rusbeldoor\yii2General\models\ActiveRecord
 {
@@ -31,6 +31,7 @@ class CronLog extends \rusbeldoor\yii2General\models\ActiveRecord
             [['cron_id', 'datetime_start'], 'required'],
             [['cron_id', 'duration'], 'integer'],
             [['datetime_start', 'datetime_complete'], 'safe'],
+            [['pid'], 'string', 'max' => 32],
             [['cron_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cron::className(), 'targetAttribute' => ['cron_id' => 'id']],
         ];
     }
