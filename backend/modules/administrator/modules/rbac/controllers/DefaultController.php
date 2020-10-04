@@ -14,5 +14,5 @@ class DefaultController extends \backend\components\Controller
      * @return string
      */
     public function actionIndex()
-    { Yii::$app->request->redirect('/admin'); }
+    { Yii::$app->request->redirect('/administrator'); }
 }
