@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m200102_000000_rusbeldoor_yii2General_user_subscription
+ * Class m200103_000000_rusbeldoor_yii2General_user_subscription
  */
-class m200102_000000_rusbeldoor_yii2General_user_subscription extends Migration
+class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
 {
     /**
      * {@inheritdoc}
@@ -43,7 +43,7 @@ class m200102_000000_rusbeldoor_yii2General_user_subscription extends Migration
      */
     public function safeDown()
     {
-        echo "m200102_000000_rusbeldoor_yii2General_user_subscription cannot be reverted.\n";
+        echo "m200103_000000_rusbeldoor_yii2General_user_subscription cannot be reverted.\n";
 
         return true;
     }
@@ -57,7 +57,7 @@ class m200102_000000_rusbeldoor_yii2General_user_subscription extends Migration
 
     public function down()
     {
-        echo "m200102_000000_rusbeldoor_yii2General_user_subscription cannot be reverted.\n";
+        echo "m200103_000000_rusbeldoor_yii2General_user_subscription cannot be reverted.\n";
 
         return false;
     }
