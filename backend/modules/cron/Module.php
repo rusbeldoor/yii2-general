@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\backend\modules\administrator\modules\cron;
+namespace rusbeldoor\yii2General\backend\modules\cron;
 
 use yii;
 use rusbeldoor\yii2General\helpers\AppHelper;
@@ -15,7 +15,7 @@ class Module extends \backend\components\Module
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'rusbeldoor\yii2General\backend\modules\administrator\modules\cron\controllers';
+    public $controllerNamespace = 'rusbeldoor\yii2General\backend\modules\cron\controllers';
 
     /**
      * {@inheritdoc}

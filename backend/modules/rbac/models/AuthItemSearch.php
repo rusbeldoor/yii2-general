@@ -1,14 +1,14 @@
 <?php
 
-namespace rusbeldoor\yii2General\backend\modules\administrator\modules\rbac\models;
+namespace rusbeldoor\yii2General\backend\modules\rbac\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-use rusbeldoor\yii2General\backend\modules\administrator\modules\rbac\models\AuthItem;
+use rusbeldoor\yii2General\backend\modules\rbac\models\AuthItem;
 
 /**
- * AuthItemSearch represents the model behind the search form of `rusbeldoor\yii2General\backend\modules\administrator\modules\rbac\models\AuthItem`.
+ * AuthItemSearch represents the model behind the search form of `rusbeldoor\yii2General\backend\modules\rbac\models\AuthItem`.
  */
 class AuthItemSearch extends AuthItem
 {

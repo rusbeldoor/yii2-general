@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\backend\modules\administrator\modules\rbac\models;
+namespace rusbeldoor\yii2General\backend\modules\rbac\models;
 
 /**
  * Auth_item (ActiveQuery)

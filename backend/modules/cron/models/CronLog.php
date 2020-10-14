@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\backend\modules\administrator\modules\cron\models;
+namespace rusbeldoor\yii2General\backend\modules\cron\models;
 
 use yii;
 

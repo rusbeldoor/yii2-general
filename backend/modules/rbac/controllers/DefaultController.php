@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\backend\modules\administrator\modules\rbac\controllers;
+namespace rusbeldoor\yii2General\backend\modules\rbac\controllers;
 
 use yii;
 
