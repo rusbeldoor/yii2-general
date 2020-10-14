@@ -30,12 +30,12 @@ class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->createTable('user_subscription', [
             'id' => $this->primaryKey(11)->unsigned(),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
-            'user_subscription_key_id' => $this->integer(11)->unsigned()->notNull(),
-            'user_subscription_channel_id' => $this->integer(11)->unsigned()->notNull(),
+            'key_id' => $this->integer(11)->unsigned()->notNull(),
+            'channel_id' => $this->integer(11)->unsigned()->notNull(),
         ]);
         $this->createIndex('unique', 'user_subscription', ['user_id', 'key_id', 'channel_id'], true);
-        $this->addForeignKey('fk-user_subscription-user_subscription_key', 'user_subscription', 'user_subscription_key_id', 'user_subscription_key', 'id');
-        $this->addForeignKey('fk-user_subscription-user_subscription_channel', 'user_subscription', 'user_subscription_channel_id', 'user_subscription_channel', 'id');
+        $this->addForeignKey('fk-user_subscription-user_subscription_key', 'user_subscription', 'key_id', 'user_subscription_key', 'id');
+        $this->addForeignKey('fk-user_subscription-user_subscription_channel', 'user_subscription', 'channel_id', 'user_subscription_channel', 'id');
     }
 
     /**
