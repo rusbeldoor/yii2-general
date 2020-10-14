@@ -38,6 +38,7 @@ class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->addForeignKey('fk-user_subscription-user_subscription_channel', 'user_subscription', 'channel_id', 'user_subscription_channel', 'id');
 
         // Тестовые данные
+        /*
         for ($key_id = 1; $key_id <= 10; $key_id++) { $this->insert('user_subscription_key', ['id' => $key_id, 'key' => 'key-' . $key_id]); }
         for ($channel_id = 1; $channel_id <= 10; $channel_id++) { $this->insert('user_subscription_channel', ['id' => $channel_id, 'channel' => 'channel-' . $channel_id]); }
         for ($user_id = 100000; $user_id < 101000; $user_id++) {
@@ -48,6 +49,7 @@ class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
                 }
             }
         }
+        */
     }
 
     /**
