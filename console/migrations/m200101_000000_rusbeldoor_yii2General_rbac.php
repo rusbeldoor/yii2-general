@@ -58,7 +58,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
         $this->addForeignKey('fk-auth_assignment-auth_item', 'auth_assignment', 'item_name', 'auth_item', 'name');
 
         // Создание ролей, операций
-        $this->insert('auth_item', ['id' => 1, 'name' => 'administrator', 'type' => 1, 'description' => 'Адинистратора']);
+        $this->insert('auth_item', ['id' => 1, 'name' => 'administrator', 'type' => 1, 'description' => 'Адинистратор']);
         $this->insert('auth_item', ['id' => 1000, 'name' => 'rusbeldoor_rbac', 'type' => 2, 'description' => 'Rusbeldoor, Роли и операции']);
         $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'rusbeldoor_rbac']);
     }
