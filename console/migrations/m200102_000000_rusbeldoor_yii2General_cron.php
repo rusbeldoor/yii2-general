@@ -39,8 +39,8 @@ class m200102_000000_rusbeldoor_yii2General_cron extends Migration
         $this->addForeignKey('fk-cron-cron_log', 'cron_log', 'cron_id', 'cron', 'id');
 
         // Создание ролей, операций
-        $this->insert('auth_item', ['name' => 'backend_administrator_cron', 'type' => 2, 'description' => 'Бэкэнд, Администратор, Кроны']);
-        $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'backend_administrator_cron']);
+        $this->insert('auth_item', ['name' => 'rusbeldoor_cron', 'type' => 2, 'description' => 'Rusbeldoor, Кроны']);
+        $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'rusbeldoor_cron']);
     }
 
     /**
