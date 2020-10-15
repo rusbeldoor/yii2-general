@@ -24,7 +24,7 @@ class Module extends \backend\components\Module
     {
         parent::init();
 
-        AppHelper::forbiddenExceptionIfNotHavePermission('backend_administrator_cron');
+        AppHelper::forbiddenExceptionIfNotHavePermission('rusbeldoor_cron');
 
         if (isset(Yii::$app->params['rusbeldoor']['yii2General']['cron']['onlyMigrations'])) {
             $this->onlyMigrations = Yii::$app->params['rusbeldoor']['yii2General']['cron']['onlyMigrations'];
