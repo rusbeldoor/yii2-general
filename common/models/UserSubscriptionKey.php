@@ -9,6 +9,7 @@ use yii;
  *
  * @property $id int
  * @property $key string
+ * @property $name string
  */
 class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
 {
@@ -24,8 +25,8 @@ class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
     public function rules()
     {
         return [
-            [['key'], 'required'],
-            [['key'], 'string', 'max' => 128],
+            [['key', 'name'], 'required'],
+            [['key', 'name'], 'string', 'max' => 128],
             [['key'], 'unique'],
         ];
     }
@@ -38,6 +39,7 @@ class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
         return [
             'id' => 'Ид',
             'key' => 'Ключ',
+            'name' => 'Название',
         ];
     }
 

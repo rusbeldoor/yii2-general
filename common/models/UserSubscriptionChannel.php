@@ -9,6 +9,7 @@ use yii;
  *
  * @property $id int
  * @property $channel string
+ * @property $name string
  */
 class UserSubscriptionChannel extends \rusbeldoor\yii2General\models\ActiveRecord
 {
@@ -24,8 +25,8 @@ class UserSubscriptionChannel extends \rusbeldoor\yii2General\models\ActiveRecor
     public function rules()
     {
         return [
-            [['channel'], 'required'],
-            [['channel'], 'string', 'max' => 32],
+            [['channel', 'name'], 'required'],
+            [['channel', 'name'], 'string', 'max' => 32],
             [['channel'], 'unique'],
         ];
     }
@@ -38,6 +39,7 @@ class UserSubscriptionChannel extends \rusbeldoor\yii2General\models\ActiveRecor
         return [
             'id' => 'Ид',
             'channel' => 'Канал',
+            'name' => 'Название',
         ];
     }
 
