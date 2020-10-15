@@ -52,6 +52,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
             'id' => $this->primaryKey(11)->unsigned(),
             'item_name' => $this->string(96)->notNull(),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
+            'created_at' => $this->integer(11)->defaultValue(null),
         ]);
         $this->createIndex('unique-item_name-user_id', 'auth_assignment', ['item_name', 'user_id'], true);
         $this->addForeignKey('fk-auth_assignment-auth_item', 'auth_assignment', 'item_name', 'auth_item', 'name');
