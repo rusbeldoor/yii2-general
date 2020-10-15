@@ -7,7 +7,7 @@ use yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-use rusbeldoor\yii2General\backend\modules\rbac\models\AuthItem;
+use rusbeldoor\yii2General\common\models\AuthItem;
 use rusbeldoor\yii2General\backend\modules\rbac\models\AuthItemSearch;
 
 /**
