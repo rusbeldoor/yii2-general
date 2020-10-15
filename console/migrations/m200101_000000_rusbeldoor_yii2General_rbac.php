@@ -30,6 +30,8 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
             'description' => $this->string(192)->defaultValue(null),
             'rule_name' => $this->string(64)->defaultValue(null),
             'data' => $this->binary(65536)->defaultValue(null),
+            'created_at' => $this->integer(11)->defaultValue(null),
+            'updated_at' => $this->integer(11)->defaultValue(null),
         ]);
         $this->createIndex('unique-name', 'auth_item', 'name', true);
         $this->addForeignKey('fk-auth_item-auth_rule', 'auth_item', 'rule_name', 'auth_rule', 'name');
