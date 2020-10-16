@@ -15,7 +15,7 @@ class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
         // Таблица ключей подписок пользователя
         $this->createTable('user_subscription_key', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'key' => $this->string(128)->notNull(),
+            'alias' => $this->string(128)->notNull(),
             'name' => $this->string(128)->notNull(),
         ]);
         $this->createIndex('unique', 'user_subscription_key', 'key', true);
@@ -23,7 +23,7 @@ class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
         // Таблица каналов подписок пользователя
         $this->createTable('user_subscription_channel', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'channel' => $this->string(32)->notNull(),
+            'alias' => $this->string(32)->notNull(),
             'name' => $this->string(32)->notNull(),
         ]);
         $this->createIndex('unique', 'user_subscription_channel', 'channel', true);

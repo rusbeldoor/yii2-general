@@ -21,8 +21,8 @@ class Module extends \frontend\components\Module
     {
         parent::init();
 
-        if (isset(Yii::$app->params['rusbeldoor']['yii2General']['subscription']['salt'])) {
-            $this->salt = Yii::$app->params['rusbeldoor']['yii2General']['subscription']['salt'];
+        if (isset(Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt'])) {
+            $this->salt = Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt'];
         }
     }
 }

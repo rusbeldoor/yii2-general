@@ -3,6 +3,8 @@
 namespace rusbeldoor\yii2General\modules\subscriptions\controllers;
 
 use yii;
+
+use rusbeldoor\yii2General\common\models\UserSubscription;
 use rusbeldoor\yii2General\helpers\AppHelper;
 
 /**
@@ -20,15 +22,20 @@ class DefaultController extends \frontend\components\Controller
     public function actionIndex($user_id, $hash)
     {
         $get = yii::$app->request->get();
-        $key = ((isset($get['key'])) ? $get['key'] : '');
-        $channel = ((isset($get['way'])) ? $get['channel'] : '');
+        $key = ((isset($get['key'])) ? $get['key'] : null);
+        $getChannels = null;
+        $channels = null;
+        if (isset($get['channels'])) {
+            $getChannels = $get['channels'];
+            $channels = explode(',', $getChannels);
+        }
 
-        $subscriptionHash =  hash('sha256', $user_id . $key . $channel);
+        $subscriptionHash =  hash('sha256', $user_id . $key . $getChannels);
         $subscriptionHash = hash('sha256', $subscriptionHash . $this->module->salt);
         if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Доступ запрещён.'); }
 
         // Добавить условие на платформу, элем тайп и т.д.
-        $userSubscriptions = UserSubscription::find()->where('user_id=:user_id', [':user_id' => $user_id])->all();
+        $userSubscriptions = UserSubscription::find()->userId($user_id)->keyByAlias($key)->all();
         $userSubscriptionsFormatted = [];
         foreach ($userSubscriptions as $userMailing) {
             if (!isset($userSubscriptionsFormatted[$userMailing->platform_id])) { $userSubscriptionsFormatted[$userMailing->platform_id] = []; }

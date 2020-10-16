@@ -8,7 +8,7 @@ use yii;
  * User_subscription_key (ActiveRecord)
  *
  * @property $id int
- * @property $key string
+ * @property $alias string
  * @property $name string
  */
 class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
@@ -25,9 +25,9 @@ class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
     public function rules()
     {
         return [
-            [['key', 'name'], 'required'],
-            [['key', 'name'], 'string', 'max' => 128],
-            [['key'], 'unique'],
+            [['alias', 'name'], 'required'],
+            [['alias', 'name'], 'string', 'max' => 128],
+            [['alias'], 'unique'],
         ];
     }
 
@@ -38,7 +38,7 @@ class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
     {
         return [
             'id' => 'Ид',
-            'key' => 'Ключ',
+            'alias' => 'Алиас',
             'name' => 'Название',
         ];
     }
@@ -61,5 +61,15 @@ class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
         // if (true) { $this->addError('id', 'Неовзможно удалить #' . $this->id . '.'); }
 
         return !$this->hasErrors() && parent::beforeDelete();
+    }
+
+    /**
+     * Получение ид по алиасам
+     *
+     * @param $aliases string|array
+     * @return array
+     */
+    public function getIdsByAliases($aliases) {
+
     }
 }
