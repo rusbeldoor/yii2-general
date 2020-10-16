@@ -45,9 +45,10 @@ class DefaultController extends \frontend\components\Controller
         ];;
 
         // Ключи
-        $userSubscriptionKeys = UserSubscriptionKey::find()->allChilds($getKeyAlias)->all();
-        $userSubscriptionKeys = ArrayHelper::arrayByField($userSubscriptionKeys, 'id');
-        $userSubscriptionKeysIds = array_keys($userSubscriptionKeys);
+        $userSubscriptionKeysById = UserSubscriptionKey::find()->allChilds($getKeyAlias)->all();
+        $userSubscriptionKeysById = ArrayHelper::arrayByField($userSubscriptionKeysById, 'id');
+        $userSubscriptionKeysByAlias = ArrayHelper::arrayByField($userSubscriptionKeysById, 'alias');
+        $userSubscriptionKeysIds = array_keys($userSubscriptionKeysById);
 
         // Каналы
         $userSubscriptionChannels = UserSubscriptionChannel::find()->aliases($channelsAliases)->all();
@@ -60,7 +61,7 @@ class DefaultController extends \frontend\components\Controller
         // Перебираем подписки
         foreach ($userSubscriptions as $userSubscription) {
             // Получаем все ключи подписки
-            $keysAliases = explode(';', $userSubscriptionKeys[$userSubscription->key_id]->alias);
+            $keysAliases = explode(';', $userSubscriptionKeysById[$userSubscription->key_id]->alias);
             // Указатель на массив
             $pointer = &$result;
             // Перебираем ключи подписки
@@ -71,7 +72,7 @@ class DefaultController extends \frontend\components\Controller
                 if (!isset($pointer[$keyAlias])) {
                     // Добавляем ключ
                     $pointer[$keyAlias] = [
-                        'name' => '', // Название
+                        'name' => $userSubscriptionKeysByAlias[$keyAlias]->name, // Название
                         'childKeys' => [], // Дочерние ключи
                         'channels' => [], // Каналы
                     ];
@@ -80,7 +81,7 @@ class DefaultController extends \frontend\components\Controller
                 $pointer = &$pointer[$keyAlias];
             }
             // Запоминаем имя последнего ключа
-            $pointer['name'] = $userSubscriptionKeys[$userSubscription->key_id]->name;
+            //$pointer['name'] = $userSubscriptionKeysById[$userSubscription->key_id]->name;
             // Запоминаем каналы их имена
             $pointer['channels'][$userSubscriptionChannels[$userSubscription->channel_id]->alias] = $userSubscriptionChannels[$userSubscription->channel_id]->name;
         }
