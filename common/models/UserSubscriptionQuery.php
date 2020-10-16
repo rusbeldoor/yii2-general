@@ -39,6 +39,6 @@ class UserSubscriptionQuery extends \rusbeldoor\yii2General\models\ActiveQuery
     public function channelsIds($channelsIds)
     {
         if (!count($channelsIds)) { return $this; }
-        return $this->andWhere("chanel_id IN (" . implode(',', $channelsIds) . ")");
+        return $this->andWhere("channel_id IN (" . implode(',', $channelsIds) . ")");
     }
 }
