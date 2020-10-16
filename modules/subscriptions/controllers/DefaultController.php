@@ -45,14 +45,12 @@ class DefaultController extends \frontend\components\Controller
         ];;
 
         // Ключи
-        $userSubscriptionKeys = [];
-        if ($getKeyAlias) { $userSubscriptionKeys = UserSubscriptionKey::find()->allChilds($getKeyAlias)->all(); }
+        $userSubscriptionKeys = UserSubscriptionKey::find()->allChilds($getKeyAlias)->all();
         $userSubscriptionKeys = ArrayHelper::arrayByField($userSubscriptionKeys, 'id');
         $userSubscriptionKeysIds = array_keys($userSubscriptionKeys);
 
         // Каналы
-        $userSubscriptionChannels = [];
-        if ($channelsAliases) { $userSubscriptionChannels = UserSubscriptionChannel::find()->aliases($channelsAliases)->all(); }
+        $userSubscriptionChannels = UserSubscriptionChannel::find()->aliases($channelsAliases)->all();
         $userSubscriptionChannels = ArrayHelper::arrayByField($userSubscriptionChannels, 'id');
         $userSubscriptionChannelsIds = array_keys($userSubscriptionChannels);
 
