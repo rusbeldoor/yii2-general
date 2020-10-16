@@ -84,6 +84,6 @@ class DefaultController extends \frontend\components\Controller
             // Запоминаем каналы их имена
             $pointer['channelsAliases'][$userSubscriptionChannels[$userSubscription->channel_id]->alias] = $userSubscriptionChannels[$userSubscription->channel_id]->name;
         }
-        return $this->render('subscriptions', ['result' => $result]);
+        return $this->render('subscriptions', ['result' => $result['childKeysAliases']]);
     }
 }
