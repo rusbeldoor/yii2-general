@@ -76,6 +76,8 @@ class DefaultController extends \frontend\components\Controller
                         'channels' => [], // Каналы
                     ];
                 }
+                // Передвигаем указатель
+                $pointer = &$pointer[$keyAlias];
             }
             // Запоминаем имя последнего ключа
             $pointer['name'] = $userSubscriptionKeys[$userSubscription->key_id]->name;
