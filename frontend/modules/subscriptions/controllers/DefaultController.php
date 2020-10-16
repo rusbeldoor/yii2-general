@@ -25,7 +25,7 @@ class DefaultController extends \frontend\components\Controller
 
         $subscriptionHash =  hash('sha256', $user_id . $key . $channel);
         $subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->params['subscriptionSalt']);
-        if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/user', 'danger', 'Доступ запрещён.'); }
+        if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Доступ запрещён.'); }
 
         // Добавить условие на платформу, элем тайп и т.д.
         $userSubscriptions = UserSubscription::find()->where('user_id=:user_id', [':user_id' => $user_id])->all();
