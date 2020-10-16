@@ -25,7 +25,7 @@ class DefaultController extends \frontend\components\Controller
     public function actionIndex($userId, $hash)
     {
         $get = yii::$app->request->get();
-        $keyAlias = ((isset($get['key'])) ? $get['key'] : null);
+        $getKeyAlias = ((isset($get['key'])) ? $get['key'] : null);
         $getChannelsAliases = null;
         $channelsAliases = null;
         if (isset($get['channels'])) {
@@ -34,7 +34,7 @@ class DefaultController extends \frontend\components\Controller
         }
 
         // Проверяем хэш
-        $subscriptionHash =  hash('sha256', $userId . $keyAlias . $getChannelsAliases);
+        $subscriptionHash = hash('sha256', $userId . $getKeyAlias . $getChannelsAliases);
         $subscriptionHash = hash('sha256', $subscriptionHash . $this->module->salt);
         if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Доступ запрещён.'); }
 
@@ -46,7 +46,7 @@ class DefaultController extends \frontend\components\Controller
 
         // Ключи
         $userSubscriptionKeys = [];
-        if ($keyAlias) { UserSubscriptionKey::find()->allChilds($keyAlias)->all(); }
+        if ($getKeyAlias) { $userSubscriptionKeys = UserSubscriptionKey::find()->allChilds($getKeyAlias)->all(); }
         $userSubscriptionKeys = ArrayHelper::arrayByField($userSubscriptionKeys, 'id');
         $userSubscriptionKeysIds = array_keys($userSubscriptionKeys);
 

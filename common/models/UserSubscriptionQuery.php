@@ -16,7 +16,7 @@ class UserSubscriptionQuery extends \rusbeldoor\yii2General\models\ActiveQuery
      * @return UserSubscriptionQuery
      */
     public function userId($userId)
-    { return $this->andWhere("user_id=1", [':user_id' => $userId]); }
+    { return $this->andWhere("user_id=:userId", [':userId' => $userId]); }
 
     /**
      * ...

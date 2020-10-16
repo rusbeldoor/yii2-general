@@ -12,9 +12,12 @@ class UserSubscriptionKeyQuery extends \rusbeldoor\yii2General\models\ActiveQuer
     /**
      * ...
      *
-     * @param $alias string
+     * @param $alias null|string
      * @return UserSubscriptionKeyQuery
      */
     public function allChilds($alias)
-    { return $this->andWhere("alias LIKE ':alias%'", [':alias' => $alias]); }
+    {
+        if ($alias === null) { return $this; }
+        return $this->andWhere("alias LIKE '$alias%'");
+    }
 }
