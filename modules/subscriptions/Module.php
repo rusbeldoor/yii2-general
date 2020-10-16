@@ -10,14 +10,19 @@ use rusbeldoor\yii2General\helpers\AppHelper;
  */
 class Module extends \frontend\components\Module
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'rusbeldoor\yii2General\frontend\modules\subscriptions\controllers';
+
+    public $salt = null; // Соль для хэша
 
     /**
      * {@inheritdoc}
      */
     public function init()
-    { parent::init(); }
+    {
+        parent::init();
+
+        if (isset(Yii::$app->params['rusbeldoor']['yii2General']['subscription']['salt'])) {
+            $this->salt = Yii::$app->params['rusbeldoor']['yii2General']['subscription']['salt'];
+        }
+    }
 }

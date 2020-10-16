@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\backend\modules\rbac\models;
+namespace rusbeldoor\yii2General\modules\rbac\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

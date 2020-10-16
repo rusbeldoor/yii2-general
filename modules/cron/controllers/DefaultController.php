@@ -1,21 +1,21 @@
 <?php
 
-namespace rusbeldoor\yii2General\backend\modules\rbac\controllers;
+namespace rusbeldoor\yii2General\modules\cron\controllers;
 
-use QuickService\general\common\models\QTOrganisation;
-use rusbeldoor\yii2General\helpers\AppHelper;
 use yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use rusbeldoor\yii2General\common\models\AuthItem;
-use rusbeldoor\yii2General\backend\modules\rbac\models\AuthItemSearch;
-use rusbeldoor\yii2General\helpers\ArrayHelper;
+use rusbeldoor\yii2General\modules\rbac\models\AuthItemSearch;
+use rusbeldoor\yii2General\helpers\AppHelper;
+
+use QuickService\general\common\models\QTOrganisation;
 
 /**
  * RoleController
  */
-class RoleController extends \backend\components\Controller
+class DefaultController extends \backend\components\Controller
 {
     /**
      * {@inheritdoc}

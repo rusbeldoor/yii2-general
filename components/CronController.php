@@ -2,9 +2,9 @@
 
 namespace rusbeldoor\yii2General\components;
 
-use rusbeldoor\yii2General\backend\modules\administrator\modules\cron\models\Cron;
+use rusbeldoor\yii2General\modules\cron\models\Cron;
 
-use rusbeldoor\yii2General\backend\modules\administrator\modules\cron\models\CronLog;
+use rusbeldoor\yii2General\modules\cron\models\CronLog;
 use yii;
 
 /**

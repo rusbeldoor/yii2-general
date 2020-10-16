@@ -20,11 +20,11 @@ class DefaultController extends \frontend\components\Controller
     public function actionIndex($user_id, $hash)
     {
         $get = yii::$app->request->get();
-        $key = ((isset($get['platform_id'])) ? $get['key'] : '');
+        $key = ((isset($get['key'])) ? $get['key'] : '');
         $channel = ((isset($get['way'])) ? $get['channel'] : '');
 
         $subscriptionHash =  hash('sha256', $user_id . $key . $channel);
-        $subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']);
+        $subscriptionHash = hash('sha256', $subscriptionHash . $this->salt);
         if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Доступ запрещён.'); }
 
         // Добавить условие на платформу, элем тайп и т.д.

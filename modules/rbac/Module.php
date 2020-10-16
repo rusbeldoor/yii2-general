@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\backend\modules\rbac;
+namespace rusbeldoor\yii2General\modules\rbac;
 
 use yii;
 use rusbeldoor\yii2General\helpers\AppHelper;
@@ -10,12 +10,9 @@ use rusbeldoor\yii2General\helpers\AppHelper;
  */
 class Module extends \backend\components\Module
 {
-    public $onlyMigrations = true;
+    public $controllerNamespace = 'rusbeldoor\yii2General\modules\rbac\controllers';
 
-    /**
-     * {@inheritdoc}
-     */
-    public $controllerNamespace = 'rusbeldoor\yii2General\backend\modules\rbac\controllers';
+    public $onlyMigrations = true; // Изменение только через миграции
 
     /**
      * {@inheritdoc}
