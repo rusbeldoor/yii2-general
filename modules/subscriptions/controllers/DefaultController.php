@@ -40,8 +40,8 @@ class DefaultController extends \frontend\components\Controller
 
         $result = [
             'name' => '', // Название
-            'childKeysAliases' => [],  // Дочерние ключи
-            'channelsAliases' => [], // Каналы
+            'childKeys' => [], // Дочерние ключи
+            'channels' => [], // Каналы
         ];;
 
         // Ключи
@@ -66,22 +66,22 @@ class DefaultController extends \frontend\components\Controller
             // Перебираем ключи подписки
             foreach ($keysAliases as $keyAlias) {
                 // Передвигаем указатель
-                $pointer = &$pointer['childKeysAliases'];
+                $pointer = &$pointer['childKeys'];
                 // Если такого ключа еще не встречалось
                 if (!isset($pointer[$keyAlias])) {
                     // Добавляем ключ
                     $pointer[$keyAlias] = [
                         'name' => '', // Название
-                        'childKeysAliases' => [],  // Дочерние ключи
-                        'channelsAliases' => [], // Каналы
+                        'childKeys' => [], // Дочерние ключи
+                        'channels' => [], // Каналы
                     ];
                 }
             }
             // Запоминаем имя последнего ключа
             $pointer['name'] = $userSubscriptionKeys[$userSubscription->key_id]->name;
             // Запоминаем каналы их имена
-            $pointer['channelsAliases'][$userSubscriptionChannels[$userSubscription->channel_id]->alias] = $userSubscriptionChannels[$userSubscription->channel_id]->name;
+            $pointer['channels'][$userSubscriptionChannels[$userSubscription->channel_id]->alias] = $userSubscriptionChannels[$userSubscription->channel_id]->name;
         }
-        return $this->render('subscriptions', ['result' => $result['childKeysAliases']]);
+        return $this->render('subscriptions', ['result' => $result['childKeys']]);
     }
 }
