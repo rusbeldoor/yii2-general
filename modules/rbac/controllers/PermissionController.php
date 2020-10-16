@@ -64,7 +64,7 @@ class PermissionController extends \backend\components\Controller
      */
     public function actionCreate()
     {
-        if (Yii::$app->controller->module->onlyMigrations) {
+        if ($this->module->onlyMigrations) {
             return AppHelper::redirectWitchFlash(
                 '/administrator/rbac/permission',
                 'error',
@@ -92,7 +92,7 @@ class PermissionController extends \backend\components\Controller
      */
     public function actionUpdate($id)
     {
-        if (Yii::$app->controller->module->onlyMigrations) {
+        if ($this->module->onlyMigrations) {
             return AppHelper::redirectWitchFlash(
                 '/administrator/rbac/permission',
                 'error',
@@ -118,7 +118,7 @@ class PermissionController extends \backend\components\Controller
      */
     public function actionDelete($id = null)
     {
-        if (Yii::$app->controller->module->onlyMigrations) {
+        if ($this->module->onlyMigrations) {
             return AppHelper::redirectWitchFlash(
                 '/administrator/rbac/permission',
                 'error',

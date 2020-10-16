@@ -24,7 +24,7 @@ class DefaultController extends \frontend\components\Controller
         $channel = ((isset($get['way'])) ? $get['channel'] : '');
 
         $subscriptionHash =  hash('sha256', $user_id . $key . $channel);
-        $subscriptionHash = hash('sha256', $subscriptionHash . $this->salt);
+        $subscriptionHash = hash('sha256', $subscriptionHash . $this->module->salt);
         if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Доступ запрещён.'); }
 
         // Добавить условие на платформу, элем тайп и т.д.

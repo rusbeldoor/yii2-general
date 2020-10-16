@@ -17,7 +17,7 @@ $gridViewColumns = [
     'description',
     ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
 ];
-if (Yii::$app->controller->module->onlyMigrations) {
+if ($this->module->onlyMigrations) {
     unset($buttonsForIndexPage[array_search('add', $buttonsForIndexPage)]);
     unset($buttonsForIndexPage[array_search('delete', $buttonsForIndexPage)]);
     unset($gridViewColumns[0]);
