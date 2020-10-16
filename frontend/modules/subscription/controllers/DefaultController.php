@@ -20,14 +20,11 @@ class DefaultController extends \frontend\components\Controller
     public function actionIndex($user_id, $hash)
     {
         $get = yii::$app->request->get();
-        $platform_id = ((isset($get['platform_id'])) ? $get['platform_id'] : '');
-        $elem_type = ((isset($get['elem_type'])) ? $get['elem_type'] : '');
-        $elem_id = ((isset($get['elem_id'])) ? $get['elem_id'] : '');
-        $way = ((isset($get['way'])) ? $get['way'] : '');
+        $key = ((isset($get['platform_id'])) ? $get['key'] : '');
+        $channel = ((isset($get['way'])) ? $get['channel'] : '');
 
-        $subscriptionHash = $user_id . $platform_id . $elem_type . $elem_id . $way;
+        $subscriptionHash =  hash('sha256', $user_id . $key . $channel);
         $subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->params['subscriptionSalt']);
-        $subscriptionHash = hash('sha256', $subscriptionHash);
         if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/user', 'danger', 'Доступ запрещён.'); }
 
         // Добавить условие на платформу, элем тайп и т.д.
