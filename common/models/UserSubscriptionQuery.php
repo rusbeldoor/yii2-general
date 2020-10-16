@@ -17,4 +17,26 @@ class UserSubscriptionQuery extends \rusbeldoor\yii2General\models\ActiveQuery
      */
     public function userId($userId)
     { return $this->andWhere("user_id=1", [':user_id' => $userId]); }
+
+    /**
+     * ...
+     *
+     * @param $keysIds array
+     * @return UserSubscriptionQuery
+     */
+    public function keysIds($keysIds)
+    {
+        return $this->andWhere("key_id IN (:keysIds)", [':keysIds' => implode(',', $keysIds)]);
+    }
+
+    /**
+     * ...
+     *
+     * @param $channelsIds array
+     * @return UserSubscriptionQuery
+     */
+    public function channelsIds($channelsIds)
+    {
+        return $this->andWhere("chanel_id IN (:channelsIds)", [':channelsIds' => implode(',', $channelsIds)]);
+    }
 }
