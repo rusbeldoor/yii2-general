@@ -38,6 +38,12 @@ class DefaultController extends \frontend\components\Controller
         $subscriptionHash = hash('sha256', $subscriptionHash . $this->module->salt);
         if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Доступ запрещён.'); }
 
+        $result = [
+            'name' => '', // Название
+            'childKeysAliases' => [],  // Дочерние ключи
+            'channelsAliases' => [], // Каналы
+        ];;
+
         // Ключи
         $userSubscriptionKeys = [];
         if ($keyAlias) { UserSubscriptionKey::find()->allChilds($keyAlias)->all(); }
@@ -52,21 +58,32 @@ class DefaultController extends \frontend\components\Controller
 
         // Подписки
         $userSubscriptions = UserSubscription::find()->userId($userId)->keysIds($userSubscriptionKeysIds)->channelsIds($userSubscriptionChannelsIds)->all();
-        $userSubscriptionsFormatted = [];
 
         // Перебираем подписки
-        foreach ($userSubscriptions as $userMailing) {
-            if (!isset($userSubscriptionsFormatted[$userMailing->platform_id])) { $userSubscriptionsFormatted[$userMailing->platform_id] = []; }
-            switch ($userMailing->elem_type) {
-                case 'organisation': $name = 'Рассылка от организаций'; break;
-                case 'city': $name = 'Рассылка по городам'; break;
-                default: $name = 'Основное';
+        foreach ($userSubscriptions as $userSubscription) {
+            // Получаем все ключи подписки
+            $keysAliases = explode(';', $userSubscriptionKeys[$userSubscription->key_id]->alias);
+            // Указатель на массив
+            $pointer = &$result;
+            // Перебираем ключи подписки
+            foreach ($keysAliases as $keyAlias) {
+                // Передвигаем указатель
+                $pointer = &$pointer['childKeysAliases'];
+                // Если такого ключа еще не встречалось
+                if (!isset($pointer[$keyAlias])) {
+                    // Добавляем ключ
+                    $pointer[$keyAlias] = [
+                        'name' => '', // Название
+                        'childKeysAliases' => [],  // Дочерние ключи
+                        'channelsAliases' => [], // Каналы
+                    ];
+                }
             }
-            if (!isset($userSubscriptionsFormatted[$userMailing->platform_id][$userMailing->elem_type])) { $userSubscriptionsFormatted[$userMailing->platform_id][$userMailing->elem_type] = ['name' => $name, 'elemIds' => []]; }
-            if (!isset($userSubscriptionsFormatted[$userMailing->platform_id][$userMailing->elem_type]['elemIds'][$userMailing->elem_id])) { $userSubscriptionsFormatted[$userMailing->platform_id][$userMailing->elem_type]['elemIds'][$userMailing->elem_id] = ['name' => '', 'ways' => []]; }
-            // Заполнить name для каждого элемента switch внутри по case запросы по бд, либо не запросы
-            if (!in_array($userMailing->way, $userSubscriptionsFormatted[$userMailing->platform_id][$userMailing->elem_type]['elemIds'][$userMailing->elem_id]['ways'])) { $userSubscriptionsFormatted[$userMailing->platform_id][$userMailing->elem_type]['elemIds'][$userMailing->elem_id]['ways'][] = $userMailing->way; }
+            // Запоминаем имя последнего ключа
+            $pointer['name'] = $userSubscriptionKeys[$userSubscription->key_id]->name;
+            // Запоминаем каналы их имена
+            $pointer['channelsAliases'][$userSubscriptionChannels[$userSubscription->channel_id]->alias] = $userSubscriptionChannels[$userSubscription->channel_id]->name;
         }
-        return $this->render('subscriptions', ['userSubscriptionsFormatted' => $userSubscriptionsFormatted]);
+        return $this->render('subscriptions', ['result' => $result]);
     }
 }

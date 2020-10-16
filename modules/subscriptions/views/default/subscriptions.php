@@ -1,9 +1,10 @@
 <?php
 /* @var $this yii\web\View */
-/* @var $userSubscriptionsFormatted array */
+/* @var $result array */
 
-if (!count($userSubscriptionsFormatted)) { echo 'У Вас нет ни одной подписки на рассылки.'; }
-foreach ($userSubscriptionsFormatted as $platforms) {
+print_r($result);
+if (!count($result)) { echo 'У Вас нет ни одной подписки на рассылки.'; }
+foreach ($result as $keyAlias => $subscription) {
     //
 }
 ?>
