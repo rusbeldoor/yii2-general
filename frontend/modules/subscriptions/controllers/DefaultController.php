@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\frontend\modules\subscription\controllers;
+namespace rusbeldoor\yii2General\frontend\modules\subscriptions\controllers;
 
 use yii;
 use rusbeldoor\yii2General\helpers\AppHelper;

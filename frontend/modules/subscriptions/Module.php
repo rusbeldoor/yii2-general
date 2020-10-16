@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\frontend\modules\subscription;
+namespace rusbeldoor\yii2General\frontend\modules\subscriptions;
 
 use yii;
 use rusbeldoor\yii2General\helpers\AppHelper;
@@ -13,7 +13,7 @@ class Module extends \frontend\components\Module
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'rusbeldoor\yii2General\frontend\modules\subscription\controllers';
+    public $controllerNamespace = 'rusbeldoor\yii2General\frontend\modules\subscriptions\controllers';
 
     /**
      * {@inheritdoc}
