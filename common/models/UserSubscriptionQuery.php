@@ -27,7 +27,7 @@ class UserSubscriptionQuery extends \rusbeldoor\yii2General\models\ActiveQuery
     public function keysIds($keysIds)
     {
         if (!count($keysIds)) { return $this; }
-        return $this->andWhere("key_id IN (:keysIds)", [':keysIds' => implode(',', $keysIds)]);
+        return $this->andWhere("key_id IN (" . implode(',', $keysIds) . ")");
     }
 
     /**
@@ -39,6 +39,6 @@ class UserSubscriptionQuery extends \rusbeldoor\yii2General\models\ActiveQuery
     public function channelsIds($channelsIds)
     {
         if (!count($channelsIds)) { return $this; }
-        return $this->andWhere("chanel_id IN (:channelsIds)", [':channelsIds' => implode(',', $channelsIds)]);
+        return $this->andWhere("chanel_id IN (" . implode(',', $channelsIds) . ")");
     }
 }
