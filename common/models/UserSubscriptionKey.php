@@ -66,10 +66,14 @@ class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
     /**
      * Получение ид по алиасам
      *
-     * @param $aliases string|array
+     * @param $alias string
      * @return array
      */
-    public function getIdsByAliases($aliases) {
-
+    public function getIdsByAliases($alias)
+    {
+        $result = [];
+        $userSubscriptionKeys = $this->find()->alias($alias)->all();
+        foreach ($userSubscriptionKeys as $userSubscriptionKey) { $result[] = $userSubscriptionKey->id; }
+        return $result;
     }
 }

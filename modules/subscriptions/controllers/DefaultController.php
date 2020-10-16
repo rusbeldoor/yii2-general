@@ -2,6 +2,9 @@
 
 namespace rusbeldoor\yii2General\modules\subscriptions\controllers;
 
+use rusbeldoor\yii2General\common\models\UserSubscriptionChannel;
+use rusbeldoor\yii2General\common\models\UserSubscriptionKey;
+use rusbeldoor\yii2General\helpers\ArrayHelper;
 use yii;
 
 use rusbeldoor\yii2General\common\models\UserSubscription;
@@ -22,21 +25,36 @@ class DefaultController extends \frontend\components\Controller
     public function actionIndex($user_id, $hash)
     {
         $get = yii::$app->request->get();
-        $key = ((isset($get['key'])) ? $get['key'] : null);
-        $getChannels = null;
-        $channels = null;
+        $keyAlias = ((isset($get['key'])) ? $get['key'] : null);
+        $getChannelsAliases = null;
+        $channelsAliases = null;
         if (isset($get['channels'])) {
-            $getChannels = $get['channels'];
-            $channels = explode(',', $getChannels);
+            $getChannelsAliases = $get['channels'];
+            $channelsAliases = explode(',', $getChannelsAliases);
         }
 
-        $subscriptionHash =  hash('sha256', $user_id . $key . $getChannels);
+        // Проверяем хэш
+        $subscriptionHash =  hash('sha256', $user_id . $keyAlias . $getChannelsAliases);
         $subscriptionHash = hash('sha256', $subscriptionHash . $this->module->salt);
         if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Доступ запрещён.'); }
 
-        // Добавить условие на платформу, элем тайп и т.д.
-        $userSubscriptions = UserSubscription::find()->userId($user_id)->keyByAlias($key)->all();
+        // Ключи
+        $userSubscriptionKeys = [];
+        if ($keyAlias) { UserSubscriptionKey::find()->allChilds($keyAlias)->all(); }
+        $userSubscriptionKeys = ArrayHelper::arrayByField($userSubscriptionKeys, 'id');
+        $userSubscriptionKeysIds = array_keys($userSubscriptionKeys);
+
+        // Каналы
+        $userSubscriptionChannels = [];
+        if ($channelsAliases) { $userSubscriptionChannels = UserSubscriptionChannel::find()->aliases($channelsAliases)->all(); }
+        $userSubscriptionChannels = ArrayHelper::arrayByField($userSubscriptionChannels, 'id');
+        $userSubscriptionChannelsIds = array_keys($userSubscriptionChannels);
+
+        // Подписки
+        $userSubscriptions = UserSubscription::find()->keysIds($userSubscriptionKeysIds)->channelsIds($userSubscriptionChannelsIds)->all();
         $userSubscriptionsFormatted = [];
+
+        // Перебираем подписки
         foreach ($userSubscriptions as $userMailing) {
             if (!isset($userSubscriptionsFormatted[$userMailing->platform_id])) { $userSubscriptionsFormatted[$userMailing->platform_id] = []; }
             switch ($userMailing->elem_type) {

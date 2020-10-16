@@ -12,10 +12,12 @@ class UserSubscriptionChannelQuery extends \rusbeldoor\yii2General\models\Active
     /**
      * ...
      *
+     * @param $aliases string|array
      * @return UserSubscriptionChannelQuery
      */
-    /*
-    public function active()
-    { return $this->andWhere("active=1"); }
-    */
+    public function aliases($aliases)
+    {
+        if (!is_array($aliases)) { $aliases = [$aliases]; }
+        return $this->andWhere("alias IN (:aliases)", [':aliases' => "'" . implode("','", $aliases) . "'"]);
+    }
 }
