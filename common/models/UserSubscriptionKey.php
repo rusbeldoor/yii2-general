@@ -62,18 +62,4 @@ class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
 
         return !$this->hasErrors() && parent::beforeDelete();
     }
-
-    /**
-     * Получение ид по алиасам
-     *
-     * @param $alias string
-     * @return array
-     */
-    public function getIdsByAliases($alias)
-    {
-        $result = [];
-        $userSubscriptionKeys = $this->find()->alias($alias)->all();
-        foreach ($userSubscriptionKeys as $userSubscriptionKey) { $result[] = $userSubscriptionKey->id; }
-        return $result;
-    }
 }

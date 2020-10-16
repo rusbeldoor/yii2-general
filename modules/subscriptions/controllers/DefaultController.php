@@ -18,11 +18,11 @@ class DefaultController extends \frontend\components\Controller
     /**
      * Подписки на рассылки
      *
-     * @param $user_id int
+     * @param $userId int
      * @param $hash string
      * @return string
      */
-    public function actionIndex($user_id, $hash)
+    public function actionIndex($userId, $hash)
     {
         $get = yii::$app->request->get();
         $keyAlias = ((isset($get['key'])) ? $get['key'] : null);
@@ -34,7 +34,7 @@ class DefaultController extends \frontend\components\Controller
         }
 
         // Проверяем хэш
-        $subscriptionHash =  hash('sha256', $user_id . $keyAlias . $getChannelsAliases);
+        $subscriptionHash =  hash('sha256', $userId . $keyAlias . $getChannelsAliases);
         $subscriptionHash = hash('sha256', $subscriptionHash . $this->module->salt);
         if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Доступ запрещён.'); }
 
@@ -51,7 +51,7 @@ class DefaultController extends \frontend\components\Controller
         $userSubscriptionChannelsIds = array_keys($userSubscriptionChannels);
 
         // Подписки
-        $userSubscriptions = UserSubscription::find()->keysIds($userSubscriptionKeysIds)->channelsIds($userSubscriptionChannelsIds)->all();
+        $userSubscriptions = UserSubscription::find()->userId($userId)->keysIds($userSubscriptionKeysIds)->channelsIds($userSubscriptionChannelsIds)->all();
         $userSubscriptionsFormatted = [];
 
         // Перебираем подписки
