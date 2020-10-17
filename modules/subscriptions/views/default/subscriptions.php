@@ -18,7 +18,7 @@ function write($elems) {
 
 }
 
-if (count($result)) { echo '<div class="row">'; write($result); write($result); write($result); echo '</div>'; }
+if (count($result)) { echo '<div class="row">'; write($result); echo '</div>'; }
 else { echo 'У Вас нет ни одной подписки на рассылки.'; }
 ?>
 
