@@ -4,17 +4,22 @@
 
 function write($elems) {
     foreach ($elems as $keyAlias => $elem) {
-        echo '<li>';
-        echo $elem['name'] . ' ';
         foreach ($elem['channels'] as $chanelAlias => $channelName) {
-            echo '<input type="checkbox" name="' . $chanelAlias . '" title="' . $channelName . '" checked> ';
+            ?><div class="card" style="float: left; margin: 0 10px 10px 0;">
+            <div class="card-body">
+                <h5 class="card-title"><?= $elem['name'] ?></h5>
+                <p class="card-text"><?= $channelName ?></p>
+                <a href="#" class="btn btn-primary">Отписаться</a>
+            </div>
+            </div><?
         }
-        echo '</li>';
-        if (count($elem['childKeys'])) { echo '<ul>'; write($elem['childKeys']); echo '</ul>'; }
+        if (count($elem['childKeys'])) { write($elem['childKeys']); }
     }
 
 }
 
-if (count($result)) { echo '<ul>'; write($result); echo '</ul>'; }
+if (count($result)) { echo '<div class="row">'; write($result); write($result); write($result); echo '</div>'; }
 else { echo 'У Вас нет ни одной подписки на рассылки.'; }
 ?>
+
+
