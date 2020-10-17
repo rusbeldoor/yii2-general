@@ -17,7 +17,6 @@ $(document).ready(function() {
      * Это предотвращает скрытие первоначального окна (при выводе поверх него окна подтверждения) при нажатии [Esc]
      */
     function confirmDialog(params) {
-        // text, confirmCallback
         if (typeof(params) == 'undefined') { return; }
         if (typeof(params.text) == 'undefined') { return; }
         if (typeof(params.confirm) == 'undefined') { params.confirm = true; }
