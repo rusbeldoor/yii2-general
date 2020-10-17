@@ -62,17 +62,22 @@ class DefaultController extends \frontend\components\Controller
         foreach ($userSubscriptions as $userSubscription) {
             // Получаем состовляющие ключа подписки
             $userSubscriptionKeysAliases = explode(';', $userSubscriptionKeysById[$userSubscription->key_id]->alias);
+
             // Указатель на массив
             $pointer = &$result;
+
             // Рассматриваемый ключ
             $currentKeyAlias = '';
+
             // Перебираем составляющие ключа подписки
             foreach ($userSubscriptionKeysAliases as $userSubscriptionKeyAlias) {
                 // Дополняем рассматриваемый ключ
                 if ($currentKeyAlias != '') { $currentKeyAlias .= ';'; }
                 $currentKeyAlias .= $userSubscriptionKeyAlias;
+
                 // Передвигаем указатель
                 $pointer = &$pointer['childKeys'];
+
                 // Если такого ключа еще не встречалось
                 if (!isset($pointer[$currentKeyAlias])) {
                     // Добавляем ключ
@@ -82,12 +87,15 @@ class DefaultController extends \frontend\components\Controller
                         'channels' => [], // Каналы
                     ];
                 }
+
                 // Передвигаем указатель
                 $pointer = &$pointer[$currentKeyAlias];
             }
+
             // Запоминаем каналы их имена
             $pointer['channels'][$userSubscriptionChannelsByIds[$userSubscription->channel_id]->alias] = $userSubscriptionChannelsByIds[$userSubscription->channel_id]->name;
         }
+
         $result = $result['childKeys'];
         return $this->render('subscriptions', ['result' => $result]);
     }

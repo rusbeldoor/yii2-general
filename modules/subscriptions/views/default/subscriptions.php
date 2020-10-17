@@ -17,9 +17,9 @@ function write($elems) {
     }
 
 }
-
+?>
+<h1>Подписки на рассылки</h1>
+<?
 if (count($result)) { echo '<div class="row">'; write($result); echo '</div>'; }
 else { echo 'У Вас нет ни одной подписки на рассылки.'; }
 ?>
-
-
