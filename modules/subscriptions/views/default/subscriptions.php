@@ -38,11 +38,11 @@ function writeElems($elems, $userId) {
 }
 
 $this->registerJs(
-    '$(document).ready(function () {
+'$(document).ready(function () {
     $(\'.unsubscribe\').click(function () {
         confirmDialog({
             text: \'Вы уверены, что хотите отписаться?\',
-            confirmCallback: () => { $(this).parent(\'form\').submit(); }
+            confirmCallback: () => { $(this).parent(\'form\').submit(); alert(333); }
         });
     });
 });'
