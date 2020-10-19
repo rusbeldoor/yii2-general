@@ -5,6 +5,8 @@
 
 use yii\bootstrap4\Html;
 
+use rusbeldoor\yii2General\helpers\SubscriptionHelper;
+
 /**
  * Вывод элементов
  *
