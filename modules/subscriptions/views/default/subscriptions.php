@@ -22,7 +22,7 @@ function writeElems($elems, $userId) {
             <div class="card-body">
                 <h5 class="card-title"><?= $key['name'] ?></h5>
                 <p class="card-text"><?= $channel['name'] ?></p>
-                <?= Html::beginForm('', 'post'); ?>
+                <?= Html::beginForm('/subscriptions/default/unsubscribe', 'post'); ?>
                     <?= Html::input('hidden', 'userId', $userId) ?>
                     <?= Html::input('hidden', 'keyId', $key['id']) ?>
                     <?= Html::input('hidden', 'channelId', $channel['id']) ?>
