@@ -148,6 +148,6 @@ class DefaultController extends \frontend\components\Controller
         UserSubscription::deleteAll(['user_id' => $post['userId'], 'key_id' => $userSubscriptionKey->id, 'channel_id' => $userSubscriptionChannel->id]);
 
         // Возвращаемся по переданному адресу
-        AppHelper::redirectWitchFlash($post['redirectUrl'], 'succes', 'Вы успешно отписались от "' . $userSubscriptionKey->name . '" (' . $userSubscriptionChannel->name . ').');
+        AppHelper::redirectWitchFlash($post['redirectUrl'], 'success', 'Вы успешно отписались от "' . $userSubscriptionKey->name . '" (' . $userSubscriptionChannel->name . ').');
     }
 }
