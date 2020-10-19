@@ -49,6 +49,8 @@ class DefaultController extends \frontend\components\Controller
         $userSubscriptionKeysIds = array_keys($userSubscriptionKeysById);
 
         // Каналы
+        $allUserSubscriptionChannels = UserSubscriptionChannel::find()->all();
+        $allUserSubscriptionChannelsById = ArrayHelper::arrayByField($allUserSubscriptionChannels, 'id');
         $userSubscriptionChannels = UserSubscriptionChannel::find()->aliases($channelsAliases)->all();
         $userSubscriptionChannelsByIds = ArrayHelper::arrayByField($userSubscriptionChannels, 'id');
         $userSubscriptionChannelsIds = array_keys($userSubscriptionChannelsByIds);
@@ -95,8 +97,8 @@ class DefaultController extends \frontend\components\Controller
             // Запоминаем каналы их имена
             $pointer['channels'][] = [
                 'id' => $userSubscription->channel_id,
-                'alias' => $userSubscriptionChannelsByIds[$userSubscription->channel_id]->alias,
-                'name' => $userSubscriptionChannelsByIds[$userSubscription->channel_id]->name,
+                'alias' => $allUserSubscriptionChannelsById[$userSubscription->channel_id]->alias,
+                'name' => $allUserSubscriptionChannelsById[$userSubscription->channel_id]->name,
             ];
         }
 
