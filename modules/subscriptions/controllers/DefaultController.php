@@ -34,7 +34,7 @@ class DefaultController extends \frontend\components\Controller
 
         // Проверяем хэш
         $subscriptionHash = hash('sha256', $userId . $getKeyAlias . $getChannelsAliases);
-        $subscriptionHash = hash('sha256', $subscriptionHash . $this->module->salt);
+        $subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']);
         if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         $result = [
@@ -133,7 +133,7 @@ class DefaultController extends \frontend\components\Controller
 
         // Проверяем хэш
         $subscriptionHash = hash('sha256', $post['userId'] . $post['keyAlias'] . $post['channelAlias']);
-        $subscriptionHash = hash('sha256', $subscriptionHash . $this->module->salt);
+        $subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']);
         if ($post['hash'] != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         // Ключ
