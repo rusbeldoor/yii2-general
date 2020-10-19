@@ -24,8 +24,8 @@ function writeElems($elems, $userId) {
                 <p class="card-text"><?= $channel['name'] ?></p>
                 <?= Html::beginForm('/subscriptions/default/unsubscribe', 'post'); ?>
                     <?= Html::input('hidden', 'userId', $userId) ?>
-                    <?= Html::input('hidden', 'keyId', $key['id']) ?>
-                    <?= Html::input('hidden', 'channelId', $channel['id']) ?>
+                    <?= Html::input('hidden', 'keyAlias', $key['alias']) ?>
+                    <?= Html::input('hidden', 'channelAlias', $channel['alias']) ?>
                     <?= Html::input('hidden', 'hash', $subscriptionHash) ?>
                     <?= Html::input('hidden', 'redirectUrl', Yii::$app->request->url) ?>
                     <button type="button" class="btn btn-primary unsubscribe">Отписаться</button>
@@ -38,7 +38,7 @@ function writeElems($elems, $userId) {
 }
 
 $this->registerJs(
-'$(document).ready(function () {
+    '$(document).ready(function () {
     $(\'.unsubscribe\').click(function () {
         confirmDialog({
             text: \'Вы уверены, что хотите отписаться?\',

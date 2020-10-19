@@ -125,24 +125,24 @@ class DefaultController extends \frontend\components\Controller
         $post = yii::$app->request->post();
         if (
             !isset($post['userId'])
-            || !isset($post['keyId'])
-            || !isset($post['channelId'])
+            || !isset($post['keyAlias'])
+            || !isset($post['channelAlias'])
             || !isset($post['hash'])
             || !isset($post['redirectUrl'])
         ) { return AppHelper::redirectWitchFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
 
         // Проверяем хэш
-        $subscriptionHash = hash('sha256', $post['userId'] . $post['keyId'] . $post['channelId']);
+        $subscriptionHash = hash('sha256', $post['userId'] . $post['keyAlias'] . $post['channelAlias']);
         $subscriptionHash = hash('sha256', $subscriptionHash . $this->module->salt);
         if ($post['hash'] != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         // Ключ
-        $userSubscriptionKey = UserSubscriptionKey::findOne($post['keyId']);
-        if ($userSubscriptionKey) { return AppHelper::redirectWitchFlash('/', 'danger', 'Ключ подписки (' . $post['keyId'] . ') не найден.'); }
+        $userSubscriptionKey = UserSubscriptionKey::find()->alias($post['keyAlias'])->one();
+        if ($userSubscriptionKey) { return AppHelper::redirectWitchFlash('/', 'danger', 'Ключ подписки (' . $post['keyAlias'] . ') не найден.'); }
 
         // Канал
-        $userSubscriptionChannel = UserSubscriptionChannel::findOne($post['channelId']);
-        if ($userSubscriptionChannel) { return AppHelper::redirectWitchFlash('/', 'danger', 'Канал подписки (' . $post['channelId'] . ') не найден.'); }
+        $userSubscriptionChannel = UserSubscriptionChannel::find()->alias($post['channelAlias'])->one();
+        if ($userSubscriptionChannel) { return AppHelper::redirectWitchFlash('/', 'danger', 'Канал подписки (#' . $post['channelAlias'] . ') не найден.'); }
 
         // Удаляем подписку
         UserSubscription::deleteAll(['user_id' => $post['userId'], 'key_id' => $userSubscriptionKey->id, 'channel_id' => $userSubscriptionChannel->id]);
