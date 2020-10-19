@@ -18,11 +18,5 @@ class Module extends \frontend\components\Module
      * {@inheritdoc}
      */
     public function init()
-    {
-        parent::init();
-
-        if (isset(Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt'])) {
-            $this->salt = Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt'];
-        }
-    }
+    { parent::init(); }
 }

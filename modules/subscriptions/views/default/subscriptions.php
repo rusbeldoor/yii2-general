@@ -17,7 +17,7 @@ function writeElems($elems, $userId) {
     foreach ($elems as $key) {
         foreach ($key['channels'] as $channel) {
             $subscriptionHash = hash('sha256', $userId . $key['alias'] . $channel['alias']);
-            $subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->controller->module->salt);
+            $subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']);
             ?><div class="card" style="float: left; margin: 0 10px 10px 0;">
             <div class="card-body">
                 <h5 class="card-title"><?= $key['name'] ?></h5>
@@ -55,7 +55,7 @@ $this->registerJs(
 $key = '';
 $channel = '';
 $subscriptionHash = hash('sha256', $userId . $key . $channel);
-$subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->controller->module->salt);
+$subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']);
 echo '<a href="' . SubscriptionHelper::link($userId, $key, $channel) . '">Все подписки</a>';
 
 if (count($result)) { writeElems($result, $userId); }
