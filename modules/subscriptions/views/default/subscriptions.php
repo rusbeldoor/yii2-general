@@ -1,11 +1,9 @@
 <?php
 /* @var $this yii\web\View */
-
-use yii\bootstrap4\ActiveForm;
-use yii\bootstrap4\Html;
-
 /* @var $userId int */
 /* @var $result array */
+
+use yii\bootstrap4\Html;
 
 /**
  * Вывод элементов
@@ -51,6 +49,13 @@ $this->registerJs(
 
 <h1>Подписки на рассылки</h1>
 <?
+
+$key = '';
+$channel = '';
+$subscriptionHash = hash('sha256', $userId . $key . $channel);
+$subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->controller->module->salt);
+echo '<a href="' . SubscriptionHelper::link($userId, $key, $channel) . '">Все подписки</a>';
+
 if (count($result)) { writeElems($result, $userId); }
 else { echo 'Вы больше не подписаны на указанную рассылку.'; }
 ?>
