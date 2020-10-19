@@ -35,7 +35,7 @@ class DefaultController extends \frontend\components\Controller
         // Проверяем хэш
         $subscriptionHash = hash('sha256', $userId . $getKeyAlias . $getChannelsAliases);
         $subscriptionHash = hash('sha256', $subscriptionHash . $this->module->salt);
-        if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Доступ запрещён.'); }
+        if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         $result = [
             'id' => '', // Ид
@@ -43,12 +43,13 @@ class DefaultController extends \frontend\components\Controller
             'name' => '', // Название
             'childKeys' => [], // Дочерние ключи
             'channels' => [], // Каналы
-        ];;
+        ];
 
         // Ключи
+        $allUserSubscriptionKeys = UserSubscriptionKey::find()->all();
+        $allUserSubscriptionKeysByAlias = ArrayHelper::arrayByField($allUserSubscriptionKeys, 'alias');
         $userSubscriptionKeys = UserSubscriptionKey::find()->allChilds($getKeyAlias)->all();
         $userSubscriptionKeysById = ArrayHelper::arrayByField($userSubscriptionKeys, 'id');
-        $userSubscriptionKeysByAlias = ArrayHelper::arrayByField($userSubscriptionKeys, 'alias');
         $userSubscriptionKeysIds = array_keys($userSubscriptionKeysById);
 
         // Каналы
@@ -83,9 +84,9 @@ class DefaultController extends \frontend\components\Controller
                 if (!isset($pointer[$currentKeyAlias])) {
                     // Добавляем ключ
                     $pointer[$currentKeyAlias] = [
-                        'id' => $userSubscriptionKeysByAlias[$currentKeyAlias]->id, // Ид
-                        'name' => $userSubscriptionKeysByAlias[$currentKeyAlias]->name, // Название
-                        'alias' => $userSubscriptionKeysByAlias[$currentKeyAlias]->alias, // Название
+                        'id' => $allUserSubscriptionKeysByAlias[$currentKeyAlias]->id, // Ид
+                        'name' => $allUserSubscriptionKeysByAlias[$currentKeyAlias]->name, // Название
+                        'alias' => $allUserSubscriptionKeysByAlias[$currentKeyAlias]->alias, // Название
                         'childKeys' => [], // Дочерние ключи
                         'channels' => [], // Каналы
                     ];
@@ -120,22 +121,33 @@ class DefaultController extends \frontend\components\Controller
     {
         AppHelper::exitIfNotPostRequest();
 
+        // post данные
         $post = yii::$app->request->post();
-        if (!isset($post['userId'])) { return AppHelper::redirectWitchFlash('/', 'danger', 'Не указан обязательный параметр userId.'); }
-        if (!isset($post['keyId'])) { return AppHelper::redirectWitchFlash('/', 'danger', 'Не указан обязательный параметр keyId.'); }
-        if (!isset($post['channelId'])) { return AppHelper::redirectWitchFlash('/', 'danger', 'Не указан обязательный параметр channelId.'); }
-        if (!isset($post['hash'])) { return AppHelper::redirectWitchFlash('/', 'danger', 'Не указан обязательный параметр hash.'); }
-        if (!isset($post['redirectUrl'])) { return AppHelper::redirectWitchFlash('/', 'danger', 'Не указан обязательный параметр redirectUrl.'); }
+        if (
+            !isset($post['userId'])
+            || !isset($post['keyId'])
+            || !isset($post['channelId'])
+            || !isset($post['hash'])
+            || !isset($post['redirectUrl'])
+        ) { return AppHelper::redirectWitchFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
 
         // Проверяем хэш
         $subscriptionHash = hash('sha256', $post['userId'] . $post['keyId'] . $post['channelId']);
         $subscriptionHash = hash('sha256', $subscriptionHash . $this->module->salt);
-        if ($post['hash'] != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Доступ запрещён.'); }
+        if ($post['hash'] != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
+
+        // Ключ
+        $userSubscriptionKey = UserSubscriptionKey::findOne($post['keyId']);
+        if ($userSubscriptionKey) { return AppHelper::redirectWitchFlash('/', 'danger', 'Ключ подписки (' . $post['keyId'] . ') не найден.'); }
+
+        // Канал
+        $userSubscriptionChannel = UserSubscriptionChannel::findOne($post['channelId']);
+        if ($userSubscriptionChannel) { return AppHelper::redirectWitchFlash('/', 'danger', 'Канал подписки (' . $post['channelId'] . ') не найден.'); }
 
         // Удаляем подписку
-        UserSubscription::deleteAll(['user_id' => $post['userId'], 'key_id' => $post['keyId'], 'channel_id' => $post['channelId']]);
+        UserSubscription::deleteAll(['user_id' => $post['userId'], 'key_id' => $userSubscriptionKey->id, 'channel_id' => $userSubscriptionChannel->id]);
 
-        // Возвращаемся на список подписок
-        AppHelper::redirectWitchFlash($post['redirectUrl'], 'succes', 'Вы успешно отписались.');
+        // Возвращаемся по переданному адресу
+        AppHelper::redirectWitchFlash($post['redirectUrl'], 'succes', 'Вы успешно отписались от "' . $userSubscriptionKey->name . '" (' . $userSubscriptionChannel->name . ').');
     }
 }

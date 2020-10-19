@@ -22,14 +22,14 @@ function writeElems($elems, $userId) {
             <div class="card-body">
                 <h5 class="card-title"><?= $key['name'] ?></h5>
                 <p class="card-text"><?= $channel['name'] ?></p>
-                <? Html::beginForm('', 'post'); ?>
-                <?= Html::input('hidden', 'userId', $userId) ?>
-                <?= Html::input('hidden', 'keyId', $key['id']) ?>
-                <?= Html::input('hidden', 'channelId', $channel['id']) ?>
-                <?= Html::input('hidden', 'hash', $subscriptionHash) ?>
-                <?= Html::input('hidden', 'redirectUrl', Yii::$app->request->url) ?>
-                <button type="button" class="btn btn-primary unsubscribe">Отписаться</button>
-                <? Html::endForm(); ?>
+                <?= Html::beginForm('', 'post'); ?>
+                    <?= Html::input('hidden', 'userId', $userId) ?>
+                    <?= Html::input('hidden', 'keyId', $key['id']) ?>
+                    <?= Html::input('hidden', 'channelId', $channel['id']) ?>
+                    <?= Html::input('hidden', 'hash', $subscriptionHash) ?>
+                    <?= Html::input('hidden', 'redirectUrl', Yii::$app->request->url) ?>
+                    <button type="button" class="btn btn-primary unsubscribe">Отписаться</button>
+                <?= Html::endForm(); ?>
             </div>
             </div><?
         }
@@ -42,7 +42,7 @@ $this->registerJs(
     $(\'.unsubscribe\').click(function () {
         confirmDialog({
             text: \'Вы уверены, что хотите отписаться?\',
-            confirmCallback: () => { $(this).parent(\'form\').submit(); alert(333); }
+            confirmCallback: () => { $(this).parent(\'form\').submit(); }
         });
     });
 });'
@@ -52,5 +52,5 @@ $this->registerJs(
 <h1>Подписки на рассылки</h1>
 <?
 if (count($result)) { writeElems($result, $userId); }
-else { echo 'У Вас нет ни одной подписки на рассылки.'; }
+else { echo 'Вы больше не подписаны на указанную рассылку.'; }
 ?>

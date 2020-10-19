@@ -58,8 +58,8 @@ function confirmDialog(params) {
         });
     }
 
+    // Заполняем модальное окно
     $confirmModal.find('.modal-body').html(params.text);
-
     $confirmModal.find('.modal-footer').html(
         ((params.confirm) ? '<button class="btn btn-primary" data-confirm-modal="true">' + params.confirmText + '</button>' : '')
         + ((params.cancel) ? '<button class="btn btn-default" data-confirm-modal="false">' + params.cancelText + '</button>' : '')
