@@ -2,6 +2,8 @@
 
 namespace rusbeldoor\yii2General\helpers;
 
+use Yii;
+
 class SubscriptionHelper
 {
     /**
