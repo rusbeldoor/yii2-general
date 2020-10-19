@@ -138,11 +138,11 @@ class DefaultController extends \frontend\components\Controller
 
         // Ключ
         $userSubscriptionKey = UserSubscriptionKey::find()->alias($post['keyAlias'])->one();
-        if ($userSubscriptionKey) { return AppHelper::redirectWitchFlash('/', 'danger', 'Ключ подписки (' . $post['keyAlias'] . ') не найден.'); }
+        if (!$userSubscriptionKey) { return AppHelper::redirectWitchFlash('/', 'danger', 'Ключ подписки (' . $post['keyAlias'] . ') не найден.'); }
 
         // Канал
         $userSubscriptionChannel = UserSubscriptionChannel::find()->alias($post['channelAlias'])->one();
-        if ($userSubscriptionChannel) { return AppHelper::redirectWitchFlash('/', 'danger', 'Канал подписки (#' . $post['channelAlias'] . ') не найден.'); }
+        if (!$userSubscriptionChannel) { return AppHelper::redirectWitchFlash('/', 'danger', 'Канал подписки (#' . $post['channelAlias'] . ') не найден.'); }
 
         // Удаляем подписку
         UserSubscription::deleteAll(['user_id' => $post['userId'], 'key_id' => $userSubscriptionKey->id, 'channel_id' => $userSubscriptionChannel->id]);
