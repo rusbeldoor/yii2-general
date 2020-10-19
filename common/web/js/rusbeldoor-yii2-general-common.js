@@ -32,12 +32,12 @@ function confirmDialog(params) {
     if (!$confirmModal.length) {
         $('body').append(
             '<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">'
-            + '<div class="modal-dialog" role="document">'
-            + '<div class="modal-content">'
-            + '<div class="modal-body"></div>'
-            + '<div class="modal-footer"></div>'
-            + '</div>'
-            + '</div>'
+                + '<div class="modal-dialog" role="document">'
+                    + '<div class="modal-content">'
+                        + '<div class="modal-body"></div>'
+                        + '<div class="modal-footer"></div>'
+                    + '</div>'
+                + '</div>'
             + '</div>');
 
         $confirmModal = $('#confirmModal');
@@ -61,24 +61,24 @@ function confirmDialog(params) {
     $confirmModal.find('.modal-body').html(params.text);
 
     $confirmModal.find('.modal-footer').html(
-        ((params.confirm) ? '<button class="btn btn-primary" data-confirm="true">' + params.confirmText + '</button>' : '')
-        + ((params.cancel) ? '<button class="btn btn-default" data-confirm="false">' + params.cancelText + '</button>' : '')
+        ((params.confirm) ? '<button class="btn btn-primary" data-confirm-modal="true">' + params.confirmText + '</button>' : '')
+        + ((params.cancel) ? '<button class="btn btn-default" data-confirm-modal="false">' + params.cancelText + '</button>' : '')
     );
 
     // Убираем события для продолжения
-    $confirmModal.off('click', 'button[data-confirm="true"]');
+    $confirmModal.off('click', 'button[data-confirm-modal="true"]');
 
     // Убираем события для отмены
-    $confirmModal.off('click', 'button[data-confirm="false"]');
+    $confirmModal.off('click', 'button[data-confirm-modal="false"]');
 
     // Добавляем событие для продолжения
-    $confirmModal.on('click', 'button[data-confirm="true"]', function () {
+    $confirmModal.on('click', 'button[data-confirm-modal="true"]', function () {
         $confirmModal.modal('hide');
         params.confirmCallback();
     });
 
     // Добавляем событие для продолжения
-    $confirmModal.on('click', 'button[data-confirm="false"]', function () {
+    $confirmModal.on('click', 'button[data-confirm-modal="false"]', function () {
         $confirmModal.modal('hide');
         params.cancelCallback();
     });
