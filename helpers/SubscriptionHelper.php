@@ -15,7 +15,7 @@ class SubscriptionHelper
     public static function link($userId, $key, $channels)
     {
         $hash = hash('sha256', $userId . $key . $channels);
-        $hash = hash('sha256', $hash . Yii::app()->params['subscriptionSalt']);
-        return Yii::app()->params['quickServiceFrontendUrl'] . '/subscriptions?userId=' . $userId . '&key=' . $key. '&channels=' . $channels . '&hash=' . $hash;
+        $hash = hash('sha256', $hash . Yii::$app->controller->module->salt);
+        return '/subscriptions?userId=' . $userId . '&key=' . $key. '&channels=' . $channels . '&hash=' . $hash;
     }
 }
