@@ -2,6 +2,7 @@
 
 namespace rusbeldoor\yii2General\modules\subscriptions\controllers;
 
+use rusbeldoor\yii2General\helpers\SubscriptionHelper;
 use yii;
 use rusbeldoor\yii2General\common\models\UserSubscriptionChannel;
 use rusbeldoor\yii2General\common\models\UserSubscriptionKey;
@@ -24,18 +25,13 @@ class DefaultController extends \frontend\components\Controller
     public function actionIndex($userId, $hash)
     {
         $get = yii::$app->request->get();
-        $getKeyAlias = ((isset($get['key'])) ? $get['key'] : null);
-        $getChannelsAliases = null;
-        $channelsAliases = null;
-        if (isset($get['channels'])) {
-            $getChannelsAliases = $get['channels'];
-            $channelsAliases = explode(',', $getChannelsAliases);
-        }
+        $post = yii::$app->request->post();
+        $getKeyAlias = ((isset($get['key'])) ? $get['key'] : ((isset($post['key'])) ? $post['key'] : null));
+        $getChannelsAliases = ((isset($get['channels'])) ? $get['channels'] : ((isset($post['channels'])) ? $post['channels'] : null));
+        $channelsAliases = explode(',', $getChannelsAliases);
 
         // Проверяем хэш
-        $subscriptionHash = hash('sha256', $userId . $getKeyAlias . $getChannelsAliases);
-        $subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']);
-        if ($hash != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
+        if ($hash != SubscriptionHelper::hash($userId, $getKeyAlias, $getChannelsAliases)) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         $result = [
             'id' => '', // Ид
@@ -85,8 +81,8 @@ class DefaultController extends \frontend\components\Controller
                     // Добавляем ключ
                     $pointer[$currentKeyAlias] = [
                         'id' => $allUserSubscriptionKeysByAlias[$currentKeyAlias]->id, // Ид
+                        'alias' => $allUserSubscriptionKeysByAlias[$currentKeyAlias]->alias, // Алиас
                         'name' => $allUserSubscriptionKeysByAlias[$currentKeyAlias]->name, // Название
-                        'alias' => $allUserSubscriptionKeysByAlias[$currentKeyAlias]->alias, // Название
                         'childKeys' => [], // Дочерние ключи
                         'channels' => [], // Каналы
                     ];
@@ -132,9 +128,7 @@ class DefaultController extends \frontend\components\Controller
         ) { return AppHelper::redirectWitchFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
 
         // Проверяем хэш
-        $subscriptionHash = hash('sha256', $post['userId'] . $post['keyAlias'] . $post['channelAlias']);
-        $subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']);
-        if ($post['hash'] != $subscriptionHash) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
+        if ($post['hash'] != SubscriptionHelper::hash($post['userId'], $post['keyAlias'], $post['channelAlias'])) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         // Ключ
         $userSubscriptionKey = UserSubscriptionKey::find()->alias($post['keyAlias'])->one();

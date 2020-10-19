@@ -16,8 +16,6 @@ use rusbeldoor\yii2General\helpers\SubscriptionHelper;
 function writeElems($elems, $userId) {
     foreach ($elems as $key) {
         foreach ($key['channels'] as $channel) {
-            $subscriptionHash = hash('sha256', $userId . $key['alias'] . $channel['alias']);
-            $subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']);
             ?><div class="card" style="float: left; margin: 0 10px 10px 0;">
             <div class="card-body">
                 <h5 class="card-title"><?= $key['name'] ?></h5>
@@ -26,7 +24,7 @@ function writeElems($elems, $userId) {
                     <?= Html::input('hidden', 'userId', $userId) ?>
                     <?= Html::input('hidden', 'keyAlias', $key['alias']) ?>
                     <?= Html::input('hidden', 'channelAlias', $channel['alias']) ?>
-                    <?= Html::input('hidden', 'hash', $subscriptionHash) ?>
+                    <?= Html::input('hidden', 'hash', SubscriptionHelper::hash($userId, $key['alias'], $channel['alias'])) ?>
                     <?= Html::input('hidden', 'redirectUrl', Yii::$app->request->url) ?>
                     <button type="button" class="btn btn-primary unsubscribe">Отписаться</button>
                 <?= Html::endForm(); ?>
@@ -50,14 +48,8 @@ $this->registerJs(
 ?>
 
 <h1>Подписки на рассылки</h1>
+<a href="<?= SubscriptionHelper::link($userId) ?>">Все подписки</a><br>
 <?
-
-$key = '';
-$channel = '';
-$subscriptionHash = hash('sha256', $userId . $key . $channel);
-$subscriptionHash = hash('sha256', $subscriptionHash . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']);
-echo '<a href="' . SubscriptionHelper::link($userId, $key, $channel) . '">Все подписки</a>';
-
 if (count($result)) { writeElems($result, $userId); }
 else { echo 'Вы больше не подписаны на указанную рассылку.'; }
 ?>
