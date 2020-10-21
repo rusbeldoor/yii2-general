@@ -1,14 +1,9 @@
 <?php
 
 use rusbeldoor\yii2General\widgets\AddEditForm;
-use kartik\sortinput\SortableInput;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\administrator\modules\rbac\models\AuthItem */
-/* @var $rolesNotOfThisRole array */
-/* @var $rolesOfThisRole array */
-/* @var $permissionsNotOfThisRole array */
-/* @var $permissionsOfThisRole array */
 ?>
 
 <div class="auth-item-form">

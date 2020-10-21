@@ -7,7 +7,7 @@ use rusbeldoor\yii2General\helpers\BaseUI;
 /* @var $searchModel backend\modules\administrator\modules\rbac\models\AuthItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Роли';
+$this->title = 'Кроны';
 $this->params['breadcrumbs'][] = $this->title;
 
 $buttonsForIndexPage = ['filter', 'add', 'delete'];
