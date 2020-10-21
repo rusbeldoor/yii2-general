@@ -2,13 +2,13 @@
 
 namespace rusbeldoor\yii2General\modules\rbac\controllers;
 
-use rusbeldoor\yii2General\helpers\AppHelper;
 use yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use rusbeldoor\yii2General\common\models\AuthItem;
 use rusbeldoor\yii2General\modules\rbac\models\AuthItemSearch;
+use rusbeldoor\yii2General\helpers\AppHelper;
 
 /**
  * PermissionController

@@ -7,7 +7,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use rusbeldoor\yii2General\common\models\AuthItem;
-use rusbeldoor\yii2General\modules\rbac\models\AuthItemSearch;
+use rusbeldoor\yii2General\modules\rbac\models\CronSearch;
 use rusbeldoor\yii2General\helpers\AppHelper;
 
 use QuickService\general\common\models\QTOrganisation;
@@ -37,8 +37,7 @@ class DefaultController extends \backend\components\Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AuthItemSearch();
-        $searchModel->type = 1;
+        $searchModel = new CronSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
 
         return $this->render('index', [
@@ -205,7 +204,7 @@ class DefaultController extends \backend\components\Controller
      */
     protected function findModel($id)
     {
-        if (($model = AuthItem::findOne($id)) !== null) { return $model; }
+        if (($model = Cron::findOne($id)) !== null) { return $model; }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
