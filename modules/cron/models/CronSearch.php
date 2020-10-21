@@ -1,6 +1,6 @@
 <?php
 
-namespace bmodules\cron\models;
+namespace modules\cron\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
