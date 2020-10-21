@@ -134,7 +134,7 @@ class RoleController extends \backend\components\Controller
     {
         if ($this->module->onlyMigrations) {
             return AppHelper::redirectWitchFlash(
-                '/administrator/rbac/permission',
+                '/administrator/rbac/role',
                 'error',
                 'Изменение ролей разрешено только через миграции.'
             );

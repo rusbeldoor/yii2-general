@@ -6,14 +6,12 @@ use yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-use rusbeldoor\yii2General\common\models\AuthItem;
-use rusbeldoor\yii2General\modules\rbac\models\CronSearch;
+use rusbeldoor\yii2General\common\models\Cron;
+use rusbeldoor\yii2General\modules\cron\models\CronSearch;
 use rusbeldoor\yii2General\helpers\AppHelper;
 
-use QuickService\general\common\models\QTOrganisation;
-
 /**
- * RoleController
+ * CronController
  */
 class DefaultController extends \backend\components\Controller
 {
@@ -57,21 +55,7 @@ class DefaultController extends \backend\components\Controller
     {
         $model = $this->findModel($id);
 
-        $rolesOfThisRole = $permissionsOfThisRole = [];
-        $elems = $model->find()->ofRole($model->name)->all();
-        foreach ($elems as $elem) {
-            if ($elem->isRole()) { $rolesOfThisRole[$elem->name] = ['content' => $elem->name]; }
-            elseif ($elem->isPermission()) { $permissionsOfThisRole[$elem->name] = ['content' => $elem->name]; }
-        }
-
-        return $this->render(
-            'view',
-            [
-                'model' => $model,
-                'rolesOfThisRole' => $rolesOfThisRole,
-                'permissionsOfThisRole' => $permissionsOfThisRole,
-            ]
-        );
+        return $this->render('view', ['model' => $model]);
     }
 
     /**
@@ -83,43 +67,21 @@ class DefaultController extends \backend\components\Controller
     {
         if ($this->module->onlyMigrations) {
             return AppHelper::redirectWitchFlash(
-                '/administrator/rbac/role',
+                '/administrator/cron',
                 'error',
-                'Создание ролей разрешено только через миграции.'
+                'Создание кронов разрешено только через миграции.'
             );
         }
 
-        $model = new AuthItem();
-        $model->type = 1;
+        $model = new Cron();
 
         $post = Yii::$app->request->post();
         if (
             $model->load($post)
             && $model->save()
-        ) {
-            $model->deleteAllChildren();
-            $model->addChildren($post['child-roles-names']);
-            $model->addChildren($post['child-permissions-names']);
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        ) { return $this->redirect(['view', 'id' => $model->id]); }
 
-        $rolesNotOfThisRole = $permissionsNotOfThisRole = [];
-        $elems = $model->find()->all();
-        foreach ($elems as $elem) {
-            if ($elem->isRole()) { $rolesNotOfThisRole[$elem->name] = ['content' => $elem->name]; }
-            elseif ($elem->isPermission()) { $permissionsNotOfThisRole[$elem->name] = ['content' => $elem->name]; }
-        }
-
-        return $this->render(
-            'create',
-            [
-                'model' => $model,
-                'rolesNotOfThisRole' => $rolesNotOfThisRole,
-                'rolesOfThisRole' => [],
-                'permissionsNotOfThisRole' => $permissionsNotOfThisRole,
-                'permissionsOfThisRole' => [],
-            ]
-        );
+        return $this->render('create', ['model' => $model]);
     }
 
     /**
@@ -133,9 +95,9 @@ class DefaultController extends \backend\components\Controller
     {
         if ($this->module->onlyMigrations) {
             return AppHelper::redirectWitchFlash(
-                '/administrator/rbac/permission',
+                '/administrator/cron',
                 'error',
-                'Изменение ролей разрешено только через миграции.'
+                'Изменение кроноа разрешено только через миграции.'
             );
         }
 
@@ -145,35 +107,9 @@ class DefaultController extends \backend\components\Controller
         if (
             $model->load($post)
             && $model->save()
-        ) {
-            $model->deleteAllChildren();
-            $model->addChildren($post['child-roles-names']);
-            $model->addChildren($post['child-permissions-names']);
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        ) { return $this->redirect(['view', 'id' => $model->id]); }
 
-        $rolesNotOfThisRole = $rolesOfThisRole = $permissionsNotOfThisRole = $permissionsOfThisRole = [];
-        $elems = $model->find()->ofRole($model->name)->all();
-        foreach ($elems as $elem) {
-            if ($elem->isRole()) { $rolesOfThisRole[$elem->name] = ['content' => $elem->name]; }
-            elseif ($elem->isPermission()) { $permissionsOfThisRole[$elem->name] = ['content' => $elem->name]; }
-        }
-        $elems = $model->find()->notOfRole($model->name)->all();
-        foreach ($elems as $elem) {
-            if ($elem->isRole()) { $rolesNotOfThisRole[$elem->name] = ['content' => $elem->name]; }
-            elseif ($elem->isPermission()) { $permissionsNotOfThisRole[$elem->name] = ['content' => $elem->name]; }
-        }
-
-        return $this->render(
-            'update',
-            [
-                'model' => $model,
-                'rolesNotOfThisRole' => $rolesNotOfThisRole,
-                'rolesOfThisRole' => $rolesOfThisRole,
-                'permissionsNotOfThisRole' => $permissionsNotOfThisRole,
-                'permissionsOfThisRole' => $permissionsOfThisRole,
-            ]
-        );
+        return $this->render('update', ['model' => $model]);
     }
 
     /**
@@ -186,9 +122,9 @@ class DefaultController extends \backend\components\Controller
     {
         if ($this->module->onlyMigrations) {
             return AppHelper::redirectWitchFlash(
-                '/administrator/rbac/role',
+                '/administrator/cron',
                 'error',
-                'Удаление ролей разрешено только через миграции.'
+                'Удаление кронов разрешено только через миграции.'
             );
         }
 
