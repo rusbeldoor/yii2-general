@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
 $buttonsForViewPage = ['add', 'delete'];
-if ($this->module->onlyMigrations) {
+if (Yii::$app->controller->module->onlyMigrations) {
     unset($buttonsForViewPage[array_search('add', $buttonsForViewPage)]);
     unset($buttonsForViewPage[array_search('delete', $buttonsForViewPage)]);
 }
