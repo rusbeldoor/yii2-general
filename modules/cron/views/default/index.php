@@ -13,7 +13,8 @@ $this->params['breadcrumbs'][] = $this->title;
 $buttonsForIndexPage = ['filter', 'add', 'delete'];
 $gridViewColumns = [
     ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'],
-    'name',
+    'id:id',
+    'alias',
     'description',
     ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
 ];

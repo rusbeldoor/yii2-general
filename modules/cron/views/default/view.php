@@ -25,8 +25,12 @@ if (Yii::$app->controller->module->onlyMigrations) {
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'name',
+            'id:id',
+            'alias',
             'description',
+            'max_duration',
+            'restart',
+            'kill',
         ],
     ]) ?>
 </div>
