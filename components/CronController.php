@@ -55,13 +55,13 @@ class CronController extends ConsoleController
                     // todo: оповещаем о проблемах
 
                     // Если разрешено уничтожать предыдущий зависший процесс
-                    if ($this->cron->kill) {
+                    if ($this->cron->kill_process_after_max_duration) {
                         // Уничтожаем предыдущий зависший процесс
                         posix_kill($cronLog->pid, 'SIGKILL');
                     }
 
                     // Если не разрешено перезапускатся при предыдущем зависшем процессе
-                    if (!$this->cron->restart) { return false; }
+                    if (!$this->cron->restart_after_max_duration) { return false; }
                 }
             } else {
                 // todo: оповещаем о проблемах

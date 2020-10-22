@@ -12,8 +12,8 @@ use rusbeldoor\yii2General\widgets\SearchForm;
         <?= $form->field($model, 'alias') ?>
         <?= $form->field($model, 'description') ?>
         <?= $form->field($model, 'max_duration') ?>
-        <?= $form->field($model, 'restart') ?>
-        <?= $form->field($model, 'kill') ?>
+        <?= $form->field($model, 'restart_after_max_duration') ?>
+        <?= $form->field($model, 'kill_process_after_max_duration') ?>
         <?= $form->buttons() ?>
     <?php SearchForm::end() ?>
 </div>

@@ -29,8 +29,8 @@ if (Yii::$app->controller->module->onlyMigrations) {
             'alias',
             'description',
             'max_duration',
-            'restart',
-            'kill',
+            'restart_after_max_duration',
+            'kill_process_after_max_duration',
         ],
     ]) ?>
 </div>

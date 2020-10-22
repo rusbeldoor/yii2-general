@@ -18,7 +18,7 @@ class CronSearch extends Cron
     public function rules()
     {
         return [
-            [['id', 'max_duration', 'restart', 'kill', 'active'], 'integer'],
+            [['id', 'max_duration', 'restart_after_max_duration', 'kill_process_after_max_duration', 'active'], 'integer'],
             [['alias', 'description', 'status'], 'safe'],
         ];
     }
@@ -60,8 +60,8 @@ class CronSearch extends Cron
         $query->andFilterWhere([
             'id' => $this->id,
             'max_duration' => $this->max_duration,
-            'restart' => $this->restart,
-            'kill' => $this->kill,
+            'restart_after_max_duration' => $this->restart_after_max_duration,
+            'kill_process_after_max_duration' => $this->kill_process_after_max_duration,
             'active' => $this->active,
         ]);
 
