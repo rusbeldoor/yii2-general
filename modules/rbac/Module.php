@@ -21,7 +21,7 @@ class Module extends \backend\components\Module
     {
         parent::init();
 
-        AppHelper::forbiddenExceptionIfNotHavePermission('rusbeldoor_rbac');
+        AppHelper::forbiddenExceptionIfNotHavePermission('rusbeldoor-rbac');
 
         if (isset(Yii::$app->params['rusbeldoor']['yii2General']['rbac']['onlyMigrations'])) {
             $this->onlyMigrations = Yii::$app->params['rusbeldoor']['yii2General']['rbac']['onlyMigrations'];
