@@ -5,10 +5,10 @@ namespace rusbeldoor\yii2General\modules\cron\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-use rusbeldoor\yii2General\common\models\Cron;
+use rusbeldoor\yii2General\models\Cron;
 
 /**
- * CronSearch represents the model behind the search form of `rusbeldoor\yii2General\common\models\Cron`.
+ * CronSearch represents the model behind the search form of `rusbeldoor\yii2General\models\Cron`.
  */
 class CronSearch extends Cron
 {

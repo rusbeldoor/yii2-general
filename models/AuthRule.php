@@ -1,23 +1,23 @@
 <?php
 
-namespace rusbeldoor\yii2General\common\models;
+namespace rusbeldoor\yii2General\models;
 
 use yii;
 
 /**
- * User_subscription_key (ActiveRecord)
+ * Auth_rule (ActiveRecord)
  *
  * @property $id int
- * @property $alias string
  * @property $name string
+ * @property $data resource|null
  */
-class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
+class AuthRule extends \rusbeldoor\yii2General\models\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
-    { return 'user_subscription_key'; }
+    { return 'auth_rule'; }
 
     /**
      * {@inheritdoc}
@@ -25,9 +25,11 @@ class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
     public function rules()
     {
         return [
-            [['alias', 'name'], 'required'],
-            [['alias', 'name'], 'string', 'max' => 128],
-            [['alias'], 'unique'],
+            [['name'], 'required'],
+            [['data'], 'string'],
+            self::getRuleString(['name'], ['max' => 96]),
+            self::getRuleMatchAlias(['name']),
+            [['name'], 'unique'],
         ];
     }
 
@@ -38,18 +40,18 @@ class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
     {
         return [
             'id' => 'Ид',
-            'alias' => 'Алиас',
-            'name' => 'Название',
+            'name' => 'Алиас',
+            'data' => 'Data',
         ];
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return UserSubscriptionKeyQuery the active query used by this AR class.
+     * @return AuthRuleQuery the active query used by this AR class.
      */
     public static function find()
-    { return new UserSubscriptionKeyQuery(get_called_class()); }
+    { return new AuthRuleQuery(get_called_class()); }
 
     /**
      * Перед удалением

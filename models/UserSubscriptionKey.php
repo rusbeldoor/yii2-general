@@ -1,23 +1,23 @@
 <?php
 
-namespace rusbeldoor\yii2General\common\models;
+namespace rusbeldoor\yii2General\models;
 
 use yii;
 
 /**
- * User_subscription_channel (ActiveRecord)
+ * User_subscription_key (ActiveRecord)
  *
  * @property $id int
  * @property $alias string
  * @property $name string
  */
-class UserSubscriptionChannel extends \rusbeldoor\yii2General\models\ActiveRecord
+class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
-    { return 'user_subscription_channel'; }
+    { return 'user_subscription_key'; }
 
     /**
      * {@inheritdoc}
@@ -26,7 +26,7 @@ class UserSubscriptionChannel extends \rusbeldoor\yii2General\models\ActiveRecor
     {
         return [
             [['alias', 'name'], 'required'],
-            [['alias', 'name'], 'string', 'max' => 32],
+            [['alias', 'name'], 'string', 'max' => 128],
             [['alias'], 'unique'],
         ];
     }
@@ -46,10 +46,10 @@ class UserSubscriptionChannel extends \rusbeldoor\yii2General\models\ActiveRecor
     /**
      * {@inheritdoc}
      *
-     * @return UserSubscriptionChannelQuery the active query used by this AR class.
+     * @return UserSubscriptionKeyQuery the active query used by this AR class.
      */
     public static function find()
-    { return new UserSubscriptionChannelQuery(get_called_class()); }
+    { return new UserSubscriptionKeyQuery(get_called_class()); }
 
     /**
      * Перед удалением

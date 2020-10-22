@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\common\models;
+namespace rusbeldoor\yii2General\models;
 
 /**
  * Cron (ActiveQuery)

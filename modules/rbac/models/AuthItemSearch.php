@@ -5,10 +5,10 @@ namespace rusbeldoor\yii2General\modules\rbac\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-use rusbeldoor\yii2General\common\models\AuthItem;
+use rusbeldoor\yii2General\models\AuthItem;
 
 /**
- * AuthItemSearch represents the model behind the search form of `rusbeldoor\yii2General\common\models\AuthItem`.
+ * AuthItemSearch represents the model behind the search form of `rusbeldoor\yii2General\models\AuthItem`.
  */
 class AuthItemSearch extends AuthItem
 {
