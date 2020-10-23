@@ -1,5 +1,4 @@
 <?php
-
 namespace rusbeldoor\yii2General\models;
 
 use yii;

@@ -1,5 +1,4 @@
 <?php
-
 namespace rusbeldoor\yii2General\modules\subscriptions;
 
 use yii;

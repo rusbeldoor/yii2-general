@@ -1,5 +1,4 @@
 <?php
-
 namespace rusbeldoor\yii2General\common\assets\bootswatch;
 
 /**

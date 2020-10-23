@@ -1,5 +1,4 @@
 <?php
-
 namespace rusbeldoor\yii2General\modules\rbac\models;
 
 use yii\base\Model;
