@@ -125,8 +125,11 @@ class DefaultController extends \frontend\components\Controller
 
     /**
      * Отписка от подписки
+     *
+     * @param $active
+     * @return void
      */
-    public function actionUnsubscribe()
+    public function actionChange($active)
     {
         AppHelper::exitIfNotPostRequest();
 
@@ -159,16 +162,16 @@ class DefaultController extends \frontend\components\Controller
         $userSubscription = UserSubscription::find()->userId($post['userId'])->keyId($userSubscriptionKey->id)->channelId($userSubscriptionChannel->id)->one();
         // Если подписка на рассылки существует
         if ($userSubscription) {
-            // Деактивируем подписку на рассылки
-            $userSubscription->active = 0;
+            // Изменяем (активируем или деактивируем) подписку на рассылки
+            $userSubscription->active = $active;
             $userSubscription->update();
         } else {
-            // Добавляем не активную подписку на рассылки
+            // Добавляем активную или не активную подписку на рассылки
             $userSubscription = new UserSubscription();
             $userSubscription->key_id = $user->id;
             $userSubscription->key_id = $userSubscriptionKey->id;
             $userSubscription->channel_id = $userSubscriptionChannel->id;
-            $userSubscription->active = 0;
+            $userSubscription->active = $active;
             $userSubscription->save();
         }
 

@@ -33,7 +33,7 @@ function writeElems($elems, $userId) {
                         case 'telegram': $iconClass = 'fab fa-telegram-plane'; break;
                         default: $iconClass = (($channel['active']) ? 'far fa-frown' : 'far fa-smile');
                     }
-                    ?><?= Html::beginForm('/subscriptions/default/' . (($channel['active']) ? 'unsubscribe' : 'subscribe'), 'post'); ?>
+                    ?><?= Html::beginForm('/subscriptions/default/change/active/' . (($channel['active']) ? '0' : '1'), 'post'); ?>
                         <?= Html::input('hidden', 'userId', $userId) ?>
                         <?= Html::input('hidden', 'keyAlias', $key['alias']) ?>
                         <?= Html::input('hidden', 'channelAlias', $channel['alias']) ?>
@@ -55,10 +55,10 @@ $this->registerJs(
     $(\'.unsubscribe\').click(function () {
         confirmDialog({
             text: \'Вы уверены, что хотите отписаться?\',
-            confirmCallback: () => { $(this).parent(\'form\').submit(); }
+            confirmCallback: () => { $(this).closest(\'form\').submit(); }
         });
     });
-    $(\'.subscribe\').click(function () { $(this).parent(\'form\').submit(); });
+    $(\'.subscribe\').click(function () { $(this).closest(\'form\').submit(); });
 });'
 );
 ?>
