@@ -33,11 +33,12 @@ function writeElems($elems, $userId) {
                         case 'telegram': $iconClass = 'fab fa-telegram-plane'; break;
                         default: $iconClass = (($channel['active']) ? 'far fa-frown' : 'far fa-smile');
                     }
-                    ?><?= Html::beginForm('/subscriptions/default/change/active/' . (($channel['active']) ? '0' : '1'), 'post'); ?>
+                    ?><?= Html::beginForm('/subscriptions/default/change', 'post'); ?>
                         <?= Html::input('hidden', 'userId', $userId) ?>
                         <?= Html::input('hidden', 'keyAlias', $key['alias']) ?>
                         <?= Html::input('hidden', 'channelAlias', $channel['alias']) ?>
                         <?= Html::input('hidden', 'hash', SubscriptionHelper::hash($userId, $key['alias'], $channel['alias'])) ?>
+                        <?= Html::input('hidden', 'active', (($channel['active']) ? '0' : '1')) ?>
                         <?= Html::input('hidden', 'redirectUrl', Yii::$app->request->url) ?>
                         <p><button type="button" class="btn btn-<?= (($channel['active']) ? 'light' : 'primary') ?> unsubscribe subscribe"><?= (($iconClass) ? '<i class="' . $iconClass . '"></i>&nbsp;' : '') ?> <?= (($channel['active']) ? 'Отписаться от рассылок' : 'Подписаться на рассылки') ?> по "<?= $channel['name'] ?>"</button></p>
                     <?= Html::endForm(); ?><?

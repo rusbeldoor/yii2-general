@@ -129,7 +129,7 @@ class DefaultController extends \frontend\components\Controller
      * @param $active
      * @return void
      */
-    public function actionChange($active)
+    public function actionChange()
     {
         AppHelper::exitIfNotPostRequest();
 
@@ -140,6 +140,7 @@ class DefaultController extends \frontend\components\Controller
             || !isset($post['keyAlias'])
             || !isset($post['channelAlias'])
             || !isset($post['hash'])
+            || !isset($post['active'])
             || !isset($post['redirectUrl'])
         ) { return AppHelper::redirectWitchFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
 
@@ -163,7 +164,7 @@ class DefaultController extends \frontend\components\Controller
         // Если подписка на рассылки существует
         if ($userSubscription) {
             // Изменяем (активируем или деактивируем) подписку на рассылки
-            $userSubscription->active = $active;
+            $userSubscription->active = $post['active'];
             $userSubscription->update();
         } else {
             // Добавляем активную или не активную подписку на рассылки
@@ -171,7 +172,7 @@ class DefaultController extends \frontend\components\Controller
             $userSubscription->key_id = $user->id;
             $userSubscription->key_id = $userSubscriptionKey->id;
             $userSubscription->channel_id = $userSubscriptionChannel->id;
-            $userSubscription->active = $active;
+            $userSubscription->active = $post['active'];
             $userSubscription->save();
         }
 
