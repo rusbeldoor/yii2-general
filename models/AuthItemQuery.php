@@ -7,7 +7,7 @@ namespace rusbeldoor\yii2General\models;
  *
  * @see AuthItem
  */
-class AuthItemQuery extends \rusbeldoor\yii2General\models\ActiveQuery
+class AuthItemQuery extends ActiveQuery
 {
     /**
      * Тип роли

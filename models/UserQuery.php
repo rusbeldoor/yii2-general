@@ -7,6 +7,6 @@ namespace rusbeldoor\yii2General\models;
  *
  * @see User
  */
-class UserQuery extends \rusbeldoor\yii2General\models\ActiveQuery
+class UserQuery extends ActiveQuery
 {
 }

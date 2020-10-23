@@ -11,7 +11,7 @@ use yii;
  * @property $name string
  * @property $data resource|null
  */
-class AuthRule extends \rusbeldoor\yii2General\models\ActiveRecord
+class AuthRule extends ActiveRecord
 {
     /**
      * {@inheritdoc}

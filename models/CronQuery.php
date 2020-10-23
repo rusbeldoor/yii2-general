@@ -7,6 +7,6 @@ namespace rusbeldoor\yii2General\models;
  *
  * @see Cron
  */
-class CronQuery extends \rusbeldoor\yii2General\models\ActiveQuery
+class CronQuery extends ActiveQuery
 {
 }

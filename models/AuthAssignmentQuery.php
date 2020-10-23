@@ -7,6 +7,6 @@ namespace rusbeldoor\yii2General\models;
  *
  * @see AuthAssignment
  */
-class AuthAssignmentQuery extends \rusbeldoor\yii2General\models\ActiveQuery
+class AuthAssignmentQuery extends ActiveQuery
 {
 }

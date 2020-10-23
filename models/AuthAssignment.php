@@ -9,7 +9,7 @@ namespace rusbeldoor\yii2General\models;
  * @property $item_name string
  * @property $user_id int
  */
-class AuthAssignment extends \rusbeldoor\yii2General\models\ActiveRecord
+class AuthAssignment extends ActiveRecord
 {
     /**
      * {@inheritdoc}

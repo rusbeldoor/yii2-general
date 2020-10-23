@@ -16,7 +16,7 @@ use yii;
  * @property $restart int
  * @property $active int
  */
-class Cron extends \rusbeldoor\yii2General\models\ActiveRecord
+class Cron extends ActiveRecord
 {
     /**
      * {@inheritdoc}

@@ -7,7 +7,7 @@ namespace rusbeldoor\yii2General\models;
  *
  * @see AuthItemChild
  */
-class AuthItemChildQuery extends \rusbeldoor\yii2General\models\ActiveQuery
+class AuthItemChildQuery extends ActiveQuery
 {
     /**
      * Родительский элемент

@@ -7,7 +7,7 @@ namespace rusbeldoor\yii2General\models;
  *
  * @see UserSubscriptionChannel
  */
-class UserSubscriptionChannelQuery extends \rusbeldoor\yii2General\models\ActiveQuery
+class UserSubscriptionChannelQuery extends ActiveQuery
 {
     /**
      * ...

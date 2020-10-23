@@ -11,7 +11,7 @@ use yii;
  * @property $alias string
  * @property $name string
  */
-class UserSubscriptionKey extends \rusbeldoor\yii2General\models\ActiveRecord
+class UserSubscriptionKey extends ActiveRecord
 {
     /**
      * {@inheritdoc}

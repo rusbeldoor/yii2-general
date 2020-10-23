@@ -11,7 +11,7 @@ use yii;
  * @property $parent string
  * @property $child string
  */
-class AuthItemChild extends \rusbeldoor\yii2General\models\ActiveRecord
+class AuthItemChild extends ActiveRecord
 {
     /**
      * {@inheritdoc}

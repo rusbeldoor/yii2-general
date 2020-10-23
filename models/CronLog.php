@@ -14,7 +14,7 @@ use yii;
  * @property $datetime_complete string|null
  * @property $pid string|null
  */
-class CronLog extends \rusbeldoor\yii2General\models\ActiveRecord
+class CronLog extends ActiveRecord
 {
     /**
      * {@inheritdoc}

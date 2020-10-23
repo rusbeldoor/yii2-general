@@ -9,7 +9,7 @@ use yii;
  *
  * ...
  */
-class User extends \rusbeldoor\yii2General\models\ActiveRecord implements yii\web\IdentityInterface
+class User extends ActiveRecord implements yii\web\IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -36,7 +36,7 @@ class User extends \rusbeldoor\yii2General\models\ActiveRecord implements yii\we
     /**
      * {@inheritdoc}
      *
-     * @return UserSubscriptionQuery the active query used by this AR class.
+     * @return UserQuery the active query used by this AR class.
      */
     public static function find()
     { return new UserQuery(get_called_class()); }

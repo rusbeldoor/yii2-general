@@ -13,7 +13,7 @@ use yii;
  * @property $channel_id int
  * @property $active int
  */
-class UserSubscription extends \rusbeldoor\yii2General\models\ActiveRecord
+class UserSubscription extends ActiveRecord
 {
     /**
      * {@inheritdoc}
