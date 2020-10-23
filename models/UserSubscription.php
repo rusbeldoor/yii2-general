@@ -11,6 +11,7 @@ use yii;
  * @property $user_id int
  * @property $key_id int
  * @property $channel_id int
+ * @property $active int
  */
 class UserSubscription extends \rusbeldoor\yii2General\models\ActiveRecord
 {
@@ -27,7 +28,7 @@ class UserSubscription extends \rusbeldoor\yii2General\models\ActiveRecord
     {
         return [
             [['user_id', 'key_id', 'channel_id'], 'required'],
-            [['user_id', 'key_id', 'channel_id'], 'integer'],
+            [['user_id', 'key_id', 'channel_id', 'active'], 'integer'],
             [['user_id', 'key_id', 'channel_id'], 'unique', 'targetAttribute' => ['user_id', 'key_id', 'channel_id']],
             [['channel_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionChannel::className(), 'targetAttribute' => ['channel_id' => 'id']],
             [['key_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionKey::className(), 'targetAttribute' => ['key_id' => 'id']],

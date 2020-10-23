@@ -28,6 +28,17 @@ class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
         ]);
         $this->createIndex('unique', 'user_subscription_channel', 'channel', true);
 
+        $this->insert('user_subscription_channel', ['alias' => 'email', 'name' => 'Электронная почта']);
+        $this->insert('user_subscription_channel', ['alias' => 'sms', 'name' => 'СМС']);
+        $this->insert('user_subscription_channel', ['alias' => 'vkontakte', 'name' => 'ВКонтакте']);
+        $this->insert('user_subscription_channel', ['alias' => 'odnoklassniki', 'name' => 'Одноклассники']);
+        $this->insert('user_subscription_channel', ['alias' => 'facebook', 'name' => 'Facebook']);
+        $this->insert('user_subscription_channel', ['alias' => 'instagram', 'name' => 'Instagram']);
+        $this->insert('user_subscription_channel', ['alias' => 'whatsapp', 'name' => 'WhatsApp']);
+        $this->insert('user_subscription_channel', ['alias' => 'viber', 'name' => 'Viber']);
+        $this->insert('user_subscription_channel', ['alias' => 'telegram', 'name' => 'Telegram']);
+        $this->insert('user_subscription_channel', ['alias' => 'browser', 'name' => 'Уведомления от браузера']);
+
         // Таблица подписок пользователя
         $this->createTable('user_subscription', [
             'id' => $this->primaryKey(11)->unsigned(),
