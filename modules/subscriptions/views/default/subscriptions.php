@@ -17,7 +17,7 @@ function writeElems($elems, $userId) {
     foreach ($elems as $key) {
         if (count($key['channels'])) {
             ?><div class="card" style="float: left; margin: 0 10px 10px 0;">
-            < class="card-body">
+            <div class="card-body">
                 <h5 class="card-title"><?= $key['name'] ?></h5><?
                 foreach ($key['channels'] as $channel) {
                     $iconClass = null;
