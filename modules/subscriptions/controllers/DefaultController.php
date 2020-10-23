@@ -2,13 +2,15 @@
 
 namespace rusbeldoor\yii2General\modules\subscriptions\controllers;
 
-use rusbeldoor\yii2General\helpers\SubscriptionHelper;
 use yii;
-use rusbeldoor\yii2General\models\UserSubscriptionChannel;
-use rusbeldoor\yii2General\models\UserSubscriptionKey;
+
+use rusbeldoor\yii2General\models\User;
 use rusbeldoor\yii2General\models\UserSubscription;
+use rusbeldoor\yii2General\models\UserSubscriptionKey;
+use rusbeldoor\yii2General\models\UserSubscriptionChannel;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 use rusbeldoor\yii2General\helpers\AppHelper;
+use rusbeldoor\yii2General\helpers\SubscriptionHelper;
 
 /**
  * Управление подписками на рассылки
@@ -141,6 +143,10 @@ class DefaultController extends \frontend\components\Controller
         // Проверяем хэш
         if ($post['hash'] != SubscriptionHelper::hash($post['userId'], $post['keyAlias'], $post['channelAlias'])) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
+        // Пользователь
+        $user = User::find($post['userId'])->one();
+        if (!$user) { return AppHelper::redirectWitchFlash('/', 'danger', 'Пользователь (#' . $post['userId'] . ') не найден.'); }
+
         // Ключ
         $userSubscriptionKey = UserSubscriptionKey::find()->alias($post['keyAlias'])->one();
         if (!$userSubscriptionKey) { return AppHelper::redirectWitchFlash('/', 'danger', 'Ключ подписки (' . $post['keyAlias'] . ') не найден.'); }
@@ -149,8 +155,22 @@ class DefaultController extends \frontend\components\Controller
         $userSubscriptionChannel = UserSubscriptionChannel::find()->alias($post['channelAlias'])->one();
         if (!$userSubscriptionChannel) { return AppHelper::redirectWitchFlash('/', 'danger', 'Канал подписки (#' . $post['channelAlias'] . ') не найден.'); }
 
-        // Удаляем подписку
-        UserSubscription::deleteAll(['user_id' => $post['userId'], 'key_id' => $userSubscriptionKey->id, 'channel_id' => $userSubscriptionChannel->id]);
+        // Подписка на рассылки
+        $userSubscription = UserSubscription::find()->userId($post['userId'])->keyId($userSubscriptionKey->id)->channelId($userSubscriptionChannel->id)->one();
+        // Если подписка на рассылки существует
+        if ($userSubscription) {
+            // Деактивируем подписку на рассылки
+            $userSubscription->active = 0;
+            $userSubscription->update();
+        } else {
+            // Добавляем не активную подписку на рассылки
+            $userSubscription = new UserSubscription();
+            $userSubscription->key_id = $user->id;
+            $userSubscription->key_id = $userSubscriptionKey->id;
+            $userSubscription->channel_id = $userSubscriptionChannel->id;
+            $userSubscription->active = 0;
+            $userSubscription->save();
+        }
 
         // Возвращаемся по переданному адресу
         AppHelper::redirectWitchFlash($post['redirectUrl'], 'success', 'Вы успешно отписались от "' . $userSubscriptionKey->name . '" (' . $userSubscriptionChannel->name . ').');
