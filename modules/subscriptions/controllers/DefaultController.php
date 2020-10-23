@@ -177,6 +177,6 @@ class DefaultController extends \frontend\components\Controller
         }
 
         // Возвращаемся по переданному адресу
-        AppHelper::redirectWitchFlash($post['redirectUrl'], 'success', 'Вы успешно отписались от "' . $userSubscriptionKey->name . '" (' . $userSubscriptionChannel->name . ').');
+        AppHelper::redirectWitchFlash($post['redirectUrl'], 'success', 'Вы успешно ' . (($post['active']) ? 'подписались на' : 'отписались от') . ' "' . $userSubscriptionKey->name . '" (' . $userSubscriptionChannel->name . ').');
     }
 }
