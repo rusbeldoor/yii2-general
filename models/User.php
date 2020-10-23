@@ -8,8 +8,12 @@ use yii;
  *
  * ...
  */
-class User extends ActiveRecord implements yii\web\IdentityInterface
+class User extends ActiveRecord
 {
+    const STATUS_DELETED = 0;
+    const STATUS_INACTIVE = 9;
+    const STATUS_ACTIVE = 10;
+
     /**
      * {@inheritdoc}
      */
@@ -21,7 +25,10 @@ class User extends ActiveRecord implements yii\web\IdentityInterface
      */
     public function rules()
     {
-        return [/* ... */];
+        return [
+            ['status', 'default', 'value' => self::STATUS_INACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+        ];
     }
 
     /**
