@@ -45,7 +45,7 @@ class SubscriptionHelper
             case 'whatsapp': $channelIconClass = 'fab fa-whatsapp'; break;
             case 'viber': $channelIconClass = 'fab fa-viber'; break;
             case 'telegram': $channelIconClass = 'fab fa-telegram-plane'; break;
-            default: return '';
+            default: $channelIconClass = 'far fa-comment-alt';
         }
         return '<i class="' . $channelIconClass . '"></i>';
     }
