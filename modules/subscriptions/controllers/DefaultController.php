@@ -80,14 +80,26 @@ class DefaultController extends \frontend\components\Controller
 
                 // Если такого ключа еще не встречалось
                 if (!isset($pointer[$currentKeyAlias])) {
+                    $id = $alias = $name = null;
+                    if (!isset($allUserSubscriptionKeysByAlias[$currentKeyAlias])) {
+                        $id = $allUserSubscriptionKeysByAlias[$currentKeyAlias]->id;
+                        $alias = $allUserSubscriptionKeysByAlias[$currentKeyAlias]->alias;
+                        $name = $allUserSubscriptionKeysByAlias[$currentKeyAlias]->name;
+                    }
                     // Добавляем ключ
                     $pointer[$currentKeyAlias] = [
-                        'id' => $allUserSubscriptionKeysByAlias[$currentKeyAlias]->id, // Ид
-                        'alias' => $allUserSubscriptionKeysByAlias[$currentKeyAlias]->alias, // Алиас
-                        'name' => $allUserSubscriptionKeysByAlias[$currentKeyAlias]->name, // Название
+                        'id' => $id, // Ид
+                        'alias' => $alias, // Алиас
+                        'name' => $name, // Название
                         'childKeys' => [], // Дочерние ключи
                         'channels' => [], // Каналы
                     ];
+                } else {
+                    if (isset($allUserSubscriptionKeysByAlias[$currentKeyAlias])) {
+                        if ($pointer[$currentKeyAlias]['id'] === null) { $pointer[$currentKeyAlias]['id'] = $allUserSubscriptionKeysByAlias[$currentKeyAlias]->id; }
+                        if ($pointer[$currentKeyAlias]['alias'] === null) { $pointer[$currentKeyAlias]['alias'] = $allUserSubscriptionKeysByAlias[$currentKeyAlias]->alias; }
+                        if ($pointer[$currentKeyAlias]['name'] === null) { $pointer[$currentKeyAlias]['name'] = $allUserSubscriptionKeysByAlias[$currentKeyAlias]->name; }
+                    }
                 }
 
                 // Передвигаем указатель
