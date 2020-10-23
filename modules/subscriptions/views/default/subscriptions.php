@@ -40,7 +40,7 @@ function writeElems($elems, $userId) {
                         <?= Html::input('hidden', 'hash', SubscriptionHelper::hash($userId, $key['alias'], $channel['alias'])) ?>
                         <?= Html::input('hidden', 'active', (($channel['active']) ? '0' : '1')) ?>
                         <?= Html::input('hidden', 'redirectUrl', Yii::$app->request->url) ?>
-                        <p><button type="button" class="btn btn-<?= (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') ?> "><?= (($iconClass) ? '<i class="' . $iconClass . '"></i>&nbsp;' : '') ?><?= $channel['name'] ?>, <?= (($channel['active']) ? 'отписаться от рассылок' : 'подписаться на рассылки') ?></button></p>
+                        <p><button type="button" class="btn btn-<?= (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') ?> "><?= (($iconClass) ? '<i class="' . $iconClass . '"></i>&nbsp;' : '') ?><?= $channel['name'] ?>: <?= (($channel['active']) ? 'отписаться' : 'подписаться') ?></button></p>
                     <?= Html::endForm(); ?><?
                 }
             ?></div>
