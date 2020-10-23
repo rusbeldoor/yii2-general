@@ -17,7 +17,7 @@ function writeElems($elems, $userId) {
     foreach ($elems as $key) {
         if (count($key['channels'])) {
             ?><div class="card" style="float: left; margin: 0 10px 10px 0;">
-            <div class="card-body">
+            < class="card-body">
                 <h5 class="card-title"><?= $key['name'] ?></h5><?
                 foreach ($key['channels'] as $channel) {
                     $iconClass = null;
@@ -39,7 +39,7 @@ function writeElems($elems, $userId) {
                         <?= Html::input('hidden', 'channelAlias', $channel['alias']) ?>
                         <?= Html::input('hidden', 'hash', SubscriptionHelper::hash($userId, $key['alias'], $channel['alias'])) ?>
                         <?= Html::input('hidden', 'redirectUrl', Yii::$app->request->url) ?>
-                        <button type="button" class="btn btn-<?= (($channel['active']) ? 'light' : 'primary') ?> unsubscribe subscribe"><?= (($iconClass) ? '<i class="' . $iconClass . '"></i>&nbsp;' : '') ?> <?= (($channel['active']) ? 'Отписаться' : 'Подписаться') ?> от рассылки по "<?= $channel['name'] ?>"</button>
+                        <p><button type="button" class="btn btn-<?= (($channel['active']) ? 'light' : 'primary') ?> unsubscribe subscribe"><?= (($iconClass) ? '<i class="' . $iconClass . '"></i>&nbsp;' : '') ?> <?= (($channel['active']) ? 'Отписаться' : 'Подписаться') ?> от рассылки по "<?= $channel['name'] ?>"</button></>
                     <?= Html::endForm(); ?><?
                 }
             ?></div>
