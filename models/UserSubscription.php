@@ -44,6 +44,7 @@ class UserSubscription extends \rusbeldoor\yii2General\models\ActiveRecord
             'user_id' => 'Пользователь',
             'key_id' => 'Ключ',
             'channel_id' => 'Канал',
+            'active' => 'Активный',
         ];
     }
 
