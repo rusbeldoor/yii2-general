@@ -20,7 +20,6 @@ function writeElems($elems, $userId) {
             <div class="card-body">
                 <h5 class="card-title"><?= $key['name'] ?></h5><?
                 foreach ($key['channels'] as $channel) {
-                    $iconClass = (($channel['active']) ? 'far fa-frown' : 'far fa-smile');
                     $channelIconClass = null;
                     switch ($channel['alias']) {
                         case 'email': $channelIconClass = 'fas fa-envelope'; break;
@@ -41,7 +40,7 @@ function writeElems($elems, $userId) {
                         <?= Html::input('hidden', 'hash', SubscriptionHelper::hash($userId, $key['alias'], $channel['alias'])) ?>
                         <?= Html::input('hidden', 'active', (($channel['active']) ? '0' : '1')) ?>
                         <?= Html::input('hidden', 'redirectUrl', Yii::$app->request->url) ?>
-                        <p><button type="button" class="btn btn-<?= (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') ?> "><?= (($channelIconClass) ? '<i class="' . $channelIconClass . '"></i>&nbsp;' : '') ?> <?= $channel['name'] ?> - <i class="<?= $iconClass ?>"></i>&nbsp;<?= (($channel['active']) ? 'Отписаться' : 'Подписаться') ?></button></p>
+                        <p><button type="button" class="btn btn-<?= (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') ?> "><?= (($channelIconClass) ? '<i class="' . $channelIconClass . '"></i>&nbsp;' : '') ?> <?= $channel['name'] ?> — <?= (($channel['active']) ? 'отписаться' : 'подписаться') ?></button></p>
                     <?= Html::endForm(); ?><?
                 }
             ?></div>
@@ -56,7 +55,7 @@ $this->registerJs(
 '$(document).ready(function () {
     $(\'.unsubscribe\').click(function () {
         confirmDialog({
-            text: \'Вы уверены, что хотите отписаться?\',
+            text: \'Вы уверены, что хотите отписаться? <i class="far fa-frown"></i>\',
             confirmCallback: () => { $(this).closest(\'form\').submit(); }
         });
     });
