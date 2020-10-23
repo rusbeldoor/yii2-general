@@ -107,6 +107,7 @@ class DefaultController extends \frontend\components\Controller
                 'id' => $userSubscription->channel_id,
                 'alias' => $allUserSubscriptionChannelsById[$userSubscription->channel_id]->alias,
                 'name' => $allUserSubscriptionChannelsById[$userSubscription->channel_id]->name,
+                'active' => $userSubscription->active,
             ];
         }
 
