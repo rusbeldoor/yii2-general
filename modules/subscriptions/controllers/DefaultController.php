@@ -3,13 +3,14 @@ namespace rusbeldoor\yii2General\modules\subscriptions\controllers;
 
 use yii;
 
-use rusbeldoor\yii2General\models\User;
 use rusbeldoor\yii2General\models\UserSubscription;
 use rusbeldoor\yii2General\models\UserSubscriptionKey;
 use rusbeldoor\yii2General\models\UserSubscriptionChannel;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 use rusbeldoor\yii2General\helpers\AppHelper;
 use rusbeldoor\yii2General\helpers\SubscriptionHelper;
+
+use common\models\User;
 
 /**
  * Управление подписками на рассылки
