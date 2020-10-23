@@ -20,19 +20,7 @@ function writeElems($elems, $userId) {
             <div class="card-body">
                 <h5 class="card-title"><?= $key['name'] ?></h5><?
                 foreach ($key['channels'] as $channel) {
-                    $channelIconClass = null;
-                    switch ($channel['alias']) {
-                        case 'email': $channelIconClass = 'fas fa-envelope'; break;
-                        case 'sms': $channelIconClass = 'fas fa-sms'; break;
-                        case 'vkontakte': $channelIconClass = 'fab fa-vk'; break;
-                        case 'odnoklassniki': $channelIconClass = 'fab fa-odnoklassniki'; break;
-                        case 'facebook': $channelIconClass = 'fab fa-facebook-f'; break;
-                        case 'instagram': $channelIconClass = 'fab fa-instagram'; break;
-                        case 'whatsapp': $channelIconClass = 'fab fa-whatsapp'; break;
-                        case 'viber': $channelIconClass = 'fab fa-viber'; break;
-                        case 'telegram': $channelIconClass = 'fab fa-telegram-plane'; break;
-                        default:
-                    }
+                    $channelIcon = SubscriptionHelper::channelIcon($channel['alias']);
                     ?><?= Html::beginForm('/subscriptions/default/change', 'post'); ?>
                         <?= Html::input('hidden', 'userId', $userId) ?>
                         <?= Html::input('hidden', 'keyAlias', $key['alias']) ?>
@@ -40,7 +28,7 @@ function writeElems($elems, $userId) {
                         <?= Html::input('hidden', 'hash', SubscriptionHelper::hash($userId, $key['alias'], $channel['alias'])) ?>
                         <?= Html::input('hidden', 'active', (($channel['active']) ? '0' : '1')) ?>
                         <?= Html::input('hidden', 'redirectUrl', Yii::$app->request->url) ?>
-                        <p><button type="button" class="btn btn-<?= (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') ?> "><?= (($channelIconClass) ? '<i class="' . $channelIconClass . '"></i>&nbsp;' : '') ?> <?= $channel['name'] ?> — <?= (($channel['active']) ? 'отписаться' : 'подписаться') ?></button></p>
+                        <p><button type="button" class="btn btn-<?= (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') ?> "><?= (($channelIcon) ? $channelIcon . '&nbsp;' : '') ?> <?= $channel['name'] ?> — <?= (($channel['active']) ? 'отписаться' : 'подписаться') ?></button></p>
                     <?= Html::endForm(); ?><?
                 }
             ?></div>
