@@ -30,7 +30,7 @@ function writeElems($elems, $userId) {
                         case 'instagram': $iconClass = 'fab fa-instagram'; break;
                         case 'whatsapp': $iconClass = 'fab fa-whatsapp'; break;
                         case 'viber': $iconClass = 'fab fa-viber'; break;
-                        case 'telegram': $iconClass = 'fa-telegram-plane'; break;
+                        case 'telegram': $iconClass = 'fab fa-telegram-plane'; break;
                         default: $iconClass = (($channel['active']) ? 'far fa-frown' : 'far fa-smile');
                     }
                     ?><?= Html::beginForm('/subscriptions/default/' . (($channel['active']) ? 'unsubscribe' : 'subscribe'), 'post'); ?>
