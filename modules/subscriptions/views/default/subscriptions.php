@@ -33,7 +33,7 @@ function writeElems($elems, $userId) {
                         . '<button type="button" class="btn btn-' . (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') . ' " data-key-name="' . $key['name'] . '" data-channel-name="' . $channel['name'] . '">' . (($channelIcon) ? $channelIcon . '&nbsp;' : '') . ' ' . $channel['name'] . ' — ' . (($channel['active']) ? 'отписаться' : 'подписаться') . '</button>'
                     . Html::endForm();
                 }
-                echo implode('<br><br>', $buttons);
+                echo implode('<br>', $buttons);
             ?></div>
             </div><?
         }
