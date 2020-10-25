@@ -28,7 +28,7 @@ function writeElems($elems, $userId) {
                         <?= Html::input('hidden', 'hash', SubscriptionHelper::hash($userId, $key['alias'], $channel['alias'])) ?>
                         <?= Html::input('hidden', 'active', (($channel['active']) ? '0' : '1')) ?>
                         <?= Html::input('hidden', 'redirectUrl', Yii::$app->request->url) ?>
-                        <p><button type="button" class="btn btn-<?= (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') ?> "><?= (($channelIcon) ? $channelIcon . '&nbsp;' : '') ?> <?= $channel['name'] ?> — <?= (($channel['active']) ? 'отписаться' : 'подписаться') ?></button></p>
+                        <p><button type="button" class="btn btn-<?= (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') ?> " data-key-name="<?= $key['name'] ?>" data-channel-name="<?= $channel['name'] ?>"><?= (($channelIcon) ? $channelIcon . '&nbsp;' : '') ?> <?= $channel['name'] ?> — <?= (($channel['active']) ? 'отписаться' : 'подписаться') ?></button></p>
                     <?= Html::endForm(); ?><?
                 }
             ?></div>
@@ -43,7 +43,7 @@ $this->registerJs(
 '$(document).ready(function () {
     $(\'.unsubscribe\').click(function () {
         confirmDialog({
-            text: \'Вы уверены, что хотите отписаться? <i class="far fa-frown"></i>\',
+            text: \'Вы уверены, что хотите отписаться от "\' + $(this).data(\'key-name\') + \'" (\' + $(this).data(\'channel-name\') + \')? <i class="far fa-frown"></i>\',
             confirmCallback: () => { $(this).closest(\'form\').submit(); }
         });
     });
