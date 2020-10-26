@@ -23,7 +23,7 @@ function writeElems($elems, $userId) {
                 foreach ($key['channels'] as $channel) {
                     $channelIcon = SubscriptionHelper::channelIcon($channel['alias']);
                     $buttons[] =
-                        Html::beginForm('/subscriptions/default/change', 'post')
+                        Html::beginForm('/subscriptions/default/change', 'post', ['style' => 'padding-top: 5px;'])
                         . Html::input('hidden', 'userId', $userId)
                         . Html::input('hidden', 'keyAlias', $key['alias'])
                         . Html::input('hidden', 'channelAlias', $channel['alias'])
@@ -33,7 +33,7 @@ function writeElems($elems, $userId) {
                         . '<button type="button" class="btn btn-' . (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') . ' " data-key-name="' . $key['name'] . '" data-channel-name="' . $channel['name'] . '">' . (($channelIcon) ? $channelIcon . '&nbsp;' : '') . ' ' . $channel['name'] . ' — ' . (($channel['active']) ? 'отписаться' : 'подписаться') . '</button>'
                     . Html::endForm();
                 }
-                echo implode('<br>', $buttons);
+                echo implode('', $buttons);
             ?></div>
             </div><?
         }
