@@ -3,7 +3,7 @@ namespace rusbeldoor\yii2General\helpers;
 
 use yii;
 
-class SubscriptionHelper
+class UserSubscriptionHelper
 {
     /**
      * Хэш
