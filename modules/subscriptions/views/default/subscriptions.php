@@ -55,7 +55,7 @@ $this->registerJs(
 );
 ?>
 
-<p><a href="<?= SubscriptionHelper::link($userId) ?>">Другие подписки</a></p>
+<p><a href="<?= SubscriptionHelper::link($userId) ?>">Все подписки</a></p>
 <?
 if (count($result)) { writeElems($result, $userId); }
 else { echo '<p>Вы больше не подписаны на указанную рассылку.</p>'; }
