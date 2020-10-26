@@ -14,7 +14,7 @@ class UserSubscriptionKeyQuery extends ActiveQuery
      * @param $alias null|string
      * @return UserSubscriptionKeyQuery
      */
-    public function allChilds($alias)
+    public function allChildren($alias)
     {
         if ($alias === null) { return $this; }
         return $this->andWhere("alias LIKE '$alias%'");

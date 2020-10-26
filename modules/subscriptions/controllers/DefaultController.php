@@ -8,7 +8,7 @@ use rusbeldoor\yii2General\models\UserSubscriptionKey;
 use rusbeldoor\yii2General\models\UserSubscriptionChannel;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 use rusbeldoor\yii2General\helpers\AppHelper;
-use rusbeldoor\yii2General\helpers\SubscriptionHelper;
+use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;
 
 use common\models\User;
 
@@ -33,7 +33,7 @@ class DefaultController extends \frontend\components\Controller
         $channelsAliases = explode(',', $getChannelsAliases);
 
         // Проверяем хэш
-        if ($hash != SubscriptionHelper::hash($userId, $getKeyAlias, $getChannelsAliases)) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
+        if ($hash != UserSubscriptionHelper::hash($userId, $getKeyAlias, $getChannelsAliases)) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         $result = [
             'id' => '', // Ид
@@ -46,7 +46,7 @@ class DefaultController extends \frontend\components\Controller
         // Ключи
         $allUserSubscriptionKeys = UserSubscriptionKey::find()->all();
         $allUserSubscriptionKeysByAlias = ArrayHelper::arrayByField($allUserSubscriptionKeys, 'alias');
-        $userSubscriptionKeys = UserSubscriptionKey::find()->allChilds($getKeyAlias)->all();
+        $userSubscriptionKeys = UserSubscriptionKey::find()->allChildren($getKeyAlias)->all();
         $userSubscriptionKeysById = ArrayHelper::arrayByField($userSubscriptionKeys, 'id');
         $userSubscriptionKeysIds = array_keys($userSubscriptionKeysById);
 
@@ -145,7 +145,7 @@ class DefaultController extends \frontend\components\Controller
         ) { return AppHelper::redirectWitchFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
 
         // Проверяем хэш
-        if ($post['hash'] != SubscriptionHelper::hash($post['userId'], $post['keyAlias'], $post['channelAlias'])) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
+        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], $post['keyAlias'], $post['channelAlias'])) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         // Пользователь
         $user = User::find($post['userId'])->one();
