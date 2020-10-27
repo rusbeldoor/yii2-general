@@ -23,7 +23,6 @@ function writeElems($elems, $userId) {
                 foreach ($key['channels'] as $channel) {
                     $channelIcon = UserSubscriptionHelper::channelIcon($channel['alias']);
                     $buttons[] =
-<<<<<<< HEAD
                         Html::beginForm('/subscriptions/default/change', 'post')
                             . Html::input('hidden', 'userId', $userId)
                             . Html::input('hidden', 'keyAlias', $key['alias'])
@@ -33,17 +32,6 @@ function writeElems($elems, $userId) {
                             . Html::input('hidden', 'redirectUrl', Yii::$app->request->url)
                             . '<button type="button" class="btn btn-' . (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') . ' " data-key-name="' . $key['name'] . '" data-channel-name="' . $channel['name'] . '">' . (($channelIcon) ? $channelIcon . '&nbsp;' : '') . ' ' . $channel['name'] . ' — ' . (($channel['active']) ? 'отписаться' : 'подписаться') . '</button>'
                         . Html::endForm();
-=======
-                        Html::beginForm('/subscriptions/default/change', 'post', ['style' => 'padding-top: 5px;'])
-                        . Html::input('hidden', 'userId', $userId)
-                        . Html::input('hidden', 'keyAlias', $key['alias'])
-                        . Html::input('hidden', 'channelAlias', $channel['alias'])
-                        . Html::input('hidden', 'hash', UserSubscriptionHelper::hash($userId, $key['alias'], $channel['alias']))
-                        . Html::input('hidden', 'active', (($channel['active']) ? '0' : '1'))
-                        . Html::input('hidden', 'redirectUrl', Yii::$app->request->url)
-                        . '<button type="button" class="btn btn-' . (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') . ' " data-key-name="' . $key['name'] . '" data-channel-name="' . $channel['name'] . '">' . (($channelIcon) ? $channelIcon . '&nbsp;' : '') . ' ' . $channel['name'] . ' — ' . (($channel['active']) ? 'отписаться' : 'подписаться') . '</button>'
-                    . Html::endForm();
->>>>>>> b8b1b23355ef1c5c05a71aa3e98c23a918fc23b2
                 }
                 echo implode('', $buttons);
             ?></div>
