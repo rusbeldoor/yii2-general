@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m200101_000000_rusbeldoor_yii2General_rbac
+ * Class m200102_000000_rusbeldoor_yii2General_rbac
  */
-class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
+class m200102_000000_rusbeldoor_yii2General_rbac extends Migration
 {
     /**
      * {@inheritdoc}
@@ -56,6 +56,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
         ]);
         $this->createIndex('unique-item_name-user_id', 'auth_assignment', ['item_name', 'user_id'], true);
         $this->addForeignKey('fk-auth_assignment-auth_item', 'auth_assignment', 'item_name', 'auth_item', 'name');
+        $this->addForeignKey('fk-auth_assignment-user_id', 'user', 'user_id', 'user', 'id'); // Закомментировать, если таблица users лежит не в той же БД или имеет другое название
 
         // Создание ролей, операций
         $this->insert('auth_item', ['id' => 1, 'name' => 'administrator', 'type' => 1, 'description' => 'Адинистратор']);
@@ -68,7 +69,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
      */
     public function safeDown()
     {
-        echo "m200101_000000_rusbeldoor_yii2General_rbac cannot be reverted.\n";
+        echo "m200102_000000_rusbeldoor_yii2General_rbac cannot be reverted.\n";
 
         return true;
     }
@@ -82,7 +83,7 @@ class m200101_000000_rusbeldoor_yii2General_rbac extends Migration
 
     public function down()
     {
-        echo "m200101_000000_rusbeldoor_yii2General_rbac cannot be reverted.\n";
+        echo "m200102_000000_rusbeldoor_yii2General_rbac cannot be reverted.\n";
 
         return false;
     }

@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m200102_000000_rusbeldoor_yii2General_cron
+ * Class m200103_000000_rusbeldoor_yii2General_cron
  */
-class m200102_000000_rusbeldoor_yii2General_cron extends Migration
+class m200103_000000_rusbeldoor_yii2General_cron extends Migration
 {
     /**
      * {@inheritdoc}
@@ -48,7 +48,7 @@ class m200102_000000_rusbeldoor_yii2General_cron extends Migration
      */
     public function safeDown()
     {
-        echo "m200102_000000_rusbeldoor_yii2General_cron cannot be reverted.\n";
+        echo "m200103_000000_rusbeldoor_yii2General_cron cannot be reverted.\n";
 
         return true;
     }
@@ -62,7 +62,7 @@ class m200102_000000_rusbeldoor_yii2General_cron extends Migration
 
     public function down()
     {
-        echo "m200102_000000_rusbeldoor_yii2General_cron cannot be reverted.\n";
+        echo "m200103_000000_rusbeldoor_yii2General_cron cannot be reverted.\n";
 
         return false;
     }
