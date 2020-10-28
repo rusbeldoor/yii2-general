@@ -23,7 +23,7 @@ function writeElems($elems, $userId) {
                 foreach ($key['channels'] as $channel) {
                     $channelIcon = UserSubscriptionHelper::channelIcon($channel['alias']);
                     $buttons[] =
-                        Html::beginForm('/subscriptions/default/change', 'post')
+                        Html::beginForm('/subscriptions/default/change', 'post', ['htmlOptions' => 'padding-top: 5px;'])
                             . Html::input('hidden', 'userId', $userId)
                             . Html::input('hidden', 'keyAlias', $key['alias'])
                             . Html::input('hidden', 'channelAlias', $channel['alias'])
