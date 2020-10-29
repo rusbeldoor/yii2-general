@@ -1,5 +1,9 @@
 <?php
 
+namespace rusbeldoor\yii2General\helpers;
+
+use yii;
+
 class ReCaptchaHelper
 {
     /**
