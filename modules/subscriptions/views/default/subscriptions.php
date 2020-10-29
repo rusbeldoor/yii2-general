@@ -7,6 +7,19 @@ use yii\bootstrap4\Html;
 
 use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;
 
+$javascript = <<< JS
+$(document).ready(function () {
+    $('.unsubscribe').click(function () {
+        confirmDialog({
+            text: 'Вы уверены, что хотите отписаться от "' + $(this).data('key-name') + '" (' + $(this).data('channel-name') + ')? <i class="far fa-frown"></i>',
+            confirmCallback: () => { $(this).closest('form').submit(); }
+        });
+    });
+    $('.subscribe').click(function () { $(this).closest('form').submit(); });
+});
+JS;
+$this->registerJs($javascript);
+
 /**
  * Вывод элементов
  *
@@ -42,21 +55,6 @@ function writeElems($elems, $userId) {
     }
 }
 
-$javascript = <<< JS
-$(document).ready(function () {
-    $('.unsubscribe').click(function () {
-        confirmDialog({
-            text: 'Вы уверены, что хотите отписаться от "' + $(this).data('key-name') + '" (' + $(this).data('channel-name') + ')? <i class="far fa-frown"></i>',
-            confirmCallback: () => { $(this).closest('form').submit(); }
-        });
-    });
-    $('.subscribe').click(function () { $(this).closest('form').submit(); });
-});
-JS;
-$this->registerJs($javascript);
-?>
-
-<?
 if (count($result)) { writeElems($result, $userId); }
 else { echo '<p>У Вас нет указанных подписок на рассылки.</p>'; }
 ?>
