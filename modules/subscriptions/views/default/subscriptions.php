@@ -42,6 +42,7 @@ function writeElems($elems, $userId) {
     }
 }
 
+/*
 $javascript = <<< JS
 $(document).ready(function () {
     $('.unsubscribe').click(function () {
@@ -54,6 +55,9 @@ $(document).ready(function () {
 });
 JS;
 $this->registerJs($javascript);
+*/
+
+$this->registerJsFile('/js/subscriptions.js');
 ?>
 
 <?

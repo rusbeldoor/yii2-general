@@ -113,12 +113,11 @@ class DefaultController extends \frontend\components\Controller
             ];
         }
 
-        $result = $result['childKeys'];
         return $this->render(
             'subscriptions',
             [
                 'userId' => $userId,
-                'result' => $result,
+                'result' => $result['childKeys'],
             ]
         );
     }
