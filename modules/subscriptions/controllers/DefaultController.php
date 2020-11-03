@@ -33,7 +33,7 @@ class DefaultController extends \frontend\components\Controller
         $channelsAliases = explode(',', $getChannelsAliases);
 
         // Проверяем хэш
-        if ($hash != UserSubscriptionHelper::hash($userId, $getKeyAlias, $getChannelsAliases)) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
+        if ($hash != UserSubscriptionHelper::hash($userId, $getKeyAlias, $getChannelsAliases)) { return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         $result = [
             'id' => '', // Ид
@@ -142,22 +142,22 @@ class DefaultController extends \frontend\components\Controller
             || !isset($post['hash'])
             || !isset($post['active'])
             || !isset($post['redirectUrl'])
-        ) { return AppHelper::redirectWitchFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
+        ) { return AppHelper::redirectWithFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
 
         // Проверяем хэш
-        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], $post['keyAlias'], $post['channelAlias'])) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
+        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], $post['keyAlias'], $post['channelAlias'])) { return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         // Пользователь
         $user = User::find($post['userId'])->one();
-        if (!$user) { return AppHelper::redirectWitchFlash('/', 'danger', 'Пользователь (#' . $post['userId'] . ') не найден.'); }
+        if (!$user) { return AppHelper::redirectWithFlash('/', 'danger', 'Пользователь (#' . $post['userId'] . ') не найден.'); }
 
         // Ключ
         $userSubscriptionKey = UserSubscriptionKey::find()->alias($post['keyAlias'])->one();
-        if (!$userSubscriptionKey) { return AppHelper::redirectWitchFlash('/', 'danger', 'Ключ подписки (' . $post['keyAlias'] . ') не найден.'); }
+        if (!$userSubscriptionKey) { return AppHelper::redirectWithFlash('/', 'danger', 'Ключ подписки (' . $post['keyAlias'] . ') не найден.'); }
 
         // Канал
         $userSubscriptionChannel = UserSubscriptionChannel::find()->alias($post['channelAlias'])->one();
-        if (!$userSubscriptionChannel) { return AppHelper::redirectWitchFlash('/', 'danger', 'Канал подписки (#' . $post['channelAlias'] . ') не найден.'); }
+        if (!$userSubscriptionChannel) { return AppHelper::redirectWithFlash('/', 'danger', 'Канал подписки (#' . $post['channelAlias'] . ') не найден.'); }
 
         // Подписка на рассылки
         $userSubscription = UserSubscription::find()->userId($post['userId'])->keyId($userSubscriptionKey->id)->channelId($userSubscriptionChannel->id)->one();
@@ -177,6 +177,6 @@ class DefaultController extends \frontend\components\Controller
         }
 
         // Возвращаемся по переданному адресу
-        AppHelper::redirectWitchFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['active']) ? 'подписались на' : 'отписались от') . ' "' . $userSubscriptionKey->name . '" (' . $userSubscriptionChannel->name . ').');
+        AppHelper::redirectWithFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['active']) ? 'подписались на' : 'отписались от') . ' "' . $userSubscriptionKey->name . '" (' . $userSubscriptionChannel->name . ').');
     }
 }
