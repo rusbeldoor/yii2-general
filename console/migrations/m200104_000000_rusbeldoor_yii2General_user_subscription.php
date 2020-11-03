@@ -15,7 +15,7 @@ class m200104_000000_rusbeldoor_yii2General_user_subscription extends Migration
         // Таблица ключей подписок пользователя
         if (Yii::$app->db->schema->getTableSchema('user_subscription_key', true)) { $this->dropTable('user_subscription_key'); }
         $this->createTable('user_subscription_key', [
-            'id' => $this->primaryKey(11)->unsigned(),
+            'id' => 'mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'alias' => $this->string(128)->notNull(),
             'name' => $this->string(128)->notNull(),
         ]);
@@ -24,6 +24,7 @@ class m200104_000000_rusbeldoor_yii2General_user_subscription extends Migration
         // Таблица каналов подписок пользователя
         if (Yii::$app->db->schema->getTableSchema('user_subscription_channel', true)) { $this->dropTable('user_subscription_channel'); }
         $this->createTable('user_subscription_channel', [
+            'id' => 'smallint(6) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'id' => $this->primaryKey(11)->unsigned(),
             'alias' => $this->string(32)->notNull(),
             'name' => $this->string(32)->notNull(),
@@ -46,8 +47,8 @@ class m200104_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->createTable('user_subscription', [
             'id' => $this->primaryKey(11)->unsigned(),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
-            'key_id' => $this->integer(11)->unsigned()->notNull(),
-            'channel_id' => $this->integer(11)->unsigned()->notNull(),
+            'key_id' => $this->mediumInteger(8)->unsigned()->notNull(),
+            'channel_id' => $this->smallInteger(6)->unsigned()->notNull(),
             'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
         ]);
         $this->createIndex('unique', 'user_subscription', ['user_id', 'key_id', 'channel_id'], true);
