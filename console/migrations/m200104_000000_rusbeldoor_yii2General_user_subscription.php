@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m200103_000000_rusbeldoor_yii2General_user_subscription
+ * Class m200104_000000_rusbeldoor_yii2General_user_subscription
  */
-class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
+class m200104_000000_rusbeldoor_yii2General_user_subscription extends Migration
 {
     /**
      * {@inheritdoc}
@@ -13,6 +13,7 @@ class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
     public function safeUp()
     {
         // Таблица ключей подписок пользователя
+        if (Yii::$app->db->schema->getTableSchema('user_subscription_key', true)) { $this->dropTable('user_subscription_key'); }
         $this->createTable('user_subscription_key', [
             'id' => $this->primaryKey(11)->unsigned(),
             'alias' => $this->string(128)->notNull(),
@@ -21,6 +22,7 @@ class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->createIndex('unique', 'user_subscription_key', 'key', true);
 
         // Таблица каналов подписок пользователя
+        if (Yii::$app->db->schema->getTableSchema('user_subscription_channel', true)) { $this->dropTable('user_subscription_channel'); }
         $this->createTable('user_subscription_channel', [
             'id' => $this->primaryKey(11)->unsigned(),
             'alias' => $this->string(32)->notNull(),
@@ -40,6 +42,7 @@ class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->insert('user_subscription_channel', ['alias' => 'browser', 'name' => 'Уведомления от браузера']);
 
         // Таблица подписок пользователя
+        if (Yii::$app->db->schema->getTableSchema('user_subscription', true)) { $this->dropTable('user_subscription'); }
         $this->createTable('user_subscription', [
             'id' => $this->primaryKey(11)->unsigned(),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
@@ -48,8 +51,9 @@ class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
             'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
         ]);
         $this->createIndex('unique', 'user_subscription', ['user_id', 'key_id', 'channel_id'], true);
-        $this->addForeignKey('fk-user_subscription-user_subscription_key', 'user_subscription', 'key_id', 'user_subscription_key', 'id');
-        $this->addForeignKey('fk-user_subscription-user_subscription_channel', 'user_subscription', 'channel_id', 'user_subscription_channel', 'id');
+        $this->addForeignKey('fk-user_subscription-user_id', 'user_subscription', 'user_id', 'user', 'id'); // Закомментировать, если таблица users лежит не в той же БД или имеет другое название
+        $this->addForeignKey('fk-user_subscription-key_id', 'user_subscription', 'key_id', 'user_subscription_key', 'id');
+        $this->addForeignKey('fk-user_subscription-channel_id', 'user_subscription', 'channel_id', 'user_subscription_channel', 'id');
 
         // Тестовые данные
         /*
@@ -71,7 +75,7 @@ class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
      */
     public function safeDown()
     {
-        echo "m200103_000000_rusbeldoor_yii2General_user_subscription cannot be reverted.\n";
+        echo "m200104_000000_rusbeldoor_yii2General_user_subscription cannot be reverted.\n";
 
         return true;
     }
@@ -85,7 +89,7 @@ class m200103_000000_rusbeldoor_yii2General_user_subscription extends Migration
 
     public function down()
     {
-        echo "m200103_000000_rusbeldoor_yii2General_user_subscription cannot be reverted.\n";
+        echo "m200104_000000_rusbeldoor_yii2General_user_subscription cannot be reverted.\n";
 
         return false;
     }
