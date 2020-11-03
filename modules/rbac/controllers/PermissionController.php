@@ -64,7 +64,7 @@ class PermissionController extends \backend\components\Controller
     public function actionCreate()
     {
         if ($this->module->onlyMigrations) {
-            return AppHelper::redirectWitchFlash(
+            return AppHelper::redirectWithFlash(
                 '/administrator/rbac/permission',
                 'error',
                 'Создание операций разрешено только через миграции.'
@@ -92,7 +92,7 @@ class PermissionController extends \backend\components\Controller
     public function actionUpdate($id)
     {
         if ($this->module->onlyMigrations) {
-            return AppHelper::redirectWitchFlash(
+            return AppHelper::redirectWithFlash(
                 '/administrator/rbac/permission',
                 'error',
                 'Изменение операций разрешено только через миграции.'
@@ -118,7 +118,7 @@ class PermissionController extends \backend\components\Controller
     public function actionDelete($id = null)
     {
         if ($this->module->onlyMigrations) {
-            return AppHelper::redirectWitchFlash(
+            return AppHelper::redirectWithFlash(
                 '/administrator/rbac/permission',
                 'error',
                 'Удаление операций разрешено только через миграции.'
