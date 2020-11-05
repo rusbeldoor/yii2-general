@@ -13,7 +13,6 @@ class m200930_000000_rusbeldoor_yii2General_yandex_direct extends Migration
     public function safeUp()
     {
         // Таблица компаний Яндекс.Директ
-        if (Yii::$app->db->schema->getTableSchema('yandex_direct_campaign', true)) { $this->dropTable('yandex_direct_campaign'); }
         $this->createTable('yandex_direct_campaign', [
             'id' => $this->primaryKey(11)->unsigned(),
             'name' => $this->varchar(255)->notNull(),
@@ -22,7 +21,6 @@ class m200930_000000_rusbeldoor_yii2General_yandex_direct extends Migration
         ]);
 
         // Таблица групп объявлений Яндекс.Директ
-        if (Yii::$app->db->schema->getTableSchema('yandex_direct_adgroup', true)) { $this->dropTable('yandex_direct_campaign'); }
         $this->createTable('user_subscription', [
             'id' => $this->primaryKey(11)->unsigned(),
             'campaign_id' => $this->integer(11)->unsigned()->notNull(),
@@ -32,7 +30,6 @@ class m200930_000000_rusbeldoor_yii2General_yandex_direct extends Migration
         $this->addForeignKey('fk-yandex_direct_adgroup-campaign_id', 'yandex_direct_adgroup', 'campaign_id', 'yandex_direct_campaign', 'id');
 
         // Таблица объявлений Яндекс.Директ
-        if (Yii::$app->db->schema->getTableSchema('yandex_direct_ad', true)) { $this->dropTable('yandex_direct_ad'); }
         $this->createTable('yandex_direct_ad', [
             'id' => $this->primaryKey(11)->unsigned(),
             'campaign_id' => $this->integer(11)->unsigned()->notNull(),

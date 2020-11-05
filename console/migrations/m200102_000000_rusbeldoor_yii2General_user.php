@@ -13,7 +13,6 @@ class m200102_000000_rusbeldoor_yii2General_user extends Migration
     public function safeUp()
     {
         // Таблица пользователей
-        if (Yii::$app->db->schema->getTableSchema('user', true)) { $this->dropTable('user'); }
         $this->createTable('user', [
             'id' => $this->primaryKey(),
             'username' => $this->string()->notNull()->unique(),

@@ -13,7 +13,6 @@ class m200104_000000_rusbeldoor_yii2General_cron extends Migration
     public function safeUp()
     {
         // Таблица кронов
-        if (Yii::$app->db->schema->getTableSchema('cron', true)) { $this->dropTable('cron'); }
         $this->createTable('cron', [
             'id' => $this->primaryKey(11)->unsigned(),
             'alias' => $this->string(96)->notNull(),
@@ -27,7 +26,6 @@ class m200104_000000_rusbeldoor_yii2General_cron extends Migration
         $this->createIndex('unique-alias', 'cron', 'alias', true);
 
         // Таблица логов по кронам
-        if (Yii::$app->db->schema->getTableSchema('cron_log', true)) { $this->dropTable('cron_log'); }
         $this->createTable('cron_log', [
             'id' => $this->primaryKey(11)->unsigned(),
             'cron_id' => $this->integer(11)->unsigned()->notNull(),

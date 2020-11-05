@@ -13,7 +13,6 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
     public function safeUp()
     {
         // Таблица ключей подписок пользователя
-        if (Yii::$app->db->schema->getTableSchema('user_subscription_key', true)) { $this->dropTable('user_subscription_key'); }
         $this->createTable('user_subscription_key', [
             'id' => 'mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'alias' => $this->string(128)->notNull(),
@@ -22,7 +21,6 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->createIndex('unique', 'user_subscription_key', 'key', true);
 
         // Таблица каналов подписок пользователя
-        if (Yii::$app->db->schema->getTableSchema('user_subscription_channel', true)) { $this->dropTable('user_subscription_channel'); }
         $this->createTable('user_subscription_channel', [
             'id' => 'smallint(6) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'id' => $this->primaryKey(11)->unsigned(),
@@ -43,7 +41,6 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->insert('user_subscription_channel', ['alias' => 'browser', 'name' => 'Уведомления от браузера']);
 
         // Таблица подписок пользователя
-        if (Yii::$app->db->schema->getTableSchema('user_subscription', true)) { $this->dropTable('user_subscription'); }
         $this->createTable('user_subscription', [
             'id' => $this->primaryKey(11)->unsigned(),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
