@@ -52,7 +52,6 @@ class YandexDirectController extends \rusbeldoor\yii2General\components\CronCont
 
         $apiAdsIds = [];
         $apiAds = YandexDirectApiHelper::getAds(['AdGroupIds' => $apiAdgroupsIds]);
-        print_r($apiAds);
         foreach ($apiAds as $apiAd) {
             $apiAdsIds[] = $apiAd->Id;
 
