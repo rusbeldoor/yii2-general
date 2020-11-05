@@ -23,7 +23,7 @@ class CronLogQuery extends ActiveQuery
      * @return AuthItemQuery
      */
     public function lastStart()
-    { return $this->andWhere("MAX(datetime_start)"); }
+    { return $this->orderBy('datetime_start DESC')->limit(1); }
 
     /**
      * Не завершённый
