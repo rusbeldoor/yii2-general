@@ -42,7 +42,7 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->createTable('user_subscription', [
             'id' => $this->primaryKey(11)->unsigned(),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
-            'key_id' => $this->mediumInteger(8)->unsigned()->notNull(),
+            'key_id' =>'mediumint(8) UNSIGNED NOT NULL',
             'channel_id' => $this->smallInteger(6)->unsigned()->notNull(),
             'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
         ]);
