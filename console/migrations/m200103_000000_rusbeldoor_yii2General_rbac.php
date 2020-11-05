@@ -15,15 +15,14 @@ class m200103_000000_rusbeldoor_yii2General_rbac extends Migration
         // Таблица правил
         $this->createTable('auth_rule', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'name' => $this->string(96)->notNull(),
+            'name' => $this->string(96)->notNull()->unique(),
             'data' => $this->binary(65536)->defaultValue(null),
         ]);
-        $this->createIndex('unique-name', 'auth_rule', 'name', true);
 
         // Таблица ролей, операций
         $this->createTable('auth_item', [
             'id' => $this->primaryKey(11)->unsigned(),
-            'name' => $this->string(96)->notNull(),
+            'name' => $this->string(96)->notNull()->unique(),
             'type' => $this->tinyInteger(1)->unsigned()->notNull(),
             'description' => $this->string(192)->defaultValue(null),
             'rule_name' => $this->string(64)->defaultValue(null),
@@ -31,7 +30,6 @@ class m200103_000000_rusbeldoor_yii2General_rbac extends Migration
             'created_at' => $this->integer(11)->defaultValue(null),
             'updated_at' => $this->integer(11)->defaultValue(null),
         ]);
-        $this->createIndex('unique-name', 'auth_item', 'name', true);
         $this->addForeignKey('fk-auth_item-auth_rule', 'auth_item', 'rule_name', 'auth_rule', 'name');
 
         // Таблица соответсвия ролей и операций
