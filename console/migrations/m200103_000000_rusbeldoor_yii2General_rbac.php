@@ -43,7 +43,7 @@ class m200103_000000_rusbeldoor_yii2General_rbac extends Migration
         $this->createIndex('unique-parent-child', 'auth_item_child', ['parent', 'child'], true);
         $this->createIndex('index-child', 'auth_item_child', 'child');
 
-        // Таюлица соответсвия ролей, операций и пользователей
+        // Таблица соответсвия ролей, операций и пользователей
         $this->createTable('auth_assignment', [
             'id' => $this->primaryKey(11)->unsigned(),
             'item_name' => $this->string(96)->notNull(),
