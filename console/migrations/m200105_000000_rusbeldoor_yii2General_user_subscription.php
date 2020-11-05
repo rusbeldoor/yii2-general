@@ -22,7 +22,6 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
         // Таблица каналов подписок пользователя
         $this->createTable('user_subscription_channel', [
             'id' => 'smallint(6) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
-            'id' => $this->primaryKey(11)->unsigned(),
             'alias' => $this->string(32)->notNull()->unique(),
             'name' => $this->string(32)->notNull(),
         ]);
