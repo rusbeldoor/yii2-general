@@ -96,9 +96,9 @@ class CronController extends ConsoleController
         $this->cron->update();
 
         // Обновляем лог крона
-        $this->cronLog->pid = null;
         $this->cronLog->duration = $time - strtotime($this->cronLog->datetime_start);
         $this->cronLog->datetime_complete = date('Y-m-d H:i:s', $time);
+        $this->cronLog->pid = null;
         $this->cronLog->update();
 
         return parent::afterAction($action, $result);
