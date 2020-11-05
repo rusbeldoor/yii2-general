@@ -1,7 +1,7 @@
 <?php
 namespace rusbeldoor\yii2General\helpers;
 
-use yii;
+use Yii;
 
 class UserSubscriptionHelper
 {

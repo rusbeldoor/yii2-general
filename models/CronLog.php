@@ -1,7 +1,7 @@
 <?php
 namespace rusbeldoor\yii2General\models;
 
-use yii;
+use Yii;
 
 /**
  * Cron_log (ActiveRecord)

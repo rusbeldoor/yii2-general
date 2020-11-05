@@ -1,7 +1,7 @@
 <?php
 namespace rusbeldoor\yii2General\components;
 
-use yii;
+use Yii;
 
 use rusbeldoor\yii2General\helpers\AppHelper;
 

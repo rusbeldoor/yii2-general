@@ -50,7 +50,7 @@ echo "<?php\n";
 
 namespace <?= $generator->ns ?>;
 
-use yii;
+use Yii;
 
 /**
  * <?= ucfirst($generator->generateTableName($tableName)) ?> (ActiveRecord)

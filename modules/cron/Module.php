@@ -1,7 +1,7 @@
 <?php
 namespace rusbeldoor\yii2General\modules\cron;
 
-use yii;
+use Yii;
 use rusbeldoor\yii2General\helpers\AppHelper;
 
 /**

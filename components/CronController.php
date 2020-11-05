@@ -1,10 +1,9 @@
 <?php
 namespace rusbeldoor\yii2General\components;
 
+use Yii;
 use rusbeldoor\yii2General\modules\cron\models\Cron;
-
 use rusbeldoor\yii2General\modules\cron\models\CronLog;
-use yii;
 
 /**
  * Контроллер
@@ -26,7 +25,7 @@ class CronController extends ConsoleController
         $time = time();
 
         // Алиас крона
-        $alias = yii::$app->controller->name;
+        $alias = Yii::$app->controller->id;
 
         // Крон
         $this->cron = Cron::find()->alias($alias)->one();

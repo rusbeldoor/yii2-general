@@ -1,7 +1,7 @@
 <?php
 namespace rusbeldoor\yii2General\modules\rbac\controllers;
 
-use yii;
+use Yii;
 
 /**
  * Default controller for the `rbac` module

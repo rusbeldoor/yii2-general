@@ -1,7 +1,7 @@
 <?php
 namespace rusbeldoor\yii2General\modules\subscriptions\controllers;
 
-use yii;
+use Yii;
 
 use rusbeldoor\yii2General\models\UserSubscription;
 use rusbeldoor\yii2General\models\UserSubscriptionKey;
@@ -26,8 +26,8 @@ class DefaultController extends \frontend\components\Controller
      */
     public function actionIndex($userId, $hash)
     {
-        $get = yii::$app->request->get();
-        $post = yii::$app->request->post();
+        $get = Yii::$app->request->get();
+        $post = Yii::$app->request->post();
         $getKeyAlias = ((isset($get['key'])) ? $get['key'] : ((isset($post['key'])) ? $post['key'] : null));
         $getChannelsAliases = ((isset($get['channels'])) ? $get['channels'] : ((isset($post['channels'])) ? $post['channels'] : null));
         $channelsAliases = explode(',', $getChannelsAliases);
@@ -133,7 +133,7 @@ class DefaultController extends \frontend\components\Controller
         AppHelper::exitIfNotPostRequest();
 
         // post данные
-        $post = yii::$app->request->post();
+        $post = Yii::$app->request->post();
         if (
             !isset($post['userId'])
             || !isset($post['keyAlias'])
