@@ -1,4 +1,7 @@
 <?php
+namespace rusbeldoor\yii2General\helpers;
+
+use YII;
 
 class YandexDirectApiHelper
 {
