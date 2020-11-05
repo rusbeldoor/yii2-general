@@ -21,7 +21,7 @@ class m200930_000000_rusbeldoor_yii2General_yandex_direct extends Migration
         ]);
 
         // Таблица групп объявлений Яндекс.Директ
-        $this->createTable('user_subscription', [
+        $this->createTable('yandex_direct_adgroup', [
             'id' => $this->primaryKey(11)->unsigned(),
             'campaign_id' => $this->integer(11)->unsigned()->notNull(),
             'name' => $this->string(255)->notNull(),
