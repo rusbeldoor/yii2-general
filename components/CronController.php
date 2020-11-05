@@ -31,11 +31,7 @@ class CronController extends ConsoleController
         $this->cron = Cron::find()->alias($alias)->one();
 
         // Если крона нет
-        if (!$this->cron) {
-            // Создаём крон
-            $this->cron = new Cron();
-            $this->cron->alias = $alias;
-        }
+        if (!$this->cron) { return false; }
 
         // Если крон не активен
         if (!$this->cron->active) { return false; }

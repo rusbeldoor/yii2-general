@@ -40,6 +40,9 @@ class m200930_000000_rusbeldoor_yii2General_yandex_direct extends Migration
         ]);
         $this->addForeignKey('fk-yandex_direct_ad-campaign_id', 'yandex_direct_ad', 'campaign_id', 'yandex_direct_campaign', 'id');
         $this->addForeignKey('fk-yandex_direct_ad-adgroup_id', 'yandex_direct_ad', 'adgroup_id', 'yandex_direct_adgroup', 'id');
+
+        // Крон
+        $this->insert('cron', ['alias' => 'yandex-direct', 'description' => 'Яндекс.Директ', 'status' => 'wait', 'max_duration' => 3600, 'kill_process' => 1, 'restart' => 1, 'active' => 1]);
     }
 
     /**
