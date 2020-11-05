@@ -15,19 +15,17 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
         // Таблица ключей подписок пользователя
         $this->createTable('user_subscription_key', [
             'id' => 'mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
-            'alias' => $this->string(128)->notNull(),
+            'alias' => $this->string(128)->notNull()->unique(),
             'name' => $this->string(128)->notNull(),
         ]);
-        $this->createIndex('unique', 'user_subscription_key', 'key', true);
 
         // Таблица каналов подписок пользователя
         $this->createTable('user_subscription_channel', [
             'id' => 'smallint(6) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'id' => $this->primaryKey(11)->unsigned(),
-            'alias' => $this->string(32)->notNull(),
+            'alias' => $this->string(32)->notNull()->unique(),
             'name' => $this->string(32)->notNull(),
         ]);
-        $this->createIndex('unique', 'user_subscription_channel', 'channel', true);
 
         $this->insert('user_subscription_channel', ['alias' => 'email', 'name' => 'Электронная почта']);
         $this->insert('user_subscription_channel', ['alias' => 'sms', 'name' => 'СМС']);
@@ -49,7 +47,7 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
             'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
         ]);
         $this->createIndex('unique', 'user_subscription', ['user_id', 'key_id', 'channel_id'], true);
-        $this->addForeignKey('fk-user_subscription-user_id', 'user_subscription', 'user_id', 'user', 'id'); // Закомментировать, если таблица users лежит не в той же БД или имеет другое название
+        $this->addForeignKey('fk-user_subscription-user_id', 'user_subscription', 'user_id', 'user', 'id'); // Закомментировать, если таблица user лежит не в той же БД или имеет другое название
         $this->addForeignKey('fk-user_subscription-key_id', 'user_subscription', 'key_id', 'user_subscription_key', 'id');
         $this->addForeignKey('fk-user_subscription-channel_id', 'user_subscription', 'channel_id', 'user_subscription_channel', 'id');
 
