@@ -21,7 +21,7 @@ class YandexDirectController extends \rusbeldoor\yii2General\components\CronCont
         foreach ($apiCampaings as $apiCampaing) {
             $apiCampaingsIds[] = $apiCampaing->Id;
 
-            $campaing = YandexDirectCampaign::find($apiCampaing->Id);
+            $campaing = YandexDirectCampaign::find($apiCampaing->Id)->one();
             if (!$campaing) {
                 $campaing = new YandexDirectCampaign();
                 $campaing->id = $apiCampaing->Id;
@@ -38,7 +38,7 @@ class YandexDirectController extends \rusbeldoor\yii2General\components\CronCont
         foreach ($apiAdgroups as $apiAdgroup) {
             $apiAdgroupsIds[] = $apiAdgroup->Id;
 
-            $adgroup = YandexDirectAdgroup::find($apiAdgroup->Id);
+            $adgroup = YandexDirectAdgroup::find($apiAdgroup->Id)->one();
             if (!$adgroup) {
                 $adgroup = new YandexDirectAdgroup();
                 $adgroup->id = $apiAdgroup->Id;
@@ -56,7 +56,7 @@ class YandexDirectController extends \rusbeldoor\yii2General\components\CronCont
         foreach ($apiAds as $apiAd) {
             $apiAdsIds[] = $apiAd->Id;
 
-            $ad = YandexDirectAd::find($apiAd->Id);
+            $ad = YandexDirectAd::find($apiAd->Id)->one();
             if (!$ad) {
                 $ad = new YandexDirectAd();
                 $ad->id = $apiAd->Id;
