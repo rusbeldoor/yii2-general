@@ -14,7 +14,7 @@ class m200102_000000_rusbeldoor_yii2General_user extends Migration
     {
         // Таблица пользователей
         $this->createTable('user', [
-            'id' => $this->primaryKey(),
+            'id' => $this->primaryKey(11)->unsigned(),
             'username' => $this->string()->notNull()->unique(),
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
