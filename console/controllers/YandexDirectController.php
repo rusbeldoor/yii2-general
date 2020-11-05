@@ -64,7 +64,7 @@ class YandexDirectController extends \rusbeldoor\yii2General\components\CronCont
                 $ad->adgroup_id = $apiAd->AdGroupId;
             }
 
-            $ad->title = $apiAd->title;
+            $ad->title = $apiAd->TextAd->Title;
             $ad->status = $apiAd->Status;
             $ad->state = $apiAd->State;
             $ad->save();
