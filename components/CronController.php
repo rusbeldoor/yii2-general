@@ -70,8 +70,10 @@ class CronController extends ConsoleController
         // Создаём лог крона
         $this->cronLog = new CronLog();
         $this->cronLog->cron_id = $this->cron->id;
-        $this->cronLog->pid = getmypid(); // Запоминаем pid текущего процесса в linux
+        $this->cronLog->duration = null; // Запоминаем pid текущего процесса в linux
         $this->cronLog->datetime_start = date('Y-m-d H:i:s', $time);
+        $this->cronLog->datetime_complete = null;
+        $this->cronLog->pid = getmypid(); // Запоминаем pid текущего процесса в linux
         $this->cronLog->save();
 
         return parent::beforeAction($action);
