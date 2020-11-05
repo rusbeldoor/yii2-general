@@ -2,8 +2,8 @@
 namespace rusbeldoor\yii2General\components;
 
 use Yii;
-use rusbeldoor\yii2General\modules\cron\models\Cron;
-use rusbeldoor\yii2General\modules\cron\models\CronLog;
+use rusbeldoor\yii2General\models\Cron;
+use rusbeldoor\yii2General\models\CronLog;
 
 /**
  * Контроллер
