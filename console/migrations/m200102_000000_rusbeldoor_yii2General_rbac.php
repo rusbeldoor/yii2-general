@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m200103_000000_rusbeldoor_yii2General_rbac
+ * Class m200102_000000_rusbeldoor_yii2General_rbac
  */
-class m200103_000000_rusbeldoor_yii2General_rbac extends Migration
+class m200102_000000_rusbeldoor_yii2General_rbac extends Migration
 {
     /**
      * {@inheritdoc}
@@ -63,7 +63,7 @@ class m200103_000000_rusbeldoor_yii2General_rbac extends Migration
      */
     public function safeDown()
     {
-        echo "m200103_000000_rusbeldoor_yii2General_rbac cannot be reverted.\n";
+        echo "m200102_000000_rusbeldoor_yii2General_rbac cannot be reverted.\n";
 
         return true;
     }
@@ -77,7 +77,7 @@ class m200103_000000_rusbeldoor_yii2General_rbac extends Migration
 
     public function down()
     {
-        echo "m200103_000000_rusbeldoor_yii2General_rbac cannot be reverted.\n";
+        echo "m200102_000000_rusbeldoor_yii2General_rbac cannot be reverted.\n";
 
         return false;
     }
