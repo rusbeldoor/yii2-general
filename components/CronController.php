@@ -21,9 +21,6 @@ class CronController extends ConsoleController
      */
     public function beforeAction($action)
     {
-        //date_default_timezone_set('Europe/Moscow');
-        //date_default_timezone_set('UTC');
-
         // Текущее время
         $time = time();
 
