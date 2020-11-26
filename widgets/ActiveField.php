@@ -19,9 +19,7 @@ class ActiveField extends \kartik\form\ActiveField
     public function searchTextInput($options = [])
     {
         $options = ArrayHelper::merge(
-            [
-                'placeholder' => 'Не важно',
-            ],
+            ['placeholder' => 'Не важно'],
             $options
         );
         return self::textInput($options);
@@ -48,9 +46,7 @@ class ActiveField extends \kartik\form\ActiveField
     public function searchNumberInputAppendSeconds($options = [])
     {
         $options = ArrayHelper::merge(
-            [
-                'placeholder' => 'Не важно',
-            ],
+            ['placeholder' => 'Не важно'],
             $options
         );
         return self::numberInputAppendSeconds($options);
