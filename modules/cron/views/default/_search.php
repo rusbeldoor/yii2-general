@@ -11,9 +11,11 @@ use rusbeldoor\yii2General\widgets\SearchForm;
     <?php $form = SearchForm::begin() ?>
         <?= $form->field($model, 'alias') ?>
         <?= $form->field($model, 'description') ?>
+        <?= $form->field($model, 'status') ?>
         <?= $form->field($model, 'max_duration') ?>
-        <?= $form->field($model, 'restart') ?>
         <?= $form->field($model, 'kill_process') ?>
+        <?= $form->field($model, 'restart') ?>
+        <?= $form->field($model, 'active') ?>
         <?= $form->buttons() ?>
     <?php SearchForm::end() ?>
 </div>

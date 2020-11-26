@@ -8,7 +8,7 @@ use rusbeldoor\yii2General\helpers\BaseUI;
 /* @var $rolesOfThisRole array */
 /* @var $permissionsOfThisRole array */
 
-$this->title = $model->name;
+$this->title = $model->alias;
 $this->params['breadcrumbs'][] = ['label' => 'Кроны', 'url' => ['/administrator/cron']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -28,9 +28,11 @@ if (Yii::$app->controller->module->onlyMigrations) {
             'id:id',
             'alias',
             'description',
+            'status',
             'max_duration',
-            'restart',
             'kill_process',
+            'restart',
+            'active',
         ],
     ]) ?>
 </div>

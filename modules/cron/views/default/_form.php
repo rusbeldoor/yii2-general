@@ -11,8 +11,8 @@ use rusbeldoor\yii2General\widgets\AddEditForm;
     <?= $form->field($model, 'alias')->textInput(['maxlength' => 96]) ?>
     <?= $form->field($model, 'description')->textInput() ?>
     <?= $form->field($model, 'max_duration')->textInput() ?>
-    <?= $form->field($model, 'restart')->textInput() ?>
     <?= $form->field($model, 'kill_process')->textInput() ?>
+    <?= $form->field($model, 'restart')->textInput() ?>
     <?= $form->buttons($model) ?>
     <? AddEditForm::end() ?>
 </div>
