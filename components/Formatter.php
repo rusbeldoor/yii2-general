@@ -26,4 +26,13 @@ class Formatter extends \yii\i18n\Formatter
             default: return '';
         }
     }
+
+    /**
+     * Секунды
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public function seconds($value)
+    { return $value . 'сек.'; }
 }
