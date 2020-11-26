@@ -13,9 +13,9 @@ use rusbeldoor\yii2General\widgets\SearchForm;
         <?= $form->field($model, 'description') ?>
         <?= $form->field($model, 'status') ?>
         <?= $form->field($model, 'max_duration') ?>
-        <?= $form->field($model, 'kill_process') ?>
-        <?= $form->field($model, 'restart') ?>
-        <?= $form->field($model, 'active') ?>
+        <?= $form->field($model, 'kill_process')->searchNumberYesNo() ?>
+        <?= $form->field($model, 'restart')->searchNumberYesNo() ?>
+        <?= $form->field($model, 'active')->searchNumberYesNo() ?>
         <?= $form->buttons() ?>
     <?php SearchForm::end() ?>
 </div>
