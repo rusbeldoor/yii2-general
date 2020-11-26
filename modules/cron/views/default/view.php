@@ -30,9 +30,9 @@ if (Yii::$app->controller->module->onlyMigrations) {
             'description',
             'status',
             'max_duration',
-            'kill_process',
-            'restart',
-            'active',
+            'kill_process:yesNo',
+            'restart:yesNo',
+            'active:yesNo',
         ],
     ]) ?>
 </div>
