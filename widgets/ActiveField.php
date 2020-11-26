@@ -42,6 +42,23 @@ class ActiveField extends \kartik\form\ActiveField
     /**
      * ...
      *
+     * @param $options array
+     * @return ActiveField
+     */
+    public function searchNumberInputAppendSeconds($options = [])
+    {
+        $options = ArrayHelper::merge(
+            [
+                'placeholder' => 'Не важно',
+            ],
+            $options
+        );
+        return self::numberInputAppendSeconds($options);
+    }
+
+    /**
+     * ...
+     *
      * @param $items array
      * @param $options array
      * @return ActiveField

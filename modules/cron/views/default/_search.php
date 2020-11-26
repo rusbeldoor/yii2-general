@@ -12,7 +12,7 @@ use rusbeldoor\yii2General\widgets\SearchForm;
         <?= $form->field($model, 'alias')->searchTextInput() ?>
         <?= $form->field($model, 'description')->searchTextInput() ?>
         <?= $form->field($model, 'status') ?>
-        <?= $form->field($model, 'max_duration')->numberInputAppendSeconds(['min' => 0, 'max' => '86400']) ?>
+        <?= $form->field($model, 'max_duration')->searchNumberInputAppendSeconds(['min' => 0, 'max' => '86400']) ?>
         <?= $form->field($model, 'kill_process')->searchNumberYesNo() ?>
         <?= $form->field($model, 'restart')->searchNumberYesNo() ?>
         <?= $form->field($model, 'active')->searchNumberYesNo() ?>
