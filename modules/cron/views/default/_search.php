@@ -9,8 +9,8 @@ use rusbeldoor\yii2General\widgets\SearchForm;
 
 <div class="auth-item-search panelSearchFormContainer">
     <?php $form = SearchForm::begin() ?>
-        <?= $form->field($model, 'alias') ?>
-        <?= $form->field($model, 'description') ?>
+        <?= $form->field($model, 'alias')->searchTextInput() ?>
+        <?= $form->field($model, 'description')->searchTextInput() ?>
         <?= $form->field($model, 'status') ?>
         <?= $form->field($model, 'max_duration')->numberInputAppendSeconds(['min' => 0, 'max' => '86400']) ?>
         <?= $form->field($model, 'kill_process')->searchNumberYesNo() ?>

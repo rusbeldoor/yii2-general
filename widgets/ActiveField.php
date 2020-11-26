@@ -35,14 +35,7 @@ class ActiveField extends \kartik\form\ActiveField
      */
     public function numberInputAppendSeconds($options = [])
     {
-        $options = ArrayHelper::merge(
-            [
-                'addon' => [
-                    'append' => ['content' => 'сек.']
-                ],
-            ],
-            $options
-        );
+        $this->addon['append'] = ['content' => 'сек.'];
         return self::input('number', $options);
     }
 
@@ -52,6 +45,7 @@ class ActiveField extends \kartik\form\ActiveField
      * @param $items array
      * @param $options array
      * @return ActiveField
+     *
      */
     public function radioButtonsList($items, $options = [])
     {
