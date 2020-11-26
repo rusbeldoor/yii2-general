@@ -35,6 +35,9 @@ class DefaultController extends \backend\components\Controller
     public function actionIndex()
     {
         $searchModel = new CronSearch();
+        $searchModel->kill_process = '';
+        $searchModel->restart = '';
+        $searchModel->active = '';
         $dataProvider = $searchModel->search(Yii::$app->request->post());
 
         return $this->render('index', [
