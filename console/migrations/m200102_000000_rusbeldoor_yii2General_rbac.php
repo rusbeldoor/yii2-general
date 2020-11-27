@@ -39,7 +39,8 @@ class m200102_000000_rusbeldoor_yii2General_rbac extends Migration
             'child' => $this->string(96)->notNull(),
         ]);
         $this->createIndex('unique-parent-child', 'auth_item_child', ['parent', 'child'], true);
-        $this->createIndex('index-child', 'auth_item_child', 'child');
+        $this->addForeignKey('fk-auth_assignment-parent', 'auth_item_child', 'parent', 'auth_item', 'name');
+        $this->addForeignKey('fk-auth_assignment-child', 'auth_item_child', 'child', 'auth_item', 'name');
 
         // Таблица соответсвия ролей, операций и пользователей
         $this->createTable('auth_assignment', [
@@ -49,7 +50,7 @@ class m200102_000000_rusbeldoor_yii2General_rbac extends Migration
             'created_at' => $this->integer(11)->defaultValue(null),
         ]);
         $this->createIndex('unique-item_name-user_id', 'auth_assignment', ['item_name', 'user_id'], true);
-        $this->addForeignKey('fk-auth_assignment-auth_item', 'auth_assignment', 'item_name', 'auth_item', 'name');
+        $this->addForeignKey('fk-auth_assignment-item_name', 'auth_assignment', 'item_name', 'auth_item', 'name');
         $this->addForeignKey('fk-auth_assignment-user_id', 'auth_assignment', 'user_id', 'user', 'id'); // Закомментировать, если таблица user лежит не в той же БД или имеет другое название
 
         // Создание ролей, операций

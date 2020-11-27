@@ -8,7 +8,7 @@ use rusbeldoor\yii2General\widgets\AddEditForm;
 
 <div class="auth-item-form">
     <?php $form = AddEditForm::begin() ?>
-        <?= $form->field($model, 'name')->textInput(['maxlength' => 96, 'readonly' => !$model->isNewRecord()]) ?>
+        <?= $form->field($model, 'name')->textInput(['maxlength' => 96]) ?>
         <?= $form->field($model, 'description')->textInput(['maxlength' => 192]) ?>
         <?= $form->buttons($model) ?>
     <?php AddEditForm::end() ?>
