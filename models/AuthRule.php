@@ -59,7 +59,7 @@ class AuthRule extends ActiveRecord
      */
     public function beforeDelete()
     {
-        // if (true) { $this->addError('id', 'Не возможно удалить #' . $this->id . '.'); }
+        // if (true) { $this->addError('id', 'Элемент #' . $this->id . ' не может быть удалён.'); }
 
         return !$this->hasErrors() && parent::beforeDelete();
     }
