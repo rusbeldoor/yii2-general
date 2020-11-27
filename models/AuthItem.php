@@ -69,7 +69,7 @@ class AuthItem extends ActiveRecord
     {
         // Проверка на пользователей использующих эту операцию/роль
         $usersIds = [];
-        $authAssignments = AuthAssignment::find()->itemName($this->name)-all();
+        $authAssignments = AuthAssignment::find()->itemName($this->name)->all();
         foreach ($authAssignments as $authAssignment) { $usersIds[] = $authAssignment->user_id; }
         if (count($usersIds)) { $this->addError('id', 'Неовзможно удалить операцию/роль #' . $this->id . '. Пользователи #' . implode('# ', $usersIds). '.') . 'используют эту операцию/роль.'; }
 
