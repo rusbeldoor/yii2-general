@@ -77,11 +77,15 @@ class DefaultController extends \backend\components\Controller
 
         $model = new Cron();
 
-        $post = Yii::$app->request->post();
-        if (
-            $model->load($post)
-            && $model->save()
-        ) { return $this->redirect(['view', 'id' => $model->id]); }
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if (
+                $model->load($post)
+                && $model->save()
+            ) { return $this->redirect(['view', 'id' => $model->id]); }
+        } else {
+            $model->loadDefaultValues();
+        }
 
         return $this->render('create', ['model' => $model]);
     }
