@@ -60,7 +60,7 @@ class AuthItemChild extends ActiveRecord
      */
     public function beforeDelete()
     {
-        // if (true) { $this->addError('id', 'Неовзможно удалить #' . $this->id . '.'); }
+        // if (true) { $this->addError('id', 'Не возможно удалить #' . $this->id . '.'); }
 
         return !$this->hasErrors() && parent::beforeDelete();
     }
