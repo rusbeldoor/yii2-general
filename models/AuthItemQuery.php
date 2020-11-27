@@ -9,6 +9,14 @@ namespace rusbeldoor\yii2General\models;
 class AuthItemQuery extends ActiveQuery
 {
     /**
+     * Алиас
+     *
+     * @return AuthItemQuery
+     */
+    public function name($name)
+    { return $this->andWhere("name=:name", [':name' => $name]); }
+
+    /**
      * Тип роли
      *
      * @return AuthItemQuery

@@ -67,7 +67,11 @@ class AuthItem extends ActiveRecord
      */
     public function beforeDelete()
     {
-        // if (true) { $this->addError('id', 'Неовзможно удалить #' . $this->id . '.'); }
+        // Проверка на пользователей использующих эту операцию/роль
+        $usersIds = [];
+        $authAssignments = AuthAssignment::find()->name($this->name)-all();
+        foreach ($authAssignments as $authAssignment) { $usersIds[] = $authAssignment->user_id; }
+        if (count($usersIds)) { $this->addError('id', 'Неовзможно удалить операцию/роль #' . $this->id . '. Пользователи #' . implode('# ', $usersIds). '.') . 'используют эту операцию/роль.'; }
 
         return !$this->hasErrors() && parent::beforeDelete();
     }
