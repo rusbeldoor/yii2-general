@@ -8,6 +8,26 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
  */
 class ActiveRecord extends \yii\db\ActiveRecord
 {
+    // Описание полей
+    public static $fieldsDescriptions = [];
+
+    /**
+     * Описание по значению
+     *
+     * @param string $fieldName
+     * @return string
+     */
+    public function getFieldDescription($fieldName)
+    { return static::$fieldsDescriptions[$fieldName][$this->$fieldName]; }
+
+    /**
+     * Имя (#ид)
+     *
+     * @return string
+     */
+    public function getNameAndId()
+    { return $this->name . ' (#' . $this->id . ')'; }
+
     /**
      * Проверка на возможность удаления
      * Для реализации необходимо расширить в потомке, иначе удаление всегда будет доступно
