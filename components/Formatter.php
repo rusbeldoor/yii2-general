@@ -34,5 +34,5 @@ class Formatter extends \yii\i18n\Formatter
      * @return string
      */
     public function asSeconds($value)
-    { return $value . ' сек.'; }
+    { return (int)$value . ' сек.'; }
 }
