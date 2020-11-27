@@ -13,7 +13,7 @@ use kartik\sortinput\SortableInput;
 
 <div class="auth-item-form">
     <? $form = AddEditForm::begin() ?>
-    <?= $form->field($model, 'name')->textInput(['maxlength' => 96]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => 96, 'readonly' => !$model->isNewRecord()]) ?>
     <?= $form->field($model, 'description')->textInput(['maxlength' => 192]) ?>
     <div class="form-group row">
         <label class="col-form-label col-md-2">Роли</label>
