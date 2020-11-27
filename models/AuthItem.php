@@ -72,20 +72,20 @@ class AuthItem extends ActiveRecord
             $authItemChildsNames = [];
             $authItemChilds = AuthItemChild::find()->parent($this->name)->all();
             foreach ($authItemChilds as $authItemChild) { $authItemChildsNames[] = $authItemChild->child; }
-            if (count($authItemChildsNames)) { $this->addError('id', 'Не возможно удалить роль ' . $this->name . ' (#' . $this->id . '). Операции/роли ' . implode(' ', $authItemChildsNames) . ' используются этой ролью.'); }
+            if (count($authItemChildsNames)) { $this->addError('id', 'Не возможно удалить роль ' . $this->name . ' (#' . $this->id . '). Операции/роли ' . implode(', ', $authItemChildsNames) . ' используются этой ролью.'); }
         }
 
         // Проверка на другие роли использующих эту операцию/роль
         $authItemChildsNames = [];
         $authItemChilds = AuthItemChild::find()->child($this->name)->all();
         foreach ($authItemChilds as $authItemChild) { $authItemChildsNames[] = $authItemChild->parent; }
-        if (count($authItemChildsNames)) { $this->addError('id', 'Не возможно удалить операцию/роль ' . $this->name . ' (#' . $this->id . '). Роли ' . implode(' ', $authItemChildsNames) . ' используют эту операцию/роль.'); }
+        if (count($authItemChildsNames)) { $this->addError('id', 'Не возможно удалить операцию/роль ' . $this->name . ' (#' . $this->id . '). Роли ' . implode(', ', $authItemChildsNames) . ' используют эту операцию/роль.'); }
 
         // Проверка на пользователей использующих эту операцию/роль
         $usersIds = [];
         $authAssignments = AuthAssignment::find()->itemName($this->name)->all();
         foreach ($authAssignments as $authAssignment) { $usersIds[] = $authAssignment->user_id; }
-        if (count($usersIds)) { $this->addError('id', 'Не возможно удалить операцию/роль ' . $this->name . ' (#' . $this->id . '). Пользователи #' . implode('# ', $usersIds) . ' используют эту операцию/роль.'); }
+        if (count($usersIds)) { $this->addError('id', 'Не возможно удалить операцию/роль ' . $this->name . ' (#' . $this->id . '). Пользователи #' . implode(', #', $usersIds) . ' используют эту операцию/роль.'); }
 
         return !$this->hasErrors() && parent::beforeDelete();
     }
