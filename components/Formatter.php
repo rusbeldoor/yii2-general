@@ -33,6 +33,6 @@ class Formatter extends \yii\i18n\Formatter
      * @param $value mixed
      * @return string
      */
-    public function seconds($value)
-    { return $value . 'сек.'; }
+    public function asSeconds($value)
+    { return $value . ' сек.'; }
 }

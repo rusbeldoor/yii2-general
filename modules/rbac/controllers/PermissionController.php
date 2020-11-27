@@ -74,10 +74,12 @@ class PermissionController extends \backend\components\Controller
         $model = new AuthItem();
         $model->type = 2;
 
-        if (
-            $model->load(Yii::$app->request->post())
-            && $model->save()
-        ) { return $this->redirect(['view', 'id' => $model->id]); }
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if ($model->load($post) && $model->save()) { return $this->redirect(['view', 'id' => $model->id]); }
+        } else {
+            $model->loadDefaultValues();
+        }
 
         return $this->render('create', ['model' => $model]);
     }
