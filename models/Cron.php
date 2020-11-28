@@ -17,6 +17,14 @@ use Yii;
  */
 class Cron extends ActiveRecord
 {
+    // Описание полей
+    public static $fieldsDescriptions = [
+        'status' => [
+            'wait' => 'Ожидает',
+            'process' => 'Выполняется',
+        ],
+    ];
+
     /**
      * {@inheritdoc}
      */

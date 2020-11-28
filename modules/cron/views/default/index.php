@@ -16,6 +16,7 @@ $gridViewColumns = [
     'id:id',
     'alias',
     'description',
+    'status:status',
     'active:yesNo',
     ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
 ];

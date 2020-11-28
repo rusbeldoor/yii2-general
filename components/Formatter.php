@@ -35,4 +35,19 @@ class Formatter extends \yii\i18n\Formatter
      */
     public function asSeconds($value)
     { return (int)$value . ' сек.'; }
+
+    /**
+     * Статус
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public function asStatus($value)
+    {
+        switch ($value) {
+            case 'wait': return 'Ожидает';
+            case 'process': return 'Выполняется';
+            default: return '';
+        }
+    }
 }

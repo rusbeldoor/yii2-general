@@ -28,7 +28,7 @@ if (Yii::$app->controller->module->onlyMigrations) {
             'id:id',
             'alias',
             'description',
-            'status',
+            'status:status',
             'max_duration:seconds',
             'kill_process:yesNo',
             'restart:yesNo',
