@@ -1,6 +1,6 @@
 <?php
 
-use yii\hlpers\html;
+use yii\helpers\html;
 use rusbeldoor\yii2General\widgets\grid\GridView;
 use rusbeldoor\yii2General\helpers\BaseUI;
 
