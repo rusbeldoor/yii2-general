@@ -19,9 +19,9 @@ $gridViewColumns = [
     'status:status',
     'active:yesNo',
     'lastCronLog' => [
-        'label' => 'Последний запуск',
+        'label' => 'Логи',
         'value' => function ($model) {
-            return (($model->lastCronLog) ? $model->lastCronLog->getName() : '-');
+            return Html::a((($model->lastCronLog) ? $model->lastCronLog->getName() : '—'), ['log', 'id' => $model->id]);
         },
     ],
     ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
