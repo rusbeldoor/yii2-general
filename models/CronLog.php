@@ -69,4 +69,10 @@ class CronLog extends ActiveRecord
 
         return !$this->hasErrors() && parent::beforeDelete();
     }
+
+    /**
+     * @return string
+     */
+    public function getDatetimeStartDatetimeEnd()
+    { return DatetimeHelper::formatHidmY($this->datetime_start) . ' — ' . (($this->datetime_complete) ? DatetimeHlper::formatHidmY($this->datetime_complete) : '...'); }
 }

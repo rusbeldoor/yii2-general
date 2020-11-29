@@ -20,7 +20,7 @@ $gridViewColumns = [
     'active:yesNo',
     'lastCronLog' => [
         'label' => 'Последний запуск',
-        'value' => function () { return '123'; },
+        'value' => function ($model) { return $model->lastCronLog->getDatetimeStartDatetimeEnd(); },
     ],
     ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
 ];
