@@ -12,6 +12,15 @@ class ActiveRecord extends \yii\db\ActiveRecord
     public static $fieldsDescriptions = [];
 
     /**
+     * Магический метод получения аттрибута
+     *
+     * @param $name string
+     * @return mixed
+     */
+    public function __get($name)
+    { return ((property_exists($this, $name)) ? $this->$name : parent::__get($name)); }
+
+    /**
      * Описание по значению
      *
      * @param string $fieldName

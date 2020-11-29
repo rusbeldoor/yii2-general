@@ -18,6 +18,10 @@ $gridViewColumns = [
     'description',
     'status:status',
     'active:yesNo',
+    'lastCronLog' => [
+        'label' => 'Последний запуск',
+        'value' => function () { return '123'; },
+    ],
     ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
 ];
 if (Yii::$app->controller->module->onlyMigrations) {

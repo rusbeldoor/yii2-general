@@ -25,6 +25,23 @@ class Cron extends ActiveRecord
         ],
     ];
 
+    public $lastCronLog; // Последний лог
+
+    /**
+     * Магический метод получения аттрибута
+     *
+     * @param $name string
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        switch ($name) {
+            case 'lastCronLog': $this->loadLastCronLog(); break;
+            default:
+        }
+        return parent::__get($name);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -80,5 +97,18 @@ class Cron extends ActiveRecord
         // if (true) { $this->addError('id', 'Элемент #' . $this->id . ' не может быть удалён.'); }
 
         return !$this->hasErrors() && parent::beforeDelete();
+    }
+
+    /**
+     * ...
+     *
+     * @param $force bool
+     * @return void
+     */
+    private function loadLastCronLog($force = false)
+    {
+        if (!$this->lastCronLog || $force) {
+            $this->lastCronLog = CronLog::find()->cronId($this->id)->lastStart();
+        }
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace rusbeldoor\yii2General\modules\cron\controllers;
 
+use rusbeldoor\yii2General\models\CronLog;
 use Yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -56,6 +57,21 @@ class DefaultController extends \backend\components\Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
+
+        /*
+        $query = CronLog::find();
+        $dataProvider = new ActiveDataProvider(['query' => $query]);
+
+        $searchModel = new CronSearch();
+        $searchModel->kill_process = '';
+        $searchModel->restart = '';
+        $searchModel->active = '';
+        $dataProvider = $searchModel->search(Yii::$app->request->post());
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
+        */
 
         return $this->render('view', ['model' => $model]);
     }

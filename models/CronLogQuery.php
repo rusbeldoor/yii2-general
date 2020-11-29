@@ -14,7 +14,7 @@ class CronLogQuery extends ActiveQuery
      * @param $cron_id int
      * @return AuthItemQuery
      */
-    public function cron($cron_id)
+    public function cronId($cron_id)
     { return $this->andWhere("cron_id=:cron_id", [':cron_id' => $cron_id]); }
 
     /**

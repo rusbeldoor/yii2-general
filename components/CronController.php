@@ -39,7 +39,7 @@ class CronController extends ConsoleController
         // Если предыдущий запуск крона еще не завершился
         if ($this->cron->status == 'process') {
              // Если лог предыдущего запуска крона найден
-            if ($cronLog = CronLog::find()->cron($this->cron->id)->lastStart()->notComplete()->one()) {
+            if ($cronLog = CronLog::find()->cronId($this->cron->id)->lastStart()->notComplete()->one()) {
                 if (
                     // Если крон имеет максимальную продолжительность выполнения
                     ($this->cron->max_duration != null)
