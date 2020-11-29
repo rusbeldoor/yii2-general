@@ -17,11 +17,21 @@ class DatetimeHelper
     }
 
     /**
+     * Дополнение реализации стандартной функции date
+     *
+     * @param $format string
+     * @param $value mixed
+     * @return string
+     */
+    public static function date($format, $value)
+    { return date($format, self::timestamp($value)); }
+
+    /**
      * 18:42 29.11.2020
      *
      * @param $value mixed
      * @return string
      */
     public static function formatHidmY($value)
-    { return date('H:i d.m.Y', self::timestamp($value)); }
+    { return self::date('H:i d.m.Y', $value); }
 }
