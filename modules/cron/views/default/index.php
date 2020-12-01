@@ -21,6 +21,7 @@ $gridViewColumns = [
     'active:yesNo',
     'lastCronLog' => [
         'label' => 'Логи',
+        'format' => 'html',
         'value' => function ($model) {
             return Html::a((($model->lastCronLog) ? $model->lastCronLog->getName() : '—'), ['log', 'id' => $model->id]);
         },
