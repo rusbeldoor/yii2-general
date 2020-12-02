@@ -23,7 +23,10 @@ $gridViewColumns = [
         'label' => 'Логи',
         'format' => 'html',
         'value' => function ($model) {
-            return (($model->lastCronLog) ? $model->lastCronLog->getName() : '—') . ' ' . Html::a('<i class="fas fa-history"></i>', ['log', 'id' => $model->id, 'htmlOptions' => ['class' => 'actionColumnButton']]);
+            return
+                (($model->lastCronLog) ? $model->lastCronLog->getName() : '—')
+                . ' '
+                . Html::a('<i class="fas fa-history"></i>', ['log', 'id' => $model->id], ['class' => 'actionColumnButton']);
         },
     ],
     ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
