@@ -8,8 +8,8 @@ use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 
 use rusbeldoor\yii2General\models\Cron;
-use rusbeldoor\yii2General\models\CronLog;
 use rusbeldoor\yii2General\modules\cron\models\CronSearch;
+use rusbeldoor\yii2General\modules\cron\models\CronLogSearch;
 use rusbeldoor\yii2General\helpers\AppHelper;
 
 /**
@@ -60,9 +60,17 @@ class DefaultController extends \backend\components\Controller
     {
         $model = $this->findModel($id);
 
-        $cronLogDataProvider = new ActiveDataProvider(['query' => CronLog::find()->cronId($id)]);
+        $cornLogSearchModel = new CronLogSearch();
+        $cornLogSearchModel->cron_id = $id;
+        $cronLogDataProvider = $cornLogSearchModel->search(Yii::$app->request->post());
 
-        return $this->render('view', ['model' => $model, 'cronLogDataProvider' => $cronLogDataProvider,]);
+        return $this->render(
+            'view',
+            [
+                'model' => $model,
+                'cronLogDataProvider' => $cronLogDataProvider,
+            ]
+        );
     }
 
     /**
