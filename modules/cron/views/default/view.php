@@ -5,8 +5,8 @@
 /* @var $cronLogDataProvider ActiveDataProvider */
 
 use rusbeldoor\yii2General\widgets\DetailView;
-use rusbeldoor\yii2General\helpers\BaseUI;
 use rusbeldoor\yii2General\widgets\grid\GridView;
+use rusbeldoor\yii2General\helpers\BaseUI;
 use kartik\tabs\TabsX;
 
 $this->title = $model->alias;
