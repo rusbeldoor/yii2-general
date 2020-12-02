@@ -58,22 +58,9 @@ class DefaultController extends \backend\components\Controller
     {
         $model = $this->findModel($id);
 
-        /*
-        $query = CronLog::find();
-        $dataProvider = new ActiveDataProvider(['query' => $query]);
+        $cronLogDataProvider = new ActiveDataProvider(['query' => CronLog::find()->cronId($id)]);
 
-        $searchModel = new CronSearch();
-        $searchModel->kill_process = '';
-        $searchModel->restart = '';
-        $searchModel->active = '';
-        $dataProvider = $searchModel->search(Yii::$app->request->post());
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
-        */
-
-        return $this->render('view', ['model' => $model]);
+        return $this->render('view', ['model' => $model, 'cronLogDataProvider' => $cronLogDataProvider,]);
     }
 
     /**

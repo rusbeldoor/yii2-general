@@ -6,8 +6,7 @@ use kartik\tabs\TabsX;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\administrator\modules\rbac\models\AuthItem */
-/* @var $rolesOfThisRole array */
-/* @var $permissionsOfThisRole array */
+/* @var $cronLogDataProvider ActiveDataProvider */
 
 $this->title = $model->alias;
 $this->params['breadcrumbs'][] = ['label' => 'Кроны', 'url' => ['/administrator/cron']];
@@ -24,7 +23,7 @@ if (Yii::$app->controller->module->onlyMigrations) {
     <?= TabsX::widget([
         'items' => [
             [
-                'label' => 'Основное',
+                'label' => '<i class="fas fa-bars"></i> Основное',
                 'content' =>
                     BaseUI::buttonsForViewPage($model, $buttonsForViewPage)
                     . DetailView::widget([
@@ -44,7 +43,14 @@ if (Yii::$app->controller->module->onlyMigrations) {
             ],
             [
                 'label' => '<i class="fas fa-history"></i> Логи',
-                'content' => '123',
+                'content' => DetailView::widget([
+                    'model' => $cronLogDataProvider,
+                    'attributes' => [
+                        'datetime_start:datetime',
+                        'datetime_complete:datetime',
+                        'duration:seconds',
+                    ],
+                ]),
             ],
         ],
         'position' => TabsX::POS_ABOVE,
