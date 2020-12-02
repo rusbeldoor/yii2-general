@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\modules\cron\models;
 
 use yii\base\Model;

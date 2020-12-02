@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\backend\assets;
 
 /**
