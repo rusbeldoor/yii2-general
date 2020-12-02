@@ -2,6 +2,8 @@
 
 namespace rusbeldoor\yii2General\components;
 
+use rusbeldoor\yii2General\helpers\DatetimeHelper;
+
 class Formatter extends \yii\i18n\Formatter
 {
     /**
@@ -12,6 +14,15 @@ class Formatter extends \yii\i18n\Formatter
      */
     public function asId($value)
     { return '#' . $value; }
+
+    /**
+     * 18:42 29.11.2020
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public function asDatetimeHidmY($value)
+    { return DatetimeHelper::formatHidmY($value); }
 
     /**
      * Да / Нет

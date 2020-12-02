@@ -48,8 +48,8 @@ if (Yii::$app->controller->module->onlyMigrations) {
                     'dataProvider' => $cronLogDataProvider,
                     'tableOptions' => ['class' => 'table table-striped table-hover'],
                     'columns' => [
-                        'datetime_start:datetime',
-                        'datetime_complete:datetime',
+                        'datetime_start:datetimeHidmY',
+                        'datetime_complete:datetimeHidmY',
                         'duration:seconds',
                     ],
                 ]),
