@@ -1,12 +1,13 @@
 <?php
 
-use rusbeldoor\yii2General\widgets\DetailView;
-use rusbeldoor\yii2General\helpers\BaseUI;
-use kartik\tabs\TabsX;
-
 /* @var $this yii\web\View */
 /* @var $model backend\modules\administrator\modules\rbac\models\AuthItem */
 /* @var $cronLogDataProvider ActiveDataProvider */
+
+use rusbeldoor\yii2General\widgets\DetailView;
+use rusbeldoor\yii2General\helpers\BaseUI;
+use rusbeldoor\yii2General\widgets\grid\GridView;
+use kartik\tabs\TabsX;
 
 $this->title = $model->alias;
 $this->params['breadcrumbs'][] = ['label' => 'Кроны', 'url' => ['/administrator/cron']];
@@ -43,9 +44,10 @@ if (Yii::$app->controller->module->onlyMigrations) {
             ],
             [
                 'label' => '<i class="fas fa-history"></i> Логи',
-                'content' => DetailView::widget([
-                    'model' => $cronLogDataProvider,
-                    'attributes' => [
+                'content' => GridView::widget([
+                    'dataProvider' => $cronLogDataProvider,
+                    'tableOptions' => ['class' => 'table table-striped table-hover'],
+                    'columns' => [
                         'datetime_start:datetime',
                         'datetime_complete:datetime',
                         'duration:seconds',
