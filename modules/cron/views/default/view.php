@@ -46,7 +46,6 @@ if (Yii::$app->controller->module->onlyMigrations) {
                 'label' => '<i class="fas fa-history"></i> Логи',
                 'content' => GridView::widget([
                     'dataProvider' => $cronLogDataProvider,
-                    'tableOptions' => ['class' => 'table table-striped table-hover'],
                     'columns' => [
                         'datetime_start:datetimeHidmY',
                         'datetime_complete:datetimeHidmY',

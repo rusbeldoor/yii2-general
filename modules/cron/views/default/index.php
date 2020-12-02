@@ -44,7 +44,6 @@ if (Yii::$app->controller->module->onlyMigrations) {
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'tableOptions' => ['class' => 'table table-striped table-hover'],
         'columns' => $gridViewColumns,
     ]); ?>
 </div>
