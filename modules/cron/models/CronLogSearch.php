@@ -41,7 +41,7 @@ class CronLogSearch extends CronLog
      */
     public function search($params)
     {
-        $query = CronLog::find();
+        $query = CronLog::find()->orderBy('datetime_start DESC');
 
         // add conditions that should always apply here
         // ...
