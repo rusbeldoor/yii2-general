@@ -1,12 +1,12 @@
 <?php
 
-use yii\helpers\html;
-use rusbeldoor\yii2General\widgets\grid\GridView;
-use rusbeldoor\yii2General\helpers\BaseUI;
-
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\administrator\modules\rbac\models\AuthItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
+use yii\helpers\html;
+use rusbeldoor\yii2General\widgets\grid\GridView;
+use rusbeldoor\yii2General\helpers\BaseUI;
 
 $this->title = 'Кроны';
 $this->params['breadcrumbs'][] = $this->title;
