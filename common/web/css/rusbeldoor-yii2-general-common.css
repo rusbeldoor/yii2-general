@@ -85,8 +85,8 @@ a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
  *** *** *** kartik-v *** *** ***
  ********************************/
 
-.tab-x {}
-.tab-x .tab-content { margin-top: 10px; }
+.tabs-x {}
+.tabs-x .tab-content { margin-top: 10px; }
 
 /*********************************
  *** *** *** Интерфейс *** *** ***
