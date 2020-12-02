@@ -21,8 +21,26 @@ class Formatter extends \yii\i18n\Formatter
      * @param $value mixed
      * @return string
      */
-    public function asDatetimeHidmY($value)
-    { return DatetimeHelper::formatHidmY($value); }
+    public function asDatetimeHourMinuteDayMonthYear($value)
+    { return DatetimeHelper::formatHourMinuteDayMonthYear($value); }
+
+    /**
+     * 18:42
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public function asDatetimeHourMinute($value)
+    { return DatetimeHelper::formatHourMinute($value); }
+
+    /**
+     * 29.11.2020
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public function asDatetimeDayMonthYear($value)
+    { return DatetimeHelper::formatDayMonthYear($value); }
 
     /**
      * Да / Нет

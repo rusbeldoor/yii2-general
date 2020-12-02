@@ -33,6 +33,24 @@ class DatetimeHelper
      * @param $value mixed
      * @return string
      */
-    public static function formatHidmY($value)
+    public static function formatHourMinuteDayMonthYear($value)
     { return self::date('H:i d.m.Y', $value); }
+
+    /**
+     * 18:42
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public static function formatHourMinute($value)
+    { return self::date('H:i', $value); }
+
+    /**
+     * 29.11.2020
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public static function formatDayMonthYear($value)
+    { return self::date('d.m.Y', $value); }
 }
