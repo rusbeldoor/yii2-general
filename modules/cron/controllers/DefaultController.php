@@ -60,9 +60,9 @@ class DefaultController extends \backend\components\Controller
     {
         $model = $this->findModel($id);
 
-        $cornLogSearchModel = new CronLogSearch();
-        $cornLogSearchModel->cron_id = $id;
-        $cronLogDataProvider = $cornLogSearchModel->search(Yii::$app->request->post());
+        $cronLogSearch = new CronLogSearch();
+        $cronLogSearch->cron_id = $id;
+        $cronLogDataProvider = $cronLogSearch->search(Yii::$app->request->post());
 
         return $this->render(
             'view',

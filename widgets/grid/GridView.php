@@ -90,7 +90,10 @@ class GridView extends \yii\grid\GridView
 });'
         );
 
-        Pjax::begin(['id' => $this->pjaxId]);
+        Pjax::begin([
+            'id' => $this->pjaxId,
+            'linkSelector' => 'pjax-link',
+        ]);
 
         // Открываем контейнер-фрагмент для копирования из него при pjax загрузке
         echo '<div id="' . $this->fragmentId  . '">';
