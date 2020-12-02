@@ -21,31 +21,30 @@ if (Yii::$app->controller->module->onlyMigrations) {
 }
 ?>
 <div class="auth-item-view">
-    <?= BaseUI::buttonsForViewPage($model, $buttonsForViewPage) ?>
-
     <?= TabsX::widget([
         'items' => [
             [
                 'label' => 'Основное',
-                'content' => DetailView::widget([
-                    'model' => $model,
-                    'attributes' => [
-                        'id:id',
-                        'alias',
-                        'description',
-                        'status:status',
-                        'max_duration:seconds',
-                        'kill_process:yesNo',
-                        'restart:yesNo',
-                        'active:yesNo',
-                    ],
-                ]),
+                'content' =>
+                    BaseUI::buttonsForViewPage($model, $buttonsForViewPage)
+                    . DetailView::widget([
+                        'model' => $model,
+                        'attributes' => [
+                            'id:id',
+                            'alias',
+                            'description',
+                            'status:status',
+                            'max_duration:seconds',
+                            'kill_process:yesNo',
+                            'restart:yesNo',
+                            'active:yesNo',
+                        ],
+                    ]),
                 'active' => true,
             ],
             [
                 'label' => '<i class="fas fa-history"></i> Логи',
                 'content' => '123',
-                'active' => false,
             ],
         ],
         'position' => TabsX::POS_ABOVE,
