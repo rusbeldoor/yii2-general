@@ -22,6 +22,8 @@ class CronController extends ConsoleController
      */
     public function beforeAction($action)
     {
+        echo "Крон \"" . $this->cron->alias . "\".\n";
+
         // Текущее время
         $time = time();
 
@@ -37,8 +39,10 @@ class CronController extends ConsoleController
         // Если крон не активен
         if (!$this->cron->active) { return false; }
 
-        // Если предыдущий запуск крона еще не завершился
+        // Если предыдущий запуск крона ещё не завершился
         if ($this->cron->status == 'process') {
+            echo "Предыдущий запуск крона ещё не завершился.\n";
+
              // Если лог предыдущего запуска крона найден
             if ($cronLog = CronLog::find()->cronId($this->cron->id)->lastStart()->notComplete()->one()) {
                 if (
@@ -47,23 +51,34 @@ class CronController extends ConsoleController
                     // Если крон выполняется дольше своей максимальной продолжительности выполнения
                     && (($time - strtotime($cronLog->datetime_start)) > $this->cron->max_duration)
                 ) {
+                    echo "Предыдущий запуск крона выполняется дольше своей максимальной продолжитльности.\n";
+
                     // todo: оповещаем о проблемах
 
                     // Если разрешено уничтожать предыдущий зависший процесс
                     if ($this->cron->kill_process) {
+                        echo "Уничтожаем процесс отвечающий за предыдущий запуск крона.\n";
+
                         // Уничтожаем предыдущий зависший процесс
                         posix_kill($cronLog->pid, 'SIGKILL');
                     }
 
-                    // Если не разрешено перезапускатся при предыдущем зависшем процессе
-                    if (!$this->cron->restart) { return false; }
+                    // Если не разрешено перезапускаться при предыдущем зависшем процессе
+                    if (!$this->cron->restart) {
+                        echo "Перезапуск крона запрещён.\n";
+                        return false;
+                    }
                 }
             } else {
+                echo "Предыдущий запуск крона не найден.\n";
+
                 // todo: оповещаем о проблемах
 
                 return false;
             }
         }
+
+        echo "Запуск крона --->\n";
 
         $this->cron->status = 'process';
         $this->cron->save();
@@ -101,7 +116,7 @@ class CronController extends ConsoleController
         $this->cronLog->datetime_complete = date('Y-m-d H:i:s', $time);
         $this->cronLog->update();
 
-        echo 'Cron ' . $this->cron->alias . ' is complete!';
+        echo "<--- " . $this->cronLog->duration . " сек.\n\n";
 
         return parent::afterAction($action, $result);
     }
