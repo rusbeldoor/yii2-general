@@ -236,7 +236,7 @@ class ActiveField extends \kartik\form\ActiveField
      * @param $options array
      * @return ActiveField
      */
-    public function sarchMultipleSelect($elems, $options = [])
+    public function searchMultipleSelect($elems, $options = [])
     {
         return self::multipleSelect($elems,
             ArrayHelper::merge(
