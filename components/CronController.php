@@ -33,13 +33,13 @@ class CronController extends ConsoleController
 
         // Если крона нет
         if (!$this->cron) {
-            echo "Крон \"" . $alias . "\" не найден.\n";
+            echo "Крон \"" . $alias . "\" не найден\n";
             return false;
         }
 
         // Если крон не активен
         if (!$this->cron->active) {
-            echo "Крон \"" . $this->cron->alias . "\" не активен.\n";
+            echo "Крон \"" . $this->cron->alias . "\" не активен\n";
             return false;
         }
 
@@ -47,7 +47,7 @@ class CronController extends ConsoleController
 
         // Если предыдущий запуск крона ещё не завершился
         if ($this->cron->status == 'process') {
-            echo "Предыдущий запуск крона ещё не завершился.\n";
+            echo "Предыдущий запуск крона ещё не завершился\n";
 
              // Если лог предыдущего запуска крона найден
             if ($cronLog = CronLog::find()->cronId($this->cron->id)->lastStart()->notComplete()->one()) {
@@ -57,13 +57,13 @@ class CronController extends ConsoleController
                     // Если крон выполняется дольше своей максимальной продолжительности выполнения
                     && (($time - strtotime($cronLog->datetime_start)) > $this->cron->max_duration)
                 ) {
-                    echo "Предыдущий запуск крона выполняется дольше своей максимальной продолжитльности.\n";
+                    echo "Предыдущий запуск крона выполняется дольше своей максимальной продолжитльности\n";
 
                     // todo: оповещаем о проблемах
 
                     // Если разрешено уничтожать предыдущий зависший процесс
                     if ($this->cron->kill_process) {
-                        echo "Уничтожаем процесс отвечающий за предыдущий запуск крона.\n";
+                        echo "Уничтожаем процесс отвечающий за предыдущий запуск крона\n";
 
                         // Уничтожаем предыдущий зависший процесс
                         posix_kill($cronLog->pid, 'SIGKILL');
@@ -71,20 +71,18 @@ class CronController extends ConsoleController
 
                     // Если не разрешено перезапускаться при предыдущем зависшем процессе
                     if (!$this->cron->restart) {
-                        echo "Перезапуск крона запрещён.\n";
+                        echo "Перезапуск крона запрещён\n";
                         return false;
                     }
                 }
             } else {
-                echo "Предыдущий запуск крона не найден.\n";
+                echo "Предыдущий запуск крона не найден\n";
 
                 // todo: оповещаем о проблемах
 
                 return false;
             }
         }
-
-        echo "Запуск крона --->\n";
 
         $this->cron->status = 'process';
         $this->cron->save();
@@ -97,6 +95,8 @@ class CronController extends ConsoleController
         $this->cronLog->datetime_complete = null;
         $this->cronLog->pid = (string)getmypid(); // Запоминаем pid текущего процесса
         $this->cronLog->save();
+
+        echo "<--- Начало --->\n";
 
         return parent::beforeAction($action);
     }
@@ -122,7 +122,7 @@ class CronController extends ConsoleController
         $this->cronLog->datetime_complete = date('Y-m-d H:i:s', $time);
         $this->cronLog->update();
 
-        echo "<--- " . $this->cronLog->duration . " сек.\n\n";
+        echo "<--- Конец (" . $this->cronLog->duration . " сек.) --->\n";
 
         return parent::afterAction($action, $result);
     }
