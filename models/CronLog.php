@@ -76,5 +76,5 @@ class CronLog extends ActiveRecord
      * @return string
      */
     public function getName()
-    { return DatetimeHelper::formatHourMinuteDayMonthYear($this->datetime_start) . ' — ' . (($this->datetime_complete) ? DatetimeHlper::formatHourMinuteDayMonthYear($this->datetime_complete) : '...'); }
+    { return DatetimeHelper::formatHourMinuteDayMonthYear($this->datetime_start) . ' — ' . (($this->datetime_complete) ? DatetimeHelper::formatHourMinuteDayMonthYear($this->datetime_complete) : '...'); }
 }
