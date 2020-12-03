@@ -125,7 +125,7 @@ class DatetimeHelper
         $minutesSeconds = $value - $seconds;
         $elems = [];
         if ($showZeroValues || $minutesSeconds) { $elems[] = self::formatCountMinute($minutesSeconds); }
-        if ($showZeroValues || $seconds) { $elems[] = self::formatCountSecond($seconds); }
+        if ($showZeroValues || !count($elems) || $seconds) { $elems[] = self::formatCountSecond($seconds); }
         return implode($separator, $elems);
     }
 
@@ -151,7 +151,7 @@ class DatetimeHelper
         $elems = [];
         if ($showZeroValues || $hoursSeconds) { $elems[] = self::formatCountHour($hoursSeconds); }
         if ($showZeroValues || $minutesSeconds) { $elems[] = self::formatCountMinute($minutesSeconds); }
-        if ($showZeroValues || $seconds) { $elems[] = self::formatCountSecond($seconds); }
+        if ($showZeroValues || !count($elems) || $seconds) { $elems[] = self::formatCountSecond($seconds); }
         return implode($separator, $elems);
     }
 }
