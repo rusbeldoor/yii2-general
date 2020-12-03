@@ -101,6 +101,8 @@ class CronController extends ConsoleController
         $this->cronLog->datetime_complete = date('Y-m-d H:i:s', $time);
         $this->cronLog->update();
 
+        echo 'Cron ' . $this->cron->alias . ' is complete!';
+
         return parent::afterAction($action, $result);
     }
 }
