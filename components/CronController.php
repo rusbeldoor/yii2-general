@@ -43,7 +43,7 @@ class CronController extends ConsoleController
             return false;
         }
 
-        echo "Крон \"" . $this->cron->alias . "\".\n";
+        echo "Крон \"" . $this->cron->alias . "\"\n";
 
         // Если предыдущий запуск крона ещё не завершился
         if ($this->cron->status == 'process') {
