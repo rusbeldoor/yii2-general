@@ -81,7 +81,7 @@ class AuthItem extends ActiveRecord
             $authItemChildsNames = [];
             $authItemChilds = AuthItemChild::find()->parent($this->name)->all();
             foreach ($authItemChilds as $authItemChild) { $authItemChildsNames[] = $authItemChild->child; }
-            if (count($authItemChildsNames)) { $this->addError('id', 'Элемент ' . $this->getNameAndId() . ' не может быть удалён. Некоторые операции/роли (' . implode(', ', $authItemChildsNames) . ') используются им .'); }
+            if (count($authItemChildsNames)) { $this->addError('id', 'Элемент ' . $this->getNameAndId() . ' не может быть удалён. Некоторые операции/роли (' . implode(', ', $authItemChildsNames) . ') используются им.'); }
         }
 
         // Проверка на другие роли использующих эту операцию/роль
