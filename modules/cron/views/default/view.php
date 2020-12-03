@@ -34,7 +34,7 @@ if (Yii::$app->controller->module->onlyMigrations) {
                             'alias',
                             'description',
                             'status:status',
-                            'max_duration:countHourMinuteSecond',
+                            'max_duration:countMinuteSecond',
                             'kill_process:yesNo',
                             'restart:yesNo',
                             'active:yesNo',
