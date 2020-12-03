@@ -65,8 +65,13 @@ class CronController extends ConsoleController
                     if ($this->cron->kill_process) {
                         echo "Уничтожаем процесс отвечающий за предыдущий запуск крона\n";
 
-                        // Уничтожаем предыдущий зависший процесс
-                        posix_kill($cronLog->pid, 'SIGKILL');
+                        // Если функция posix_kill существует
+                        if (function_exists('posix_kill')) {
+                            // Уничтожаем предыдущий зависший процесс
+                            posix_kill($cronLog->pid, 'SIGKILL');
+                        } else {
+                            echo "Функция posix_kill не доступна, процесс не уничтожить\n";
+                        }
                     }
 
                     // Если не разрешено перезапускаться при предыдущем зависшем процессе
