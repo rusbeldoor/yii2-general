@@ -191,9 +191,54 @@ class ActiveField extends \kartik\form\ActiveField
      * @param $options array
      * @return ActiveField
      */
+    public function searchSelect($elems, $options = [])
+    {
+        return $this->widget(
+            'rusbeldoor\yii2General\widgets\select2',
+            ArrayHelper::merge(
+                [
+                    'data' => $elems,
+                    'options' => ['placeholder' => 'Не важно'],
+                    'pluginOptions' => [
+                        'allowClear' => true, // Кнопка "крестик" очистки выбора
+                    ],
+                ],
+                $options
+            )
+        );
+    }
+
+    /**
+     * ...
+     *
+     * @param $elems array
+     * @param $options array
+     * @return ActiveField
+     */
     public function multipleSelect($elems, $options = [])
     {
         return self::select($elems,
+            ArrayHelper::merge(
+                [
+                    'pluginOptions' => [
+                        'multiple' => true,
+                    ],
+                ],
+                $options
+            )
+        );
+    }
+
+    /**
+     * ...
+     *
+     * @param $elems array
+     * @param $options array
+     * @return ActiveField
+     */
+    public function sarchMultipleSelect($elems, $options = [])
+    {
+        return self::multipleSelect($elems,
             ArrayHelper::merge(
                 [
                     'pluginOptions' => [
