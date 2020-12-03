@@ -101,6 +101,7 @@ class DatetimeHelper
 
     /**
      * 1 519 мин. 20 сек.
+     * 20 сек.
      *
      * @param $value int|string
      * @param $separator string

@@ -76,7 +76,7 @@ class Formatter extends \yii\i18n\Formatter
     }
 
     /**
-     * Секунды
+     * 1 520 сек.
      *
      * @param $value mixed
      * @return string
@@ -85,13 +85,14 @@ class Formatter extends \yii\i18n\Formatter
     { return DatetimeHelper::formatCountSecond($value); }
 
     /**
-     * Секунды
+     * 1 519 мин. 20 сек.
+     * 20 сек.
      *
      * @param $value mixed
      * @return string
      */
     public function asCountMinuteSecond($value)
-    { return DatetimeHelper::formatCountMinuteSecond($value); }
+    { return DatetimeHelper::formatCountMinuteSecond($value, ' ', false); }
 
     /**
      * Статус
