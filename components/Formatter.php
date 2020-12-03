@@ -7,13 +7,16 @@ use rusbeldoor\yii2General\helpers\DatetimeHelper;
 class Formatter extends \yii\i18n\Formatter
 {
     /**
-     * Идентификатор
+     * Ид
      *
      * @param $value mixed
      * @return string
      */
     public function asId($value)
-    { return '#' . $value; }
+    {
+        if ($value === null) { return $this->nullDisplay; }
+        return '#' . $value;
+    }
 
     /**
      * 18:42 29.11.2020
@@ -22,7 +25,10 @@ class Formatter extends \yii\i18n\Formatter
      * @return string
      */
     public function asDatetimeHourMinuteDayMonthYear($value)
-    { return DatetimeHelper::formatHourMinuteDayMonthYear($value); }
+    {
+        if ($value === null) { return $this->nullDisplay; }
+        return DatetimeHelper::formatHourMinuteDayMonthYear($value);
+    }
 
     /**
      * 18:42:01 29.11.2020
@@ -31,7 +37,10 @@ class Formatter extends \yii\i18n\Formatter
      * @return string
      */
     public function asDatetimeHourMinuteSecondDayMonthYear($value)
-    { return DatetimeHelper::formatHourMinuteSecondDayMonthYear($value); }
+    {
+        if ($value === null) { return $this->nullDisplay; }
+        return DatetimeHelper::formatHourMinuteSecondDayMonthYear($value);
+    }
 
     /**
      * 18:42
@@ -40,7 +49,10 @@ class Formatter extends \yii\i18n\Formatter
      * @return string
      */
     public function asDatetimeHourMinute($value)
-    { return DatetimeHelper::formatHourMinute($value); }
+    {
+        if ($value === null) { return $this->nullDisplay; }
+        return DatetimeHelper::formatHourMinute($value);
+    }
 
     /**
      * 18:42:01
@@ -49,7 +61,10 @@ class Formatter extends \yii\i18n\Formatter
      * @return string
      */
     public function asDatetimeHourMinuteSecond($value)
-    { return DatetimeHelper::formatHourMinuteSecond($value); }
+    {
+        if ($value === null) { return $this->nullDisplay; }
+        return DatetimeHelper::formatHourMinuteSecond($value);
+    }
 
     /**
      * 29.11.2020
@@ -58,7 +73,10 @@ class Formatter extends \yii\i18n\Formatter
      * @return string
      */
     public function asDatetimeDayMonthYear($value)
-    { return DatetimeHelper::formatDayMonthYear($value); }
+    {
+        if ($value === null) { return $this->nullDisplay; }
+        return DatetimeHelper::formatDayMonthYear($value);
+    }
 
     /**
      * Да / Нет
@@ -68,6 +86,7 @@ class Formatter extends \yii\i18n\Formatter
      */
     public function asYesNo($value)
     {
+        if ($value === null) { return $this->nullDisplay; }
         switch ($value) {
             case 1: case true: case '1': return 'Да';
             case 0: case false: case '': case '0': return 'Нет';
@@ -83,7 +102,7 @@ class Formatter extends \yii\i18n\Formatter
      */
     public function asCountSecond($value)
     {
-        if ($value === null) { return null; }
+        if ($value === null) { return $this->nullDisplay; }
         return DatetimeHelper::formatCountSecond($value);
     }
 
@@ -96,7 +115,7 @@ class Formatter extends \yii\i18n\Formatter
      */
     public function asCountMinuteSecond($value)
     {
-        if ($value === null) { return null; }
+        if ($value === null) { return $this->nullDisplay; }
         return DatetimeHelper::formatCountMinuteSecond($value, ' ', false);
     }
 
@@ -108,6 +127,7 @@ class Formatter extends \yii\i18n\Formatter
      */
     public function asStatus($value)
     {
+        if ($value === null) { return $this->nullDisplay; }
         switch ($value) {
             case 'wait': return 'Ожидает';
             case 'process': return 'Выполняется';
