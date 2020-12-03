@@ -67,7 +67,7 @@ class CronController extends ConsoleController
                 && ($duration <= $this->cron->max_duration)
             ) {
                 echo "Перезапуск крона запрещён (предыдущий запуск крона выполняется меньше своей максимальной продолжительности)\n";
-                echo "Повторите запуск через " . ($this->cron->max_duratio - $duration)  . " сек.\n";
+                echo "Повторите запуск через " . ($this->cron->max_duration - $duration)  . " сек.\n";
 
                 // todo: оповещаем о проблемах
 
