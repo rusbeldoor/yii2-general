@@ -78,21 +78,27 @@ class Formatter extends \yii\i18n\Formatter
     /**
      * 1 520 сек.
      *
-     * @param $value mixed
+     * @param $value int|string|null
      * @return string
      */
     public function asCountSecond($value)
-    { return DatetimeHelper::formatCountSecond($value); }
+    {
+        if ($value === null) { return null; }
+        return DatetimeHelper::formatCountSecond($value);
+    }
 
     /**
      * 1 519 мин. 20 сек.
      * 20 сек.
      *
-     * @param $value mixed
+     * @param $value int|string|null
      * @return string
      */
     public function asCountMinuteSecond($value)
-    { return DatetimeHelper::formatCountMinuteSecond($value, ' ', false); }
+    {
+        if ($value === null) { return null; }
+        return DatetimeHelper::formatCountMinuteSecond($value, ' ', false);
+    }
 
     /**
      * Статус
