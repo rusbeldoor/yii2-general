@@ -3,7 +3,7 @@
 namespace rusbeldoor\yii2General\models;
 
 use yii;
-use rusbeldoor\yii2Gnereal\helpers\DatetimeHelper;
+use rusbeldoor\yii2General\helpers\DatetimeHelper;
 
 /**
  * Cron_log (ActiveRecord)
