@@ -20,7 +20,7 @@ $gridViewColumns = [
     'status:status',
     'active:yesNo',
     'lastCronLog' => [
-        'label' => 'Последний лог',
+        'label' => 'Последний запуск',
         'format' => 'html',
         'value' => function ($model) {
             return (($model->lastCronLog) ? $model->lastCronLog->getName() : '—');

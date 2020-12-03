@@ -48,7 +48,7 @@ class CronLog extends ActiveRecord
             'duration' => 'Продолжительность',
             'datetime_start' => 'Дата и время начала',
             'datetime_complete' => 'Дата и время завершения',
-            'pid' => 'Ид процесса в Linux',
+            'pid' => 'Ид процесса',
         ];
     }
 
