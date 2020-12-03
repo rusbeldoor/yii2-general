@@ -43,7 +43,7 @@ if (Yii::$app->controller->module->onlyMigrations) {
                 'active' => true,
             ],
             [
-                'label' => '<i class="fas fa-history"></i> Логи',
+                'label' => '<i class="fas fa-history"></i> История запусков',
                 'content' => GridView::widget([
                     'dataProvider' => $cronLogDataProvider,
                     'columns' => [
