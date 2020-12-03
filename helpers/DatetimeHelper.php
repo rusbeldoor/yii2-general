@@ -111,9 +111,9 @@ class DatetimeHelper
     {
         $value = (int)$value;
         $seconds = $value % 60;
-        $minutes = (int)($value / 60);
+        $minutesSeconds = $value - $seconds;
         $elems = [];
-        if ($showZeroValues || $minutes) { $elems[] = self::formatCountMinute($minutes); }
+        if ($showZeroValues || $minutesSeconds) { $elems[] = self::formatCountMinute($minutesSeconds); }
         if ($showZeroValues || $seconds) { $elems[] = self::formatCountSecond($seconds); }
         return implode($separator, $elems);
     }
