@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2YandexDirect\console\controllers;
+namespace rusbeldoor\yii2General\console\controllers;
 
 use rusbeldoor\yii2General\helpers\DatetimeHelper;
 use rusbeldoor\yii2General\models\CronLog;
