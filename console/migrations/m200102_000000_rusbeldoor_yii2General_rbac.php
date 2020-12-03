@@ -55,8 +55,8 @@ class m200102_000000_rusbeldoor_yii2General_rbac extends Migration
 
         // Создание ролей, операций
         $this->insert('auth_item', ['id' => 1, 'name' => 'administrator', 'type' => 1, 'description' => 'Адинистратор']);
-        $this->insert('auth_item', ['id' => 1000, 'name' => 'rusbeldoor-rbac', 'type' => 2, 'description' => 'Rusbeldoor, Роли и операции']);
-        $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'rusbeldoor-rbac']);
+        $this->insert('auth_item', ['id' => 1000, 'name' => 'rbac', 'type' => 2, 'description' => 'Роли и операции']);
+        $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'rbac']);
     }
 
     /**
