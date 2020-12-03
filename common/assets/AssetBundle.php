@@ -11,11 +11,11 @@ class AssetBundle extends \yii\web\AssetBundle
     public $sourcePath = '@vendor/rusbeldoor/yii2-general/common/web';
 
     public $css = [
-        'css/rusbeldoor-yii2-general-common.css',
+        'css/yii2-general-common.css',
     ];
 
     public $js = [
-		'js/rusbeldoor-yii2-general-common.js',
+		'js/yii2-general-common.js',
 		'js/reCaptcha.js',
 	];
 
