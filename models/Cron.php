@@ -26,7 +26,7 @@ class Cron extends ActiveRecord
         ],
     ];
 
-    public $lastCronLog; // Последний лог
+    protected $lastCronLog; // Последний лог
 
     /**
      * Магический метод получения аттрибута
@@ -109,7 +109,7 @@ class Cron extends ActiveRecord
     private function loadLastCronLog($force = false)
     {
         if (!$this->lastCronLog || $force) {
-            $this->lastCronLog = CronLog::find()->cronId($this->id)->lastStart();
+            $this->lastCronLog = CronLog::find()->cronId($this->id)->lastStart()->one();
         }
     }
 }
