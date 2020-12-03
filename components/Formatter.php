@@ -108,6 +108,7 @@ class Formatter extends \yii\i18n\Formatter
 
     /**
      * 1 519 мин. 20 сек.
+     * 1 519 мин.
      * 20 сек.
      *
      * @param $value int|string|null
@@ -117,6 +118,19 @@ class Formatter extends \yii\i18n\Formatter
     {
         if ($value === null) { return $this->nullDisplay; }
         return DatetimeHelper::formatCountMinuteSecond($value, ' ', false);
+    }
+
+    /**
+     * 1 519 мин. 20 сек.
+     * 20 сек.
+     *
+     * @param $value int|string|null
+     * @return string
+     */
+    public function asCountHourMinuteSecond($value)
+    {
+        if ($value === null) { return $this->nullDisplay; }
+        return DatetimeHelper::formatCountHourMinuteSecond($value, ' ', false);
     }
 
     /**
