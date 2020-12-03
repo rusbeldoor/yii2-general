@@ -25,6 +25,15 @@ class Formatter extends \yii\i18n\Formatter
     { return DatetimeHelper::formatHourMinuteDayMonthYear($value); }
 
     /**
+     * 18:42:01 29.11.2020
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public function asDatetimeHourMinuteSecondDayMonthYear($value)
+    { return DatetimeHelper::formatHourMinuteSecondDayMonthYear($value); }
+
+    /**
      * 18:42
      *
      * @param $value mixed
@@ -32,6 +41,15 @@ class Formatter extends \yii\i18n\Formatter
      */
     public function asDatetimeHourMinute($value)
     { return DatetimeHelper::formatHourMinute($value); }
+
+    /**
+     * 18:42:01
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public function asDatetimeHourMinuteSecond($value)
+    { return DatetimeHelper::formatHourMinuteSecond($value); }
 
     /**
      * 29.11.2020
@@ -63,8 +81,17 @@ class Formatter extends \yii\i18n\Formatter
      * @param $value mixed
      * @return string
      */
-    public function asSeconds($value)
-    { return (int)$value . ' сек.'; }
+    public function asCountSecond($value)
+    { return DatetimeHelper::formatCountSecond($value); }
+
+    /**
+     * Секунды
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public function asCountMinuteSecond($value)
+    { return DatetimeHelper::formatCountMinuteSecond($value); }
 
     /**
      * Статус
