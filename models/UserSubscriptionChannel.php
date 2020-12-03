@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\models;
 
-use Yii;
+use yii;
 
 /**
  * User_subscription_channel (ActiveRecord)

@@ -36,7 +36,7 @@ echo "<?php\n";
 
 namespace <?= StringHelper::dirname(ltrim($generator->controllerClass, '\\')) ?>;
 
-use Yii;
+use yii;
 <?php if (empty($generator->searchModelClass)): ?>use yii\data\ActiveDataProvider;
 <?php endif; ?>
 use yii\web\NotFoundHttpException;

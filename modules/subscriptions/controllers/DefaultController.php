@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\modules\subscriptions\controllers;
 
-use Yii;
+use yii;
 
 use rusbeldoor\yii2General\models\UserSubscription;
 use rusbeldoor\yii2General\models\UserSubscriptionKey;

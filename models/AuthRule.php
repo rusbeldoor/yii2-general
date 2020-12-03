@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\models;
 
-use Yii;
+use yii;
 
 /**
  * Auth_rule (ActiveRecord)

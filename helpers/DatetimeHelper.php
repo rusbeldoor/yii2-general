@@ -28,6 +28,15 @@ class DatetimeHelper
     { return date($format, self::timestamp($value)); }
 
     /**
+     * 2020-11-29 18:42:01
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public static function formatYearMonthDayHourMinuteSecond($value)
+    { return self::date('Y-m-d H:i:s', $value); }
+
+    /**
      * 18:42 29.11.2020
      *
      * @param $value mixed
@@ -37,6 +46,15 @@ class DatetimeHelper
     { return self::date('H:i d.m.Y', $value); }
 
     /**
+     * 18:42:01 29.11.2020
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public static function formatHourMinuteSecondDayMonthYear($value)
+    { return self::date('H:i:s d.m.Y', $value); }
+
+    /**
      * 18:42
      *
      * @param $value mixed
@@ -44,6 +62,15 @@ class DatetimeHelper
      */
     public static function formatHourMinute($value)
     { return self::date('H:i', $value); }
+
+    /**
+     * 18:42:01
+     *
+     * @param $value mixed
+     * @return string
+     */
+    public static function formatHourMinuteSecond($value)
+    { return self::date('H:i:s', $value); }
 
     /**
      * 29.11.2020

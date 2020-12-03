@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\components;
 
-use Yii;
+use yii;
 use yii\helpers\Html;
 
 /**

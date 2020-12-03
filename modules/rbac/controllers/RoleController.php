@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\modules\rbac\controllers;
 
-use Yii;
+use yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 

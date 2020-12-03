@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\modules\rbac;
 
-use Yii;
+use yii;
 use rusbeldoor\yii2General\helpers\AppHelper;
 
 /**
