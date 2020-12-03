@@ -22,8 +22,6 @@ class CronController extends ConsoleController
      */
     public function beforeAction($action)
     {
-        echo "Крон \"" . $this->cron->alias . "\".\n";
-
         // Текущее время
         $time = time();
 
@@ -34,10 +32,18 @@ class CronController extends ConsoleController
         $this->cron = Cron::find()->alias($alias)->one();
 
         // Если крона нет
-        if (!$this->cron) { return false; }
+        if (!$this->cron) {
+            echo "Крон \"" . $alias . "\" не найден.\n";
+            return false;
+        }
 
         // Если крон не активен
-        if (!$this->cron->active) { return false; }
+        if (!$this->cron->active) {
+            echo "Крон \"" . $this->cron->alias . "\" не активен.\n";
+            return false;
+        }
+
+        echo "Крон \"" . $this->cron->alias . "\".\n";
 
         // Если предыдущий запуск крона ещё не завершился
         if ($this->cron->status == 'process') {
