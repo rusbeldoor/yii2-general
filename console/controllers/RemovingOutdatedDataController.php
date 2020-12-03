@@ -8,7 +8,7 @@ use rusbeldoor\yii2General\models\CronLog;
 /**
  * Контроллер
  */
-class RemoveOutdatedDataController extends \rusbeldoor\yii2General\components\CronController
+class RemovingOutdatedDataController extends \rusbeldoor\yii2General\components\CronController
 {
     // Время устаревания
     public $obsolescenceTime = [
