@@ -37,17 +37,17 @@ if (Yii::$app->controller->module->onlyMigrations) {
                     'items' => $rolesOfThisRole,
                     'sortableOptions' => ['itemOptions' => ['class' => 'alert alert-success']],
                     'options' => ['class' => 'form-control', 'readonly' => true]
-                ]) : '—'),
+                ]) : '-'),
             ],
             [
                 'label' => 'Операции',
                 'format' => 'html',
-                'value' => SortableInput::widget([
+                'value' => ((count($permissionsOfThisRole)) ? SortableInput::widget([
                     'name' => 'child-permissions-names',
                     'items' => $permissionsOfThisRole,
                     'sortableOptions' => ['itemOptions' => ['class' => 'alert alert-success']],
                     'options' => ['class' => 'form-control', 'readonly' => true]
-                ]),
+                ]) : '-'),
             ],
         ],
     ]) ?>
