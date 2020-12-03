@@ -7,6 +7,9 @@
 php yii migrate --migrationPath=@vendor/rusbeldoor/yii2-general/console/migrations/
 ```
 
+3. Создайте кроны и настройте их запуск.
+- `\console\controllers\RemoveOutdatedDataController` (родитель `\rusbeldoor\yii2General\console\controllers\RemoveOutdatedDataController`, запуск раз в сутки).
+
 # Панели
 ## Backend
 
