@@ -3,9 +3,11 @@
  *******************************/
 
 $(document).ready(function() {
-    console.log($('.select2 .select2-selection__rendered .select2-search.select2-search--inline .select2-search__field'));
-    $('.select2 .select2-selection__rendered .select2-search.select2-search--inline .select2-search__field').css("width", "");
-    console.log($('.select2 .select2-selection__rendered .select2-search.select2-search--inline .select2-search__field'));
+    setTimeout(function() {
+        console.log($('.select2 .select2-selection__rendered .select2-search.select2-search--inline .select2-search__field'));
+        $('.select2 .select2-selection__rendered .select2-search.select2-search--inline .select2-search__field').css("width", "");
+        console.log($('.select2 .select2-selection__rendered .select2-search.select2-search--inline .select2-search__field'));
+    }, 1000);
 });
 
 /*********************************
