@@ -174,7 +174,6 @@ class ActiveField extends \kartik\form\ActiveField
             ArrayHelper::merge(
                 [
                     'data' => $elems,
-                    'options' => ['placeholder' => 'Select a state ...'],
                     'pluginOptions' => [
                         'allowClear' => true, // Кнопка "крестик" очистки выбора
                     ],
@@ -193,15 +192,10 @@ class ActiveField extends \kartik\form\ActiveField
      */
     public function searchSelect($elems, $options = [])
     {
-        return $this->widget(
-            'rusbeldoor\yii2General\widgets\select2',
+        return self::select($elems,
             ArrayHelper::merge(
                 [
-                    'data' => $elems,
                     'options' => ['placeholder' => 'Не важно'],
-                    'pluginOptions' => [
-                        'allowClear' => true, // Кнопка "крестик" очистки выбора
-                    ],
                 ],
                 $options
             )
@@ -238,7 +232,7 @@ class ActiveField extends \kartik\form\ActiveField
      */
     public function searchMultipleSelect($elems, $options = [])
     {
-        return self::multipleSelect($elems,
+        return self::searchSelect($elems,
             ArrayHelper::merge(
                 [
                     'pluginOptions' => [
