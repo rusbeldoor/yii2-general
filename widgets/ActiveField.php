@@ -70,7 +70,7 @@ class ActiveField extends \kartik\form\ActiveField
                 'unselect' => null,
                 'item' => function ($index, $label, $name, $checked, $value) {
                     return
-                        '<label class="btn btn-secondary' . ($checked ? ' active' : '') . '">'
+                        '<label class="btn btn-light' . ($checked ? ' active' : '') . '">'
                         . Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
                         . ' '
                         . $label
