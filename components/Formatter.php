@@ -145,6 +145,7 @@ class Formatter extends \yii\i18n\Formatter
         switch ($value) {
             case 'wait': return 'Ожидает';
             case 'process': return 'Выполняется';
+            case 'complete': return 'Выполнено';
             default: return '';
         }
     }
