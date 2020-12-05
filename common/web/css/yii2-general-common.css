@@ -117,7 +117,7 @@ a.desc:after { content: "\f160"; }
     padding: 15px;
     border: 1px solid #f8f9fa;
     border-radius: 0.25rem;
-    background-color: #f8f9fa;
+    background-color: #fbfcfd;
 }
 
 .widthDateTime { width: 207px; }
