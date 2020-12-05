@@ -1,3 +1,11 @@
+/*******************************
+ *** *** *** Select2 *** *** ***
+ *******************************/
+
+$(document).ready(function() {
+    $('.select2 .select2-selection__rendered .select2-search.select2-search--inline .select2-search__field').css("width", "");
+});
+
 /*********************************
  *** *** *** Интерфейс *** *** ***
  *********************************/
