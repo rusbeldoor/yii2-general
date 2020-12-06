@@ -39,6 +39,29 @@ class ActiveRecord extends \yii\db\ActiveRecord
     public static function getNotArchiveList($id = null, $valueFieldName = 'name', $keyFieldName = 'id')
     { return array_column(self::find()->notArchive()->asArray($id)->all(), $valueFieldName, $keyFieldName); }
 
+    /**
+     * Список элементов с указанным типом
+     *
+     * @param $type mixed
+     * @param $valueFieldName string
+     * @param $keyFieldName string
+     * @return string
+     */
+    public static function getListByType($type, $valueFieldName = 'name', $keyFieldName = 'id')
+    { return array_column(self::find()->type($type)->asArray()->all(), $valueFieldName, $keyFieldName); }
+
+    /**
+     * Список не архивных элементов с указанным типом
+     *
+     * @param $type mixed
+     * @param $id int|null
+     * @param $valueFieldName string
+     * @param $keyFieldName string
+     * @return string
+     */
+    public static function getNotArchiveListByType($type, $id = null, $valueFieldName = 'name', $keyFieldName = 'id')
+    { return array_column(self::find()->type($type)->notArchive()->asArray($id)->all(), $valueFieldName, $keyFieldName); }
+
     /****************************
      *** *** *** Поля *** *** ***
      ****************************/
