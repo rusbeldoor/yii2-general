@@ -9,9 +9,6 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
  */
 class ActiveRecord extends \yii\db\ActiveRecord
 {
-    // Описание полей
-    public static $fieldsDescriptions = [];
-
     /**
      * Магический метод получения аттрибута
      *
@@ -22,21 +19,45 @@ class ActiveRecord extends \yii\db\ActiveRecord
     { return ((property_exists($this, $name)) ? $this->$name : parent::__get($name)); }
 
     /**
+     * Список элементов
+     *
+     * @param $valueFieldName string
+     * @param $keyFieldName string
+     * @return string
+     */
+    public function getList($valueFieldName = 'name', $keyFieldName = 'id')
+    { return array_column($this->find()->asArray()->all(), $valueFieldName, $keyFieldName); }
+
+    /**
+     * Список не архивных элементов
+     *
+     * @param $id int|null
+     * @param $valueFieldName string
+     * @param $keyFieldName string
+     * @return string
+     */
+    public function getNotArchiveList($id = null, $valueFieldName = 'name', $keyFieldName = 'id')
+    { return array_column($this->find()->notArchive()->asArray($id)->all(), $valueFieldName, $keyFieldName); }
+
+    /****************************
+     *** *** *** Поля *** *** ***
+     ****************************/
+
+    // Описание полей
+    public static $fieldsDescriptions = [];
+
+    /**
      * Описание по значению
      *
-     * @param string $fieldName
+     * @param $fieldName string
      * @return string
      */
     public function getFieldDescription($fieldName)
     { return static::$fieldsDescriptions[$fieldName][$this->$fieldName]; }
 
-    /**
-     * Имя (#ид)
-     *
-     * @return string
-     */
-    public function getNameAndId()
-    { return $this->name . ' (#' . $this->id . ')'; }
+    /********************************
+     *** *** *** Проверки *** *** ***
+     ********************************/
 
     /**
      * Проверка на возможность удаления

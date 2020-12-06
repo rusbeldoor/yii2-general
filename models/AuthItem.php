@@ -81,20 +81,20 @@ class AuthItem extends ActiveRecord
             $authItemChildsNames = [];
             $authItemChilds = AuthItemChild::find()->parent($this->name)->all();
             foreach ($authItemChilds as $authItemChild) { $authItemChildsNames[] = $authItemChild->child; }
-            if (count($authItemChildsNames)) { $this->addError('id', 'Элемент ' . $this->getNameAndId() . ' не может быть удалён. Некоторые операции/роли (' . implode(', ', $authItemChildsNames) . ') используются им.'); }
+            if (count($authItemChildsNames)) { $this->addError('id', 'Элемент ' . $this->name . ' (#' . $this->id . ') не может быть удалён. Некоторые операции/роли (' . implode(', ', $authItemChildsNames) . ') используются им.'); }
         }
 
         // Проверка на другие роли использующих эту операцию/роль
         $authItemChildsNames = [];
         $authItemChilds = AuthItemChild::find()->child($this->name)->all();
         foreach ($authItemChilds as $authItemChild) { $authItemChildsNames[] = $authItemChild->parent; }
-        if (count($authItemChildsNames)) { $this->addError('id', 'Элемент ' . $this->getNameAndId() . ' не может быть удалён. Некоторые роли (' . implode(', ', $authItemChildsNames) . ') используют его.'); }
+        if (count($authItemChildsNames)) { $this->addError('id', 'Элемент ' . $this->name . ' (#' . $this->id . ') не может быть удалён. Некоторые роли (' . implode(', ', $authItemChildsNames) . ') используют его.'); }
 
         // Проверка на пользователей использующих эту операцию/роль
         $usersIds = [];
         $authAssignments = AuthAssignment::find()->itemName($this->name)->all();
         foreach ($authAssignments as $authAssignment) { $usersIds[] = $authAssignment->user_id; }
-        if (count($usersIds)) { $this->addError('id', 'Элемент ' . $this->getNameAndId() . ' не может быть удалён. Некоторые пользователи (#' . implode(', #', $usersIds) . ') используют его.'); }
+        if (count($usersIds)) { $this->addError('id', 'Элемент ' . $this->name . ' (#' . $this->id . ') не может быть удалён. Некоторые пользователи (#' . implode(', #', $usersIds) . ') используют его.'); }
 
         return !$this->hasErrors() && parent::beforeDelete();
     }

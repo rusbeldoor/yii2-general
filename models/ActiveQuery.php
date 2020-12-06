@@ -37,7 +37,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Архивный
      *
-     * return ActiveQuery
+     * @return ActiveQuery
      */
     public function archive()
     { return $this->andWhere("archive=1"); }
@@ -45,15 +45,17 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Не архивный
      *
-     * return ActiveQuery
+     * @param $fieldValue int|null
+     * @param $fieldName string
+     * @return ActiveQuery
      */
-    public function notArchive()
-    { return $this->andWhere("archive=0"); }
+    public function notArchive($fieldValue = null, $fieldName = 'id')
+    { return $this->andWhere("archive=0" . (($fieldValue !== null) ? " OR " . $fieldName . "=" . ((is_string($fieldValue)) ? "\"" . $fieldValue . "\"" : $fieldValue) : "")); }
 
     /**
      * Активный
      *
-     * return ActiveQuery
+     * @return ActiveQuery
      */
     public function active()
     { return $this->andWhere("active=1"); }
@@ -61,7 +63,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Не активный
      *
-     * return ActiveQuery
+     * @return ActiveQuery
      */
     public function notActive()
     { return $this->andWhere("active=0"); }
