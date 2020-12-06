@@ -10,7 +10,7 @@ use rusbeldoor\yii2General\widgets\SearchForm;
 
 <div class="auth-item-search panelSearchFormContainer">
     <?php $form = SearchForm::begin() ?>
-        <?= $form->field($model, 'id') ?>
+        <?= $form->field($model, 'id')->searchTextInput() ?>
         <?= $form->field($model, 'alias')->searchTextInput() ?>
         <?= $form->field($model, 'description')->searchTextInput() ?>
         <?= $form->field($model, 'status')->searchSelect(Cron::$fieldsDescriptions['status']) ?>
