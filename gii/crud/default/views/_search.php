@@ -19,7 +19,7 @@ use rusbeldoor\yii2General\widgets\SearchForm;
 ?>
 
 <div class="<?= $name ?>-search panelSearchFormContainer">
-    <?= "<?php " ?>$form = SearchForm::begin() ?>
+    <?= "<? " ?>$form = SearchForm::begin() ?>
 <?php foreach ($generator->getColumnNames() as $attribute) {
     // Если аттрибут не разрешен к выводу
     if (in_array($attribute, ['id'])) { continue; }
@@ -28,5 +28,5 @@ use rusbeldoor\yii2General\widgets\SearchForm;
     echo "\n";
 } ?>
         <?= "<?= " ?>$form->buttons() ?>
-    <?= "<?php " ?>SearchForm::end() ?>
+    <?= "<? " ?>SearchForm::end() ?>
 </div>

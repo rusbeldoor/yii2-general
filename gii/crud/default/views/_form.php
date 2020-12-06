@@ -23,7 +23,7 @@ use rusbeldoor\yii2General\widgets\AddEditForm;
 ?>
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
-    <?= "<?php " ?>$form = AddEditForm::begin() ?>
+    <?= "<? " ?>$form = AddEditForm::begin() ?>
 <?php foreach ($generator->getColumnNames() as $attribute) {
     if (
         // Если аттрибут не разрешен к массовому присваиванию
@@ -36,5 +36,5 @@ use rusbeldoor\yii2General\widgets\AddEditForm;
     echo "\n";
 } ?>
         <?= "<?= " ?>$form->buttons($model) ?>
-    <?= "<?php " ?>AddEditForm::end() ?>
+    <?= "<? " ?>AddEditForm::end() ?>
 </div>
