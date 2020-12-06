@@ -25,8 +25,8 @@ class ActiveRecord extends \yii\db\ActiveRecord
      * @param $keyFieldName string
      * @return string
      */
-    public function getList($valueFieldName = 'name', $keyFieldName = 'id')
-    { return array_column($this->find()->asArray()->all(), $valueFieldName, $keyFieldName); }
+    public static function getList($valueFieldName = 'name', $keyFieldName = 'id')
+    { return array_column(self::find()->asArray()->all(), $valueFieldName, $keyFieldName); }
 
     /**
      * Список не архивных элементов
@@ -36,8 +36,8 @@ class ActiveRecord extends \yii\db\ActiveRecord
      * @param $keyFieldName string
      * @return string
      */
-    public function getNotArchiveList($id = null, $valueFieldName = 'name', $keyFieldName = 'id')
-    { return array_column($this->find()->notArchive()->asArray($id)->all(), $valueFieldName, $keyFieldName); }
+    public static function getNotArchiveList($id = null, $valueFieldName = 'name', $keyFieldName = 'id')
+    { return array_column(self::find()->notArchive()->asArray($id)->all(), $valueFieldName, $keyFieldName); }
 
     /****************************
      *** *** *** Поля *** *** ***
