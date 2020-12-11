@@ -20,4 +20,16 @@ class AlertHelper
             return '<div class="alert alert-' . $type . '">' . $text . '</div>';
         }
     }
+
+    /**
+     * ...
+     *
+     * @param $type string
+     * @param $text string
+     * @return void
+     */
+    public static function alertText($type, $text)
+    {
+        return '<span class="alert alert-' . $type . '">' . $text . '</span>';
+    }
 }
