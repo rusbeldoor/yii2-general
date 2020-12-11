@@ -56,6 +56,7 @@ if (Yii::$app->controller->module->onlyMigrations) {
             ],
         ],
         'position' => TabsX::POS_ABOVE,
+        'enableStickyTabs' => true,
         'encodeLabels' => false,
     ]) ?>
 </div>
