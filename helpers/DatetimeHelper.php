@@ -88,7 +88,7 @@ class DatetimeHelper
      * @return string
      */
     public static function formatCountSecond($value)
-    { return number_format((int)$value, 0, '', ' ') . ' сек.'; }
+    { return number_format((int)$value, 0, '', ' ') . '&nbsp;сек.'; }
 
     /**
      * 1 519 мин.
@@ -97,7 +97,7 @@ class DatetimeHelper
      * @return string
      */
     public static function formatCountMinute($value)
-    { return number_format((int)((int)$value / 60), 0, '', ' ') . ' мин.'; }
+    { return number_format((int)((int)$value / 60), 0, '', ' ') . '&nbsp;мин.'; }
 
     /**
      * 1 518 час.
@@ -106,7 +106,7 @@ class DatetimeHelper
      * @return string
      */
     public static function formatCountHour($value)
-    { return number_format((int)((int)$value / 3600), 0, '', ' ') . ' час.'; }
+    { return number_format((int)((int)$value / 3600), 0, '', ' ') . '&nbsp;час.'; }
 
     /**
      * 1 519 мин. 20 сек.
