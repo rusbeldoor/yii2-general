@@ -27,7 +27,8 @@
 .border1pxSolidLightgray { border: 1px solid lightgray; }
 .borderRadius025rem { border-radius: 0.25rem; }
 
-table.textCenter td { text-align: center; }
+table.thCenter th { text-align: center; }
+table.tdCenter td { text-align: center; }
 
 .colorRemove { color: var(--red); }
 .colorEdit { color: var(--green); }
