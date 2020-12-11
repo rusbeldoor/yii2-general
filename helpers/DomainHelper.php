@@ -29,6 +29,6 @@ class DomainHelper
      */
     public static function check($domain)
     {
-        return true;
+        return $domain != '';
     }
 }
