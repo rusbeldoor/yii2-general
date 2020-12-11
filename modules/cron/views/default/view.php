@@ -47,10 +47,10 @@ if (Yii::$app->controller->module->onlyMigrations) {
                 'content' => GridView::widget([
                     'dataProvider' => $cronLogDataProvider,
                     'columns' => [
-                        'pid',
+                        'duration:countMinuteSecond',
                         'datetime_start:datetimeHourMinuteDayMonthYear',
                         'datetime_complete:datetimeHourMinuteDayMonthYear',
-                        'duration:countMinuteSecond',
+                        'pid',
                     ],
                 ]),
             ],
