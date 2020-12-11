@@ -30,6 +30,6 @@ class AlertHelper
      */
     public static function alertText($type, $text)
     {
-        return '<span class="text-' . $type . '" style="font-weight: bold;">' . $text . '</span>';
+        return '<span class="text-' . $type . '">' . $text . '</span>';
     }
 }
