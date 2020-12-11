@@ -43,7 +43,7 @@ class CronController extends ConsoleController
             return false;
         }
 
-        echo "Крон \"" . $this->cron->alias . "\".\n";
+        echo "Запуск крона \"" . $this->cron->alias . "\"\n";
 
         // Если предыдущий запуск крона ещё не завершился
         if ($this->cron->status == 'process') {
@@ -110,7 +110,7 @@ class CronController extends ConsoleController
         $this->cronLog->pid = (string)getmypid(); // Запоминаем pid текущего процесса
         $this->cronLog->save();
 
-        echo "<--- Начало --->\n";
+        echo "<--- Начало выполнения --->\n";
 
         return parent::beforeAction($action);
     }
@@ -136,7 +136,7 @@ class CronController extends ConsoleController
         $this->cronLog->datetime_complete = date('Y-m-d H:i:s', $time);
         $this->cronLog->update();
 
-        echo "<--- Конец (" . $this->cronLog->duration . " сек.) --->\n";
+        echo "<--- Конец выполнения (" . $this->cronLog->duration . " сек.) --->\n";
 
         return parent::afterAction($action, $result);
     }
