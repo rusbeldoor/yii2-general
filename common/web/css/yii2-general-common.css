@@ -8,11 +8,12 @@
 .noMargin { margin: 0 !important; }
 .margin10px { margin: 10px; }
 .marginTop10px { margin-top: 10px; }
+.marginBottom1rem { margin-bottom: 1rem; }
 .marginBottom10px { margin-bottom: 10px; }
-.marginBottom16px { margin-bottom: 16px; }
 .marginTopBottom10px { margin-top: 10px; margin-bottom: 10px; }
 
 .noPadding { padding: 0 !important; }
+.padding0375rem075rem { padding: 0.375rem 0.75rem; }
 .padding10px { padding: 10px; }
 .paddingTop10px { margin-top: 10px; }
 .paddingBottom10px { margin-bottom: 10px; }
