@@ -9,6 +9,7 @@
 .margin10px { margin: 10px; }
 .marginTop10px { margin-top: 10px; }
 .marginBottom10px { margin-bottom: 10px; }
+.marginBottom16px { margin-bottom: 16px; }
 .marginTopBottom10px { margin-top: 10px; margin-bottom: 10px; }
 
 .noPadding { padding: 0 !important; }
