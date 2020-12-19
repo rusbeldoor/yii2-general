@@ -4,7 +4,6 @@
 /* @var $result array */
 
 use yii\bootstrap4\Html;
-
 use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;
 
 $this->registerJs('$(document).ready(function () {

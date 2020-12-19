@@ -3,7 +3,6 @@
 namespace rusbeldoor\yii2General\modules\subscriptions;
 
 use yii;
-use rusbeldoor\yii2General\helpers\AppHelper;
 
 /**
  * rbac module definition class

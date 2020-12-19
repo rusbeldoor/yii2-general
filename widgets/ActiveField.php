@@ -3,7 +3,6 @@
 namespace rusbeldoor\yii2General\widgets;
 
 use yii\helpers\html;
-
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 
 /**
