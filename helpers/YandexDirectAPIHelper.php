@@ -148,7 +148,7 @@ class YandexDirectApiHelper
      * @var $selectionCriteria array
      * @return mixed
      */
-    static function atchiveAds($selectionCriteria = [])
+    static function archiveAds($selectionCriteria = [])
     { return static::request(
         'ads',
         'archive',
