@@ -61,7 +61,7 @@ class YandexDirectAPI extends \yii\base\Model
      * @param $login
      * @param $token
      */
-    function init($url, $login, $token)
+    public function init($url, $login, $token)
     {
         parent::init();
 
