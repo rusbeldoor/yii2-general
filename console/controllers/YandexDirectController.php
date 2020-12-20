@@ -26,6 +26,7 @@ class YandexDirectController extends \rusbeldoor\yii2General\components\CronCont
         foreach ($yandexDirectAccounts as $yandexDirectAccount) {
             $yandexDirectAPI = new YandexDirectAPI($yandexDirectAccount->url, $yandexDirectAccount->login, $yandexDirectAccount->token);
 
+            // Компании Яндекс.Директ аккаунта
             $apiCampaingsIds = [];
             $apiCampaings = $yandexDirectAPI->getCampaigns();
             for ($i = 0; $i < count($apiCampaings); $i++) {
@@ -46,7 +47,9 @@ class YandexDirectController extends \rusbeldoor\yii2General\components\CronCont
                 $campaing->state = $apiCampaing->State;
                 $campaing->save();
             }
+            if (count($apiCampaingsIds)) { YandexDirectCampaign::deleteAll('id NOT IN (' . implode(',', $apiCampaingsIds) . ')'); }
 
+            // Группы объявлений Яндекс.Директ аккаунта
             $apiAdgroupsIds = [];
             $apiAdgroups = $yandexDirectAPI->getAdgroups(['CampaignIds' => $apiCampaingsIds]);
             for ($i = 0; $i < count($apiAdgroups); $i++) {
@@ -68,7 +71,9 @@ class YandexDirectController extends \rusbeldoor\yii2General\components\CronCont
                 $adgroup->status = $apiAdgroup->Status;
                 $adgroup->save();
             }
+            if (count($apiAdgroupsIds)) { YandexDirectAdgroup::deleteAll('id NOT IN (' . implode(',', $apiAdgroupsIds) . ')'); }
 
+            // Объявления Яндекс.Директ аккаунта
             $apiAdsIds = [];
             $apiAds = $yandexDirectAPI->getAds(['AdGroupIds' => $apiAdgroupsIds]);
             for ($i = 0; $i < count($apiAds); $i++) {
@@ -93,6 +98,7 @@ class YandexDirectController extends \rusbeldoor\yii2General\components\CronCont
                 $ad->state = $apiAd->State;
                 $ad->save();
             }
+            if (count($apiAdsIds)) { YandexDirectAd::deleteAll('id NOT IN (' . implode(',', $apiAdsIds) . ')'); }
         }
     }
 }
