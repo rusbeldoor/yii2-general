@@ -57,7 +57,7 @@ class m201201_000000_rusbeldoor_yii2General_yandex_direct extends Migration
         $this->addForeignKey('fk-yandex_direct_ad-adgroup_id', 'yandex_direct_ad', 'adgroup_id', 'yandex_direct_adgroup', 'id');
 
         // Таблица логов Яндекс.Директ
-        $this->createTable('yandex_direct_log ', [
+        $this->createTable('yandex_direct_log', [
             'id' => $this->primaryKey(11)->unsigned(),
             'user_id' => $this->primaryKey(11)->unsigned()->defaultValue(null),
             'elem_type' => 'ENUM("account", "campaign", "adgroup", "ad") NOT NULL',
