@@ -1,11 +1,18 @@
 <?php
 
-namespace rusbeldoor\yii2General\helpers;
+namespace rusbeldoor\yii2General\models;
 
 use yii;
 
-class YandexDirectApiHelper
+/**
+ * ...
+ */
+class YandexDirectAPI extends \yii\base\Model
 {
+    public $url;
+    public $login;
+    public $token;
+
     // Статусы
     static $statuses = [
         'DRAFT' => 'Черновик',
@@ -48,16 +55,28 @@ class YandexDirectApiHelper
     }
 
     /**
+     * Конструктор
+     */
+    function __constructor($url, $login, $token)
+    {
+        parent::__constrictor();
+
+        $this->url = $url;
+        $this->login = $login;
+        $this->token = $token;
+    }
+
+    /**
      * Запрос к АПИ
      *
      * @param $function string
      * @param $params array
      * @return mixed
      */
-    static function requestAPI($function, $params)
+    public function requestAPI($function, $params)
     {
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL,  Yii::$app->params['rusbeldoor']['yii2YandexDirect']['api']['url'] . $function);
+        curl_setopt($curl, CURLOPT_URL,  $this->url . $function);
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($params, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
@@ -65,8 +84,8 @@ class YandexDirectApiHelper
         curl_setopt($curl, CURLOPT_HEADER, true);
         curl_setopt($curl, CURLINFO_HEADER_OUT, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, [
-            'Authorization: Bearer ' .  Yii::$app->params['rusbeldoor']['yii2YandexDirect']['api']['token'],
-            'Client-Login: ' .  Yii::$app->params['rusbeldoor']['yii2YandexDirect']['api']['login'],
+            'Authorization: Bearer ' .  $this->token,
+            'Client-Login: ' .  $this->login,
             'Accept-Language: ru',
             'Content-Type: application/json; charset=utf-8',
         ]);
@@ -90,17 +109,17 @@ class YandexDirectApiHelper
      * @param $params
      * @return mixed
      */
-    static function request($function, $method, $params)
-    { return self::requestAPI($function, ['method' => $method, 'params' => $params]); }
+    public function request($function, $method, $params)
+    { return $this->requestAPI($function, ['method' => $method, 'params' => $params]); }
 
     /**
-     * Компании
+     * Получение компаний
      *
      * @var $selectionCriteria array
      * @return mixed
      */
-    static function getCampaigns($selectionCriteria = [])
-    { return static::request(
+    public function getCampaigns($selectionCriteria = [])
+    { return $this->request(
         'campaigns',
         'get',
         [
@@ -110,13 +129,13 @@ class YandexDirectApiHelper
     )->Campaigns; }
 
     /**
-     * Группы объявлений
+     * Получение групп объявлений
      *
      * @var $selectionCriteria array
      * @return mixed
      */
-    static function getAdgroups($selectionCriteria = [])
-    { return static::request(
+    public function getAdgroups($selectionCriteria = [])
+    { return $this->request(
         'adgroups',
         'get',
         [
@@ -126,13 +145,13 @@ class YandexDirectApiHelper
     )->AdGroups; }
 
     /**
-     * Объявления
+     * Получение объявления
      *
      * @var $selectionCriteria array
      * @return mixed
      */
-    static function getAds($selectionCriteria = [])
-    { return static::request(
+    public function getAds($selectionCriteria = [])
+    { return $this->request(
         'ads',
         'get',
         [
@@ -148,8 +167,8 @@ class YandexDirectApiHelper
      * @var $selectionCriteria array
      * @return mixed
      */
-    static function archiveAds($selectionCriteria = [])
-    { return static::request(
+    public function archiveAds($selectionCriteria = [])
+    { return $this->request(
         'ads',
         'archive',
         ['SelectionCriteria' => (object)$selectionCriteria]
@@ -161,8 +180,8 @@ class YandexDirectApiHelper
      * @var $selectionCriteria array
      * @return mixed
      */
-    static function unarchiveAds($selectionCriteria = [])
-    { return static::request(
+    public function unarchiveAds($selectionCriteria = [])
+    { return $this->request(
         'ads',
         'unarchive',
         ['SelectionCriteria' => (object)$selectionCriteria]
@@ -174,8 +193,8 @@ class YandexDirectApiHelper
      * @var $selectionCriteria array
      * @return mixed
      */
-    static function resumeAds($selectionCriteria = [])
-    { return static::request(
+    public function resumeAds($selectionCriteria = [])
+    { return $this->request(
         'ads',
         'resume',
         ['SelectionCriteria' => (object)$selectionCriteria]
@@ -187,8 +206,8 @@ class YandexDirectApiHelper
      * @var $selectionCriteria array
      * @return mixed
      */
-    static function suspendAds($selectionCriteria = [])
-    { return static::request(
+    public function suspendAds($selectionCriteria = [])
+    { return $this->request(
         'ads',
         'suspend',
         ['SelectionCriteria' => (object)$selectionCriteria]
