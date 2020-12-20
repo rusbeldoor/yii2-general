@@ -8,6 +8,7 @@ use yii;
  * Yandex_direct_campaign (ActiveRecord)
  *
  * @property $id int
+ * @property $account_id int
  * @property $name string
  * @property $status string
  * @property $state string
@@ -26,10 +27,12 @@ class YandexDirectCampaign extends \rusbeldoor\yii2General\models\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'name', 'status', 'state'], 'required'],
+            [['id', 'account_id', 'name', 'status', 'state'], 'required'],
+            [['account_id'], 'integer'],
             [['id', 'status', 'state'], 'string', 'max' => 16],
-            [['name'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 128],
             [['id'], 'unique'],
+            [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => YandexDirectAccount::className(), 'targetAttribute' => ['account_id' => 'id']],
         ];
     }
 
@@ -40,9 +43,10 @@ class YandexDirectCampaign extends \rusbeldoor\yii2General\models\ActiveRecord
     {
         return [
             'id' => 'Ид',
+            'account_id' => 'Аккаунт',
             'name' => 'Название',
             'status' => 'Статус',
-            'state' => 'State',
+            'state' => 'Состояние',
         ];
     }
 

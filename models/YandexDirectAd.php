@@ -8,6 +8,7 @@ use yii;
  * Yandex_direct_ad (ActiveRecord)
  *
  * @property $id int
+ * @property $account_id int
  * @property $campaign_id int
  * @property $adgroup_id int
  * @property $title string
@@ -28,12 +29,14 @@ class YandexDirectAd extends \rusbeldoor\yii2General\models\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'campaign_id', 'adgroup_id', 'title', 'status', 'state'], 'required'],
+            [['id', 'account_id', 'campaign_id', 'adgroup_id', 'title', 'status', 'state'], 'required'],
+            [['account_id'], 'integer'],
             [['id', 'campaign_id', 'adgroup_id', 'status', 'state'], 'string', 'max' => 16],
-            [['title'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 128],
             [['id'], 'unique'],
-            [['adgroup_id'], 'exist', 'skipOnError' => true, 'targetClass' => YandexDirectAdgroup::className(), 'targetAttribute' => ['adgroup_id' => 'id']],
+            [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => YandexDirectAccount::className(), 'targetAttribute' => ['account_id' => 'id']],
             [['campaign_id'], 'exist', 'skipOnError' => true, 'targetClass' => YandexDirectCampaign::className(), 'targetAttribute' => ['campaign_id' => 'id']],
+            [['adgroup_id'], 'exist', 'skipOnError' => true, 'targetClass' => YandexDirectAdgroup::className(), 'targetAttribute' => ['adgroup_id' => 'id']],
         ];
     }
 
@@ -44,11 +47,12 @@ class YandexDirectAd extends \rusbeldoor\yii2General\models\ActiveRecord
     {
         return [
             'id' => 'Ид',
-            'campaign_id' => 'Campaign ID',
-            'adgroup_id' => 'Adgroup ID',
+            'account_id' => 'Аккаунт',
+            'campaign_id' => 'Компания',
+            'adgroup_id' => 'Группа объявлений',
             'title' => 'Заголовок',
             'status' => 'Статус',
-            'state' => 'State',
+            'state' => 'Состояние',
         ];
     }
 

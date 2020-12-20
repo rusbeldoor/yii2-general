@@ -8,6 +8,7 @@ use yii;
  * Yandex_direct_adgroup (ActiveRecord)
  *
  * @property $id int
+ * @property $account_id int
  * @property $campaign_id int
  * @property $name string
  * @property $status string
@@ -26,10 +27,12 @@ class YandexDirectAdgroup extends \rusbeldoor\yii2General\models\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'campaign_id', 'name', 'status'], 'required'],
+            [['id', 'account_id', 'campaign_id', 'name', 'status'], 'required'],
+            [['account_id'], 'integer'],
             [['id', 'campaign_id', 'status'], 'string', 'max' => 16],
-            [['name'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 128],
             [['id'], 'unique'],
+            [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => YandexDirectAccount::className(), 'targetAttribute' => ['account_id' => 'id']],
             [['campaign_id'], 'exist', 'skipOnError' => true, 'targetClass' => YandexDirectCampaign::className(), 'targetAttribute' => ['campaign_id' => 'id']],
         ];
     }
@@ -41,7 +44,8 @@ class YandexDirectAdgroup extends \rusbeldoor\yii2General\models\ActiveRecord
     {
         return [
             'id' => 'Ид',
-            'campaign_id' => 'Campaign ID',
+            'account_id' => 'Аккаунт',
+            'campaign_id' => 'Компания',
             'name' => 'Название',
             'status' => 'Статус',
         ];
