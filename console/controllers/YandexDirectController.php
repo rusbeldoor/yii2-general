@@ -24,7 +24,8 @@ class YandexDirectController extends \rusbeldoor\yii2General\components\CronCont
 
         // Перебираем акканты Яндекс.Диреет
         foreach ($yandexDirectAccounts as $yandexDirectAccount) {
-            $yandexDirectAPI = new YandexDirectAPI($yandexDirectAccount->url, $yandexDirectAccount->login, $yandexDirectAccount->token);
+            $yandexDirectAPI = new YandexDirectAPI();
+            $yandexDirectAPI->init($yandexDirectAccount->url, $yandexDirectAccount->login, $yandexDirectAccount->token);
 
             $apiCampaingsIds = [];
             $apiCampaings = $yandexDirectAPI->getCampaigns();

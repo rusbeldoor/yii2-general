@@ -55,11 +55,15 @@ class YandexDirectAPI extends \yii\base\Model
     }
 
     /**
-     * Конструктор
+     * Инициализация
+     *
+     * @param $url
+     * @param $login
+     * @param $token
      */
-    function __constructor($url, $login, $token)
+    function init($url, $login, $token)
     {
-        parent::__constrictor();
+        parent::init();
 
         $this->url = $url;
         $this->login = $login;
