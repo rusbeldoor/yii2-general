@@ -1,6 +1,6 @@
 # Установка и настройка
 
-1. Измените настройки `rusbeldoor/yii2General` в файле `./common/config/mylocal-sample/params-mylocal.php` и `./common/config/params-mylocal.php`.
+1. Измените настройки `rusbeldoor/yii2General` в файле `./common/config/params-mylocal.php`.
 
 2. Выполнить миграции для изменения структуры базы данных.
 ```
