@@ -28,9 +28,10 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
      *
      * @param $array array
      * @param $string string
+     * @param $safeKeys bool
      * @return array
      */
-    public static function arrayWithString($array, $string)
+    public static function arrayWithString($array, $string, $safeKeys = false)
     {
         if (!is_array($array)) { return []; }
 
@@ -41,7 +42,8 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
             // Если элемент массива содержит искомую строку
             if (mb_strpos($item, $string) !== false) {
                 // Записываем элемент массива в результат
-                $result[$key] = $item;
+                if ($safeKeys) { $result[$key] = $item; }
+                else { $result[] = $item; }
             }
         }
         return $result;
