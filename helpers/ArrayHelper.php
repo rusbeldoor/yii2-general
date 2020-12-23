@@ -8,7 +8,7 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
      * Массив по полю
      *
      * @param $array array
-     * @param string $field
+     * @param $field string
      * @return array
      */
     public static function arrayByField($array, $field)
@@ -19,6 +19,30 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
         foreach ($array as $item) {
             $key = ((is_object($item)) ? $item->$field : $item[$field]);
             $result[$key] = $item;
+        }
+        return $result;
+    }
+
+    /**
+     * Массив строк содержащих передаваему строку
+     *
+     * @param $array array
+     * @param $string string
+     * @return array
+     */
+    public static function arrayWithString($array, $string)
+    {
+        if (!is_array($array)) { return []; }
+
+        $result = [];
+        foreach ($array as $key => $item) {
+            // Если элемент массива не строк, прпоускаем его
+            if (!is_string($item)) { continue; }
+            // Если элемент массива содержит искомую строку
+            if (mb_strpos($item, $string) !== false) {
+                // Записываем элемент массива в результат
+                $result[$key] = $item;
+            }
         }
         return $result;
     }
