@@ -5,7 +5,7 @@ namespace rusbeldoor\yii2General\helpers;
 class DomainHelper
 {
     /**
-     * Коррекция электронной почты
+     * Коррекция домена
      *
      * @param $domain string
      * @return string
@@ -14,6 +14,14 @@ class DomainHelper
     {
         // Переводим в нижний регистр
         $domain = mb_strtolower($domain);
+
+        // Удаляем протокол
+        $domain = str_replace('http://', '', $domain);
+        $domain = str_replace('https://', '', $domain);
+
+        // Удаляем всё не относящееся к домену
+        $domain = explode('/', $domain);
+        $domain = $domain[0];
 
         // Удаляем все не подходящие символы
         $domain = preg_replace('/[^\.-_0-1a-zа-я]/', '', $domain);
