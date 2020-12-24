@@ -50,24 +50,30 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     }
 
     /**
-     * Массив строк не содержащих передаваему строку
+     * Массив строк не содержащих передаваемые строки
      *
      * @param $array array
-     * @param $string string
+     * @param $strings string|array
      * @param $safeKeys bool
      * @return array
      */
-    public static function arrayWithoutString($array, $string, $safeKeys = false)
+    public static function arrayWithoutString($array, $strings, $safeKeys = false)
     {
         if (!is_array($array)) { return []; }
+
+        if (!is_array($strings)) { $strings = [$strings]; }
 
         $result = [];
         foreach ($array as $key => $item) {
             // Если элемент массива не строк, прпоускаем его
             if (!is_string($item)) { continue; }
-            
+
+            // Ищем хотябы одну из подстрок
+            $flag = true;
+            foreach ($strings as $string) { $flag = ((mb_strpos($item, $string) === false) ? false : $flag); }
+
             // Если элемент массива содержит искомую строку
-            if (mb_strpos($item, $string) === false) {
+            if ($flag) {
                 // Записываем элемент массива в результат
                 if ($safeKeys) { $result[$key] = $item; }
                 else { $result[] = $item; }
@@ -77,17 +83,19 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     }
 
     /**
-     * Массив элементов не содержащих передаваему строку в одном из полей
+     * Массив элементов не содержащих передаваемые подстроки в одном из полей
      *
      * @param $array array
-     * @param $string string
+     * @param $strings string|array
      * @param $field string
      * @param $safeKeys bool
      * @return array
      */
-    public static function arrayWithoutStringInField($array, $string, $field, $safeKeys = false)
+    public static function arrayWithoutStringInField($array, $strings, $field, $safeKeys = false)
     {
         if (!is_array($array)) { return []; }
+
+        if (!is_array($strings)) { $strings = [$strings]; }
 
         $result = [];
         foreach ($array as $key => $item) {
@@ -98,8 +106,12 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
                 || !is_string($item[$field])
             ) { continue; }
 
-            // Если элемент массива содержит искомую строку
-            if (mb_strpos($item[$field], $string) === false) {
+            // Ищем хотябы одну из подстрок
+            $flag = true;
+            foreach ($strings as $string) { $flag = ((mb_strpos($item[$field], $string) === false) ? false : $flag); }
+
+            // Если элемент массива содержит одну из искомых подстрок
+            if ($flag) {
                 // Записываем элемент массива в результат
                 if ($safeKeys) { $result[$key] = $item; }
                 else { $result[] = $item; }
