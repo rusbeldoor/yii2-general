@@ -95,7 +95,7 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     }
 
     /**
-     * Массив строк не содержащих передаваемые строки
+     * Массив строк не содержащих все передаваемые строки
      *
      * @param $array array
      * @param $strings string|array
@@ -110,15 +110,19 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
 
         $result = [];
         foreach ($array as $key => $item) {
-            // Если элемент массива не строк, прпоускаем его
-            if (!is_string($item)) { continue; }
+            $add = true;
 
-            // Ищем хотябы одну из подстрок
-            $flag = true;
-            foreach ($strings as $string) { $flag = ((mb_strpos($item, $string) !== false) ? false : $flag); }
+            // Если элемент массива строка
+            if (is_string($item)) {
+                // Перебираем искомые подстроки
+                foreach ($strings as $string) {
+                    // Если хотябы одна из подстрок найдена, элемент массива не будет добавлен
+                    $add = ((mb_strpos($item, $string) !== false) ? false : $add);
+                }
+            }
 
-            // Если элемент массива содержит искомую строку
-            if ($flag) {
+            // Если элемент массива нужно добавить
+            if ($add) {
                 // Записываем элемент массива в результат
                 if ($safeKeys) { $result[$key] = $item; }
                 else { $result[] = $item; }
@@ -128,7 +132,7 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     }
 
     /**
-     * Массив элементов не содержащих передаваемые подстроки в одном из полей
+     * Массив элементов не содержащих все передаваемые подстроки в одном из полей
      *
      * @param $array array
      * @param $strings string|array
@@ -144,19 +148,23 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
 
         $result = [];
         foreach ($array as $key => $item) {
+            $add = true;
+
             if (
-                // Если поле в элементе не существует
-                !isset($item[$field])
-                // Если поле не строка
-                || !is_string($item[$field])
-            ) { continue; }
+                // Если поле в элементе массива существует
+                isset($item[$field])
+                // Если поле в элементе массива строка
+                && is_string($item[$field])
+            ) {
+                // Перебираем искомые подстроки
+                foreach ($strings as $string) {
+                    // Если хотябы одна из подстрок найдена, элемент массива не будет добавлен
+                    $add = ((mb_strpos($item[$field], $string) !== false) ? false : $add);
+                }
+            }
 
-            // Ищем хотябы одну из подстрок
-            $flag = true;
-            foreach ($strings as $string) { $flag = ((mb_strpos($item[$field], $string) !== false) ? false : $flag); }
-
-            // Если элемент массива содержит одну из искомых подстрок
-            if ($flag) {
+            // Если элемент массива нужно добавить
+            if ($add) {
                 // Записываем элемент массива в результат
                 if ($safeKeys) { $result[$key] = $item; }
                 else { $result[] = $item; }
