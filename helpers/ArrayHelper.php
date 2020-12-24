@@ -48,4 +48,30 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
         }
         return $result;
     }
+
+    /**
+     * Массив строк не содержащих передаваему строку
+     *
+     * @param $array array
+     * @param $string string
+     * @param $safeKeys bool
+     * @return array
+     */
+    public static function arrayWithoutString($array, $string, $safeKeys = false)
+    {
+        if (!is_array($array)) { return []; }
+
+        $result = [];
+        foreach ($array as $key => $item) {
+            // Если элемент массива не строк, прпоускаем его
+            if (!is_string($item)) { continue; }
+            // Если элемент массива содержит искомую строку
+            if (mb_strpos($item, $string) === false) {
+                // Записываем элемент массива в результат
+                if ($safeKeys) { $result[$key] = $item; }
+                else { $result[] = $item; }
+            }
+        }
+        return $result;
+    }
 }
