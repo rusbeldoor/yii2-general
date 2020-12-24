@@ -65,6 +65,7 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
         foreach ($array as $key => $item) {
             // Если элемент массива не строк, прпоускаем его
             if (!is_string($item)) { continue; }
+            
             // Если элемент массива содержит искомую строку
             if (mb_strpos($item, $string) === false) {
                 // Записываем элемент массива в результат
@@ -90,8 +91,13 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
 
         $result = [];
         foreach ($array as $key => $item) {
-            // Если элемент массива не строк, прпоускаем его
-            if (!is_string($item[$field])) { continue; }
+            if (
+                // Если поле в элементе не существует
+                !isset($item[$field])
+                // Если поле не строка
+                || !is_string($item[$field])
+            ) { continue; }
+
             // Если элемент массива содержит искомую строку
             if (mb_strpos($item[$field], $string) === false) {
                 // Записываем элемент массива в результат
