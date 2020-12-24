@@ -76,7 +76,7 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     }
 
     /**
-     * Массив строк не содержащих передаваему строку
+     * Массив элементов не содержащих передаваему строку в одном из полей
      *
      * @param $array array
      * @param $string string
