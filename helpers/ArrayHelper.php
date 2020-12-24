@@ -27,11 +27,11 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
      * Массив строк содержащих передаваему строку
      *
      * @param $array array
-     * @param $string string
+     * @param $strings string|array
      * @param $safeKeys bool
      * @return array
      */
-    public static function arrayWithString($array, $string, $safeKeys = false)
+    public static function arrayWithStrings($array, $strings, $safeKeys = false)
     {
         if (!is_array($array)) { return []; }
 
@@ -39,8 +39,53 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
         foreach ($array as $key => $item) {
             // Если элемент массива не строк, прпоускаем его
             if (!is_string($item)) { continue; }
+
+            if (!is_array($strings)) { $strings = [$strings]; }
+
+            // Ищем хотябы одну из подстрок
+            $flag = false;
+            foreach ($strings as $string) { $flag = ((mb_strpos($item, $string) !== false) ? true : $flag); }
+
             // Если элемент массива содержит искомую строку
-            if (mb_strpos($item, $string) !== false) {
+            if ($flag) {
+                // Записываем элемент массива в результат
+                if ($safeKeys) { $result[$key] = $item; }
+                else { $result[] = $item; }
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Массив элементов содержащих передаваемые подстроки в одном из полей
+     *
+     * @param $array array
+     * @param $strings string|array
+     * @param $field string
+     * @param $safeKeys bool
+     * @return array
+     */
+    public static function arrayWithStringsInField($array, $strings, $field, $safeKeys = false)
+    {
+        if (!is_array($array)) { return []; }
+
+        if (!is_array($strings)) { $strings = [$strings]; }
+
+        $result = [];
+        foreach ($array as $key => $item) {
+            if (
+                // Если поле в элементе не существует
+                !isset($item[$field])
+                // Если поле не строка
+                || !is_string($item[$field])
+            ) { continue; }
+
+            // Ищем хотябы одну из подстрок
+            $flag = false;
+            foreach ($strings as $string) { $flag = ((mb_strpos($item[$field], $string) !== false) ? true : $flag); }
+
+            // Если элемент массива содержит одну из искомых подстрок
+            if ($flag) {
                 // Записываем элемент массива в результат
                 if ($safeKeys) { $result[$key] = $item; }
                 else { $result[] = $item; }
@@ -57,7 +102,7 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
      * @param $safeKeys bool
      * @return array
      */
-    public static function arrayWithoutString($array, $strings, $safeKeys = false)
+    public static function arrayWithoutStrings($array, $strings, $safeKeys = false)
     {
         if (!is_array($array)) { return []; }
 
@@ -70,7 +115,7 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
 
             // Ищем хотябы одну из подстрок
             $flag = true;
-            foreach ($strings as $string) { $flag = ((mb_strpos($item, $string) === false) ? false : $flag); }
+            foreach ($strings as $string) { $flag = ((mb_strpos($item, $string) !== false) ? false : $flag); }
 
             // Если элемент массива содержит искомую строку
             if ($flag) {
@@ -91,7 +136,7 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
      * @param $safeKeys bool
      * @return array
      */
-    public static function arrayWithoutStringInField($array, $strings, $field, $safeKeys = false)
+    public static function arrayWithoutStringsInField($array, $strings, $field, $safeKeys = false)
     {
         if (!is_array($array)) { return []; }
 
@@ -108,7 +153,7 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
 
             // Ищем хотябы одну из подстрок
             $flag = true;
-            foreach ($strings as $string) { $flag = ((mb_strpos($item[$field], $string) === false) ? false : $flag); }
+            foreach ($strings as $string) { $flag = ((mb_strpos($item[$field], $string) !== false) ? false : $flag); }
 
             // Если элемент массива содержит одну из искомых подстрок
             if ($flag) {
