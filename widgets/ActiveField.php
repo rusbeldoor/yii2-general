@@ -13,7 +13,7 @@ class ActiveField extends \kartik\form\ActiveField
     /**
      * ...
      *
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function searchTextInput($options = [])
@@ -28,7 +28,34 @@ class ActiveField extends \kartik\form\ActiveField
     /**
      * ...
      *
-     * @param $options array
+     * @param array $options
+     * @return ActiveField
+     */
+    public function numberInputAppendCount($options = [])
+    {
+        $this->addon['append'] = ['content' => 'шт.'];
+        return self::input('number', $options);
+    }
+
+    /**
+     * ...
+     *
+     * @param array $options
+     * @return ActiveField
+     */
+    public function searchNumberInputAppendCount($options = [])
+    {
+        $options = ArrayHelper::merge(
+            ['placeholder' => 'Не важно'],
+            $options
+        );
+        return self::numberInputAppendCount($options);
+    }
+
+    /**
+     * ...
+     *
+     * @param array $options
      * @return ActiveField
      */
     public function numberInputAppendSeconds($options = [])
@@ -40,7 +67,7 @@ class ActiveField extends \kartik\form\ActiveField
     /**
      * ...
      *
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function searchNumberInputAppendSeconds($options = [])
@@ -56,7 +83,7 @@ class ActiveField extends \kartik\form\ActiveField
      * ...
      *
      * @param $items array
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      *
      */
@@ -70,9 +97,9 @@ class ActiveField extends \kartik\form\ActiveField
                 'item' => function ($index, $label, $name, $checked, $value) {
                     return
                         '<label class="btn btn-light' . ($checked ? ' active' : '') . '">'
-                        . Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
-                        . ' '
-                        . $label
+                            . Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
+                            . ' '
+                            . $label
                         . '</label>';
                 },
             ],
@@ -84,7 +111,7 @@ class ActiveField extends \kartik\form\ActiveField
     /**
      * ...
      *
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function numberYesNo($options = [])
@@ -93,7 +120,7 @@ class ActiveField extends \kartik\form\ActiveField
     /**
      * ...
      *
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function searchNumberYesNo($options = [])
@@ -102,7 +129,7 @@ class ActiveField extends \kartik\form\ActiveField
     /**
      * ...
      *
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function dateTimePicker($options = [])
@@ -163,7 +190,7 @@ class ActiveField extends \kartik\form\ActiveField
      * ...
      *
      * @param $elems array
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function select($elems, $options = [])
@@ -186,7 +213,7 @@ class ActiveField extends \kartik\form\ActiveField
      * ...
      *
      * @param $elems array
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function searchSelect($elems, $options = [])
@@ -205,7 +232,7 @@ class ActiveField extends \kartik\form\ActiveField
      * ...
      *
      * @param $elems array
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function multipleSelect($elems, $options = [])
@@ -226,7 +253,7 @@ class ActiveField extends \kartik\form\ActiveField
      * ...
      *
      * @param $elems array
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function searchMultipleSelect($elems, $options = [])
@@ -246,7 +273,7 @@ class ActiveField extends \kartik\form\ActiveField
     /**
      * ...
      *
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function masked($options = [])

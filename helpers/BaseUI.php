@@ -104,10 +104,12 @@ class BaseUI
     public static function buttonsForSearchForm()
     {
         return
-            '<div class="form-group">'
-                . Html::submitButton('Применить', ['class' => 'btn btn-primary'])
-                . '&nbsp;&nbsp;&nbsp;'
-                . Html::resetButton('<i class="fas fa-wind"></i> Сбросить', ['class' => 'btn btn-outline-secondary'])
+            '<div class="form-group row">'
+                . '<div class="offset-md-2">'
+                    . Html::submitButton('Применить', ['class' => 'btn btn-primary'])
+                    . '&nbsp;&nbsp;&nbsp;'
+                    . Html::resetButton('<i class="fas fa-wind"></i> Сбросить', ['class' => 'btn btn-outline-secondary'])
+                . '</div>'
             . '</div>';
     }
 
