@@ -206,7 +206,7 @@ class ActiveField extends \kartik\form\ActiveField
      */
     public function searchSelect($elems, $options = [])
     {
-        $options = ArrayHelper::merge(['options' => ['placeholder' => 'Не важно']], $options)ж
+        $options = ArrayHelper::merge(['options' => ['placeholder' => 'Не важно']], $options);
         return self::select($elems, $options);
     }
 
