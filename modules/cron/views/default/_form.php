@@ -8,6 +8,7 @@ use rusbeldoor\yii2General\widgets\AddEditForm;
 
 <div class="auth-item-form">
     <? $form = AddEditForm::begin() ?>
+        <?= $form->errorSummary($model); ?>
         <?= $form->field($model, 'alias')->textInput(['maxlength' => 96]) ?>
         <?= $form->field($model, 'description') ?>
         <?= $form->field($model, 'max_duration')->numberInputAppendSeconds(['min' => 0, 'max' => '86400']) ?>
