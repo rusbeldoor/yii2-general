@@ -120,10 +120,12 @@ class BaseUI
     public static function buttonsForAddEditForm($model)
     {
         return
-            '<div class="form-group">'
-                . Html::submitButton((($model->isNewRecord) ? '<i class="fas fa-plus"></i>&nbsp;&nbsp;Добавить' : '<i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Изменить'), ['class' => 'btn btn-success'])
-                . '&nbsp;&nbsp;&nbsp;'
-                . Html::a('<i class="fas fa-times"></i>&nbsp;&nbsp;Отмена', Yii::$app->request->referrer,  ['class' => 'btn btn-outline-secondary'])
+            '<div class="form-group row">'
+                . '<div class="offset-md-2">'
+                    . Html::submitButton((($model->isNewRecord) ? '<i class="fas fa-plus"></i>&nbsp;&nbsp;Добавить' : '<i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Изменить'), ['class' => 'btn btn-success'])
+                    . '&nbsp;&nbsp;&nbsp;'
+                    . Html::a('<i class="fas fa-times"></i>&nbsp;&nbsp;Отмена', Yii::$app->request->referrer,  ['class' => 'btn btn-outline-secondary'])
+                . '</div>'
             . '</div>';
     }
 }

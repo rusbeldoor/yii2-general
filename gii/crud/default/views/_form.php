@@ -24,7 +24,7 @@ use rusbeldoor\yii2General\widgets\AddEditForm;
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
     <?= "<? " ?>$form = AddEditForm::begin() ?>
-<?php foreach ($generator->getColumnNames() as $attribute) {
+<? foreach ($generator->getColumnNames() as $attribute) {
     if (
         // Если аттрибут не разрешен к массовому присваиванию
         !in_array($attribute, $safeAttributes)
