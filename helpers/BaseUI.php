@@ -105,7 +105,8 @@ class BaseUI
     {
         return
             '<div class="form-group row">'
-                . '<div class="offset-md-2">'
+                . '<div class="col-2"></div>'
+                . '<div class="col-10">'
                     . Html::submitButton('Применить', ['class' => 'btn btn-primary'])
                     . '&nbsp;&nbsp;&nbsp;'
                     . Html::resetButton('<i class="fas fa-wind"></i> Сбросить', ['class' => 'btn btn-outline-secondary'])
@@ -123,7 +124,8 @@ class BaseUI
     {
         return
             '<div class="form-group row">'
-                . '<div class="offset-md-2">'
+                . '<div class="col-2"></div>'
+                . '<div class="col-10">'
                     . Html::submitButton((($model->isNewRecord) ? '<i class="fas fa-plus"></i>&nbsp;&nbsp;Добавить' : '<i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Изменить'), ['class' => 'btn btn-success'])
                     . '&nbsp;&nbsp;&nbsp;'
                     . Html::a('<i class="fas fa-times"></i>&nbsp;&nbsp;Отмена', Yii::$app->request->referrer,  ['class' => 'btn btn-outline-secondary'])
