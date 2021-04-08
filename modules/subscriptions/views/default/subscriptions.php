@@ -1,7 +1,7 @@
 <?php
-/* @var $this yii\web\View */
-/* @var $userId int */
-/* @var $result array */
+/* @var yii\web\View $this */
+/* @var int $userId */
+/* @var array $result */
 
 use yii\bootstrap4\Html;
 use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;
@@ -19,8 +19,8 @@ $(\'.subscribe\').click(function () { $(this).closest(\'form\').submit(); });
 /**
  * Вывод элементов
  *
- * @param $elems array
- * @param $userId int
+ * @param array $elems
+ * @param int $userId
  */
 function writeElems($elems, $userId) {
     foreach ($elems as $key) {

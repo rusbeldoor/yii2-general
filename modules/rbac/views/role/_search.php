@@ -3,8 +3,8 @@
 use yii\helpers\html;
 use rusbeldoor\yii2General\widgets\SearchForm;
 
-/* @var $this yii\web\View */
-/* @var $model backend\modules\administrator\modules\rbac\models\AuthItemSearch */
+/* @var yii\web\View $this */
+/* @var backend\modules\administrator\modules\rbac\models\AuthItemSearch $model */
 ?>
 
 <div class="auth-item-search panelSearchFormContainer">

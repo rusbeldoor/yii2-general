@@ -31,7 +31,7 @@ class Cron extends ActiveRecord
     /**
      * Магический метод получения аттрибута
      *
-     * @param $name string
+     * @param string $name
      * @return mixed
      */
     public function __get($name)
@@ -103,7 +103,7 @@ class Cron extends ActiveRecord
     /**
      * ...
      *
-     * @param $force bool
+     * @param bool $force
      * @return void
      */
     private function loadLastCronLog($force = false)

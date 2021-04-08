@@ -7,7 +7,7 @@ class TextHelper
     /**
      * Первый символ в верхний регистр
      *
-     * @param $text string
+     * @param string $text
      * @return string
      */
     public static function mb_ucfirst($text) {

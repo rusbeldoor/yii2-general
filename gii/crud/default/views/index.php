@@ -3,8 +3,8 @@
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\crud\Generator */
+/* @var yii\web\View $this */
+/* @var yii\gii\generators\crud\Generator $generator */
 
 $urlParams = $generator->generateUrlParams();
 $nameAttribute = $generator->getNameAttribute();
@@ -15,9 +15,9 @@ echo "<?php\n";
 use rusbeldoor\yii2General\widgets\grid\GridView;
 use rusbeldoor\yii2General\helpers\BaseUI;
 
-/* @var $this yii\web\View */
+/* @var yii\web\View $this */
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>;
 $this->params['breadcrumbs'][] = $this->title;

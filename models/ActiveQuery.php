@@ -10,7 +10,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Алиас
      *
-     * @param $alias string
+     * @param string $alias
      * @return AuthItemQuery
      */
     public function alias($alias)
@@ -19,7 +19,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Тип
      *
-     * @param $type mixed
+     * @param mixed $type
      * @return AuthItemQuery
      */
     public function type($type)
@@ -28,7 +28,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Статус
      *
-     * @param $status mixed
+     * @param mixed $status
      * @return CronQuery
      */
     public function status($status)
@@ -45,8 +45,8 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Не архивный
      *
-     * @param $fieldValue int|null
-     * @param $fieldName string
+     * @param int|null $fieldValue
+     * @param string $fieldName
      * @return ActiveQuery
      */
     public function notArchive($fieldValue = null, $fieldName = 'id')

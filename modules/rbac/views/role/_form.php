@@ -3,12 +3,12 @@
 use rusbeldoor\yii2General\widgets\AddEditForm;
 use kartik\sortinput\SortableInput;
 
-/* @var $this yii\web\View */
-/* @var $model backend\modules\administrator\modules\rbac\models\AuthItem */
-/* @var $rolesNotOfThisRole array */
-/* @var $rolesOfThisRole array */
-/* @var $permissionsNotOfThisRole array */
-/* @var $permissionsOfThisRole array */
+/* @var yii\web\View $this */
+/* @var backend\modules\administrator\modules\rbac\models\AuthItem $model */
+/* @var array $rolesNotOfThisRole */
+/* @var array $rolesOfThisRole */
+/* @var array $permissionsNotOfThisRole */
+/* @var array $permissionsOfThisRole */
 ?>
 
 <div class="auth-item-form">

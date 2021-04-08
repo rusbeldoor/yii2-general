@@ -19,8 +19,8 @@ class DefaultController extends \frontend\components\Controller
     /**
      * Подписки на рассылки
      *
-     * @param $userId int
-     * @param $hash string
+     * @param int $userId
+     * @param string $hash
      * @return string
      */
     public function actionIndex($userId, $hash)
@@ -124,7 +124,6 @@ class DefaultController extends \frontend\components\Controller
     /**
      * Отписка от подписки
      *
-     * @param $active
      * @return void
      */
     public function actionChange()

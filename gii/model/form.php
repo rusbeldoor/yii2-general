@@ -2,9 +2,9 @@
 
 use yii\gii\generators\model\Generator;
 
-/* @var $this yii\web\View */
-/* @var $form yii\widgets\ActiveForm */
-/* @var $generator yii\gii\generators\model\Generator */
+/* @var yii\web\View $this */
+/* @var yii\widgets\ActiveForm $form */
+/* @var yii\gii\generators\model\Generator $generator */
 
 echo $form->field($generator, 'tableName')->textInput(['table_prefix' => $generator->getTablePrefix()]);
 echo $form->field($generator, 'modelClass');

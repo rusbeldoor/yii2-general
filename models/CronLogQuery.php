@@ -12,7 +12,7 @@ class CronLogQuery extends ActiveQuery
     /**
      * Крон
      *
-     * @param $cron_id int
+     * @param int $cron_id
      * @return AuthItemQuery
      */
     public function cronId($cron_id)

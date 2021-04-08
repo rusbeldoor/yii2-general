@@ -12,7 +12,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Магический метод получения аттрибута
      *
-     * @param $name string
+     * @param string $name
      * @return mixed
      */
     public function __get($name)
@@ -21,8 +21,8 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Список элементов
      *
-     * @param $valueFieldName string
-     * @param $keyFieldName string
+     * @param string $valueFieldName
+     * @param string $keyFieldName
      * @return string
      */
     public static function getList($valueFieldName = 'name', $keyFieldName = 'id')
@@ -31,9 +31,9 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Список не архивных элементов
      *
-     * @param $id int|null
-     * @param $valueFieldName string
-     * @param $keyFieldName string
+     * @param int|null $id
+     * @param string $valueFieldName
+     * @param string $keyFieldName
      * @return string
      */
     public static function getNotArchiveList($id = null, $valueFieldName = 'name', $keyFieldName = 'id')
@@ -42,9 +42,9 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Список элементов с указанным типом
      *
-     * @param $type mixed
-     * @param $valueFieldName string
-     * @param $keyFieldName string
+     * @param mixed $type
+     * @param string $valueFieldName
+     * @param string $keyFieldName
      * @return string
      */
     public static function getListByType($type, $valueFieldName = 'name', $keyFieldName = 'id')
@@ -53,10 +53,10 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Список не архивных элементов с указанным типом
      *
-     * @param $type mixed
-     * @param $id int|null
-     * @param $valueFieldName string
-     * @param $keyFieldName string
+     * @param mixed $type
+     * @param int|null $id
+     * @param string $valueFieldName
+     * @param string $keyFieldName
      * @return string
      */
     public static function getNotArchiveListByType($type, $id = null, $valueFieldName = 'name', $keyFieldName = 'id')
@@ -72,7 +72,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Описание по значению
      *
-     * @param $fieldName string
+     * @param string $fieldName
      * @return string
      */
     public function getFieldDescription($fieldName)
@@ -101,9 +101,9 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Правило валидации регулярным выражением
      *
-     * @param $elems string|array
-     * @param $function string
-     * @param $options array
+     * @param array|string $elems
+     * @param string $function
+     * @param array $options
      * @return array
      */
     public static function getRule($elems, $function, $options)
@@ -115,7 +115,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Правило валидации строки
      *
-     * @param $elems string|array
+     * @param array|string $elems
      * @return array
      */
     public static function getRuleString($elems, $options)
@@ -124,9 +124,9 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Правило валидации регулярным выражением
      *
-     * @param $elems string|array
-     * @param $pattern string
-     * @param $message string
+     * @param array|string $elems
+     * @param string $pattern
+     * @param string $message
      * @return array
      */
     public static function getRuleMatch($elems, $pattern, $message = null)
@@ -139,7 +139,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Правило валидации алиаса
      *
-     * @param $elems string|array
+     * @param array|string $elems
      * @return array
      */
     public static function getRuleMatchAlias($elems)
@@ -152,7 +152,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Правило валидации ИНН
      *
-     * @param $elems string|array
+     * @param array|string $elems
      * @return array
      */
     public static function getRuleMatchInn($elems)

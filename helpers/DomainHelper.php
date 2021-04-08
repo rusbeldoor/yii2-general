@@ -7,7 +7,7 @@ class DomainHelper
     /**
      * Коррекция домена
      *
-     * @param $domain string
+     * @param string $domain
      * @return string
      */
     public static function correct($domain)
@@ -36,7 +36,7 @@ class DomainHelper
     /**
      * Проверка домена
      *
-     * @param $domain string
+     * @param string $domain
      * @return bool
      */
     public static function check($domain)

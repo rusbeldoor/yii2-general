@@ -30,7 +30,7 @@ class WebController extends \yii\web\Controller
     /**
      * Удаление
      *
-     * @param $id int|null
+     * @param int|null $id
      * @return yii\web\Response
      */
     public function actionDelete($id = null)

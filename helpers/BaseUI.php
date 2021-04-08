@@ -13,7 +13,7 @@ class BaseUI
     /**
      * Кнопки для главной страицы
      *
-     * @param $buttons array
+     * @param array $buttons
      * @return string
      */
     public static function buttonsForIndexPage($buttons = [])
@@ -60,8 +60,8 @@ class BaseUI
     /**
      * Кноаки для страницы отображения
      *
-     * @param $model mixed
-     * @param $buttons array
+     * @param mixed $model
+     * @param array $buttons
      * @return string
      */
     public static function buttonsForViewPage($model, $buttons = [])
@@ -117,7 +117,7 @@ class BaseUI
     /**
      * Кнопки для формы добавления/изменения
      *
-     * @param $model mixed
+     * @param mixed $model
      * @return string
      */
     public static function buttonsForAddEditForm($model)

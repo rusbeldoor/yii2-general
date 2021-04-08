@@ -17,7 +17,7 @@ class CronController extends ConsoleController
     /**
      * Вызов перед экшеном
      *
-     * @param $action
+     * @param string $action
      * @return mixed
      */
     public function beforeAction($action)
@@ -118,9 +118,9 @@ class CronController extends ConsoleController
     /**
      * Вызов после экшена
      *
-     * @param $action
-     * @param $result
-     * @return mixed\
+     * @param string $action
+     * @param mixed $result
+     * @return mixed
      */
     public function afterAction($action, $result)
     {

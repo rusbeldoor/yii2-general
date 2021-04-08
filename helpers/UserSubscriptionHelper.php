@@ -9,9 +9,9 @@ class UserSubscriptionHelper
     /**
      * Хэш
      *
-     * @param $userId int
-     * @param $key string
-     * @param $channels string
+     * @param int $userId
+     * @param string $key
+     * @param string $channels
      * @return string
      */
     public static function hash($userId, $key = '', $channels = '')
@@ -20,9 +20,9 @@ class UserSubscriptionHelper
     /**
      * Ссылка
      *
-     * @param $userId int
-     * @param $key string
-     * @param $channels string
+     * @param int $userId
+     * @param string $key
+     * @param string $channels
      * @return string
      */
     public static function link($userId, $key = '', $channels = '')
@@ -31,7 +31,7 @@ class UserSubscriptionHelper
     /**
      * Иконка канала
      *
-     * @param $alias string
+     * @param string $alias
      * @return string
      */
     public static function channelIcon($alias)

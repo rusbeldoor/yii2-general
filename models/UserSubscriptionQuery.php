@@ -12,7 +12,7 @@ class UserSubscriptionQuery extends ActiveQuery
     /**
      * ...
      *
-     * @param $userId int
+     * @param int $userId
      * @return UserSubscriptionQuery
      */
     public function userId($userId)
@@ -21,7 +21,7 @@ class UserSubscriptionQuery extends ActiveQuery
     /**
      * ...
      *
-     * @param $keyId int
+     * @param int $keyId
      * @return UserSubscriptionQuery
      */
     public function keyId($keyId)
@@ -30,7 +30,7 @@ class UserSubscriptionQuery extends ActiveQuery
     /**
      * ...
      *
-     * @param $keysIds array
+     * @param array $keysIds
      * @return UserSubscriptionQuery
      */
     public function keysIds($keysIds)
@@ -42,7 +42,7 @@ class UserSubscriptionQuery extends ActiveQuery
     /**
      * ...
      *
-     * @param $channelId int
+     * @param int $channelId
      * @return UserSubscriptionQuery
      */
     public function channelId($channelId)
@@ -51,7 +51,7 @@ class UserSubscriptionQuery extends ActiveQuery
     /**
      * ...
      *
-     * @param $channelsIds array
+     * @param array $channelsIds
      * @return UserSubscriptionQuery
      */
     public function channelsIds($channelsIds)

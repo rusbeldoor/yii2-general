@@ -1,8 +1,8 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $searchModel backend\modules\administrator\modules\rbac\models\AuthItemSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var yii\web\View $this */
+/* @var backend\modules\administrator\modules\rbac\models\AuthItemSearch $searchModel */
+/* @var yii\data\ActiveDataProvider $dataProvider */
 
 use yii\helpers\html;
 use rusbeldoor\yii2General\widgets\grid\GridView;

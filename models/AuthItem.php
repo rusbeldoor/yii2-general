@@ -113,7 +113,7 @@ class AuthItem extends ActiveRecord
     /**
      * Добавление потомков
      *
-     * @param $names string|array
+     * @param string|array $names
      * @return void
      */
     public function addChildren($names)

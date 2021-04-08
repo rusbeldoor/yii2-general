@@ -12,7 +12,7 @@ class UserSubscriptionKeyQuery extends ActiveQuery
     /**
      * ...
      *
-     * @param $alias null|string
+     * @param string|null $alias
      * @return UserSubscriptionKeyQuery
      */
     public function allChildren($alias)

@@ -33,7 +33,7 @@ class YandexDirectAPI extends \yii\base\Model
     /**
      * Статус
      *
-     * @param $status string
+     * @param string $status
      * @return string
      */
     static function status($status)
@@ -45,7 +45,7 @@ class YandexDirectAPI extends \yii\base\Model
     /**
      * Состояние
      *
-     * @param $state string
+     * @param string $state
      * @return string
      */
     static function state($state)
@@ -57,9 +57,9 @@ class YandexDirectAPI extends \yii\base\Model
     /**
      * Конструктор
      *
-     * @param $url
-     * @param $login
-     * @param $token
+     * @param string $url
+     * @param string $login
+     * @param string $token
      */
     function __construct($url, $login, $token)
     {
@@ -73,8 +73,8 @@ class YandexDirectAPI extends \yii\base\Model
     /**
      * Запрос к АПИ
      *
-     * @param $function string
-     * @param $params array
+     * @param string $function
+     * @param array $params
      * @return mixed
      */
     public function requestAPI($function, $params)
@@ -108,9 +108,9 @@ class YandexDirectAPI extends \yii\base\Model
     /**
      * Запрос
      *
-     * @param $function string
-     * @param $method string
-     * @param $params
+     * @param string $function
+     * @param string $method
+     * @param array $params
      * @return mixed
      */
     public function request($function, $method, $params)
@@ -119,7 +119,7 @@ class YandexDirectAPI extends \yii\base\Model
     /**
      * Получение компаний
      *
-     * @var $selectionCriteria array
+     * @var array $selectionCriteria
      * @return mixed
      */
     public function getCampaigns($selectionCriteria = [])
@@ -135,7 +135,7 @@ class YandexDirectAPI extends \yii\base\Model
     /**
      * Получение групп объявлений
      *
-     * @var $selectionCriteria array
+     * @var array $selectionCriteria
      * @return mixed
      */
     public function getAdgroups($selectionCriteria = [])
@@ -151,7 +151,7 @@ class YandexDirectAPI extends \yii\base\Model
     /**
      * Получение объявления
      *
-     * @var $selectionCriteria array
+     * @var array $selectionCriteria
      * @return mixed
      */
     public function getAds($selectionCriteria = [])
@@ -168,7 +168,7 @@ class YandexDirectAPI extends \yii\base\Model
     /**
      * Архивация объявлений
      *
-     * @var $selectionCriteria array
+     * @var array $selectionCriteria
      * @return mixed
      */
     public function archiveAds($selectionCriteria = [])
@@ -181,7 +181,7 @@ class YandexDirectAPI extends \yii\base\Model
     /**
      * Разархивация объявлений
      *
-     * @var $selectionCriteria array
+     * @var array $selectionCriteria
      * @return mixed
      */
     public function unarchiveAds($selectionCriteria = [])
@@ -194,7 +194,7 @@ class YandexDirectAPI extends \yii\base\Model
     /**
      * Запуск объявлений
      *
-     * @var $selectionCriteria array
+     * @var array $selectionCriteria
      * @return mixed
      */
     public function resumeAds($selectionCriteria = [])
@@ -207,7 +207,7 @@ class YandexDirectAPI extends \yii\base\Model
     /**
      * Остановка объявлений
      *
-     * @var $selectionCriteria array
+     * @var array $selectionCriteria
      * @return mixed
      */
     public function suspendAds($selectionCriteria = [])

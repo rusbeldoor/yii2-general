@@ -30,7 +30,7 @@ class AppHelper
     /**
      * Завершение с выводом
      *
-     * @param $string string
+     * @param string $string
      * @return void
      */
     public static function exitWithEcho($string)
@@ -39,9 +39,9 @@ class AppHelper
     /**
      * Завершение с выводом сообщения
      *
-     * @param $type string
-     * @param $text string
-     * @param $close bool
+     * @param string $type
+     * @param string $text
+     * @param bool $close
      * @return void
      */
     public static function exitWithEchoMessage($type, $text, $close = false)
@@ -50,7 +50,7 @@ class AppHelper
     /**
      * Завершение с выводом json
      *
-     * @param $data array
+     * @param array $data
      * @return void
      */
     public static function exitWithJson($data)
@@ -63,8 +63,8 @@ class AppHelper
     /**
      * Завершение с выводом json ['result' => $result, 'data' => $data]
      *
-     * @param $result mixed
-     * @param $data mixed
+     * @param mixed $result
+     * @param mixed $data
      * @return void
      */
     public static function exitWithJsonResultData($result, $data = null)
@@ -78,7 +78,7 @@ class AppHelper
     /**
      * Завершение с выводом json ['result' => $result]
      *
-     * @param $result mixed
+     * @param mixed $result
      * @return void
      */
     public static function exitWithJsonResult($result)
@@ -87,9 +87,9 @@ class AppHelper
     /**
      * ...
      *
-     * @param $url string
-     * @param $flasType string
-     * @param $flasahText string
+     * @param string $url
+     * @param string $flasType
+     * @param string $flasahText
      * @return object
      */
     public static function redirectWithFlash($url, $flasType, $flasahText)
@@ -105,7 +105,7 @@ class AppHelper
     /**
      * Проверка права доступа
      *
-     * @param $itemName string
+     * @param string $itemName
      */
     public static function forbiddenExceptionIfNotHavePermission($itemName)
     {
@@ -121,7 +121,7 @@ class AppHelper
     /**
      * Установка сообщений
      *
-     * @param $flashs array
+     * @param array $flashs
      * @return void
      */
     public static function setFlashes($flashs)
@@ -138,8 +138,8 @@ class AppHelper
     /**
      * Логирование данных в файл
      *
-     * @param $file string
-     * @param $string string
+     * @param string $file
+     * @param string $string
      * @return void
      */
     public static function log($file, $string, $n = true)

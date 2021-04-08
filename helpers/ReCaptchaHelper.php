@@ -17,7 +17,7 @@ class ReCaptchaHelper
     /**
      * Проверка каптчи
      *
-     * @param $params array
+     * @param array $params
      * @return bool
      */
     public static function check($params = [])

@@ -9,7 +9,7 @@ class Formatter extends \yii\i18n\Formatter
     /**
      * Ид
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public function asId($value)
@@ -21,7 +21,7 @@ class Formatter extends \yii\i18n\Formatter
     /**
      * 18:42 29.11.2020
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public function asDatetimeHourMinuteDayMonthYear($value)
@@ -33,7 +33,7 @@ class Formatter extends \yii\i18n\Formatter
     /**
      * 18:42:01 29.11.2020
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public function asDatetimeHourMinuteSecondDayMonthYear($value)
@@ -45,7 +45,7 @@ class Formatter extends \yii\i18n\Formatter
     /**
      * 18:42
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public function asDatetimeHourMinute($value)
@@ -57,7 +57,7 @@ class Formatter extends \yii\i18n\Formatter
     /**
      * 18:42:01
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public function asDatetimeHourMinuteSecond($value)
@@ -69,7 +69,7 @@ class Formatter extends \yii\i18n\Formatter
     /**
      * 29.11.2020
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public function asDatetimeDayMonthYear($value)
@@ -81,7 +81,7 @@ class Formatter extends \yii\i18n\Formatter
     /**
      * Да / Нет
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public function asYesNo($value)
@@ -97,7 +97,7 @@ class Formatter extends \yii\i18n\Formatter
     /**
      * 1 520 сек.
      *
-     * @param $value int|string|null
+     * @param int|string|null $value
      * @return string
      */
     public function asCountSecond($value)
@@ -111,7 +111,7 @@ class Formatter extends \yii\i18n\Formatter
      * 1 519 мин.
      * 20 сек.
      *
-     * @param $value int|string|null
+     * @param int|string|null $value
      * @return string
      */
     public function asCountMinuteSecond($value)
@@ -124,7 +124,7 @@ class Formatter extends \yii\i18n\Formatter
      * 1 519 мин. 20 сек.
      * 20 сек.
      *
-     * @param $value int|string|null
+     * @param int|string|null $value
      * @return string
      */
     public function asCountHourMinuteSecond($value)
@@ -136,7 +136,7 @@ class Formatter extends \yii\i18n\Formatter
     /**
      * Статус
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public function asStatus($value)

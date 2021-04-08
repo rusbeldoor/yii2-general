@@ -7,7 +7,7 @@ class DatetimeHelper
     /**
      * Метка времени
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return int
      */
     public static function timestamp($value)
@@ -20,8 +20,8 @@ class DatetimeHelper
     /**
      * Дополнение реализации стандартной функции date
      *
-     * @param $format string
-     * @param $value mixed
+     * @param string $format
+     * @param mixed $value
      * @return string
      */
     public static function date($format, $value)
@@ -30,7 +30,7 @@ class DatetimeHelper
     /**
      * 2020-11-29 18:42:01
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public static function formatYearMonthDayHourMinuteSecond($value)
@@ -39,7 +39,7 @@ class DatetimeHelper
     /**
      * 18:42 29.11.2020
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public static function formatHourMinuteDayMonthYear($value)
@@ -48,7 +48,7 @@ class DatetimeHelper
     /**
      * 18:42:01 29.11.2020
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public static function formatHourMinuteSecondDayMonthYear($value)
@@ -57,7 +57,7 @@ class DatetimeHelper
     /**
      * 18:42
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public static function formatHourMinute($value)
@@ -66,7 +66,7 @@ class DatetimeHelper
     /**
      * 18:42:01
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public static function formatHourMinuteSecond($value)
@@ -75,7 +75,7 @@ class DatetimeHelper
     /**
      * 29.11.2020
      *
-     * @param $value mixed
+     * @param mixed $value
      * @return string
      */
     public static function formatDayMonthYear($value)
@@ -84,7 +84,7 @@ class DatetimeHelper
     /**
      * 1 520 сек.
      *
-     * @param $value int|string
+     * @param int|string $value
      * @return string
      */
     public static function formatCountSecond($value)
@@ -93,7 +93,7 @@ class DatetimeHelper
     /**
      * 1 519 мин.
      *
-     * @param $value int|string
+     * @param int|string $value
      * @return string
      */
     public static function formatCountMinute($value)
@@ -102,7 +102,7 @@ class DatetimeHelper
     /**
      * 1 518 час.
      *
-     * @param $value int|string
+     * @param int|string $value
      * @return string
      */
     public static function formatCountHour($value)
@@ -113,9 +113,9 @@ class DatetimeHelper
      * 1 519 мин.
      * 20 сек.
      *
-     * @param $value int|string
-     * @param $separator string
-     * @param $showZeroValues bool
+     * @param int|string $value
+     * @param string $separator
+     * @param bool $showZeroValues
      * @return string
      */
     public static function formatCountMinuteSecond($value, $separator = ' ', $showZeroValues = true)
@@ -137,9 +137,9 @@ class DatetimeHelper
      * 42 мин.
      * 20 сек.
      *
-     * @param $value int|string
-     * @param $separator string
-     * @param $showZeroValues bool
+     * @param int|string $value
+     * @param string $separator
+     * @param bool $showZeroValues
      * @return string
      */
     public static function formatCountHourMinuteSecond($value, $separator = ' ', $showZeroValues = true)

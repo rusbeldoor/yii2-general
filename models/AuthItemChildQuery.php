@@ -12,7 +12,7 @@ class AuthItemChildQuery extends ActiveQuery
     /**
      * Родительский элемент
      *
-     * @param $name string
+     * @param string $name
      * @return AuthItemChildQuery
      */
     public function parent($name)
@@ -21,7 +21,7 @@ class AuthItemChildQuery extends ActiveQuery
     /**
      * Дочерний элемент
      *
-     * @param $name string
+     * @param string $name
      * @return AuthItemChildQuery
      */
     public function child($name)

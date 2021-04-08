@@ -7,9 +7,9 @@ class AlertHelper
     /**
      * ...
      *
-     * @param $type string
-     * @param $text string
-     * @param $close bool
+     * @param string $type
+     * @param string $text
+     * @param bool $close
      * @return void
      */
     public static function alert($type, $text, $close = false)
@@ -24,8 +24,8 @@ class AlertHelper
     /**
      * ...
      *
-     * @param $type string
-     * @param $text string
+     * @param string $type
+     * @param string $text
      * @return void
      */
     public static function alertText($type, $text)

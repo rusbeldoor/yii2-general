@@ -4,10 +4,10 @@ use rusbeldoor\yii2General\widgets\DetailView;
 use rusbeldoor\yii2General\helpers\BaseUI;
 use kartik\sortinput\SortableInput;
 
-/* @var $this yii\web\View */
-/* @var $model backend\modules\administrator\modules\rbac\models\AuthItem */
-/* @var $rolesOfThisRole array */
-/* @var $permissionsOfThisRole array */
+/* @var yii\web\View $this */
+/* @var backend\modules\administrator\modules\rbac\models\AuthItem $model */
+/* @var array $rolesOfThisRole */
+/* @var array $permissionsOfThisRole */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Роли', 'url' => ['/administrator/rbac/role']];

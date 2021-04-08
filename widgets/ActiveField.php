@@ -80,7 +80,7 @@ class ActiveField extends \kartik\form\ActiveField
     /**
      * Радиогруппа кнопок
      *
-     * @param $items array
+     * @param array $items
      * @param array $options
      * @return ActiveField
      *
@@ -187,7 +187,7 @@ class ActiveField extends \kartik\form\ActiveField
     /**
      * Выпадающие список
      *
-     * @param $elems array
+     * @param array $elems
      * @param array $options
      * @return ActiveField
      */
@@ -200,7 +200,7 @@ class ActiveField extends \kartik\form\ActiveField
     /**
      * Выпадающий список для поиска
      *
-     * @param $elems array
+     * @param array $elems
      * @param array $options
      * @return ActiveField
      */
@@ -213,7 +213,7 @@ class ActiveField extends \kartik\form\ActiveField
     /**
      * Выпадающий список с множественным выбором
      *
-     * @param $elems array
+     * @param array $elems
      * @param array $options
      * @return ActiveField
      */
@@ -226,7 +226,7 @@ class ActiveField extends \kartik\form\ActiveField
     /**
      * Выпадающий список с множественным выбором для поиска
      *
-     * @param $elems array
+     * @param array $elems
      * @param array $options
      * @return ActiveField
      */

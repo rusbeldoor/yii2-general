@@ -7,7 +7,7 @@ class EmailHelper
     /**
      * Коррекция электронной почты
      *
-     * @param $email string
+     * @param string $email
      * @return string
      */
     public static function correct($email)
@@ -164,7 +164,7 @@ class EmailHelper
     /**
      * Проверка электронной почты
      *
-     * @param $email string
+     * @param string $email
      * @return bool
      */
     public static function check($email)
@@ -177,7 +177,7 @@ class EmailHelper
     /**
      * Коррекция текста письма
      *
-     * @param $text string
+     * @param string $text
      * @return string
      */
     public static function correctText($text)
@@ -195,7 +195,7 @@ class EmailHelper
     /**
      * Проверка электронной почты
      *
-     * @param $email string
+     * @param string $email
      * @return bool
      */
     public static function checkMX($email)

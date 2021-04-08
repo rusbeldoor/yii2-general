@@ -3,8 +3,8 @@
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\crud\Generator */
+/* @var yii\web\View $this */
+/* @var yii\gii\generators\crud\Generator $generator */
 
 $name = Inflector::camel2id(StringHelper::basename($generator->modelClass));
 
@@ -14,8 +14,8 @@ echo "<?php\n";
 use yii\helpers\html;
 use rusbeldoor\yii2General\widgets\SearchForm;
 
-/* @var $this yii\web\View */
-/* @var $model <?= ltrim($generator->searchModelClass, '\\') ?> */
+/* @var yii\web\View $this */
+/* @var <?= ltrim($generator->searchModelClass, '\\') ?> $model */
 ?>
 
 <div class="<?= $name ?>-search panelSearchFormContainer">

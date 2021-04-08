@@ -7,8 +7,8 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     /**
      * Массив по полю
      *
-     * @param $array array
-     * @param $field string
+     * @param array $array
+     * @param string $field
      * @return array
      */
     public static function arrayByField($array, $field)
@@ -26,9 +26,9 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     /**
      * Массив строк содержащих передаваему строку
      *
-     * @param $array array
-     * @param $strings string|array
-     * @param $safeKeys bool
+     * @param array $array
+     * @param string|array $strings
+     * @param bool $safeKeys
      * @return array
      */
     public static function arrayWithStrings($array, $strings, $safeKeys = false)
@@ -59,10 +59,10 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     /**
      * Массив элементов содержащих передаваемые подстроки в одном из полей
      *
-     * @param $array array
-     * @param $strings string|array
-     * @param $field string
-     * @param $safeKeys bool
+     * @param array $array
+     * @param string|array $strings
+     * @param string $field
+     * @param bool $safeKeys
      * @return array
      */
     public static function arrayWithStringsInField($array, $strings, $field, $safeKeys = false)
@@ -97,9 +97,9 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     /**
      * Массив строк не содержащих все передаваемые строки
      *
-     * @param $array array
-     * @param $strings string|array
-     * @param $safeKeys bool
+     * @param array $array
+     * @param string|array $strings
+     * @param bool $safeKeys
      * @return array
      */
     public static function arrayWithoutStrings($array, $strings, $safeKeys = false)
@@ -134,10 +134,10 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     /**
      * Массив элементов не содержащих все передаваемые подстроки в одном из полей
      *
-     * @param $array array
-     * @param $strings string|array
-     * @param $field string
-     * @param $safeKeys bool
+     * @param array $array
+     * @param string|array $strings
+     * @param string $field
+     * @param bool $safeKeys
      * @return array
      */
     public static function arrayWithoutStringsInField($array, $strings, $field, $safeKeys = false)

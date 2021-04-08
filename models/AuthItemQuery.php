@@ -36,7 +36,7 @@ class AuthItemQuery extends ActiveQuery
     /**
      * Есть родители по имени
      *
-     * @param $name string
+     * @param string $name
      * @return AuthItemQuery
      */
     public function ofRole($name)
@@ -50,7 +50,7 @@ class AuthItemQuery extends ActiveQuery
     /**
      * Нет родителей по имени
      *
-     * @param $name string
+     * @param string $name
      * @return AuthItemQuery
      */
     public function notOfRole($name)

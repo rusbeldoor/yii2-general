@@ -12,7 +12,7 @@ class UserSubscriptionChannelQuery extends ActiveQuery
     /**
      * ...
      *
-     * @param $aliases null|string|array
+     * @param array|string|null $aliases
      * @return UserSubscriptionChannelQuery
      */
     public function aliases($aliases)

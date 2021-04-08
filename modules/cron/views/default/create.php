@@ -1,7 +1,7 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $model backend\modules\administrator\modules\rbac\models\AuthItem */
+/* @var yii\web\View $this */
+/* @var backend\modules\administrator\modules\rbac\models\AuthItem $model */
 
 $this->title = 'Добавление';
 $this->params['breadcrumbs'][] = ['label' => 'Кроны', 'url' => ['/administrator/cron']];

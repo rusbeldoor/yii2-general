@@ -47,7 +47,7 @@ class PermissionController extends \backend\components\Controller
     /**
      * Просмотр
      *
-     * @param $id string
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -87,7 +87,7 @@ class PermissionController extends \backend\components\Controller
     /**
      * Изменение
      *
-     * @param $id string
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -114,7 +114,7 @@ class PermissionController extends \backend\components\Controller
     /**
      * Удаление
      *
-     * @param $id int|null
+     * @param int|null $id
      * @return yii\web\Response
      */
     public function actionDelete($id = null)
@@ -133,7 +133,7 @@ class PermissionController extends \backend\components\Controller
     /**
      * Получение модели
      *
-     * @param $id string
+     * @param string $id
      * @return AuthItem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

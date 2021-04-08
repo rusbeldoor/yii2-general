@@ -2,8 +2,8 @@
 
 use rusbeldoor\yii2General\widgets\AddEditForm;
 
-/* @var $this yii\web\View */
-/* @var $model backend\modules\administrator\modules\rbac\models\AuthItem */
+/* @var yii\web\View $this */
+/* @var backend\modules\administrator\modules\rbac\models\AuthItem $model */
 ?>
 
 <div class="auth-item-form">
