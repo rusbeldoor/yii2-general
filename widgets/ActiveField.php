@@ -23,6 +23,27 @@ class ActiveField extends \kartik\form\ActiveField
     }
 
     /**
+     * Числовое поле
+     *
+     * @param array $options
+     * @return ActiveField
+     */
+    public function numberInput($options = [])
+    { return self::input('number', $options); }
+
+    /**
+     * Числовое поле для поиска
+     *
+     * @param array $options
+     * @return ActiveField
+     */
+    public function searchNumberInput($options = [])
+    {
+        $options = ArrayHelper::merge(['placeholder' => 'Не важно'], $options);
+        return self::numberInput($options);
+    }
+
+    /**
      * Числовое поле с статичным текстом после
      *
      * @param array $options
