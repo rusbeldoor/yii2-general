@@ -5,7 +5,7 @@ namespace rusbeldoor\yii2General\models;
 /**
  * Common ActiveRecord
  */
-class Model extends yii\base\Model
+class Model extends \yii\base\Model
 {
     /**
      * Магический метод получения аттрибута
