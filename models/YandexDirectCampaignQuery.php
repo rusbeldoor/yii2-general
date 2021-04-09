@@ -7,7 +7,7 @@ namespace rusbeldoor\yii2General\models;
  *
  * @see YandexDirectCampaign
  */
-class YandexDirectCampaignQuery extends \rusbeldoor\yii2General\models\ActiveQuery
+class YandexDirectCampaignQuery extends ActiveQuery
 {
     /**
      * ...

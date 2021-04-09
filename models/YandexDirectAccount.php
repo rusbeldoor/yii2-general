@@ -2,8 +2,6 @@
 
 namespace rusbeldoor\yii2General\models;
 
-use yii;
-
 /**
  * Yandex_direct_account (ActiveRecord)
  *
@@ -13,7 +11,7 @@ use yii;
  * @property $login string
  * @property $token string
  */
-class YandexDirectAccount extends \rusbeldoor\yii2General\models\ActiveRecord
+class YandexDirectAccount extends ActiveRecord
 {
     /**
      * {@inheritdoc}

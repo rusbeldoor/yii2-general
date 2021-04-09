@@ -7,7 +7,7 @@ namespace rusbeldoor\yii2General\models;
  *
  * @see YandexDirectAccount
  */
-class YandexDirectAccountQuery extends \rusbeldoor\yii2General\models\ActiveQuery
+class YandexDirectAccountQuery extends ActiveQuery
 {
     /**
      * ...

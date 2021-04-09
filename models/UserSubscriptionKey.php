@@ -2,8 +2,6 @@
 
 namespace rusbeldoor\yii2General\models;
 
-use yii;
-
 /**
  * User_subscription_key (ActiveRecord)
  *

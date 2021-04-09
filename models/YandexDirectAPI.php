@@ -2,12 +2,10 @@
 
 namespace rusbeldoor\yii2General\models;
 
-use yii;
-
 /**
  * ...
  */
-class YandexDirectAPI extends \yii\base\Model
+class YandexDirectAPI extends Model
 {
     public $url;
     public $login;

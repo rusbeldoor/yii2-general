@@ -2,7 +2,6 @@
 
 namespace rusbeldoor\yii2General\models;
 
-use yii;
 use rusbeldoor\yii2General\helpers\DatetimeHelper;
 
 /**

@@ -2,8 +2,6 @@
 
 namespace rusbeldoor\yii2General\models;
 
-use yii;
-
 /**
  * Yandex_direct_ad (ActiveRecord)
  *
@@ -15,7 +13,7 @@ use yii;
  * @property $status string
  * @property $state string
  */
-class YandexDirectAd extends \rusbeldoor\yii2General\models\ActiveRecord
+class YandexDirectAd extends ActiveRecord
 {
     /**
      * {@inheritdoc}

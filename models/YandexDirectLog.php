@@ -2,8 +2,6 @@
 
 namespace rusbeldoor\yii2General\models;
 
-use yii;
-
 /**
  * Yandex_direct_log (ActiveRecord)
  *
@@ -14,7 +12,7 @@ use yii;
  * @property $datetime string
  * @property $action string
  */
-class YandexDirectLog extends \rusbeldoor\yii2General\models\ActiveRecord
+class YandexDirectLog extends ActiveRecord
 {
     // Описание полей
     public static $fieldsDescriptions = [

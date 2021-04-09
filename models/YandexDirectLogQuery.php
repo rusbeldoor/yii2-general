@@ -7,7 +7,7 @@ namespace rusbeldoor\yii2General\models;
  *
  * @see YandexDirectLog
  */
-class YandexDirectLogQuery extends \rusbeldoor\yii2General\models\ActiveQuery
+class YandexDirectLogQuery extends ActiveQuery
 {
     /**
      * ...
