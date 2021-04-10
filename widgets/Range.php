@@ -9,7 +9,25 @@ use kartik\helpers\Html;
  */
 class Range extends \kartik\field\FieldRange
 {
+    /**
+     * @var string the field separator string between first and second field
+     */
     public $separator = '—';
+
+    /**
+     * @var boolean whether the field is a normal HTML Input rendered by yii\helpers\Html
+     */
+    private $_isInput = false;
+
+    /**
+     * @var boolean whether the field is a dropdown input
+     */
+    private $_isDropdown = false;
+    
+    /**
+     * @var boolean whether it the form is of bootstrap horizontal layout style.
+     */
+    private $_isHorizontalForm = false;
 
     /**
      * Renders the field range widget.
