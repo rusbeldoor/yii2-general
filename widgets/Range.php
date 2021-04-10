@@ -3,10 +3,11 @@
 namespace rusbeldoor\yii2General\widgets;
 
 use yii\helpers\Html;
+
 /**
  * ...
  */
-class Range extends \yii\base\Widget
+class Range extends Widget
 {
     /**
      * @inheritdoc
@@ -27,6 +28,7 @@ class Range extends \yii\base\Widget
     protected function renderWidget()
     {
 
+        /*
         Html::addCssClass($this->options, 'kv-field-range');
         Html::addCssClass($this->container, 'kv-field-range-container');
         $isBs4 = $this->isBs4();
@@ -72,5 +74,6 @@ class Range extends \yii\base\Widget
             '{error}' => $error,
         ];
         echo Html::tag('div', strtr($this->template, $replaceTokens), $this->container);
+        */
     }
 }
