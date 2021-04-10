@@ -2,22 +2,31 @@
 
 namespace rusbeldoor\yii2General\widgets;
 
-use yii\helpers\Html;
+use Exception;
+use kartik\helpers\Html;
 
 /**
  * ...
  */
-class Range extends Widget
+class Range extends \kartik\field\FieldRange
 {
+    public $required = false;
+
+    /**
+     * @var boolean whether it the form is of bootstrap horizontal layout style.
+     */
+    private $_isHorizontalForm = false;
+
     /**
      * @inheritdoc
-     * @throws InvalidConfigException
-     * @throws Exception
      */
-    public function run()
+    public function init()
     {
-        parent::run();
-        $this->renderWidget();
+        parent::init();
+        $this->labelOptions['class'] = 'col-md-2';
+        if ($this->required) { $this->labelOptions['class'] += ' has-star'; }
+        $this->widgetContainer['class'] = 'col-md-10';
+        $this->separator = '<i class="fas fa-long-arrow-alt-left"></i>&nbsp;<i class="fas fa-long-arrow-alt-right"></i>';
     }
 
     /**
@@ -27,8 +36,6 @@ class Range extends Widget
      */
     protected function renderWidget()
     {
-
-        /*
         Html::addCssClass($this->options, 'kv-field-range');
         Html::addCssClass($this->container, 'kv-field-range-container');
         $isBs4 = $this->isBs4();
@@ -41,10 +48,9 @@ class Range extends Widget
         if ($this->type === self::INPUT_DATE) {
             $widget = $this->getDatePicker();
         } else {
-            $css = 'form-group';
-            if ($isBs4 && $this->_isHorizontalForm) {
-                $css = [$css, 'row'];
-            }
+            $css = ['form-group'];
+            if ($isBs4 && $this->_isHorizontalForm) { $css[] = 'row'; }
+            if ($this->required) { $css[] = 'required'; }
             Html::addCssClass($this->container, $css);
             Html::addCssClass($this->options, 'input-group');
             $tag = ArrayHelper::remove($this->separatorOptions, 'tag', 'span');
@@ -74,6 +80,5 @@ class Range extends Widget
             '{error}' => $error,
         ];
         echo Html::tag('div', strtr($this->template, $replaceTokens), $this->container);
-        */
     }
 }
