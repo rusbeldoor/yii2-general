@@ -2,11 +2,23 @@
 
 namespace rusbeldoor\yii2General\widgets;
 
+use yii\helpers\Html;
 /**
  * ...
  */
-class Range extends Widget
+class Range extends \yii\base\Widget
 {
+    /**
+     * @inheritdoc
+     * @throws InvalidConfigException
+     * @throws Exception
+     */
+    public function run()
+    {
+        parent::run();
+        $this->renderWidget();
+    }
+
     /**
      * Renders the field range widget.
      * @throws InvalidConfigException
@@ -14,6 +26,7 @@ class Range extends Widget
      */
     protected function renderWidget()
     {
+
         Html::addCssClass($this->options, 'kv-field-range');
         Html::addCssClass($this->container, 'kv-field-range-container');
         $isBs4 = $this->isBs4();
