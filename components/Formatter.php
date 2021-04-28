@@ -156,7 +156,7 @@ class Formatter extends \yii\i18n\Formatter
      * @param $value mixed
      * @return string
      */
-    public function formatValueOrDash($value)
+    public function asValueOrDash($value)
     {
         if ($value === null) { return $this->nullDisplay; }
         return (($value) ? $value : '-');
