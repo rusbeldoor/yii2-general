@@ -9,9 +9,9 @@ use rusbeldoor\yii2General\widgets\SearchForm;
 
 <div class="auth-item-search panelSearchFormContainer">
     <?php $form = SearchForm::begin() ?>
-        <?= $form->field($model, 'id') ?>
-        <?= $form->field($model, 'name') ?>
-        <?= $form->field($model, 'description') ?>
+        <?= $form->field($model, 'id')->searchNumberInput() ?>
+        <?= $form->field($model, 'name')->searchTextInput() ?>
+        <?= $form->field($model, 'description')->searchTextInput() ?>
         <?= $form->buttons() ?>
     <?php SearchForm::end() ?>
 </div>
