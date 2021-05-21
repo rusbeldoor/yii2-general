@@ -17,8 +17,8 @@ class PlatformSearch extends Platform
     public function rules()
     {
         return [
-            [['id', 'max_duration', 'restart', 'kill_process', 'active'], 'integer'],
-            [['alias', 'description', 'status'], 'safe'],
+            [['id'], 'integer'],
+            [['alias', 'name'], 'safe'],
         ];
     }
 
@@ -58,16 +58,11 @@ class PlatformSearch extends Platform
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'max_duration' => $this->max_duration,
-            'restart' => $this->restart,
-            'kill_process' => $this->kill_process,
-            'active' => $this->active,
         ]);
 
         $query
             ->andFilterWhere(['like', 'alias', $this->alias])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'status', $this->status]);
+            ->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }
