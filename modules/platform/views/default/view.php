@@ -31,12 +31,7 @@ if (Yii::$app->controller->module->onlyMigrations) {
                         'attributes' => [
                             'id:id',
                             'alias',
-                            'description',
-                            'status:status',
-                            'max_duration:countMinuteSecond',
-                            'kill_process:yesNo',
-                            'restart:yesNo',
-                            'active:yesNo',
+                            'name',
                         ],
                     ]),
                 'active' => true,
