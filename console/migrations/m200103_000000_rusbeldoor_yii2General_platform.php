@@ -14,7 +14,7 @@ class m200103_000000_rusbeldoor_yii2General_platform extends Migration
     {
         // Таблица платформ
         $this->createTable('platform', [
-            'id' => $this->primaryKey(11)->unsigned(),
+            'id' => 'smallint(6) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'alias' => $this->string(16)->notNull(),
             'name' => $this->string(32)->notNull(),
         ]);
