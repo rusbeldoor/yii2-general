@@ -1,18 +1,17 @@
 <?php
 
-namespace rusbeldoor\yii2General\modules\cron\controllers;
+namespace rusbeldoor\yii2General\modules\platform\controllers;
 
 use yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
-use rusbeldoor\yii2General\models\Cron;
-use rusbeldoor\yii2General\modules\cron\models\PlatformSearch;
-use rusbeldoor\yii2General\modules\cron\models\CronLogSearch;
+use rusbeldoor\yii2General\models\platform;
+use rusbeldoor\yii2General\modules\platform\models\platformSearch;
 use rusbeldoor\yii2General\helpers\AppHelper;
 
 /**
- * CronController
+ * PlatformController
  */
 class DefaultController extends \backend\components\Controller
 {
@@ -59,15 +58,10 @@ class DefaultController extends \backend\components\Controller
     {
         $model = $this->findModel($id);
 
-        $cronLogSearch = new CronLogSearch();
-        $cronLogSearch->cron_id = $id;
-        $cronLogDataProvider = $cronLogSearch->search(Yii::$app->request->post());
-
         return $this->render(
             'view',
             [
                 'model' => $model,
-                'cronLogDataProvider' => $cronLogDataProvider,
             ]
         );
     }
@@ -81,13 +75,13 @@ class DefaultController extends \backend\components\Controller
     {
         if ($this->module->onlyMigrations) {
             return AppHelper::redirectWithFlash(
-                '/administrator/cron',
+                '/administrator/platform',
                 'error',
-                'Создание кронов разрешено только через миграции.'
+                'Создание платформ разрешено только через миграции.'
             );
         }
 
-        $model = new Cron();
+        $model = new Platform();
 
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
@@ -110,9 +104,9 @@ class DefaultController extends \backend\components\Controller
     {
         if ($this->module->onlyMigrations) {
             return AppHelper::redirectWithFlash(
-                '/administrator/cron',
+                '/administrator/platform',
                 'error',
-                'Изменение кроноа разрешено только через миграции.'
+                'Изменение платформ разрешено только через миграции.'
             );
         }
 
@@ -136,9 +130,9 @@ class DefaultController extends \backend\components\Controller
     {
         if ($this->module->onlyMigrations) {
             return AppHelper::redirectWithFlash(
-                '/administrator/cron',
+                '/administrator/зlatform',
                 'error',
-                'Удаление кронов разрешено только через миграции.'
+                'Удаление платформ разрешено только через миграции.'
             );
         }
 
@@ -154,7 +148,7 @@ class DefaultController extends \backend\components\Controller
      */
     protected function findModel($id)
     {
-        if (($model = Cron::findOne($id)) !== null) { return $model; }
+        if (($model = Platform::findOne($id)) !== null) { return $model; }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
