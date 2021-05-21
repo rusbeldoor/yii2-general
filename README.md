@@ -11,18 +11,28 @@ php yii migrate --migrationPath=@vendor/rusbeldoor/yii2-general/console/migratio
 - `\console\controllers\RemoveOutdatedDataController` (родитель `\rusbeldoor\yii2General\console\controllers\RemoveOutdatedDataController`, рекомендуется запуск раз в сутки).
 - `\console\controllers\YandexDirectController` (родитель `\rusbeldoor\yii2General\console\controllers\YandexDirectController`, рекомендуется запуск раз в 2 часа).
 
-# Панели
-## Backend
+# Модули
 
-### RBAC
+## Платформы
+
+Backend. Перечеь сервисов (сайтов, платформ и т. п.) участвующих в общей структуре (главный, дочерние, соседние сервисы).
+
+http://panel.yii2.local/administrator/platform
+
+## RBAC
+
+Backend. Модуль реализующий систему контроля доступа (права, роли).
 
 http://panel.yii2.local/administrator/rbac/role  
 http://panel.yii2.local/administrator/rbac/permission  
 
-### Кроны
+## Кроны
+
+Backend. Модуль реализующий работу и управление кронами.
 
 http://panel.yii2.local/administrator/cron 
 
-### Яндекс.Директ
 
-http://panel.yii2.local/administrator/yandex-direct
+## Подписки
+
+Frontend-backend. Модуль реализующий подписную систему (систему уведомлений по каналам связи).
