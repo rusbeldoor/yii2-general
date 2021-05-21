@@ -16,9 +16,7 @@ $gridViewColumns = [
     ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'],
     'id:id',
     'alias',
-    'description',
-    'status:status',
-    'active:yesNo',
+    'name',
     ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
 ];
 if (Yii::$app->controller->module->onlyMigrations) {
