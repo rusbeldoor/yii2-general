@@ -18,18 +18,9 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
             'platform_id' => 'mediumint(6) UNSIGNED NOT NULL',
             'alias' => $this->string(128)->notNull()->unique(),
             'name' => $this->string(128)->notNull(),
-        ]);
-        $this->addForeignKey('fk-user_subscription_key-platform_id', 'user_subscription_key', 'platform_id', 'platform', 'id');
-
-        // Таблица действий подписок пользователя
-        $this->createTable('user_subscription_action', [
-            'id' => 'mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
-            'platform_id' => 'mediumint(6) UNSIGNED NOT NULL',
-            'alias' => $this->string(128)->notNull()->unique(),
-            'name' => $this->string(128)->notNull(),
             'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
         ]);
-        $this->addForeignKey('fk-user_subscription_action-platform_id', 'user_subscription_action', 'platform_id', 'platform', 'id');
+        $this->addForeignKey('fk-user_subscription_key-platform_id', 'user_subscription_key', 'platform_id', 'platform', 'id');
 
         // Таблица каналов подписок пользователя
         $this->createTable('user_subscription_channel', [
@@ -49,6 +40,16 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->insert('user_subscription_channel', ['alias' => 'viber', 'name' => 'Viber', 'active' => 1]);
         $this->insert('user_subscription_channel', ['alias' => 'telegram', 'name' => 'Telegram', 'active' => 1]);
         $this->insert('user_subscription_channel', ['alias' => 'browser', 'name' => 'Уведомления от браузера', 'active' => 1]);
+
+        // Таблица действий подписок пользователя
+        $this->createTable('user_subscription_action', [
+            'id' => 'mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
+            'platform_id' => 'mediumint(6) UNSIGNED NOT NULL',
+            'alias' => $this->string(128)->notNull()->unique(),
+            'name' => $this->string(128)->notNull(),
+            'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
+        ]);
+        $this->addForeignKey('fk-user_subscription_action-platform_id', 'user_subscription_action', 'platform_id', 'platform', 'id');
 
         // Таблица связей пользователей с ключами подписок
         $this->createTable('user_subscription', [
