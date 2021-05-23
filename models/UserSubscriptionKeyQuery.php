@@ -12,6 +12,15 @@ class UserSubscriptionKeyQuery extends ActiveQuery
     /**
      * ...
      *
+     * @param int $platformId
+     * @return UserSubscriptionQuery
+     */
+    public function platformId($platformId)
+    { return $this->andWhere("platform_id=:platformId", [':platformId' => $platformId]); }
+
+    /**
+     * ...
+     *
      * @param string|null $alias
      * @return UserSubscriptionKeyQuery
      */

@@ -38,25 +38,4 @@ class UserSubscriptionQuery extends ActiveQuery
         if (!count($keysIds)) { return $this; }
         return $this->andWhere("key_id IN (" . implode(',', $keysIds) . ")");
     }
-
-    /**
-     * ...
-     *
-     * @param int $channelId
-     * @return UserSubscriptionQuery
-     */
-    public function channelId($channelId)
-    { return $this->andWhere("channel_id=:channelId", [':channelId' => $channelId]); }
-
-    /**
-     * ...
-     *
-     * @param array $channelsIds
-     * @return UserSubscriptionQuery
-     */
-    public function channelsIds($channelsIds)
-    {
-        if (!count($channelsIds)) { return $this; }
-        return $this->andWhere("channel_id IN (" . implode(',', $channelsIds) . ")");
-    }
 }

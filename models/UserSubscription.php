@@ -8,8 +8,6 @@ namespace rusbeldoor\yii2General\models;
  * @property $id int
  * @property $user_id int
  * @property $key_id int
- * @property $channel_id int
- * @property $active int
  */
 class UserSubscription extends ActiveRecord
 {
@@ -25,10 +23,9 @@ class UserSubscription extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'key_id', 'channel_id'], 'required'],
-            [['user_id', 'key_id', 'channel_id', 'active'], 'integer'],
-            [['user_id', 'key_id', 'channel_id'], 'unique', 'targetAttribute' => ['user_id', 'key_id', 'channel_id']],
-            [['channel_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionChannel::className(), 'targetAttribute' => ['channel_id' => 'id']],
+            [['user_id', 'key_id'], 'required'],
+            [['user_id', 'key_id'], 'integer'],
+            [['user_id', 'key_id'], 'unique', 'targetAttribute' => ['user_id', 'key_id']],
             [['key_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionKey::className(), 'targetAttribute' => ['key_id' => 'id']],
         ];
     }
@@ -42,8 +39,6 @@ class UserSubscription extends ActiveRecord
             'id' => 'Ид',
             'user_id' => 'Пользователь',
             'key_id' => 'Ключ',
-            'channel_id' => 'Канал',
-            'active' => 'Активный',
         ];
     }
 

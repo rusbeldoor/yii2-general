@@ -5,9 +5,10 @@ namespace rusbeldoor\yii2General\models;
 /**
  * User_subscription_channel (ActiveRecord)
  *
- * @property $id int
- * @property $alias string
- * @property $name string
+ * @property int $id
+ * @property string $alias
+ * @property string $name
+ * @property int $active
  */
 class UserSubscriptionChannel extends ActiveRecord
 {
@@ -24,6 +25,7 @@ class UserSubscriptionChannel extends ActiveRecord
     {
         return [
             [['alias', 'name'], 'required'],
+            [['active'], 'integer'],
             [['alias', 'name'], 'string', 'max' => 32],
             [['alias'], 'unique'],
         ];
@@ -38,6 +40,7 @@ class UserSubscriptionChannel extends ActiveRecord
             'id' => 'Ид',
             'alias' => 'Алиас',
             'name' => 'Название',
+            'active' => 'Активный',
         ];
     }
 
