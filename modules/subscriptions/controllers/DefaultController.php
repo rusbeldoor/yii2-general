@@ -29,6 +29,7 @@ class DefaultController extends \frontend\components\Controller
         $post = Yii::$app->request->post();
         $getKeyAlias = ((isset($get['key'])) ? $get['key'] : ((isset($post['key'])) ? $post['key'] : null));
         $getChannelsAliases = ((isset($get['channels'])) ? $get['channels'] : ((isset($post['channels'])) ? $post['channels'] : null));
+        //$getChannelsAliases = ((isset($get['actions'])) ? $get['actions'] : ((isset($post['actions'])) ? $post['actions'] : null));
         $channelsAliases = explode(',', $getChannelsAliases);
 
         // Проверяем хэш
