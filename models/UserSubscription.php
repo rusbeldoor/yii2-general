@@ -6,11 +6,11 @@ use yii;
 /**
  * User_subscription (ActiveRecord)
  *
- * @property $id int
- * @property $user_id int
- * @property $key_id int
- * @property $channel_id int
- * @property $active int
+ * @property int $id
+ * @property int $user_id
+ * @property int $key_id
+ * @property int $channel_id
+ * @property int $active
  */
 class UserSubscription extends ActiveRecord
 {
