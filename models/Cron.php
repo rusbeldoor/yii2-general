@@ -1,7 +1,6 @@
 <?php
-namespace rusbeldoor\yii2General\models;
 
-use yii;
+namespace rusbeldoor\yii2General\models;
 
 /**
  * Cron (ActiveRecord)
@@ -17,6 +16,31 @@ use yii;
  */
 class Cron extends ActiveRecord
 {
+    // Описание полей
+    public static $fieldsDescriptions = [
+        'status' => [
+            'wait' => 'Ожидает',
+            'process' => 'Выполняется',
+        ],
+    ];
+
+    protected $lastCronLog; // Последний лог
+
+    /**
+     * Магический метод получения аттрибута
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        switch ($name) {
+            case 'lastCronLog': $this->loadLastCronLog(); break;
+            default:
+        }
+        return parent::__get($name);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -69,8 +93,21 @@ class Cron extends ActiveRecord
      */
     public function beforeDelete()
     {
-        // if (true) { $this->addError('id', 'Неовзможно удалить #' . $this->id . '.'); }
+        // if (true) { $this->addError('id', 'Элемент #' . $this->id . ' не может быть удалён.'); }
 
         return !$this->hasErrors() && parent::beforeDelete();
+    }
+
+    /**
+     * ...
+     *
+     * @param bool $force
+     * @return void
+     */
+    private function loadLastCronLog($force = false)
+    {
+        if (!$this->lastCronLog || $force) {
+            $this->lastCronLog = CronLog::find()->cronId($this->id)->lastStart()->one();
+        }
     }
 }

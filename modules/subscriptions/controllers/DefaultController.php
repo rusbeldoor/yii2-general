@@ -1,16 +1,16 @@
 <?php
+
 namespace rusbeldoor\yii2General\modules\subscriptions\controllers;
 
+use rusbeldoor\yii2General\models\UserSubscriptionExemption;
 use yii;
-
+use common\models\User;
 use rusbeldoor\yii2General\models\UserSubscription;
 use rusbeldoor\yii2General\models\UserSubscriptionKey;
 use rusbeldoor\yii2General\models\UserSubscriptionChannel;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 use rusbeldoor\yii2General\helpers\AppHelper;
 use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;
-
-use common\models\User;
 
 /**
  * Управление подписками на рассылки
@@ -20,20 +20,21 @@ class DefaultController extends \frontend\components\Controller
     /**
      * Подписки на рассылки
      *
-     * @param $userId int
-     * @param $hash string
+     * @param int $userId
+     * @param string $hash
      * @return string
      */
     public function actionIndex($userId, $hash)
     {
-        $get = yii::$app->request->get();
-        $post = yii::$app->request->post();
+        $get = Yii::$app->request->get();
+        $post = Yii::$app->request->post();
         $getKeyAlias = ((isset($get['key'])) ? $get['key'] : ((isset($post['key'])) ? $post['key'] : null));
         $getChannelsAliases = ((isset($get['channels'])) ? $get['channels'] : ((isset($post['channels'])) ? $post['channels'] : null));
-        $channelsAliases = explode(',', $getChannelsAliases);
+        //$getChannelsAliases = ((isset($get['actions'])) ? $get['actions'] : ((isset($post['actions'])) ? $post['actions'] : null));
+        $channelsAliases = (($getChannelsAliases) ? explode(',', $getChannelsAliases) : null);
 
         // Проверяем хэш
-        if ($hash != UserSubscriptionHelper::hash($userId, $getKeyAlias, $getChannelsAliases)) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
+        if ($hash != UserSubscriptionHelper::hash($userId, $getKeyAlias, $getChannelsAliases)) { return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         $result = [
             'id' => '', // Ид
@@ -44,26 +45,20 @@ class DefaultController extends \frontend\components\Controller
         ];
 
         // Ключи
-        $allUserSubscriptionKeys = UserSubscriptionKey::find()->all();
-        $allUserSubscriptionKeysByAlias = ArrayHelper::arrayByField($allUserSubscriptionKeys, 'alias');
-        $userSubscriptionKeys = UserSubscriptionKey::find()->allChildren($getKeyAlias)->all();
-        $userSubscriptionKeysById = ArrayHelper::arrayByField($userSubscriptionKeys, 'id');
-        $userSubscriptionKeysIds = array_keys($userSubscriptionKeysById);
+        $allUserSubscriptionKeys = UserSubscriptionKey::find()->indexBy('alias')->all();
+        $userSubscriptionKeys = UserSubscriptionKey::find()->indexBy('id')->allChildren($getKeyAlias)->all();
+        $userSubscriptionKeysIds = array_keys($userSubscriptionKeys);
 
         // Каналы
-        $allUserSubscriptionChannels = UserSubscriptionChannel::find()->all();
-        $allUserSubscriptionChannelsById = ArrayHelper::arrayByField($allUserSubscriptionChannels, 'id');
-        $userSubscriptionChannels = UserSubscriptionChannel::find()->aliases($channelsAliases)->all();
-        $userSubscriptionChannelsByIds = ArrayHelper::arrayByField($userSubscriptionChannels, 'id');
-        $userSubscriptionChannelsIds = array_keys($userSubscriptionChannelsByIds);
+        $allUserSubscriptionChannels = UserSubscriptionChannel::find()->indexBy('id')->all();
 
         // Подписки
-        $userSubscriptions = UserSubscription::find()->userId($userId)->keysIds($userSubscriptionKeysIds)->channelsIds($userSubscriptionChannelsIds)->all();
+        $userSubscriptions = UserSubscription::find()->userId($userId)->keysIds($userSubscriptionKeysIds)->with('key', 'exemptions')->all();
 
         // Перебираем подписки
         foreach ($userSubscriptions as $userSubscription) {
             // Получаем состовляющие ключа подписки
-            $userSubscriptionKeysAliases = explode(';', $userSubscriptionKeysById[$userSubscription->key_id]->alias);
+            $userSubscriptionKeysAliases = explode(';', $userSubscriptionKeys[$userSubscription->key_id]->alias);
 
             // Указатель на массив
             $pointer = &$result;
@@ -93,11 +88,11 @@ class DefaultController extends \frontend\components\Controller
                 }
 
                 // Если ключ известен
-                if (isset($allUserSubscriptionKeysByAlias[$currentKeyAlias])) {
+                if (isset($allUserSubscriptionKeys[$currentKeyAlias])) {
                     // Заполняем значения
-                    if ($pointer[$currentKeyAlias]['id'] === null) { $pointer[$currentKeyAlias]['id'] = $allUserSubscriptionKeysByAlias[$currentKeyAlias]->id; }
-                    if ($pointer[$currentKeyAlias]['alias'] === null) { $pointer[$currentKeyAlias]['alias'] = $allUserSubscriptionKeysByAlias[$currentKeyAlias]->alias; }
-                    if ($pointer[$currentKeyAlias]['name'] === null) { $pointer[$currentKeyAlias]['name'] = $allUserSubscriptionKeysByAlias[$currentKeyAlias]->name; }
+                    if ($pointer[$currentKeyAlias]['id'] === null) { $pointer[$currentKeyAlias]['id'] = $allUserSubscriptionKeys[$currentKeyAlias]->id; }
+                    if ($pointer[$currentKeyAlias]['alias'] === null) { $pointer[$currentKeyAlias]['alias'] = $allUserSubscriptionKeys[$currentKeyAlias]->alias; }
+                    if ($pointer[$currentKeyAlias]['name'] === null) { $pointer[$currentKeyAlias]['name'] = $allUserSubscriptionKeys[$currentKeyAlias]->name; }
                 }
 
                 // Передвигаем указатель
@@ -107,26 +102,18 @@ class DefaultController extends \frontend\components\Controller
             // Запоминаем каналы их имена
             $pointer['channels'][] = [
                 'id' => $userSubscription->channel_id,
-                'alias' => $allUserSubscriptionChannelsById[$userSubscription->channel_id]->alias,
-                'name' => $allUserSubscriptionChannelsById[$userSubscription->channel_id]->name,
+                'alias' => $allUserSubscriptionChannels[$userSubscription->channel_id]->alias,
+                'name' => $allUserSubscriptionChannels[$userSubscription->channel_id]->name,
                 'active' => $userSubscription->active,
             ];
         }
 
-        $result = $result['childKeys'];
-        return $this->render(
-            'subscriptions',
-            [
-                'userId' => $userId,
-                'result' => $result,
-            ]
-        );
+        return $this->render('subscriptions', ['userId' => $userId, 'result' => $result['childKeys']]);
     }
 
     /**
      * Отписка от подписки
      *
-     * @param $active
      * @return void
      */
     public function actionChange()
@@ -134,7 +121,7 @@ class DefaultController extends \frontend\components\Controller
         AppHelper::exitIfNotPostRequest();
 
         // post данные
-        $post = yii::$app->request->post();
+        $post = Yii::$app->request->post();
         if (
             !isset($post['userId'])
             || !isset($post['keyAlias'])
@@ -142,22 +129,22 @@ class DefaultController extends \frontend\components\Controller
             || !isset($post['hash'])
             || !isset($post['active'])
             || !isset($post['redirectUrl'])
-        ) { return AppHelper::redirectWitchFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
+        ) { return AppHelper::redirectWithFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
 
         // Проверяем хэш
-        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], $post['keyAlias'], $post['channelAlias'])) { return AppHelper::redirectWitchFlash('/', 'danger', 'Нарушена целосность запроса.'); }
+        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], $post['keyAlias'], $post['channelAlias'])) { return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         // Пользователь
         $user = User::find($post['userId'])->one();
-        if (!$user) { return AppHelper::redirectWitchFlash('/', 'danger', 'Пользователь (#' . $post['userId'] . ') не найден.'); }
+        if (!$user) { return AppHelper::redirectWithFlash('/', 'danger', 'Пользователь (#' . $post['userId'] . ') не найден.'); }
 
         // Ключ
         $userSubscriptionKey = UserSubscriptionKey::find()->alias($post['keyAlias'])->one();
-        if (!$userSubscriptionKey) { return AppHelper::redirectWitchFlash('/', 'danger', 'Ключ подписки (' . $post['keyAlias'] . ') не найден.'); }
+        if (!$userSubscriptionKey) { return AppHelper::redirectWithFlash('/', 'danger', 'Ключ подписки (' . $post['keyAlias'] . ') не найден.'); }
 
         // Канал
         $userSubscriptionChannel = UserSubscriptionChannel::find()->alias($post['channelAlias'])->one();
-        if (!$userSubscriptionChannel) { return AppHelper::redirectWitchFlash('/', 'danger', 'Канал подписки (#' . $post['channelAlias'] . ') не найден.'); }
+        if (!$userSubscriptionChannel) { return AppHelper::redirectWithFlash('/', 'danger', 'Канал подписки (#' . $post['channelAlias'] . ') не найден.'); }
 
         // Подписка на рассылки
         $userSubscription = UserSubscription::find()->userId($post['userId'])->keyId($userSubscriptionKey->id)->channelId($userSubscriptionChannel->id)->one();
@@ -177,6 +164,6 @@ class DefaultController extends \frontend\components\Controller
         }
 
         // Возвращаемся по переданному адресу
-        AppHelper::redirectWitchFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['active']) ? 'подписались на' : 'отписались от') . ' "' . $userSubscriptionKey->name . '" (' . $userSubscriptionChannel->name . ').');
+        AppHelper::redirectWithFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['active']) ? 'подписались на' : 'отписались от') . ' "' . $userSubscriptionKey->name . '" (' . $userSubscriptionChannel->name . ').');
     }
 }

@@ -1,14 +1,14 @@
 <?php
-namespace rusbeldoor\yii2General\models;
 
-use yii;
+namespace rusbeldoor\yii2General\models;
 
 /**
  * User_subscription_channel (ActiveRecord)
  *
- * @property $id int
- * @property $alias string
- * @property $name string
+ * @property int $id
+ * @property string $alias
+ * @property string $name
+ * @property int $active
  */
 class UserSubscriptionChannel extends ActiveRecord
 {
@@ -25,6 +25,7 @@ class UserSubscriptionChannel extends ActiveRecord
     {
         return [
             [['alias', 'name'], 'required'],
+            [['active'], 'integer'],
             [['alias', 'name'], 'string', 'max' => 32],
             [['alias'], 'unique'],
         ];
@@ -39,6 +40,7 @@ class UserSubscriptionChannel extends ActiveRecord
             'id' => 'Ид',
             'alias' => 'Алиас',
             'name' => 'Название',
+            'active' => 'Активный',
         ];
     }
 
@@ -57,7 +59,7 @@ class UserSubscriptionChannel extends ActiveRecord
      */
     public function beforeDelete()
     {
-        // if (true) { $this->addError('id', 'Неовзможно удалить #' . $this->id . '.'); }
+        // if (true) { $this->addError('id', 'Элемент #' . $this->id . ' не может быть удалён.'); }
 
         return !$this->hasErrors() && parent::beforeDelete();
     }

@@ -1,8 +1,8 @@
 <?php
+
 namespace rusbeldoor\yii2General\components;
 
 use yii;
-
 use rusbeldoor\yii2General\helpers\AppHelper;
 
 /**
@@ -30,7 +30,7 @@ class WebController extends \yii\web\Controller
     /**
      * Удаление
      *
-     * @param $id int|null
+     * @param int|null $id
      * @return yii\web\Response
      */
     public function actionDelete($id = null)

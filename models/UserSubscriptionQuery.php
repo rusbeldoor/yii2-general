@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\models;
 
 /**
@@ -11,7 +12,7 @@ class UserSubscriptionQuery extends ActiveQuery
     /**
      * ...
      *
-     * @param $userId int
+     * @param int $userId
      * @return UserSubscriptionQuery
      */
     public function userId($userId)
@@ -20,7 +21,7 @@ class UserSubscriptionQuery extends ActiveQuery
     /**
      * ...
      *
-     * @param $keyId int
+     * @param int $keyId
      * @return UserSubscriptionQuery
      */
     public function keyId($keyId)
@@ -29,33 +30,12 @@ class UserSubscriptionQuery extends ActiveQuery
     /**
      * ...
      *
-     * @param $keysIds array
+     * @param array $keysIds
      * @return UserSubscriptionQuery
      */
     public function keysIds($keysIds)
     {
         if (!count($keysIds)) { return $this; }
         return $this->andWhere("key_id IN (" . implode(',', $keysIds) . ")");
-    }
-
-    /**
-     * ...
-     *
-     * @param $channelId int
-     * @return UserSubscriptionQuery
-     */
-    public function channelId($channelId)
-    { return $this->andWhere("channel_id=:channelId", [':channelId' => $channelId]); }
-
-    /**
-     * ...
-     *
-     * @param $channelsIds array
-     * @return UserSubscriptionQuery
-     */
-    public function channelsIds($channelsIds)
-    {
-        if (!count($channelsIds)) { return $this; }
-        return $this->andWhere("channel_id IN (" . implode(',', $channelsIds) . ")");
     }
 }

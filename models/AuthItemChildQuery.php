@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\models;
 
 /**
@@ -11,7 +12,18 @@ class AuthItemChildQuery extends ActiveQuery
     /**
      * Родительский элемент
      *
-     * return AuthItemChildQuery     */
+     * @param string $name
+     * @return AuthItemChildQuery
+     */
     public function parent($name)
     { return $this->andWhere("parent=:parent", [':parent' => $name]); }
+
+    /**
+     * Дочерний элемент
+     *
+     * @param string $name
+     * @return AuthItemChildQuery
+     */
+    public function child($name)
+    { return $this->andWhere("child=:child", [':child' => $name]); }
 }

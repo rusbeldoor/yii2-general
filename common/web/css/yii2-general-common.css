@@ -3,19 +3,13 @@
  ********************************/
 
 .width1px { width: 1px; }
-.width100p { width: 100%; }
+.width100 { width: 100%; }
 
 .noMargin { margin: 0 !important; }
-.margin10px { margin: 10px; }
-.marginTop10px { margin-top: 10px; }
-.marginBottom10px { margin-bottom: 10px; }
-.marginTopBottom10px { margin-top: 10px; margin-bottom: 10px; }
+.marginBottom1rem { margin-bottom: 1rem; }
 
 .noPadding { padding: 0 !important; }
-.padding10px { padding: 10px; }
-.paddingTop10px { margin-top: 10px; }
-.paddingBottom10px { margin-bottom: 10px; }
-.paddingTopBottom10px { padding-top: 10px; padding-bottom: 10px; }
+.padding0375rem075rem { padding: 0.375rem 0.75rem; }
 
 .floatLeft { float: left; }
 .floatRight { float: right; }
@@ -27,7 +21,8 @@
 .border1pxSolidLightgray { border: 1px solid lightgray; }
 .borderRadius025rem { border-radius: 0.25rem; }
 
-table.textCenter td { text-align: center; }
+table.thTextCenter th { text-align: center; }
+table.tdTextCenter td { text-align: center; }
 
 .colorRemove { color: var(--red); }
 .colorEdit { color: var(--green); }
@@ -39,6 +34,23 @@ table.textCenter td { text-align: center; }
 
 /* Якорь как обычный элемент */
 a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
+
+/* Сортировка */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+a.asc:after { content: "\f161"; }
+a.desc:after { content: "\f160"; }
+.sort-numerical a.asc:after { content: "\f163"; }
+.sort-numerical a.desc:after { content: "\f162"; }
+.sort-ordinal a.asc:after { content: "\f15e"; }
+.sort-ordinal a.desc:after { content: "\f15d"; }
 
 /***********************************
  *** *** *** bootstrap 4 *** *** ***
@@ -81,19 +93,26 @@ a[name], a[name]:hover { text-decoration: inherit; color: inherit; }
 
 .sortable { min-height: 52px; }
 
+/********************************
+ *** *** *** kartik-v *** *** ***
+ ********************************/
+
+.tabs-x {}
+.tabs-x .tab-content { margin-top: 15px; }
+
 /*********************************
  *** *** *** Интерфейс *** *** ***
  *********************************/
 
-.panelButtonsGroup { margin: 0 0 16px 0; }
+.panelButtonsGroup { margin: 0 0 15px 0; }
 .panelSearchFormToggle {}
 .panelSearchFormContainer {
     display: none;
-    margin: 0 0 16px 0;
+    margin: 0 0 15px 0;
     padding: 15px;
-    border: 1px solid #f8f9fa;
+    border: 1px solid #f5f5f5;
     border-radius: 0.25rem;
-    background-color: #f8f9fa;
+    background-color: #fdfdfd;
 }
 
 .widthDateTime { width: 207px; }

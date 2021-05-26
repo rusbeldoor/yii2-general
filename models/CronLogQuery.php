@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\models;
 
 /**
@@ -11,10 +12,10 @@ class CronLogQuery extends ActiveQuery
     /**
      * Крон
      *
-     * @param $cron_id int
+     * @param int $cron_id
      * @return AuthItemQuery
      */
-    public function cron($cron_id)
+    public function cronId($cron_id)
     { return $this->andWhere("cron_id=:cron_id", [':cron_id' => $cron_id]); }
 
     /**
@@ -23,7 +24,7 @@ class CronLogQuery extends ActiveQuery
      * @return AuthItemQuery
      */
     public function lastStart()
-    { return $this->andWhere("MAX(datetime_start)"); }
+    { return $this->orderBy('datetime_start DESC')->limit(1); }
 
     /**
      * Не завершённый

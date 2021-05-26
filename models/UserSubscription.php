@@ -1,7 +1,6 @@
 <?php
-namespace rusbeldoor\yii2General\models;
 
-use yii;
+namespace rusbeldoor\yii2General\models;
 
 /**
  * User_subscription (ActiveRecord)
@@ -9,8 +8,6 @@ use yii;
  * @property int $id
  * @property int $user_id
  * @property int $key_id
- * @property int $channel_id
- * @property int $active
  */
 class UserSubscription extends ActiveRecord
 {
@@ -26,13 +23,24 @@ class UserSubscription extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'key_id', 'channel_id'], 'required'],
-            [['user_id', 'key_id', 'channel_id', 'active'], 'integer'],
-            [['user_id', 'key_id', 'channel_id'], 'unique', 'targetAttribute' => ['user_id', 'key_id', 'channel_id']],
-            [['channel_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionChannel::className(), 'targetAttribute' => ['channel_id' => 'id']],
+            [['user_id', 'key_id'], 'required'],
+            [['user_id', 'key_id'], 'integer'],
+            [['user_id', 'key_id'], 'unique', 'targetAttribute' => ['user_id', 'key_id']],
             [['key_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionKey::className(), 'targetAttribute' => ['key_id' => 'id']],
         ];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getKey()
+    { return $this->hasOne(UserSubscriptionKey::class, ['id' => 'key_id']); }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExemptions()
+    { return $this->hasMany(UserSubscriptionExemption::class, ['subscription_id' => 'id']); }
 
     /**
      * {@inheritdoc}
@@ -43,8 +51,6 @@ class UserSubscription extends ActiveRecord
             'id' => 'Ид',
             'user_id' => 'Пользователь',
             'key_id' => 'Ключ',
-            'channel_id' => 'Канал',
-            'active' => 'Активный',
         ];
     }
 
@@ -63,7 +69,7 @@ class UserSubscription extends ActiveRecord
      */
     public function beforeDelete()
     {
-        // if (true) { $this->addError('id', 'Неовзможно удалить #' . $this->id . '.'); }
+        // if (true) { $this->addError('id', 'Элемент #' . $this->id . ' не может быть удалён.'); }
 
         return !$this->hasErrors() && parent::beforeDelete();
     }

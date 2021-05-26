@@ -1,17 +1,26 @@
 <?php
-/* @var $this yii\web\View */
-/* @var $userId int */
-/* @var $result array */
+/* @var yii\web\View $this */
+/* @var int $userId */
+/* @var array $result */
 
 use yii\bootstrap4\Html;
-
 use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;
+
+$this->registerJs('$(document).ready(function () {
+$(\'.unsubscribe\').click(function () {
+    confirmDialog({
+        text: \'Вы уверены, что хотите отписаться от "\' + $(this).data(\'key-name\') + \'" (\' + $(this).data(\'channel-name\') + \')? <i class="far fa-frown"></i>\',
+        confirmCallback: () => { $(this).closest(\'form\').submit(); }
+    });
+});
+$(\'.subscribe\').click(function () { $(this).closest(\'form\').submit(); });
+});');
 
 /**
  * Вывод элементов
  *
- * @param $elems array
- * @param $userId int
+ * @param array $elems
+ * @param int $userId
  */
 function writeElems($elems, $userId) {
     foreach ($elems as $key) {
@@ -42,20 +51,6 @@ function writeElems($elems, $userId) {
     }
 }
 
-$this->registerJs(
-'$(document).ready(function () {
-    $(\'.unsubscribe\').click(function () {
-        confirmDialog({
-            text: \'Вы уверены, что хотите отписаться от "\' + $(this).data(\'key-name\') + \'" (\' + $(this).data(\'channel-name\') + \')? <i class="far fa-frown"></i>\',
-            confirmCallback: () => { $(this).closest(\'form\').submit(); }
-        });
-    });
-    $(\'.subscribe\').click(function () { $(this).closest(\'form\').submit(); });
-});'
-);
-?>
-
-<?
 if (count($result)) { writeElems($result, $userId); }
 else { echo '<p>У Вас нет указанных подписок на рассылки.</p>'; }
 ?>

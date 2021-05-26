@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\models;
 
 /**
@@ -8,4 +9,11 @@ namespace rusbeldoor\yii2General\models;
  */
 class AuthAssignmentQuery extends ActiveQuery
 {
+    /**
+     * Алиас
+     *
+     * @return AuthItemQuery
+     */
+    public function itemName($item_name)
+    { return $this->andWhere("item_name=:item_name", [':item_name' => $item_name]); }
 }

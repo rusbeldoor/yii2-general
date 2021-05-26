@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\gii\crud;
 
 /**
@@ -12,7 +13,7 @@ class Generator extends \yii\gii\generators\crud\Generator
      */
     public function generateActionParamComments()
     {
-        /* @var $class ActiveRecord */
+        /* @var ActiveRecord $class */
         $class = $this->modelClass;
         $pks = $class::primaryKey();
         if (($table = $this->getTableSchema()) === false) {

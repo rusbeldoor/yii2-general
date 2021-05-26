@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\models;
 
 /**
@@ -9,7 +10,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Алиас
      *
-     * @param $alias string
+     * @param string $alias
      * @return AuthItemQuery
      */
     public function alias($alias)
@@ -18,7 +19,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Тип
      *
-     * @param $type mixed
+     * @param mixed $type
      * @return AuthItemQuery
      */
     public function type($type)
@@ -27,7 +28,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Статус
      *
-     * @param $status mixed
+     * @param mixed $status
      * @return CronQuery
      */
     public function status($status)
@@ -36,7 +37,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Архивный
      *
-     * return ActiveQuery
+     * @return ActiveQuery
      */
     public function archive()
     { return $this->andWhere("archive=1"); }
@@ -44,15 +45,17 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Не архивный
      *
-     * return ActiveQuery
+     * @param int|null $fieldValue
+     * @param string $fieldName
+     * @return ActiveQuery
      */
-    public function notArchive()
-    { return $this->andWhere("archive=0"); }
+    public function notArchive($fieldValue = null, $fieldName = 'id')
+    { return $this->andWhere("archive=0" . (($fieldValue !== null) ? " OR " . $fieldName . "=" . ((is_string($fieldValue)) ? "\"" . $fieldValue . "\"" : $fieldValue) : "")); }
 
     /**
      * Активный
      *
-     * return ActiveQuery
+     * @return ActiveQuery
      */
     public function active()
     { return $this->andWhere("active=1"); }
@@ -60,7 +63,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Не активный
      *
-     * return ActiveQuery
+     * @return ActiveQuery
      */
     public function notActive()
     { return $this->andWhere("active=0"); }

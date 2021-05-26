@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\models;
 
 /**
@@ -11,7 +12,16 @@ class UserSubscriptionKeyQuery extends ActiveQuery
     /**
      * ...
      *
-     * @param $alias null|string
+     * @param int $platformId
+     * @return UserSubscriptionQuery
+     */
+    public function platformId($platformId)
+    { return $this->andWhere("platform_id=:platformId", [':platformId' => $platformId]); }
+
+    /**
+     * ...
+     *
+     * @param string|null $alias
      * @return UserSubscriptionKeyQuery
      */
     public function allChildren($alias)

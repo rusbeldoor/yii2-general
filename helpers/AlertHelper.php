@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\helpers;
 
 class AlertHelper
@@ -6,9 +7,9 @@ class AlertHelper
     /**
      * ...
      *
-     * @param $type string
-     * @param $text string
-     * @param $close bool
+     * @param string $type
+     * @param string $text
+     * @param bool $close
      * @return void
      */
     public static function alert($type, $text, $close = false)
@@ -18,5 +19,17 @@ class AlertHelper
         } else {
             return '<div class="alert alert-' . $type . '">' . $text . '</div>';
         }
+    }
+
+    /**
+     * ...
+     *
+     * @param string $type
+     * @param string $text
+     * @return void
+     */
+    public static function alertText($type, $text)
+    {
+        return '<span class="text-' . $type . '">' . $text . '</span>';
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\modules\cron;
 
 use yii;
@@ -20,7 +21,11 @@ class Module extends \backend\components\Module
     {
         parent::init();
 
-        AppHelper::forbiddenExceptionIfNotHavePermission('rusbeldoor-cron');
+        AppHelper::forbiddenExceptionIfNotHavePermission('cron');
+
+        // Фикс, на сервере не находит эти пути, указываем вручную
+        Yii::$classMap['rusbeldoor\yii2General\widgets\select2'] = '@vendor/rusbeldoor/yii2-general/widgets/Select2.php';
+        Yii::$classMap['kartik\select2\select2'] = '@vendor/kartik-v/yii2-widget-select2/src/Select2.php';
 
         if (isset(Yii::$app->params['rusbeldoor']['yii2General']['cron']['onlyMigrations'])) {
             $this->onlyMigrations = Yii::$app->params['rusbeldoor']['yii2General']['cron']['onlyMigrations'];

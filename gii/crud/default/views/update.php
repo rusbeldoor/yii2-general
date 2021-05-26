@@ -3,8 +3,8 @@
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\crud\Generator */
+/* @var yii\web\View $this */
+/* @var yii\gii\generators\crud\Generator $generator */
 
 $urlParams = $generator->generateUrlParams();
 $modelClassName = Inflector::camel2words(StringHelper::basename($generator->modelClass));
@@ -19,8 +19,8 @@ if ($generator->enableI18N) {
 echo "<?php\n";
 ?>
 
-/* @var $this yii\web\View */
-/* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
+/* @var yii\web\View $this */
+/* @var <?= ltrim($generator->modelClass, '\\') ?> $model */
 
 $this->title = <?= $title ?>;
 $this->params['breadcrumbs'][] = ['label' => <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>, 'url' => ['/<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>']];

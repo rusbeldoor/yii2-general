@@ -1,10 +1,10 @@
 <?php
+
 namespace rusbeldoor\yii2General\modules\rbac\controllers;
 
 use yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
 use rusbeldoor\yii2General\models\AuthItem;
 use rusbeldoor\yii2General\modules\rbac\models\AuthItemSearch;
 use rusbeldoor\yii2General\helpers\AppHelper;
@@ -47,7 +47,7 @@ class PermissionController extends \backend\components\Controller
     /**
      * Просмотр
      *
-     * @param $id string
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -64,7 +64,7 @@ class PermissionController extends \backend\components\Controller
     public function actionCreate()
     {
         if ($this->module->onlyMigrations) {
-            return AppHelper::redirectWitchFlash(
+            return AppHelper::redirectWithFlash(
                 '/administrator/rbac/permission',
                 'error',
                 'Создание операций разрешено только через миграции.'
@@ -74,10 +74,12 @@ class PermissionController extends \backend\components\Controller
         $model = new AuthItem();
         $model->type = 2;
 
-        if (
-            $model->load(Yii::$app->request->post())
-            && $model->save()
-        ) { return $this->redirect(['view', 'id' => $model->id]); }
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if ($model->load($post) && $model->save()) { return $this->redirect(['view', 'id' => $model->id]); }
+        } else {
+            $model->loadDefaultValues();
+        }
 
         return $this->render('create', ['model' => $model]);
     }
@@ -85,14 +87,14 @@ class PermissionController extends \backend\components\Controller
     /**
      * Изменение
      *
-     * @param $id string
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
         if ($this->module->onlyMigrations) {
-            return AppHelper::redirectWitchFlash(
+            return AppHelper::redirectWithFlash(
                 '/administrator/rbac/permission',
                 'error',
                 'Изменение операций разрешено только через миграции.'
@@ -101,10 +103,10 @@ class PermissionController extends \backend\components\Controller
 
         $model = $this->findModel($id);
 
-        if (
-            $model->load(Yii::$app->request->post())
-            && $model->save()
-        ) { return $this->redirect(['view', 'id' => $model->id]); }
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if ($model->load($post) && $model->save()) { return $this->redirect(['view', 'id' => $model->id]); }
+        }
 
         return $this->render('update', ['model' => $model]);
     }
@@ -112,13 +114,13 @@ class PermissionController extends \backend\components\Controller
     /**
      * Удаление
      *
-     * @param $id int|null
+     * @param int|null $id
      * @return yii\web\Response
      */
     public function actionDelete($id = null)
     {
         if ($this->module->onlyMigrations) {
-            return AppHelper::redirectWitchFlash(
+            return AppHelper::redirectWithFlash(
                 '/administrator/rbac/permission',
                 'error',
                 'Удаление операций разрешено только через миграции.'
@@ -131,7 +133,7 @@ class PermissionController extends \backend\components\Controller
     /**
      * Получение модели
      *
-     * @param $id string
+     * @param string $id
      * @return AuthItem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

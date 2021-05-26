@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\models;
 
 use rusbeldoor\yii2General\helpers\ArrayHelper;
@@ -8,6 +9,79 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
  */
 class ActiveRecord extends \yii\db\ActiveRecord
 {
+    /**
+     * Магический метод получения аттрибута
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function __get($name)
+    { return ((property_exists($this, $name)) ? $this->$name : parent::__get($name)); }
+
+    /**
+     * Список элементов
+     *
+     * @param string $valueFieldName
+     * @param string $keyFieldName
+     * @return string
+     */
+    public static function getList($valueFieldName = 'name', $keyFieldName = 'id')
+    { return array_column(self::find()->asArray()->all(), $valueFieldName, $keyFieldName); }
+
+    /**
+     * Список не архивных элементов
+     *
+     * @param int|null $id
+     * @param string $valueFieldName
+     * @param string $keyFieldName
+     * @return string
+     */
+    public static function getNotArchiveList($id = null, $valueFieldName = 'name', $keyFieldName = 'id')
+    { return array_column(self::find()->notArchive()->asArray($id)->all(), $valueFieldName, $keyFieldName); }
+
+    /**
+     * Список элементов с указанным типом
+     *
+     * @param mixed $type
+     * @param string $valueFieldName
+     * @param string $keyFieldName
+     * @return string
+     */
+    public static function getListByType($type, $valueFieldName = 'name', $keyFieldName = 'id')
+    { return array_column(self::find()->type($type)->asArray()->all(), $valueFieldName, $keyFieldName); }
+
+    /**
+     * Список не архивных элементов с указанным типом
+     *
+     * @param mixed $type
+     * @param int|null $id
+     * @param string $valueFieldName
+     * @param string $keyFieldName
+     * @return string
+     */
+    public static function getNotArchiveListByType($type, $id = null, $valueFieldName = 'name', $keyFieldName = 'id')
+    { return array_column(self::find()->type($type)->notArchive()->asArray($id)->all(), $valueFieldName, $keyFieldName); }
+
+    /****************************
+     *** *** *** Поля *** *** ***
+     ****************************/
+
+    // Описание полей
+    public static $fieldsDescriptions = [];
+
+    /**
+     * Описание по значению
+     *
+     * @param string $fieldName
+     * @return string
+     */
+    public function getFieldDescription($fieldName)
+    { return static::$fieldsDescriptions[$fieldName][$this->$fieldName]; }
+
+    /********************************
+     *** *** *** Проверки *** *** ***
+     ********************************/
+
     /**
      * Проверка на возможность удаления
      * Для реализации необходимо расширить в потомке, иначе удаление всегда будет доступно
@@ -27,9 +101,9 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Правило валидации регулярным выражением
      *
-     * @param $elems string|array
-     * @param $function string
-     * @param $options array
+     * @param array|string $elems
+     * @param string $function
+     * @param array $options
      * @return array
      */
     public static function getRule($elems, $function, $options)
@@ -41,7 +115,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Правило валидации строки
      *
-     * @param $elems string|array
+     * @param array|string $elems
      * @return array
      */
     public static function getRuleString($elems, $options)
@@ -50,9 +124,9 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Правило валидации регулярным выражением
      *
-     * @param $elems string|array
-     * @param $pattern string
-     * @param $message string
+     * @param array|string $elems
+     * @param string $pattern
+     * @param string $message
      * @return array
      */
     public static function getRuleMatch($elems, $pattern, $message = null)
@@ -65,7 +139,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Правило валидации алиаса
      *
-     * @param $elems string|array
+     * @param array|string $elems
      * @return array
      */
     public static function getRuleMatchAlias($elems)
@@ -78,7 +152,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * Правило валидации ИНН
      *
-     * @param $elems string|array
+     * @param array|string $elems
      * @return array
      */
     public static function getRuleMatchInn($elems)

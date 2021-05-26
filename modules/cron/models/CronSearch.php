@@ -1,9 +1,9 @@
 <?php
+
 namespace rusbeldoor\yii2General\modules\cron\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-
 use rusbeldoor\yii2General\models\Cron;
 
 /**

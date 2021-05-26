@@ -1,7 +1,6 @@
 <?php
-namespace rusbeldoor\yii2General\models;
 
-use yii;
+namespace rusbeldoor\yii2General\models;
 
 /**
  * Auth_item (ActiveRecord)
@@ -15,6 +14,14 @@ use yii;
  */
 class AuthItem extends ActiveRecord
 {
+    // Описание полей
+    public static $fieldsDescriptions = [
+        'type' => [
+            1 => 'Роль',
+            2 => 'Операция',
+        ],
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -67,7 +74,25 @@ class AuthItem extends ActiveRecord
      */
     public function beforeDelete()
     {
-        // if (true) { $this->addError('id', 'Неовзможно удалить #' . $this->id . '.'); }
+        if ($this->isRole()) {
+            // Проверка на другие операции/роли которые использует эта роль
+            $authItemChildsNames = [];
+            $authItemChilds = AuthItemChild::find()->parent($this->name)->all();
+            foreach ($authItemChilds as $authItemChild) { $authItemChildsNames[] = $authItemChild->child; }
+            if (count($authItemChildsNames)) { $this->addError('id', 'Элемент ' . $this->name . ' (#' . $this->id . ') не может быть удалён. Некоторые операции/роли (' . implode(', ', $authItemChildsNames) . ') используются им.'); }
+        }
+
+        // Проверка на другие роли использующих эту операцию/роль
+        $authItemChildsNames = [];
+        $authItemChilds = AuthItemChild::find()->child($this->name)->all();
+        foreach ($authItemChilds as $authItemChild) { $authItemChildsNames[] = $authItemChild->parent; }
+        if (count($authItemChildsNames)) { $this->addError('id', 'Элемент ' . $this->name . ' (#' . $this->id . ') не может быть удалён. Некоторые роли (' . implode(', ', $authItemChildsNames) . ') используют его.'); }
+
+        // Проверка на пользователей использующих эту операцию/роль
+        $usersIds = [];
+        $authAssignments = AuthAssignment::find()->itemName($this->name)->all();
+        foreach ($authAssignments as $authAssignment) { $usersIds[] = $authAssignment->user_id; }
+        if (count($usersIds)) { $this->addError('id', 'Элемент ' . $this->name . ' (#' . $this->id . ') не может быть удалён. Некоторые пользователи (#' . implode(', #', $usersIds) . ') используют его.'); }
 
         return !$this->hasErrors() && parent::beforeDelete();
     }
@@ -86,7 +111,7 @@ class AuthItem extends ActiveRecord
     /**
      * Добавление потомков
      *
-     * @param $names string|array
+     * @param string|array $names
      * @return void
      */
     public function addChildren($names)

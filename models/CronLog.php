@@ -1,7 +1,8 @@
 <?php
+
 namespace rusbeldoor\yii2General\models;
 
-use yii;
+use rusbeldoor\yii2General\helpers\DatetimeHelper;
 
 /**
  * Cron_log (ActiveRecord)
@@ -46,7 +47,7 @@ class CronLog extends ActiveRecord
             'duration' => 'Продолжительность',
             'datetime_start' => 'Дата и время начала',
             'datetime_complete' => 'Дата и время завершения',
-            'pid' => 'Ид процесса в Linux',
+            'pid' => 'Ид процесса',
         ];
     }
 
@@ -65,8 +66,14 @@ class CronLog extends ActiveRecord
      */
     public function beforeDelete()
     {
-        // if (true) { $this->addError('id', 'Неовзможно удалить #' . $this->id . '.'); }
+        // if (true) { $this->addError('id', 'Элемент #' . $this->id . ' не может быть удалён.'); }
 
         return !$this->hasErrors() && parent::beforeDelete();
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    { return DatetimeHelper::formatHourMinuteDayMonthYear($this->datetime_start) . ' — ' . (($this->datetime_complete) ? DatetimeHelper::formatHourMinuteDayMonthYear($this->datetime_complete) : '...'); }
 }

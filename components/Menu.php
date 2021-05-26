@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\components;
 
 use yii;
@@ -16,7 +17,7 @@ class Menu
     /**
      * Магический метод получения аттрибута
      *
-     * @param $name string
+     * @param string $name
      * @return mixed
      */
     public function __get($name)
@@ -41,7 +42,7 @@ class Menu
     /**
      * Добавление авторизации
      *
-     * @param $params array
+     * @param array $params
      * @return void
      */
     public function addAuthorisation($params = [])

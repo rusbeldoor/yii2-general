@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\models;
 
 /**
@@ -8,6 +9,14 @@ namespace rusbeldoor\yii2General\models;
  */
 class AuthItemQuery extends ActiveQuery
 {
+    /**
+     * Алиас
+     *
+     * @return AuthItemQuery
+     */
+    public function name($name)
+    { return $this->andWhere("name=:name", [':name' => $name]); }
+
     /**
      * Тип роли
      *
@@ -27,7 +36,7 @@ class AuthItemQuery extends ActiveQuery
     /**
      * Есть родители по имени
      *
-     * @param $name string
+     * @param string $name
      * @return AuthItemQuery
      */
     public function ofRole($name)
@@ -41,7 +50,7 @@ class AuthItemQuery extends ActiveQuery
     /**
      * Нет родителей по имени
      *
-     * @param $name string
+     * @param string $name
      * @return AuthItemQuery
      */
     public function notOfRole($name)

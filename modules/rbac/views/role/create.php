@@ -1,11 +1,11 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $model backend\modules\administrator\modules\rbac\models\AuthItem */
-/* @var $rolesNotOfThisRole array */
-/* @var $rolesOfThisRole array */
-/* @var $permissionsNotOfThisRole array */
-/* @var $permissionsOfThisRole array */
+/* @var yii\web\View $this */
+/* @var backend\modules\administrator\modules\rbac\models\AuthItem $model */
+/* @var array $rolesNotOfThisRole */
+/* @var array $rolesOfThisRole */
+/* @var array $permissionsNotOfThisRole */
+/* @var array $permissionsOfThisRole */
 
 $this->title = 'Добавление';
 $this->params['breadcrumbs'][] = ['label' => 'Роли', 'url' => ['/administrator/rbac/role']];

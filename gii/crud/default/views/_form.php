@@ -3,10 +3,10 @@
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\crud\Generator */
+/* @var yii\web\View $this */
+/* @var yii\gii\generators\crud\Generator $generator */
 
-/* @var $model \yii\db\ActiveRecord */
+/* @var \yii\db\ActiveRecord $model */
 $model = new $generator->modelClass();
 $safeAttributes = $model->safeAttributes();
 if (empty($safeAttributes)) {
@@ -18,13 +18,13 @@ echo "<?php\n";
 
 use rusbeldoor\yii2General\widgets\AddEditForm;
 
-/* @var $this yii\web\View */
-/* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
+/* @var yii\web\View $this */
+/* @var <?= ltrim($generator->modelClass, '\\') ?> $model */
 ?>
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
-    <?= "<?php " ?>$form = AddEditForm::begin() ?>
-<?php foreach ($generator->getColumnNames() as $attribute) {
+    <?= "<? " ?>$form = AddEditForm::begin() ?>
+<? foreach ($generator->getColumnNames() as $attribute) {
     if (
         // Если аттрибут не разрешен к массовому присваиванию
         !in_array($attribute, $safeAttributes)
@@ -36,5 +36,5 @@ use rusbeldoor\yii2General\widgets\AddEditForm;
     echo "\n";
 } ?>
         <?= "<?= " ?>$form->buttons($model) ?>
-    <?= "<?php " ?>AddEditForm::end() ?>
+    <?= "<? " ?>AddEditForm::end() ?>
 </div>

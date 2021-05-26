@@ -1,9 +1,9 @@
 <?php
+
 namespace rusbeldoor\yii2General\modules\rbac\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-
 use rusbeldoor\yii2General\models\AuthItem;
 
 /**
@@ -17,7 +17,7 @@ class AuthItemSearch extends AuthItem
     public function rules()
     {
         return [
-            [['name', 'description', 'rule_name', 'data'], 'safe'],
+            [['id', 'name', 'description', 'rule_name', 'data'], 'safe'],
             [['type'], 'integer'],
         ];
     }
@@ -57,10 +57,12 @@ class AuthItemSearch extends AuthItem
 
         // grid filtering conditions
         $query->andFilterWhere([
+            'id' => $this->id,
             'type' => $this->type,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

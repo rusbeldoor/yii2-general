@@ -1,8 +1,8 @@
 <?php
+
 namespace rusbeldoor\yii2General\widgets;
 
 use yii\helpers\html;
-
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 
 /**
@@ -11,41 +11,100 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
 class ActiveField extends \kartik\form\ActiveField
 {
     /**
-     * ...
+     * Текстовое поле для поиска
      *
-     * @param $options array
-     * @return ActiveField
-     */
-    public function textInputMaxlength($maxlength = null)
-    {
-        $options = [];
-        if ($maxlength) { $options['maxlength'] = $maxlength; }
-        return self::textInput($options);
-    }
-
-    /**
-     * ...
-     *
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function searchTextInput($options = [])
     {
-        $options = ArrayHelper::merge(
-            [
-                'placeholder' => 'Не важно',
-            ],
-            $options
-        );
+        $options = ArrayHelper::merge(['placeholder' => 'Не важно'], $options);
         return self::textInput($options);
     }
 
     /**
-     * ...
+     * Числовое поле
      *
-     * @param $items array
-     * @param $options array
+     * @param array $options
      * @return ActiveField
+     */
+    public function numberInput($options = [])
+    { return self::input('number', $options); }
+
+    /**
+     * Числовое поле для поиска
+     *
+     * @param array $options
+     * @return ActiveField
+     */
+    public function searchNumberInput($options = [])
+    {
+        $options = ArrayHelper::merge(['placeholder' => 'Не важно'], $options);
+        return self::numberInput($options);
+    }
+
+    /**
+     * Числовое поле с статичным текстом после
+     *
+     * @param array $options
+     * @param string|null $append
+     * @return ActiveField
+     */
+    public function numberInputAppend($options = [], $append = null)
+    {
+        if (is_string($append)) { $this->addon['append'] = ['content' => $append]; }
+        return self::input('number', $options);
+    }
+
+    /**
+     * Числовое поле с статичным текстом после "шт."
+     *
+     * @param array $options
+     * @return ActiveField
+     */
+    public function numberInputAppendCount($options = [])
+    { return self::numberInputAppend($options, 'шт.'); }
+
+    /**
+     * Числовое поле с статичным текстом после "шт." для поиска
+     *
+     * @param array $options
+     * @return ActiveField
+     */
+    public function searchNumberInputAppendCount($options = [])
+    {
+        $options = ArrayHelper::merge(['placeholder' => 'Не важно'], $options);
+        return self::numberInputAppendCount($options);
+    }
+
+    /**
+     * Числовое поле с статичным текстом после "сек."
+     *
+     * @param array $options
+     * @return ActiveField
+     */
+    public function numberInputAppendSeconds($options = [])
+    { return self::numberInputAppend($options, 'сек.'); }
+
+    /**
+     * Числовое поле с статичным текстом после "сек." для поиска
+     *
+     * @param array $options
+     * @return ActiveField
+     */
+    public function searchNumberInputAppendSeconds($options = [])
+    {
+        $options = ArrayHelper::merge(['placeholder' => 'Не важно'], $options);
+        return self::numberInputAppendSeconds($options);
+    }
+
+    /**
+     * Радиогруппа кнопок
+     *
+     * @param array $items
+     * @param array $options
+     * @return ActiveField
+     *
      */
     public function radioButtonsList($items, $options = [])
     {
@@ -56,10 +115,10 @@ class ActiveField extends \kartik\form\ActiveField
                 'unselect' => null,
                 'item' => function ($index, $label, $name, $checked, $value) {
                     return
-                        '<label class="btn btn-secondary' . ($checked ? ' active' : '') . '">'
-                        . Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
-                        . ' '
-                        . $label
+                        '<label class="btn btn-light' . ($checked ? ' active' : '') . '">'
+                            . Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
+                            . ' '
+                            . $label
                         . '</label>';
                 },
             ],
@@ -69,30 +128,30 @@ class ActiveField extends \kartik\form\ActiveField
     }
 
     /**
-     * ...
+     * Радоигруппа кнопок Да/Нет с значениме в виде числа
      *
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function numberYesNo($options = [])
     { return self::radioButtonsList(['1' => 'Да', '0' => 'Нет'], $options); }
 
     /**
-     * ...
+     * Радоигруппа кнопок Не важно/Да/Нет с значениме в виде числа для поиска
      *
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function searchNumberYesNo($options = [])
     { return self::radioButtonsList(['' => 'Не важно', '1' => 'Да', '0' => 'Нет'], $options); }
 
     /**
-     * ...
+     * Общий выбор даты и времени
      *
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
-    public function dateTimePicker($options = [])
+    private function dateTimePicker($options = [])
     {
         $this->addon['prepend'] = ['content' => '<i class="fas fa-calendar-alt"></i>'];
         return $this->widget(
@@ -112,7 +171,7 @@ class ActiveField extends \kartik\form\ActiveField
     }
 
     /**
-     * ...
+     * Выюор даты и времени
      *
      * @return ActiveField
      */
@@ -130,7 +189,7 @@ class ActiveField extends \kartik\form\ActiveField
     }
 
     /**
-     * ...
+     * Выбор даты
      *
      * @return ActiveField
      */
@@ -147,54 +206,61 @@ class ActiveField extends \kartik\form\ActiveField
     }
 
     /**
-     * ...
+     * Выпадающие список
      *
-     * @param $elems array
-     * @param $options array
+     * @param array $elems
+     * @param array $options
      * @return ActiveField
      */
     public function select($elems, $options = [])
     {
-        return $this->widget(
-            'rusbeldoor\yii2General\widgets\select2',
-            ArrayHelper::merge(
-                [
-                    'data' => $elems,
-                    'options' => ['placeholder' => 'Select a state ...'],
-                    'pluginOptions' => [
-                        'allowClear' => true, // Кнопка "крестик" очистки выбора
-                    ],
-                ],
-                $options
-            )
-        );
+        $options = ArrayHelper::merge(['data' => $elems, 'pluginOptions' => ['allowClear' => true]], $options);
+        return $this->widget('rusbeldoor\yii2General\widgets\select2', $options);
     }
 
     /**
-     * ...
+     * Выпадающий список для поиска
      *
-     * @param $elems array
-     * @param $options array
+     * @param array $elems
+     * @param array $options
+     * @return ActiveField
+     */
+    public function searchSelect($elems, $options = [])
+    {
+        $options = ArrayHelper::merge(['options' => ['placeholder' => 'Не важно']], $options);
+        return self::select($elems, $options);
+    }
+
+    /**
+     * Выпадающий список с множественным выбором
+     *
+     * @param array $elems
+     * @param array $options
      * @return ActiveField
      */
     public function multipleSelect($elems, $options = [])
     {
-        return self::select($elems,
-            ArrayHelper::merge(
-                [
-                    'pluginOptions' => [
-                        'multiple' => true,
-                    ],
-                ],
-                $options
-            )
-        );
+        $options = ArrayHelper::merge(['pluginOptions' => ['multiple' => true]], $options);
+        return self::select($elems, $options);
+    }
+
+    /**
+     * Выпадающий список с множественным выбором для поиска
+     *
+     * @param array $elems
+     * @param array $options
+     * @return ActiveField
+     */
+    public function searchMultipleSelect($elems, $options = [])
+    {
+        $options = ArrayHelper::merge(['pluginOptions' => ['multiple' => true]], $options);
+        return self::searchSelect($elems, $options);
     }
 
     /**
      * ...
      *
-     * @param $options array
+     * @param array $options
      * @return ActiveField
      */
     public function masked($options = [])

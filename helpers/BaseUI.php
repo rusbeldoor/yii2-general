@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\helpers;
 
 use yii;
@@ -12,7 +13,7 @@ class BaseUI
     /**
      * Кнопки для главной страицы
      *
-     * @param $buttons array
+     * @param array $buttons
      * @return string
      */
     public static function buttonsForIndexPage($buttons = [])
@@ -59,8 +60,8 @@ class BaseUI
     /**
      * Кноаки для страницы отображения
      *
-     * @param $model mixed
-     * @param $buttons array
+     * @param mixed $model
+     * @param array $buttons
      * @return string
      */
     public static function buttonsForViewPage($model, $buttons = [])
@@ -103,26 +104,32 @@ class BaseUI
     public static function buttonsForSearchForm()
     {
         return
-            '<div class="form-group">'
-                . Html::submitButton('Применить', ['class' => 'btn btn-primary'])
-                . '&nbsp;&nbsp;&nbsp;'
-                . Html::resetButton('<i class="fas fa-wind"></i> Сбросить', ['class' => 'btn btn-outline-secondary'])
+            '<div class="form-group row">'
+                . '<div class="col-2"></div>'
+                . '<div class="col-10">'
+                    . Html::submitButton('Применить', ['class' => 'btn btn-primary'])
+                    . '&nbsp;&nbsp;&nbsp;'
+                    . Html::resetButton('<i class="fas fa-wind"></i> Сбросить', ['class' => 'btn btn-outline-secondary'])
+                . '</div>'
             . '</div>';
     }
 
     /**
      * Кнопки для формы добавления/изменения
      *
-     * @param $model mixed
+     * @param mixed $model
      * @return string
      */
     public static function buttonsForAddEditForm($model)
     {
         return
-            '<div class="form-group">'
-                . Html::submitButton((($model->isNewRecord) ? '<i class="fas fa-plus"></i>&nbsp;&nbsp;Добавить' : '<i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Изменить'), ['class' => 'btn btn-success'])
-                . '&nbsp;&nbsp;&nbsp;'
-                . Html::a('<i class="fas fa-times"></i>&nbsp;&nbsp;Отмена', Yii::$app->request->referrer,  ['class' => 'btn btn-outline-secondary'])
+            '<div class="form-group row">'
+                . '<div class="col-2"></div>'
+                . '<div class="col-10">'
+                    . Html::submitButton((($model->isNewRecord) ? '<i class="fas fa-plus"></i>&nbsp;&nbsp;Добавить' : '<i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Изменить'), ['class' => 'btn btn-success'])
+                    . '&nbsp;&nbsp;&nbsp;'
+                    . Html::a('<i class="fas fa-times"></i>&nbsp;&nbsp;Отмена', Yii::$app->request->referrer,  ['class' => 'btn btn-outline-secondary'])
+                . '</div>'
             . '</div>';
     }
 }

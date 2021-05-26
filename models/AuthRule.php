@@ -1,7 +1,6 @@
 <?php
-namespace rusbeldoor\yii2General\models;
 
-use yii;
+namespace rusbeldoor\yii2General\models;
 
 /**
  * Auth_rule (ActiveRecord)
@@ -59,7 +58,7 @@ class AuthRule extends ActiveRecord
      */
     public function beforeDelete()
     {
-        // if (true) { $this->addError('id', 'Неовзможно удалить #' . $this->id . '.'); }
+        // if (true) { $this->addError('id', 'Элемент #' . $this->id . ' не может быть удалён.'); }
 
         return !$this->hasErrors() && parent::beforeDelete();
     }

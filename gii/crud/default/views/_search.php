@@ -3,8 +3,8 @@
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\crud\Generator */
+/* @var yii\web\View $this */
+/* @var yii\gii\generators\crud\Generator $generator */
 
 $name = Inflector::camel2id(StringHelper::basename($generator->modelClass));
 
@@ -14,12 +14,12 @@ echo "<?php\n";
 use yii\helpers\html;
 use rusbeldoor\yii2General\widgets\SearchForm;
 
-/* @var $this yii\web\View */
-/* @var $model <?= ltrim($generator->searchModelClass, '\\') ?> */
+/* @var yii\web\View $this */
+/* @var <?= ltrim($generator->searchModelClass, '\\') ?> $model */
 ?>
 
 <div class="<?= $name ?>-search panelSearchFormContainer">
-    <?= "<?php " ?>$form = SearchForm::begin() ?>
+    <?= "<? " ?>$form = SearchForm::begin() ?>
 <?php foreach ($generator->getColumnNames() as $attribute) {
     // Если аттрибут не разрешен к выводу
     if (in_array($attribute, ['id'])) { continue; }
@@ -28,5 +28,5 @@ use rusbeldoor\yii2General\widgets\SearchForm;
     echo "\n";
 } ?>
         <?= "<?= " ?>$form->buttons() ?>
-    <?= "<?php " ?>SearchForm::end() ?>
+    <?= "<? " ?>SearchForm::end() ?>
 </div>

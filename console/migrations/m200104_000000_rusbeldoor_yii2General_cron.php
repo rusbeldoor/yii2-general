@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m200103_000000_rusbeldoor_yii2General_cron
+ * Class m200104_000000_rusbeldoor_yii2General_rbac
  */
-class m200103_000000_rusbeldoor_yii2General_cron extends Migration
+class m200104_000000_rusbeldoor_yii2General_cron extends Migration
 {
     /**
      * {@inheritdoc}
@@ -13,7 +13,6 @@ class m200103_000000_rusbeldoor_yii2General_cron extends Migration
     public function safeUp()
     {
         // Таблица кронов
-        if (Yii::$app->db->schema->getTableSchema('cron', true)) { $this->dropTable('cron'); }
         $this->createTable('cron', [
             'id' => $this->primaryKey(11)->unsigned(),
             'alias' => $this->string(96)->notNull(),
@@ -27,7 +26,6 @@ class m200103_000000_rusbeldoor_yii2General_cron extends Migration
         $this->createIndex('unique-alias', 'cron', 'alias', true);
 
         // Таблица логов по кронам
-        if (Yii::$app->db->schema->getTableSchema('cron_log', true)) { $this->dropTable('cron_log'); }
         $this->createTable('cron_log', [
             'id' => $this->primaryKey(11)->unsigned(),
             'cron_id' => $this->integer(11)->unsigned()->notNull(),
@@ -38,9 +36,12 @@ class m200103_000000_rusbeldoor_yii2General_cron extends Migration
         ]);
         $this->addForeignKey('fk-cron-cron_log', 'cron_log', 'cron_id', 'cron', 'id');
 
+        // Крон
+        $this->insert('cron', ['alias' => 'remove-outdated-data', 'description' => 'Удаление устаревших данных', 'status' => 'wait', 'max_duration' => 3600, 'kill_process' => 1, 'restart' => 1, 'active' => 1]);
+
         // Создание ролей, операций
-        $this->insert('auth_item', ['name' => 'rusbeldoor-cron', 'type' => 2, 'description' => 'Rusbeldoor, Кроны']);
-        $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'rusbeldoor-cron']);
+        $this->insert('auth_item', ['name' => 'cron', 'type' => 2, 'description' => 'Кроны']);
+        $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'cron']);
     }
 
     /**
@@ -48,7 +49,7 @@ class m200103_000000_rusbeldoor_yii2General_cron extends Migration
      */
     public function safeDown()
     {
-        echo "m200103_000000_rusbeldoor_yii2General_cron cannot be reverted.\n";
+        echo "m200104_000000_rusbeldoor_yii2General_rbac cannot be reverted.\n";
 
         return true;
     }
@@ -62,7 +63,7 @@ class m200103_000000_rusbeldoor_yii2General_cron extends Migration
 
     public function down()
     {
-        echo "m200103_000000_rusbeldoor_yii2General_cron cannot be reverted.\n";
+        echo "m200104_000000_rusbeldoor_yii2General_rbac cannot be reverted.\n";
 
         return false;
     }

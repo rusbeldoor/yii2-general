@@ -1,12 +1,14 @@
 <?php
+
 namespace rusbeldoor\yii2General\modules\cron\controllers;
 
 use yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\data\ActiveDataProvider;
 use rusbeldoor\yii2General\models\Cron;
-use rusbeldoor\yii2General\modules\cron\models\CronSearch;
+use rusbeldoor\yii2General\modules\cron\models\PlatformSearch;
+use rusbeldoor\yii2General\modules\cron\models\CronLogSearch;
 use rusbeldoor\yii2General\helpers\AppHelper;
 
 /**
@@ -34,7 +36,10 @@ class DefaultController extends \backend\components\Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CronSearch();
+        $searchModel = new PlatformSearch();
+        $searchModel->kill_process = '';
+        $searchModel->restart = '';
+        $searchModel->active = '';
         $dataProvider = $searchModel->search(Yii::$app->request->post());
 
         return $this->render('index', [
@@ -46,7 +51,7 @@ class DefaultController extends \backend\components\Controller
     /**
      * Просмотр
      *
-     * @param $id string
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -54,7 +59,17 @@ class DefaultController extends \backend\components\Controller
     {
         $model = $this->findModel($id);
 
-        return $this->render('view', ['model' => $model]);
+        $cronLogSearch = new CronLogSearch();
+        $cronLogSearch->cron_id = $id;
+        $cronLogDataProvider = $cronLogSearch->search(Yii::$app->request->post());
+
+        return $this->render(
+            'view',
+            [
+                'model' => $model,
+                'cronLogDataProvider' => $cronLogDataProvider,
+            ]
+        );
     }
 
     /**
@@ -65,7 +80,7 @@ class DefaultController extends \backend\components\Controller
     public function actionCreate()
     {
         if ($this->module->onlyMigrations) {
-            return AppHelper::redirectWitchFlash(
+            return AppHelper::redirectWithFlash(
                 '/administrator/cron',
                 'error',
                 'Создание кронов разрешено только через миграции.'
@@ -74,11 +89,12 @@ class DefaultController extends \backend\components\Controller
 
         $model = new Cron();
 
-        $post = Yii::$app->request->post();
-        if (
-            $model->load($post)
-            && $model->save()
-        ) { return $this->redirect(['view', 'id' => $model->id]); }
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if ($model->load($post) && $model->save()) { return $this->redirect(['view', 'id' => $model->id]); }
+        } else {
+            $model->loadDefaultValues();
+        }
 
         return $this->render('create', ['model' => $model]);
     }
@@ -86,14 +102,14 @@ class DefaultController extends \backend\components\Controller
     /**
      * Изменение
      *
-     * @param $id string
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
         if ($this->module->onlyMigrations) {
-            return AppHelper::redirectWitchFlash(
+            return AppHelper::redirectWithFlash(
                 '/administrator/cron',
                 'error',
                 'Изменение кроноа разрешено только через миграции.'
@@ -102,11 +118,10 @@ class DefaultController extends \backend\components\Controller
 
         $model = $this->findModel($id);
 
-        $post = Yii::$app->request->post();
-        if (
-            $model->load($post)
-            && $model->save()
-        ) { return $this->redirect(['view', 'id' => $model->id]); }
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if ($model->load($post) && $model->save()) { return $this->redirect(['view', 'id' => $model->id]); }
+        }
 
         return $this->render('update', ['model' => $model]);
     }
@@ -114,13 +129,13 @@ class DefaultController extends \backend\components\Controller
     /**
      * Удаление
      *
-     * @param $id int|null
+     * @param int|null $id
      * @return yii\web\Response
      */
     public function actionDelete($id = null)
     {
         if ($this->module->onlyMigrations) {
-            return AppHelper::redirectWitchFlash(
+            return AppHelper::redirectWithFlash(
                 '/administrator/cron',
                 'error',
                 'Удаление кронов разрешено только через миграции.'
@@ -133,7 +148,7 @@ class DefaultController extends \backend\components\Controller
     /**
      * Получение модели
      *
-     * @param $id string
+     * @param string $id
      * @return AuthItem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

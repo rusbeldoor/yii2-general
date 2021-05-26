@@ -1,4 +1,5 @@
 <?php
+
 namespace rusbeldoor\yii2General\widgets\grid;
 
 use yii;

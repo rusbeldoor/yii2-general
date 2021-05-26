@@ -3,9 +3,9 @@
 use rusbeldoor\yii2General\widgets\grid\GridView;
 use rusbeldoor\yii2General\helpers\BaseUI;
 
-/* @var $this yii\web\View */
-/* @var $searchModel backend\modules\administrator\modules\rbac\models\AuthItemSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var yii\web\View $this */
+/* @var backend\modules\administrator\modules\rbac\models\AuthItemSearch $searchModel */
+/* @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Роли';
 $this->params['breadcrumbs'][] = $this->title;
@@ -14,6 +14,7 @@ $buttonsForIndexPage = ['filter', 'add', 'delete'];
 $gridViewColumns = [
     ['class' => 'rusbeldoor\yii2General\widgets\grid\BulkActionColumn'],
     'id:id',
+    'name',
     'description',
     ['class' => 'rusbeldoor\yii2General\widgets\grid\ActionColumn'],
 ];
@@ -33,7 +34,6 @@ if (Yii::$app->controller->module->onlyMigrations) {
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'tableOptions' => ['class' => 'table table-striped table-hover'],
         'columns' => $gridViewColumns,
     ]); ?>
 </div>

@@ -1,14 +1,15 @@
 <?php
-namespace rusbeldoor\yii2General\models;
 
-use yii;
+namespace rusbeldoor\yii2General\models;
 
 /**
  * User_subscription_key (ActiveRecord)
  *
- * @property $id int
- * @property $alias string
- * @property $name string
+ * @property int $id
+ * @property int $platform_id
+ * @property string $alias
+ * @property string $name
+ * @property int $active
  */
 class UserSubscriptionKey extends ActiveRecord
 {
@@ -24,9 +25,11 @@ class UserSubscriptionKey extends ActiveRecord
     public function rules()
     {
         return [
-            [['alias', 'name'], 'required'],
+            [['platform_id', 'alias', 'name'], 'required'],
+            [['platform_id', 'active'], 'integer'],
             [['alias', 'name'], 'string', 'max' => 128],
             [['alias'], 'unique'],
+            [['platform_id'], 'exist', 'skipOnError' => true, 'targetClass' => Platform::className(), 'targetAttribute' => ['platform_id' => 'id']],
         ];
     }
 
@@ -37,8 +40,10 @@ class UserSubscriptionKey extends ActiveRecord
     {
         return [
             'id' => 'Ид',
+            'platform_id' => 'Платформа',
             'alias' => 'Алиас',
             'name' => 'Название',
+            'active' => 'Активный',
         ];
     }
 
@@ -57,7 +62,7 @@ class UserSubscriptionKey extends ActiveRecord
      */
     public function beforeDelete()
     {
-        // if (true) { $this->addError('id', 'Неовзможно удалить #' . $this->id . '.'); }
+        // if (true) { $this->addError('id', 'Элемент #' . $this->id . ' не может быть удалён.'); }
 
         return !$this->hasErrors() && parent::beforeDelete();
     }

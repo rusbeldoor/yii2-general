@@ -1,13 +1,23 @@
-/*********************************
- *** *** *** Интерфейс *** *** ***
- *********************************/
-
 $(document).ready(function() {
-    // Отображение/скрытие окна формы поиска
-    $('.panelSearchFormToggle').click(function () {
-        $('.panelSearchFormContainer').toggle();
-        return false;
-    });
+    /*******************************
+     *** *** *** Select2 *** *** ***
+     *******************************/
+
+    /**
+     * Фикс ошибки (если список выводится в скрытом элементе у него ширина расчитывается как 0, что не верно и placeholder может обрезаться)
+     * В версии 4.1.* ошибка решена, но версия не стабильная и пакет kartik-v/yii2-widget-select2 использет пока только стабильную версию
+     */
+    setTimeout(function() {
+        $('.select2 .select2-selection__rendered .select2-search.select2-search--inline .select2-search__field').css("width", "100%");
+    }, 1000);
+
+    /*******************************
+     *** *** *** Widgets *** *** ***
+     *******************************/
+
+    $.fn.radioButtonsListValue = function() {
+        return $(this).children('label.active').children('input').val();
+    };
 });
 
 /**

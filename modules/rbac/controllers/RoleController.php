@@ -1,14 +1,13 @@
 <?php
+
 namespace rusbeldoor\yii2General\modules\rbac\controllers;
 
 use yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
 use rusbeldoor\yii2General\models\AuthItem;
 use rusbeldoor\yii2General\modules\rbac\models\AuthItemSearch;
 use rusbeldoor\yii2General\helpers\AppHelper;
-
 use QuickService\general\common\models\QTOrganisation;
 
 /**
@@ -49,7 +48,7 @@ class RoleController extends \backend\components\Controller
     /**
      * Просмотр
      *
-     * @param $id string
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -82,7 +81,7 @@ class RoleController extends \backend\components\Controller
     public function actionCreate()
     {
         if ($this->module->onlyMigrations) {
-            return AppHelper::redirectWitchFlash(
+            return AppHelper::redirectWithFlash(
                 '/administrator/rbac/role',
                 'error',
                 'Создание ролей разрешено только через миграции.'
@@ -92,15 +91,16 @@ class RoleController extends \backend\components\Controller
         $model = new AuthItem();
         $model->type = 1;
 
-        $post = Yii::$app->request->post();
-        if (
-            $model->load($post)
-            && $model->save()
-        ) {
-            $model->deleteAllChildren();
-            $model->addChildren($post['child-roles-names']);
-            $model->addChildren($post['child-permissions-names']);
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if ($model->load($post) && $model->save()) {
+                $model->deleteAllChildren();
+                $model->addChildren($post['child-roles-names']);
+                $model->addChildren($post['child-permissions-names']);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
         }
 
         $rolesNotOfThisRole = $permissionsNotOfThisRole = [];
@@ -125,14 +125,14 @@ class RoleController extends \backend\components\Controller
     /**
      * Изменение
      *
-     * @param $id string
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
         if ($this->module->onlyMigrations) {
-            return AppHelper::redirectWitchFlash(
+            return AppHelper::redirectWithFlash(
                 '/administrator/rbac/role',
                 'error',
                 'Изменение ролей разрешено только через миграции.'
@@ -141,15 +141,14 @@ class RoleController extends \backend\components\Controller
 
         $model = $this->findModel($id);
 
-        $post = Yii::$app->request->post();
-        if (
-            $model->load($post)
-            && $model->save()
-        ) {
-            $model->deleteAllChildren();
-            $model->addChildren($post['child-roles-names']);
-            $model->addChildren($post['child-permissions-names']);
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if ($model->load($post) && $model->save()) {
+                $model->deleteAllChildren();
+                $model->addChildren($post['child-roles-names']);
+                $model->addChildren($post['child-permissions-names']);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         $rolesNotOfThisRole = $rolesOfThisRole = $permissionsNotOfThisRole = $permissionsOfThisRole = [];
@@ -179,13 +178,13 @@ class RoleController extends \backend\components\Controller
     /**
      * Удаление
      *
-     * @param $id int|null
+     * @param int|null $id
      * @return yii\web\Response
      */
     public function actionDelete($id = null)
     {
         if ($this->module->onlyMigrations) {
-            return AppHelper::redirectWitchFlash(
+            return AppHelper::redirectWithFlash(
                 '/administrator/rbac/role',
                 'error',
                 'Удаление ролей разрешено только через миграции.'
@@ -198,7 +197,7 @@ class RoleController extends \backend\components\Controller
     /**
      * Получение модели
      *
-     * @param $id string
+     * @param string $id
      * @return AuthItem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
