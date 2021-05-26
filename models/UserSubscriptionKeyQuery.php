@@ -29,4 +29,12 @@ class UserSubscriptionKeyQuery extends ActiveQuery
         if ($alias === null) { return $this; }
         return $this->andWhere("alias LIKE '$alias%'");
     }
+
+    /**
+     * ...
+     *
+     * @param array|string|null $aliases
+     * @return UserSubscriptionKeyQuery
+     */
+    public function active() { return $this->andWhere("active=1"); }
 }
