@@ -95,6 +95,7 @@ class DefaultController extends \frontend\components\Controller
             $result[$userSubscription->id] = [
                 'id' => $userSubscription->id,
                 'key_id' => $userSubscription->key_id,
+                'platform_id' => $userSubscriptionKeys[$userSubscription->key_id]->platform_id,
                 'alias' => $userSubscriptionKeys[$userSubscription->key_id]->alias,
                 'name' => $userSubscriptionKeys[$userSubscription->key_id]->name,
                 'actions' => $actionsByKeyId[$userSubscription->key_id],
@@ -134,6 +135,7 @@ class DefaultController extends \frontend\components\Controller
         $post = Yii::$app->request->post();
         if (
             !isset($post['userId'])
+            || !isset($post['platformId'])
             || !isset($post['keyAlias'])
             || !isset($post['channelAlias'])
             || !isset($post['hash'])
@@ -142,7 +144,7 @@ class DefaultController extends \frontend\components\Controller
         ) { return AppHelper::redirectWithFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
 
         // Проверяем хэш
-        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], $post['keyAlias'], $post['channelAlias'])) { return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.'); }
+        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], $post['platformId'], $post['keyAlias'], $post['channelAlias'])) { return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         // Пользователь
         $user = User::find($post['userId'])->one();
@@ -160,17 +162,23 @@ class DefaultController extends \frontend\components\Controller
         $userSubscription = UserSubscription::find()->userId($post['userId'])->keyId($userSubscriptionKey->id)->channelId($userSubscriptionChannel->id)->one();
         // Если подписка на рассылки существует
         if ($userSubscription) {
+            if ($post['active']) {
+//                $userSubscriptionExemption = UserSubscriptionExemption::find()->addCondition()
+            } else {
+                // Добавляем активную или не активную подписку на рассылки
+                $userSubscription = new UserSubscriptionExemption();
+                $userSubscription->subscription_id = $userSubscription->id;
+                $userSubscription->channel_id = $userSubscriptionChannel->id;
+                $userSubscription->action_id = $userSubscriptionKey->id;
+                $userSubscription->active = $post['active'];
+                $userSubscription->save();
+            }
+
             // Изменяем (активируем или деактивируем) подписку на рассылки
             $userSubscription->active = $post['active'];
             $userSubscription->update();
         } else {
-            // Добавляем активную или не активную подписку на рассылки
-            $userSubscription = new UserSubscription();
-            $userSubscription->key_id = $user->id;
-            $userSubscription->key_id = $userSubscriptionKey->id;
-            $userSubscription->channel_id = $userSubscriptionChannel->id;
-            $userSubscription->active = $post['active'];
-            $userSubscription->save();
+
         }
 
         // Возвращаемся по переданному адресу
