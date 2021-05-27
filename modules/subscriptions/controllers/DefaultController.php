@@ -38,19 +38,11 @@ class DefaultController extends \frontend\components\Controller
         // Проверяем хэш
         // if ($hash != UserSubscriptionHelper::hash($userId, $getKeyAlias, $getChannelsAliases)) { return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
-//        $result = [
-//            'id' => '', // Ид
-//            'alias' => '', // Алиас
-//            'name' => '', // Название
-//            'childKeys' => [], // Дочерние ключи
-//            'channels' => [], // Каналы
-//        ];
-
         /** @var UserSubscriptionKey[] $userSubscriptionKeys Ключи */
-        $userSubscriptionKeys = UserSubscriptionKey::find()->indexBy('id')->active()->all();
+        $userSubscriptionKeys = UserSubscriptionKey::find()->platformId($getPlatform)->allChildren($getKeyAlias)->indexBy('id')->active()->all();
 
         /** @var UserSubscriptionChannel[] $userSubscriptionChannels Каналы */
-        $userSubscriptionChannels = UserSubscriptionChannel::find()->active()->indexBy('id')->all();
+        $userSubscriptionChannels = UserSubscriptionChannel::find()->aliases($channelsAliases)->active()->indexBy('id')->all();
         $channels = [];
         // Обрабатываем каналы
         foreach ($userSubscriptionChannels as $userSubscriptionChannel) {
@@ -63,15 +55,16 @@ class DefaultController extends \frontend\components\Controller
         }
 
         /** @var UserSubscriptionAction[] $userSubscriptionActions Действия */
-        $userSubscriptionActions = UserSubscriptionAction::find()->active()->indexBy('id')->all();
+        $userSubscriptionActions = UserSubscriptionAction::find()->platformId($getPlatform)->active()->indexBy('id')->all();
         $actionsByKeyId = [];
         // Перебираем ключи
         foreach ($userSubscriptionKeys as $userSubscriptionKey) {
+            $actionsByKeyId[$userSubscriptionKey->id] = [];
+
             // Перебираем действия
             foreach ($userSubscriptionActions as $userSubscriptionAction) {
                 // Если начало строки соответствует
                 if (strpos($userSubscriptionKey->alias, $userSubscriptionAction->part_key_alias) === 0) {
-                    if (!isset($actionsByKeyId[$userSubscriptionKey->id])) { $actionsByKeyId[$userSubscriptionKey->id] = []; }
                     $actionsByKeyId[$userSubscriptionKey->id][$userSubscriptionAction->id] = [
                         'id' => $userSubscriptionAction->id,
                         'name' => $userSubscriptionAction->name,
@@ -84,10 +77,16 @@ class DefaultController extends \frontend\components\Controller
 
 
         /** @var UserSubscription[] $userSubscriptions Подписки */
-        $userSubscriptions = UserSubscription::find()->userId($userId)->with('exemptions')->orderBy('key_id')->all();
+        $userSubscriptions = UserSubscription::find()
+            ->userId($userId)
+            ->keysIds(array_keys($userSubscriptionKeys))
+            ->with(['exemptions' => function ($query) use($userSubscriptionActions, $userSubscriptionChannels) {
+                $query->andWhere(['action_id' => array_keys($userSubscriptionActions), 'channel_id' => array_keys($userSubscriptionChannels)]);
+            }])
+            ->orderBy('key_id')
+            ->all();
 
         $result = [];
-
         // Перебираем подписки
         foreach ($userSubscriptions as $userSubscription) {
             // Подписка
