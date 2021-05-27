@@ -75,16 +75,17 @@ class DefaultController extends \frontend\components\Controller
             }
         }
 
-
         /** @var UserSubscription[] $userSubscriptions Подписки */
-        $userSubscriptions = UserSubscription::find()
-            ->userId($userId)
-            ->keysIds(array_keys($userSubscriptionKeys))
-            ->with(['exemptions' => function ($query) use($userSubscriptionActions, $userSubscriptionChannels) {
-                $query->andWhere(['action_id' => array_keys($userSubscriptionActions), 'channel_id' => array_keys($userSubscriptionChannels)]);
-            }])
-            ->orderBy('key_id')
-            ->all();
+        if (count($userSubscriptionKeys)) {
+            $userSubscriptions = UserSubscription::find()
+                ->userId($userId)
+                ->keysIds(array_keys($userSubscriptionKeys))
+                ->with(['exemptions' => function ($query) use($userSubscriptionActions, $userSubscriptionChannels) {
+                    $query->andWhere(['action_id' => array_keys($userSubscriptionActions), 'channel_id' => array_keys($userSubscriptionChannels)]);
+                }])
+                ->orderBy('key_id')
+                ->all();
+        }
 
         $result = [];
         // Перебираем подписки
