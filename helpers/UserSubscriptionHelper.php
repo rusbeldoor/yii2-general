@@ -10,11 +10,12 @@ class UserSubscriptionHelper
      * Хэш
      *
      * @param int $userId
+     * @param string $platform
      * @param string $key
      * @param string $channels
      * @return string
      */
-    public static function hash($userId, $key = '', $channels = '')
+    public static function hash($userId, $platform = 1, $key = '', $channels = '')
     { return hash('sha256', hash('sha256', $userId . $key . $channels) . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']); }
 
     /**

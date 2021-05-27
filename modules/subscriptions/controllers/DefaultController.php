@@ -36,7 +36,7 @@ class DefaultController extends \frontend\components\Controller
         $channelsAliases = (($getChannelsAliases) ? explode(',', $getChannelsAliases) : false);
 
         // Проверяем хэш
-        // if ($hash != UserSubscriptionHelper::hash($userId, $getKeyAlias, $getChannelsAliases)) { return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.'); }
+        if ($hash != UserSubscriptionHelper::hash($userId, $getPlatform, $getKeyAlias, $getChannelsAliases)) { return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
         /** @var UserSubscriptionKey[] $userSubscriptionKeys Ключи */
         $userSubscriptionKeys = UserSubscriptionKey::find()->platformId($getPlatform)->allChildren($getKeyAlias)->indexBy('id')->active()->all();
@@ -76,6 +76,7 @@ class DefaultController extends \frontend\components\Controller
         }
 
         /** @var UserSubscription[] $userSubscriptions Подписки */
+        $userSubscriptions = [];
         if (count($userSubscriptionKeys)) {
             $userSubscriptions = UserSubscription::find()
                 ->userId($userId)
