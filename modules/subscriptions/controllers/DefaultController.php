@@ -49,10 +49,10 @@ class DefaultController extends \frontend\components\Controller
         /** @var UserSubscriptionKey[] $userSubscriptionKeys Ключи */
         $userSubscriptionKeys = UserSubscriptionKey::find()->indexBy('id')->active()->all();
 
-        /** @var UserSubscriptionChannel[] $allUserSubscriptionChannels Каналы */
+        /** @var UserSubscriptionChannel[] $userSubscriptionChannels Каналы */
         $userSubscriptionChannels = UserSubscriptionChannel::find()->active()->indexBy('id')->all();
         $channels = [];
-        foreach ($allUserSubscriptionChannels as $userSubscriptionChannel) {
+        foreach ($userSubscriptionChannels as $userSubscriptionChannel) {
             $channels[$userSubscriptionChannel->id] = [
                 'id' => $userSubscriptionChannel->id,
                 'name' => $userSubscriptionChannel->name,
@@ -60,11 +60,11 @@ class DefaultController extends \frontend\components\Controller
             ];
         }
 
-        /** @var UserSubscriptionAction[] $allUserSubscriptionActions Действия */
+        /** @var UserSubscriptionAction[] $userSubscriptionActions Действия */
         $userSubscriptionActions = UserSubscriptionAction::find()->active()->indexBy('id')->all();
         $actionsByKeyId = [];
         foreach ($userSubscriptionKeys as $userSubscriptionKey) {
-            foreach ($allUserSubscriptionActions as $userSubscriptionAction) {
+            foreach ($userSubscriptionActions as $userSubscriptionAction) {
                 // Если начало строки соответствует
                 if (strpos($userSubscriptionKey->alias, $userSubscriptionAction->part_key_alias) === 0) {
                     if (!isset($actionsByKeyId[$userSubscriptionKey->id])) { $actionsByKeyId[$userSubscriptionKey->id] = []; }
@@ -102,9 +102,9 @@ class DefaultController extends \frontend\components\Controller
                         $result[$userSubscription->id]['actions'][$exemption->action_id]['active'] = false;
                     }
                 } elseif (isset($exemption->channel_id)) {
-                    $result['channels'][$exemption->channel_id]['active'] = false;
+                    $result[$userSubscription->id]['channels'][$exemption->channel_id]['active'] = false;
                 } else {
-                    $result['active'] = false;
+                    $result[$userSubscription->id]['active'] = false;
                 }
             }
         }
@@ -155,7 +155,7 @@ class DefaultController extends \frontend\components\Controller
 //            }
 //
 //            // Запоминаем каналы их имена
-//            foreach ($allUserSubscriptionChannels as $userSubscriptionChannel) {
+//            foreach ($userSubscriptionChannels as $userSubscriptionChannel) {
 //                $pointer['channels'][] = [
 //                    'id' => $userSubscriptionChannel->id,
 //                    'alias' => $userSubscriptionChannel->alias,
@@ -170,7 +170,7 @@ class DefaultController extends \frontend\components\Controller
 //
 //
 //            // Запоминаем каналы их имена
-//            foreach ($allUserSubscriptionChannels as $userSubscriptionChannel) {
+//            foreach ($userSubscriptionChannels as $userSubscriptionChannel) {
 //                $pointer['channels'][] = [
 //                    'id' => $userSubscriptionChannel->id,
 //                    'alias' => $userSubscriptionChannel->alias,
