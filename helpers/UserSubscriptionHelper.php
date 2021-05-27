@@ -13,10 +13,11 @@ class UserSubscriptionHelper
      * @param string $platform
      * @param string $key
      * @param string $channels
+     * @param string $actions
      * @return string
      */
-    public static function hash($userId, $platform = 1, $key = '', $channels = '')
-    { return hash('sha256', hash('sha256', $userId . $key . $channels) . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']); }
+    public static function hash($userId, $platform = 1, $key = '', $channels = '', $actions = '')
+    { return hash('sha256', hash('sha256', $userId . $platform . $key . $channels . $actions) . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']); }
 
     /**
      * Ссылка
@@ -24,10 +25,18 @@ class UserSubscriptionHelper
      * @param int $userId
      * @param string $key
      * @param string $channels
+     * @param string $action
      * @return string
      */
-    public static function link($userId, $key = '', $channels = '')
-    { return '/subscriptions?userId=' . $userId . (($key) ? '&key=' . $key : '') . (($channels) ? '&channels=' . $channels : '') . '&hash=' . self::hash($userId, $key, $channels); }
+    public static function link($userId, $platform = '', $key = '', $channels = '', $actions = '')
+    {
+        return '/subscriptions?userId=' . $userId
+            . (($platform) ? '&platform=' . $platform : '')
+            . (($key) ? '&key=' . $key : '')
+            . (($channels) ? '&channels=' . $channels : '')
+            . (($actions) ? '&actions=' . $actions : '')
+            . '&hash=' . self::hash($userId, $key, $channels);
+    }
 
     /**
      * Иконка канала
