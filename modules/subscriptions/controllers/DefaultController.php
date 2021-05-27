@@ -7,6 +7,7 @@ use yii;
 use common\models\User;
 use rusbeldoor\yii2General\models\UserSubscription;
 use rusbeldoor\yii2General\models\UserSubscriptionKey;
+use rusbeldoor\yii2General\models\UserSubscriptionAction;
 use rusbeldoor\yii2General\models\UserSubscriptionChannel;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 use rusbeldoor\yii2General\helpers\AppHelper;
@@ -37,82 +38,149 @@ class DefaultController extends \frontend\components\Controller
         // Проверяем хэш
         // if ($hash != UserSubscriptionHelper::hash($userId, $getKeyAlias, $getChannelsAliases)) { return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.'); }
 
-        $result = [
-            'id' => '', // Ид
-            'alias' => '', // Алиас
-            'name' => '', // Название
-            'childKeys' => [], // Дочерние ключи
-            'channels' => [], // Каналы
-        ];
+//        $result = [
+//            'id' => '', // Ид
+//            'alias' => '', // Алиас
+//            'name' => '', // Название
+//            'childKeys' => [], // Дочерние ключи
+//            'channels' => [], // Каналы
+//        ];
 
-        // Ключи
-        $allUserSubscriptionKeys = UserSubscriptionKey::find()->indexBy('alias')->active()->all();
-        //        $userSubscriptionKeys = UserSubscriptionKey::find()->indexBy('id')->allChildren($getKeyAlias)->all();
-        //        $userSubscriptionKeysIds = array_keys($userSubscriptionKeys);
+        /** @var UserSubscriptionKey[] $userSubscriptionKeys Ключи */
+        $userSubscriptionKeys = UserSubscriptionKey::find()->indexBy('id')->active()->all();
 
-        // Каналы
-        $allUserSubscriptionChannels = UserSubscriptionChannel::find()->active()->indexBy('id')->all();
-
-        // Подписки
-        $userSubscriptions = UserSubscription::find()
-            ->userId($userId)
-            ->with(['key' => function ($query) { $query->with('platform'); }, 'exemptions'])
-            ->all();
-
-        // Перебираем подписки
-        foreach ($userSubscriptions as $userSubscription) {
-            // Получаем состовляющие ключа подписки
-            $userSubscriptionKeysAliases = explode(';', $userSubscriptionKeys[$userSubscription->key_id]->alias);
-
-            // Указатель на массив
-            $pointer = &$result;
-
-            // Рассматриваемый ключ
-            $currentKeyAlias = '';
-
-            // Перебираем составляющие ключа подписки
-            foreach ($userSubscriptionKeysAliases as $userSubscriptionKeyAlias) {
-                // Дополняем рассматриваемый ключ
-                if ($currentKeyAlias != '') { $currentKeyAlias .= ';'; }
-                $currentKeyAlias .= $userSubscriptionKeyAlias;
-
-                // Передвигаем указатель
-                $pointer = &$pointer['childKeys'];
-
-                // Если такого ключа еще не встречалось
-                if (!isset($pointer[$currentKeyAlias])) {
-                    // Добавляем ключ
-                    $pointer[$currentKeyAlias] = [
-                        'id' => null, // Ид
-                        'alias' => null, // Алиас
-                        'name' => null, // Название
-                        'childKeys' => [], // Дочерние ключи
-                        'channels' => [], // Каналы
-                    ];
-                }
-
-                // Если ключ известен
-                if (isset($allUserSubscriptionKeys[$currentKeyAlias])) {
-                    // Заполняем значения
-                    if ($pointer[$currentKeyAlias]['id'] === null) { $pointer[$currentKeyAlias]['id'] = $allUserSubscriptionKeys[$currentKeyAlias]->id; }
-                    if ($pointer[$currentKeyAlias]['alias'] === null) { $pointer[$currentKeyAlias]['alias'] = $allUserSubscriptionKeys[$currentKeyAlias]->alias; }
-                    if ($pointer[$currentKeyAlias]['name'] === null) { $pointer[$currentKeyAlias]['name'] = $allUserSubscriptionKeys[$currentKeyAlias]->name; }
-                }
-
-                // Передвигаем указатель
-                $pointer = &$pointer[$currentKeyAlias];
-            }
-
-            // Запоминаем каналы их имена
-            $pointer['channels'][] = [
-                'id' => $userSubscription->channel_id,
-                'alias' => $allUserSubscriptionChannels[$userSubscription->channel_id]->alias,
-                'name' => $allUserSubscriptionChannels[$userSubscription->channel_id]->name,
-                'active' => $userSubscription->active,
+        /** @var UserSubscriptionChannel[] $allUserSubscriptionChannels Каналы */
+        $userSubscriptionChannels = UserSubscriptionChannel::find()->active()->indexBy('id')->all();
+        $channels = [];
+        foreach ($allUserSubscriptionChannels as $userSubscriptionChannel) {
+            $channels[$userSubscriptionChannel->id] = [
+                'id' => $userSubscriptionChannel->id,
+                'name' => $userSubscriptionChannel->name,
+                'active' => true,
             ];
         }
 
-        return $this->render('subscriptions', ['userId' => $userId, 'result' => $result['childKeys']]);
+        /** @var UserSubscriptionAction[] $allUserSubscriptionActions Действия */
+        $userSubscriptionActions = UserSubscriptionAction::find()->active()->indexBy('id')->all();
+        $actionsByKeyId = [];
+        foreach ($userSubscriptionKeys as $userSubscriptionKey) {
+            foreach ($allUserSubscriptionActions as $userSubscriptionAction) {
+                // Если начало строки соответствует
+                if (strpos($userSubscriptionKey->alias, $userSubscriptionAction->part_key_alias) === 0) {
+                    if (!isset($actionsByKeyId[$userSubscriptionKey->id])) { $actionsByKeyId[$userSubscriptionKey->id] = []; }
+                    $actionsByKeyId[$userSubscriptionKey->id][$userSubscriptionAction->id] = [
+                        'id' => $userSubscriptionAction->id,
+                        'name' => $userSubscriptionAction->name,
+                        'channels' => $channels,
+                        'active' => true,
+                    ];
+                }
+            }
+        }
+
+
+        /** @var UserSubscription[] $userSubscriptions Подписки */
+        $userSubscriptions = UserSubscription::find()->userId($userId)->with('exemptions')->orderBy('key_id')->all();
+
+        $result = [];
+
+        foreach ($userSubscriptions as $userSubscription) {
+            $result[$userSubscription->id] = [
+                'id' => $userSubscription->id,
+                'key_id' => $userSubscription->key_id,
+                'name' => $userSubscriptionKeys[$userSubscription->key_id]->name,
+                'actions' => $actionsByKeyId[$userSubscription->key_id],
+                'channels' => $channels,
+                'active' => true,
+            ];
+
+            foreach ($userSubscription->exemptions as $exemption) {
+                if (isset($exemption->action_id)) {
+                    if (isset($exemption->channel_id)) {
+                        $result[$userSubscription->id]['actions'][$exemption->action_id]['channels'][$exemption->channel_id]['active'] = false;
+                    } else {
+                        $result[$userSubscription->id]['actions'][$exemption->action_id]['active'] = false;
+                    }
+                } elseif (isset($exemption->channel_id)) {
+                    $result['channels'][$exemption->channel_id]['active'] = false;
+                } else {
+                    $result['active'] = false;
+                }
+            }
+        }
+
+
+        // Перебираем подписки
+//        foreach ($userSubscriptions as $userSubscription) {
+//            // Получаем состовляющие ключа подписки
+//            $userSubscriptionKeysAliases = explode(';', $userSubscription->key->alias);
+//
+//            // Указатель на массив
+//            $pointer = &$result;
+//
+//            // Рассматриваемый ключ
+//            $currentKeyAlias = '';
+//
+//            // Перебираем составляющие ключа подписки
+//            foreach ($userSubscriptionKeysAliases as $userSubscriptionKeyAlias) {
+//                // Дополняем рассматриваемый ключ
+//                if ($currentKeyAlias != '') { $currentKeyAlias .= ';'; }
+//                $currentKeyAlias .= $userSubscriptionKeyAlias;
+//
+//                // Передвигаем указатель
+//                $pointer = &$pointer['childKeys'];
+//
+//                // Если такого ключа еще не встречалось
+//                if (!isset($pointer[$currentKeyAlias])) {
+//                    // Добавляем ключ
+//                    $pointer[$currentKeyAlias] = [
+//                        'id' => null, // Ид
+//                        'alias' => null, // Алиас
+//                        'name' => null, // Название
+//                        'childKeys' => [], // Дочерние ключи
+//                        'channels' => [], // Каналы
+//                    ];
+//                }
+//
+//                // Если ключ известен
+//                if (isset($userSubscriptionKeys[$currentKeyAlias])) {
+//                    // Заполняем значения
+//                    if ($pointer[$currentKeyAlias]['id'] === null) { $pointer[$currentKeyAlias]['id'] = $userSubscriptionKeys[$currentKeyAlias]->id; }
+//                    if ($pointer[$currentKeyAlias]['alias'] === null) { $pointer[$currentKeyAlias]['alias'] = $userSubscriptionKeys[$currentKeyAlias]->alias; }
+//                    if ($pointer[$currentKeyAlias]['name'] === null) { $pointer[$currentKeyAlias]['name'] = $userSubscriptionKeys[$currentKeyAlias]->name; }
+//                }
+//
+//                // Передвигаем указатель
+//                $pointer = &$pointer[$currentKeyAlias];
+//            }
+//
+//            // Запоминаем каналы их имена
+//            foreach ($allUserSubscriptionChannels as $userSubscriptionChannel) {
+//                $pointer['channels'][] = [
+//                    'id' => $userSubscriptionChannel->id,
+//                    'alias' => $userSubscriptionChannel->alias,
+//                    'name' => $userSubscriptionChannel->name,
+//                    'active' => $userSubscriptionChannel->active,
+//                ];
+//            }
+//        }
+
+//        foreach ($userSubscriptions as $userSubscription) {
+//
+//
+//
+//            // Запоминаем каналы их имена
+//            foreach ($allUserSubscriptionChannels as $userSubscriptionChannel) {
+//                $pointer['channels'][] = [
+//                    'id' => $userSubscriptionChannel->id,
+//                    'alias' => $userSubscriptionChannel->alias,
+//                    'name' => $userSubscriptionChannel->name,
+//                    'active' => $userSubscriptionChannel->active,
+//                ];
+//            }
+//        }
+
+        return $this->render('subscriptions', ['userId' => $userId, 'result' => $result]);
     }
 
     /**

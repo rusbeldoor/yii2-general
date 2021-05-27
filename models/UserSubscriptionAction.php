@@ -8,6 +8,7 @@ namespace rusbeldoor\yii2General\models;
  * @property int $id
  * @property int $platform_id
  * @property string $alias
+ * @property string $part_key_alias
  * @property string $name
  * @property int $active
  */
@@ -27,7 +28,7 @@ class UserSubscriptionAction extends ActiveRecord
         return [
             [['platform_id', 'alias', 'name'], 'required'],
             [['platform_id', 'active'], 'integer'],
-            [['alias', 'name'], 'string', 'max' => 128],
+            [['alias', 'part_key_alias', 'name'], 'string', 'max' => 128],
             [['alias'], 'unique'],
             [['platform_id'], 'exist', 'skipOnError' => true, 'targetClass' => Platform::className(), 'targetAttribute' => ['platform_id' => 'id']],
         ];
@@ -42,6 +43,7 @@ class UserSubscriptionAction extends ActiveRecord
             'id' => 'Ид',
             'platform_id' => 'Платформа',
             'alias' => 'Алиас',
+            'part_key_alias' => 'Часть алиаса ключа',
             'name' => 'Название',
             'active' => 'Активный',
         ];

@@ -8,6 +8,9 @@ namespace rusbeldoor\yii2General\models;
  * @property int $id
  * @property int $user_id
  * @property int $key_id
+ *
+ * @property UserSubscriptionKey $key
+ * @property UserSubscriptionExemption[] $exemptions
  */
 class UserSubscription extends ActiveRecord
 {
