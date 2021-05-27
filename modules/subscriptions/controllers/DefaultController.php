@@ -29,11 +29,11 @@ class DefaultController extends \frontend\components\Controller
     {
         $get = Yii::$app->request->get();
         $post = Yii::$app->request->post();
-        $getPlatform = ((isset($get['platform'])) ? $get['platform'] : ((isset($post['platform'])) ? $post['platform'] : null));
-        $getKeyAlias = ((isset($get['key'])) ? $get['key'] : ((isset($post['key'])) ? $post['key'] : null));
-        $getChannelsAliases = ((isset($get['channels'])) ? $get['channels'] : ((isset($post['channels'])) ? $post['channels'] : null));
+        $getPlatform = ((isset($get['platform'])) ? $get['platform'] : ((isset($post['platform'])) ? $post['platform'] : false));
+        $getKeyAlias = ((isset($get['key'])) ? $get['key'] : ((isset($post['key'])) ? $post['key'] : false));
+        $getChannelsAliases = ((isset($get['channels'])) ? $get['channels'] : ((isset($post['channels'])) ? $post['channels'] : false));
         //$getChannelsAliases = ((isset($get['actions'])) ? $get['actions'] : ((isset($post['actions'])) ? $post['actions'] : null));
-        $channelsAliases = (($getChannelsAliases) ? explode(',', $getChannelsAliases) : null);
+        $channelsAliases = (($getChannelsAliases) ? explode(',', $getChannelsAliases) : false);
 
         // Проверяем хэш
         // if ($hash != UserSubscriptionHelper::hash($userId, $getKeyAlias, $getChannelsAliases)) { return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.'); }

@@ -17,7 +17,7 @@ class UserSubscriptionChannelQuery extends ActiveQuery
      */
     public function aliases($aliases)
     {
-        if ($aliases === null) { return $this; }
+        if ($aliases === false) { return $this; }
         if (!is_array($aliases)) { $aliases = [$aliases]; }
         return $this->andWhere("alias IN ('" . implode("','", $aliases) . "')");
     }

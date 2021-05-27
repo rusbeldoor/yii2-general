@@ -13,10 +13,13 @@ class UserSubscriptionActionQuery extends ActiveQuery
      * ...
      *
      * @param int $platformId
-     * @return UserSubscriptionQuery
+     * @return UserSubscriptionActionQuery
      */
     public function platformId($platformId)
-    { return $this->andWhere("platform_id=:platformId", [':platformId' => $platformId]); }
+    {
+        if ($platformId === false) { return $this; }
+        return $this->andWhere("platform_id=:platformId", [':platformId' => $platformId]);
+    }
 
     /**
      * ...
@@ -26,7 +29,7 @@ class UserSubscriptionActionQuery extends ActiveQuery
      */
     public function allChildren($alias)
     {
-        if ($alias === null) { return $this; }
+        if (($alias === false) || ($alias === null)) { return $this; }
         return $this->andWhere("alias LIKE '$alias%'");
     }
 }
