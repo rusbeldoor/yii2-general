@@ -12,17 +12,27 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
      */
     public function safeUp()
     {
-        // Таблица ключей подписок пользователя
-        $this->createTable('user_subscription_key', [
+        // Таблица категорий отправителей
+        $this->createTable('user_subscription_sender_category', [
             'id' => 'mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'platform_id' => 'mediumint(6) UNSIGNED NOT NULL',
-            'alias' => $this->string(128)->notNull()->unique(),
+            'alias' => $this->string(128)->notNull(),
+            'name' => $this->string(128)->notNull(),
+        ]);
+        $this->createIndex('unique', 'user_subscription_sender_category', ['platform_id', 'alias'], true);
+        $this->addForeignKey('fk-user_subscription_sender-platform_id', 'user_subscription_sender_category', 'platform_id', 'platform', 'id');
+
+        // Таблица отправителей
+        $this->createTable('user_subscription_sender', [
+            'id' => 'mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
+            'category_id' => 'mediumint(8) UNSIGNED NOT NULL',
+            'key' => $this->string(16),
             'name' => $this->string(128)->notNull(),
             'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
         ]);
-        $this->addForeignKey('fk-user_subscription_key-platform_id', 'user_subscription_key', 'platform_id', 'platform', 'id');
+        $this->addForeignKey('fk-user_subscription_sender_category-category_id', 'user_subscription_sender', 'category_id', 'user_subscription_sender_category', 'id');
 
-        // Таблица каналов подписок пользователя
+        // Таблица способов доставки сообщений
         $this->createTable('user_subscription_channel', [
             'id' => 'smallint(6) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'alias' => $this->string(32)->notNull()->unique(),
@@ -41,37 +51,37 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->insert('user_subscription_channel', ['alias' => 'telegram', 'name' => 'Telegram', 'active' => 1]);
         $this->insert('user_subscription_channel', ['alias' => 'browser', 'name' => 'Уведомления от браузера', 'active' => 1]);
 
-        // Таблица действий подписок пользователя
-        $this->createTable('user_subscription_action', [
+        // Таблица действий распростроняющиеся на всех участников категорий
+        $this->createTable('user_subscription_sender_category_action', [
             'id' => 'mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
-            'platform_id' => 'mediumint(6) UNSIGNED NOT NULL',
+            'category_id' => 'mediumint(8) UNSIGNED',
             'alias' => $this->string(128)->notNull()->unique(),
             'name' => $this->string(128)->notNull(),
             'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
         ]);
-        $this->addForeignKey('fk-user_subscription_action-platform_id', 'user_subscription_action', 'platform_id', 'platform', 'id');
+        $this->addForeignKey('fk-user_subscription_sender_category_action-category_id', 'user_subscription_sender_category_action', 'category_id', 'user_subscription_sender_category', 'id');
 
-        // Таблица связей пользователей с ключами подписок
+        // Таблица связей пользователей с отправителями
         $this->createTable('user_subscription', [
             'id' => $this->primaryKey(11)->unsigned(),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
-            'key_id' =>'mediumint(8) UNSIGNED NOT NULL',
+            'sender_id' =>'mediumint(8) UNSIGNED NOT NULL',
         ]);
-        $this->createIndex('unique', 'user_subscription', ['user_id', 'key_id'], true);
+        $this->createIndex('unique', 'user_subscription', ['user_id', 'sender_id'], true);
         $this->addForeignKey('fk-user_subscription-user_id', 'user_subscription', 'user_id', 'user', 'id'); // Закомментировать, если таблица user лежит не в той же БД или имеет другое название
-        $this->addForeignKey('fk-user_subscription-key_id', 'user_subscription', 'key_id', 'user_subscription_key', 'id');
+        $this->addForeignKey('fk-user_subscription-sender_id', 'user_subscription', 'sender_id', 'user_subscription_sender', 'id');
 
         // Таблица исключений (отписок) пользователей
         $this->createTable('user_subscription_exception', [
             'id' => $this->primaryKey(11)->unsigned(),
             'subscription_id' => $this->integer(11)->unsigned()->notNull(),
+            'sender_category_action_id' =>'mediumint(8) UNSIGNED NOT NULL',
             'channel_id' =>'smallint(8) UNSIGNED NOT NULL',
-            'action_id' =>'mediumint(8) UNSIGNED NOT NULL',
         ]);
-        $this->createIndex('unique', 'user_subscription_exception', ['subscription_id', 'channel_id', 'action_id'], true);
+        $this->createIndex('unique', 'user_subscription_exception', ['subscription_id', 'sender_category_action_id', 'channel_id'], true);
         $this->addForeignKey('fk-user_subscription_exception-subscription_id', 'user_subscription_exception', 'subscription_id', 'user_subscription', 'id');
+        $this->addForeignKey('fk-user_subscription_exception-sender_category_action_id', 'user_subscription_exception', 'sender_category_action_id', 'user_subscription_sender_category_action', 'id');
         $this->addForeignKey('fk-user_subscription_exception-channel_id', 'user_subscription_exception', 'channel_id', 'user_subscription_channel', 'id');
-        $this->addForeignKey('fk-user_subscription_exception-action_id', 'user_subscription_exception', 'action_id', 'user_subscription_action', 'id');
     }
 
     /**

@@ -3,12 +3,12 @@
 namespace rusbeldoor\yii2General\models;
 
 /**
- * user_subscription_exception (ActiveRecord)
+ * User_subscription_exception (ActiveRecord)
  *
  * @property int $id
  * @property int $subscription_id
+ * @property int $sender_category_action_id
  * @property int $channel_id
- * @property int $action_id
  */
 class UserSubscriptionExemption extends ActiveRecord
 {
@@ -24,7 +24,7 @@ class UserSubscriptionExemption extends ActiveRecord
     {
         return [
             [['subscription_id'], 'required'],
-            [['subscription_id, channel_id, action_id'], 'integer'],
+            [['subscription_id, sender_category_action_id, channel_id'], 'integer'],
         ];
     }
 
@@ -36,8 +36,8 @@ class UserSubscriptionExemption extends ActiveRecord
         return [
             'id' => 'Ид',
             'subscription_id' => 'Подписка',
+            'sender_category_action_id' => 'Действие отправителя',
             'channel_id' => 'Канал',
-            'action_id' => 'Действие',
         ];
     }
 
@@ -57,15 +57,15 @@ class UserSubscriptionExemption extends ActiveRecord
      * {@inheritdoc}
      */
     public function getSubscriptionAction()
-    { return $this->hasOne(UserSubscriptionAction::class, ['id' => 'action_id']); }
+    { return $this->hasOne(UserSubscriptionSenderCategoryAction::class, ['id' => 'sender_category_action_id']); }
 
     /**
      * {@inheritdoc}
      *
-     * @return UserSubscriptionActionQuery the active query used by this AR class.
+     * @return UserSubscriptionSenderCategoryActionQuery the active query used by this AR class.
      */
     public static function find()
-    { return new UserSubscriptionActionQuery(get_called_class()); }
+    { return new ActiveQuery(get_called_class()); }
 
     /**
      * Перед удалением

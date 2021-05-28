@@ -7,9 +7,9 @@ namespace rusbeldoor\yii2General\models;
  *
  * @property int $id
  * @property int $user_id
- * @property int $key_id
+ * @property int $sender_id
  *
- * @property UserSubscriptionKey $key
+ * @property UserSubscriptionSender $sender
  * @property UserSubscriptionExemption[] $exemptions
  */
 class UserSubscription extends ActiveRecord
@@ -26,18 +26,18 @@ class UserSubscription extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'key_id'], 'required'],
-            [['user_id', 'key_id'], 'integer'],
-            [['user_id', 'key_id'], 'unique', 'targetAttribute' => ['user_id', 'key_id']],
-            [['key_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionKey::className(), 'targetAttribute' => ['key_id' => 'id']],
+            [['user_id', 'sender_id'], 'required'],
+            [['user_id', 'sender_id'], 'integer'],
+            [['user_id', 'sender_id'], 'unique', 'targetAttribute' => ['user_id', 'sender_id']],
+            [['sender_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionSender::className(), 'targetAttribute' => ['sender_id' => 'id']],
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getKey()
-    { return $this->hasOne(UserSubscriptionKey::class, ['id' => 'key_id']); }
+    public function getSender()
+    { return $this->hasOne(UserSubscriptionSender::class, ['id' => 'sender_id']); }
 
     /**
      * {@inheritdoc}
@@ -53,7 +53,7 @@ class UserSubscription extends ActiveRecord
         return [
             'id' => 'Ид',
             'user_id' => 'Пользователь',
-            'key_id' => 'Ключ',
+            'sender_id' => 'Отправитель',
         ];
     }
 
