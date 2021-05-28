@@ -10,7 +10,7 @@ class UserSubscriptionHelper
      * Хэш
      *
      * @param int $userId
-     * @param string $params
+     * @param array $params
      * @return string
      */
     public static function hash($userId, $params)
@@ -33,7 +33,7 @@ class UserSubscriptionHelper
      * Ссылка
      *
      * @param int $userId
-     * @param string $params
+     * @param array $params
      * @return string
      */
     public static function link($userId, $params)

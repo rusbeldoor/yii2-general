@@ -160,7 +160,7 @@ class DefaultController extends \frontend\components\Controller
         };
 
         // Обработка параметров
-        $params = ['platforms' => null, 'category' => null, 'keys' => null, 'channels' => null, 'actions' => null];
+        $params = ['platforms' => null, 'category' => null, 'senders' => null, 'channels' => null, 'actions' => null];
         foreach ($params as $key => $param) { $params[$key] = $getParam($key); }
 
         // Проверка hash`a
@@ -169,38 +169,41 @@ class DefaultController extends \frontend\components\Controller
         }
 
         // Параметры, которые необходимо преобразовать
-        $arrayKeys = ['platforms', 'keys', 'channels', 'actions'];
+        $arrayKeys = ['platforms', 'senders', 'channels', 'actions'];
         foreach ($arrayKeys as $key) { $params[$key] = explode(',', $params[$key]); }
 
-        // Получаем категории и действия
-        $categories = UserSubscriptionSenderCategory::find()->indexBy('id');
-        if ($params['platforms']) { $categories->where(['platform' => $params['platforms']]); }
-        if ($params['category']) { $categories->where(['alias' => $params['category']]); }
-        $categories = $categories->with('actions')->all();
+        /** @var UserSubscriptionSenderCategory[] $senderCategories Категории отправителей и их действия */
+        $senderCategoriesQuery = UserSubscriptionSenderCategory::find()->indexBy('id')->platformAlias($params['platforms']);
+        if ($params['category']) { $senderCategoriesQuery->where(['alias' => $params['category']]); }
+        $senderCategories = $senderCategoriesQuery->with('actions')->all();
 
-        // Получаем ключи
-        /** @var UserSubscriptionSender[] $userSubscriptionKeys Ключи */
-        $keys = UserSubscriptionSender::find()->where(['category_id' => array_keys($categories)])->indexBy('id')->active();
-        if ($params['category']) { $categories->where(['k' => $params['category']]); }
-        $keys = $keys->all();
+        // todo Закончил здесь!!
+        /** @var UserSubscriptionSenderCategoryAction[] $senderCategoriesActions Категории отправителей и их действия */
+        $senderCategoriesActionsQuery = UserSubscriptionSenderCategoryAction::find()->indexBy('id')->where([$params['platforms']]);
+        if ($params['category']) { $senderCategoriesActionsQuery->where(['alias' => $params['category']]); }
+        $senderCategoriesActions = $senderCategoriesActionsQuery->with('actions')->all();
 
-        // Получаем каналы
-        $channels = UserSubscriptionSender::find()->where(['шв' => array_keys($categories)])->indexBy('id')->active()->all();
+        /** @var UserSubscriptionSender[] $senders Отправители */
+        $sendersQuery = UserSubscriptionSender::find()->where(['category_id' => array_keys($senderCategories)])->indexBy('id')->active();
+        if ($params['keys']) { $sendersQuery->where(['key' => $params['keys']]); }
+        $senders = $senders->all();
 
         // Получаем подписки...
-        $userSubscriptions = UserSubscription::find()
-            ->userId($userId)
-            ->keysIds(array_keys($userSubscriptionKeys))
-            ->with(['exemptions' => function ($query) use($userSubscriptionActions, $userSubscriptionChannels) {
-                $query->andWhere(['action_id' => array_keys($userSubscriptionActions), 'channel_id' => array_keys($userSubscriptionChannels)]);
-            }])
-            ->orderBy('key_id')
-            ->all();
+        $userSubscriptions = [];
+        if (count($senders)) {
+            $userSubscriptions = UserSubscription::find()
+                ->userId($userId)
+                ->where(['sender_id' => array_keys($senders)])
+                ->with(['exemptions' => function ($query) {
+                    $query->andWhere(['sender_category_action_id' => array_keys($senderCategoriesActions), 'channel_id' => array_keys($userSubscriptionChannels)]);
+                }])
+                ->orderBy('key_id')
+                ->all();
+        }
 
         // Получения подписок по параметрам
         /** @var UserSubscription[] $userSubscriptions Подписки */
         $userSubscriptions = UserSubscription::getAllByParams($params);
-
 
         /** @var UserSubscriptionSender[] $userSubscriptionKeys Ключи */
         $userSubscriptionKeys = UserSubscriptionSender::find()->categoryId($getPlatform)->allChildren($getKeyAlias)->indexBy('id')->active()->all();
