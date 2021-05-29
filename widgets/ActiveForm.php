@@ -14,5 +14,5 @@ class ActiveForm extends \yii\widgets\ActiveForm
 
     public $fieldClass = 'rusbeldoor\yii2General\widgets\ActiveField';
 
-    public $type = self::TYPE_HORIZONTAL;
+    public $layout = self::TYPE_HORIZONTAL;
 }
