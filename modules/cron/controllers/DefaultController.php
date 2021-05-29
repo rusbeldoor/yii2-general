@@ -7,7 +7,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use rusbeldoor\yii2General\models\Cron;
-use rusbeldoor\yii2General\modules\cron\models\PlatformSearch;
+use rusbeldoor\yii2General\modules\cron\models\CronSearch;
 use rusbeldoor\yii2General\modules\cron\models\CronLogSearch;
 use rusbeldoor\yii2General\helpers\AppHelper;
 
