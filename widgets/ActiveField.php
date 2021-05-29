@@ -8,7 +8,8 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
 /**
  * ...
  */
-class ActiveField extends \kartik\form\ActiveField
+//class ActiveField extends \kartik\form\ActiveField
+class ActiveField extends \yii\widgets\ActiveField
 {
     /**
      * Текстовое поле для поиска

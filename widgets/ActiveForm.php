@@ -5,7 +5,8 @@ namespace rusbeldoor\yii2General\widgets;
 /**
  * ...
  */
-class ActiveForm extends \kartik\form\ActiveForm
+//class ActiveForm extends \kartik\form\ActiveForm
+class ActiveForm extends \yii\widgets\ActiveForm
 {
     /**
      * @var string the default field class name when calling [[field()]] to create a new field.
