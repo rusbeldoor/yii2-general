@@ -7,6 +7,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use rusbeldoor\yii2General\models\Cron;
+use rusbeldoor\yii2General\modules\cron\models\CronSearch;
 use rusbeldoor\yii2General\modules\cron\models\CronLogSearch;
 use rusbeldoor\yii2General\helpers\AppHelper;
 
@@ -35,7 +36,7 @@ class DefaultController extends \backend\components\Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PlatformSearch();
+        $searchModel = new CronSearch();
         $searchModel->kill_process = '';
         $searchModel->restart = '';
         $searchModel->active = '';
