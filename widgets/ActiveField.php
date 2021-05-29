@@ -8,7 +8,7 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
 /**
  * ...
  */
-class ActiveField extends \yii\widgets\ActiveField
+class ActiveField extends \yii\bootstrap4\ActiveField
 {
     /**
      * ...
