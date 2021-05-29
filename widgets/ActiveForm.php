@@ -7,7 +7,6 @@ use yii\helpers\Html;
 /**
  * ...
  */
-//class ActiveForm extends \kartik\form\ActiveForm
 class ActiveForm extends \yii\widgets\ActiveForm
 {
     const TYPE_VERTICAL = 'vertical';
