@@ -9,8 +9,6 @@ use rusbeldoor\yii2General\helpers\BaseUI;
  */
 class AddOrEditForm extends ActiveForm
 {
-    public $layout = 'horizontal';
-
     /**
      * @param mixed $model
      * @return string

@@ -11,25 +11,6 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
 class ActiveField extends \yii\bootstrap4\ActiveField
 {
     /**
-     * ...
-     */
-    public function begin()
-    {
-        if ($this->form->layout == ActiveForm::TYPE_HORIZONTAL) {
-            Html::addCssClass($this->options, 'row');
-        }
-        return parent::begin();
-    }
-
-    /**
-     * ...
-     */
-    public function end()
-    {
-        return parent::end();
-    }
-
-    /**
      * Текстовое поле для поиска
      *
      * @param array $options
