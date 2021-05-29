@@ -14,6 +14,8 @@ class SearchForm extends ActiveForm
         'method' => 'post',
     ];
 
+    public $layout = 'horizontal';
+
     /**
      * Кнопки
      *

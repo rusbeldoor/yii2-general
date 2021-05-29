@@ -15,7 +15,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function begin()
     {
-        return self::begin();
+        return parent::begin();
     }
 
     /**
@@ -23,7 +23,7 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function end()
     {
-        return self::end();
+        return parent::end();
     }
 
     /**
