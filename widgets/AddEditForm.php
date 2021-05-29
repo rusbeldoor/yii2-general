@@ -7,7 +7,7 @@ use rusbeldoor\yii2General\helpers\BaseUI;
 /**
  * Форма добавления/изменения
  */
-class AddEditForm extends ActiveForm
+class AddOrEditForm extends ActiveForm
 {
     public $layout = 'horizontal';
 
@@ -16,5 +16,5 @@ class AddEditForm extends ActiveForm
      * @return string
      */
     public function buttons($model)
-    { return BaseUI::buttonsForAddEditForm($model);}
+    { return BaseUI::buttonsForAddOrEditForm($model);}
 }

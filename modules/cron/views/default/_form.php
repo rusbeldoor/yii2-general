@@ -1,13 +1,13 @@
 <?php
 
-use rusbeldoor\yii2General\widgets\AddEditForm;
+use rusbeldoor\yii2General\widgets\AddOrEditForm;
 
 /* @var yii\web\View $this */
 /* @var backend\modules\administrator\modules\rbac\models\AuthItem $model */
 ?>
 
 <div class="auth-item-form">
-    <? $form = AddEditForm::begin() ?>
+    <? $form = AddOrEditForm::begin() ?>
         <?= $form->errorSummary($model); ?>
         <?= $form->field($model, 'alias')->textInput(['maxlength' => 96]) ?>
         <?= $form->field($model, 'description') ?>
@@ -16,5 +16,5 @@ use rusbeldoor\yii2General\widgets\AddEditForm;
         <?= $form->field($model, 'restart')->numberYesNo() ?>
         <?= $form->field($model, 'active')->numberYesNo() ?>
         <?= $form->buttons($model) ?>
-    <? AddEditForm::end() ?>
+    <? AddOrEditForm::end() ?>
 </div>
