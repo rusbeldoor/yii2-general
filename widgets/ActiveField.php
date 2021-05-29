@@ -15,6 +15,9 @@ class ActiveField extends \yii\widgets\ActiveField
      */
     public function begin()
     {
+        if ($this->form->layout == ActiveForm::TYPE_HORIZONTAL) {
+            Html::addCssClass($this->options, 'row');
+        }
         return parent::begin();
     }
 

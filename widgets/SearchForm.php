@@ -13,7 +13,7 @@ class SearchForm extends ActiveForm
         'class' => 'panelSearchForm',
         'method' => 'post',
     ];
-    
+
     /**
      * Кнопки
      *
