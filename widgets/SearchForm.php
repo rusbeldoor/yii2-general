@@ -13,9 +13,7 @@ class SearchForm extends ActiveForm
         'class' => 'panelSearchForm',
         'method' => 'post',
     ];
-
-    public $layout = 'horizontal';
-
+    
     /**
      * Кнопки
      *
