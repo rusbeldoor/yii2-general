@@ -11,6 +11,22 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
 class ActiveField extends \yii\widgets\ActiveField
 {
     /**
+     * ...
+     */
+    public function begin()
+    {
+        return self::begin();
+    }
+
+    /**
+     * ...
+     */
+    public function end()
+    {
+        return self::end();
+    }
+
+    /**
      * Текстовое поле для поиска
      *
      * @param array $options
