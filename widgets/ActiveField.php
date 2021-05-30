@@ -4,7 +4,7 @@ namespace rusbeldoor\yii2General\widgets;
 
 use yii\base\InvalidConfigException;
 use yii\helpers\html;
-use rusbeldoor\yii2General\widgets\Addon;
+use rusbeldoor\yii2General\widgets\Addon2;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 
 /**
@@ -12,7 +12,7 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
  */
 class ActiveField extends \yii\bootstrap4\ActiveField
 {
-    use Addon;
+    use Addon2;
 
     /**
      * @var array addon options for text and password inputs. The following settings can be configured:
