@@ -27,7 +27,7 @@ trait AppendPrepend
                 }
             }
         }
-        $pos = $type === (('append') ? 'append' : 'prepend');
+        $pos = (($type === 'append') ? 'append' : 'prepend');
         return Html::tag('div', $out, ['class' => "input-group-{$pos}"]);
     }
 

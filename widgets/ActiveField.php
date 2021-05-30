@@ -14,18 +14,18 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     use AppendPrepend;
 
     /**
-     * @var array addon options for text and password inputs. The following settings can be configured:
-     * - `prepend`: _array_, the prepend addon configuration
-     *      - `content`: _string_, the prepend addon content
-     *      - `asButton`: _boolean_, whether the addon is a button or button group. Defaults to false.
-     *      - `options`: _array_, the HTML attributes to be added to the container.
-     * - `append`: _array_, the append addon configuration
-     *      - `content`: _string_|_array_, the append addon content
-     *      - `asButton`: _boolean_, whether the addon is a button or button group. Defaults to false.
-     *      - `options`: _array_, the HTML attributes to be added to the container.
-     * - `groupOptions`: _array_, HTML options for the input group
-     * - `contentBefore`: _string_, content placed before addon
-     * - `contentAfter`: _string_, content placed after addon
+     * @var array
+     * prepend (array) the prepend addon configuration
+     *  content (string|array) the prepend addon content
+     *  asButton (boolean) whether the addon is a button or button group. Defaults to false.
+     *  options (array) the HTML attributes to be added to the container.
+     * append (array) the append addon configuration
+     *  content (string|array) the append addon content
+     *  asButton(boolean) whether the addon is a button or button group. Defaults to false.
+     *  options (array) the HTML attributes to be added to the container.
+     * groupOptions (array) HTML options for the input group
+     * contentBefore (string) content placed before addon
+     * contentAfter (string) content placed after addon
      */
     public $addon = [];
 
