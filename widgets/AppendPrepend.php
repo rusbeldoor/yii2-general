@@ -5,7 +5,7 @@ namespace rusbeldoor\yii2General\widgets;
 use yii\helpers\html;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 
-class Addon2
+trait AppendPrepend
 {
     /**
      * Parses and returns addon content.
