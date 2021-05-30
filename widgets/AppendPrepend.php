@@ -5,12 +5,15 @@ namespace rusbeldoor\yii2General\widgets;
 use yii\helpers\html;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 
+/**
+ * Trait AppendPrepend
+ */
 trait AppendPrepend
 {
     /**
-     * Parses and returns addon content.
+     * Получением всего содержимого
      *
-     * @param string $type the addon type `prepend` or `append`. If any other value is set, it will default to `prepend`
+     * @param string $type
      * @return string
      */
     protected function getAddonContent($type)
@@ -32,9 +35,9 @@ trait AppendPrepend
     }
 
     /**
-     * Renders an addon item based on its configuration
+     * Получение одного элемента содержимого
      *
-     * @param array $config the addon item configuration
+     * @param array $config
      * @return string
      */
     protected static function renderAddonItem($config)
