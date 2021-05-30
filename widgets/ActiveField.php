@@ -11,6 +11,8 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
  */
 class ActiveField extends \yii\bootstrap4\ActiveField
 {
+    use Addon;
+
     /**
      * @var array addon options for text and password inputs. The following settings can be configured:
      * - `prepend`: _array_, the prepend addon configuration
