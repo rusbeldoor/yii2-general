@@ -4,6 +4,7 @@ namespace rusbeldoor\yii2General\widgets;
 
 use yii\base\InvalidConfigException;
 use yii\helpers\html;
+use rusbeldoor\yii2General\widgets\Addon;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 
 /**
