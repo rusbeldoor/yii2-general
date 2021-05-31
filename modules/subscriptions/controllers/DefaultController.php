@@ -57,8 +57,11 @@ class DefaultController extends \frontend\components\Controller
 //        }
 
         /** @var UserSubscriptionSenderCategory[] $senderCategories Категории отправителей и их действия */
-        $senderCategoriesQuery = UserSubscriptionSenderCategory::find()->indexBy('id')->platformAlias($params['platforms']);
-        if ($params['category']) { $senderCategoriesQuery->alias($params['category']); }
+        $senderCategoriesQuery = UserSubscriptionSenderCategory::find()->indexBy('id');
+        if ($params['platforms']) {
+            $senderCategoriesQuery->joinWith('platform')->andWhere(['platform.alias' => $params['platforms']]);
+            if ($params['category']) { $senderCategoriesQuery->alias($params['category']); }
+        }
         $senderCategories = $senderCategoriesQuery->all();
 
         /** @var UserSubscriptionSender[] $senders Отправители */
