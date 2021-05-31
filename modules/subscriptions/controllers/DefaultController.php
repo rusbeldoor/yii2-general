@@ -42,7 +42,7 @@ class DefaultController extends \frontend\components\Controller
         };
 
         // Обработка параметров
-        $params = ['platforms' => null, 'category' => null, 'keys' => null, 'channels' => null, 'actions' => null];
+        $params = ['platforms' => null, 'category' => null, 'senderKeys' => null, 'channels' => null, 'actions' => null];
         foreach ($params as $key => $param) { $params[$key] = $getParam($key); }
 
         // Проверка hash`a
@@ -66,7 +66,7 @@ class DefaultController extends \frontend\components\Controller
 
         /** @var UserSubscriptionSender[] $senders Отправители */
         $sendersQuery = UserSubscriptionSender::find()->andWhere(['category_id' => array_keys($senderCategories)])->indexBy('id')->active();
-        if ($params['keys']) { $sendersQuery->andWhere(['sender_id' => $params['keys']]); }
+        if ($params['senderKeys']) { $sendersQuery->andWhere(['key' => $params['senderKeys']]); }
         $senders = $sendersQuery->all();
 
         /** @var UserSubscriptionChannel[] $channels Способы доставки уведомлений */
