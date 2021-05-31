@@ -63,7 +63,7 @@ class DefaultController extends \frontend\components\Controller
 
         /** @var UserSubscriptionSender[] $senders Отправители */
         $sendersQuery = UserSubscriptionSender::find()->where(['category_id' => array_keys($senderCategories)])->indexBy('id')->active();
-        if ($params['sender']) { $sendersQuery->where(['sender_id' => $params['sender_id']]); }
+        if ($params['senders']) { $sendersQuery->where(['sender_id' => $params['senders']]); }
         $senders = $senders->all();
 
         /** @var UserSubscriptionChannel[] $channels Способы доставки уведомлений */
