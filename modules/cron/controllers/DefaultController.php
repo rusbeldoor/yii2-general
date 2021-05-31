@@ -91,7 +91,9 @@ class DefaultController extends \backend\components\Controller
 
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            if ($model->load($post) && $model->save()) { AppHelper::redirectWithFlash() return $this->redirect(['index']); }
+            if ($model->load($post) && $model->save()) {
+                AppHelper::redirectIndexWithFlash('success', 'Крон #' . $model->id . ' успешно добавлен.');
+            }
         } else {
             $model->loadDefaultValues();
         }
@@ -120,7 +122,9 @@ class DefaultController extends \backend\components\Controller
 
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            if ($model->load($post) && $model->save()) { return $this->redirect(['view', 'id' => $model->id]); }
+            if ($model->load($post) && $model->save()) {
+                AppHelper::redirectIndexWithFlash('success', 'Крон #' . $model->id . ' успешно изменено.');
+            }
         }
 
         return $this->render('update', ['model' => $model]);
