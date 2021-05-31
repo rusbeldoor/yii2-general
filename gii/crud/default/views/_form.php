@@ -16,14 +16,14 @@ if (empty($safeAttributes)) {
 echo "<?php\n";
 ?>
 
-use rusbeldoor\yii2General\widgets\AddEditForm;
+use rusbeldoor\yii2General\widgets\AddOrEditForm;
 
 /* @var yii\web\View $this */
 /* @var <?= ltrim($generator->modelClass, '\\') ?> $model */
 ?>
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
-    <?= "<? " ?>$form = AddEditForm::begin() ?>
+    <?= "<? " ?>$form = AddOrEditForm::begin() ?>
 <? foreach ($generator->getColumnNames() as $attribute) {
     if (
         // Если аттрибут не разрешен к массовому присваиванию
@@ -36,5 +36,5 @@ use rusbeldoor\yii2General\widgets\AddEditForm;
     echo "\n";
 } ?>
         <?= "<?= " ?>$form->buttons($model) ?>
-    <?= "<? " ?>AddEditForm::end() ?>
+    <?= "<? " ?>AddOrEditForm::end() ?>
 </div>

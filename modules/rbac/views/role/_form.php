@@ -1,6 +1,6 @@
 <?php
 
-use rusbeldoor\yii2General\widgets\AddEditForm;
+use rusbeldoor\yii2General\widgets\AddOrEditForm;
 use kartik\sortinput\SortableInput;
 
 /* @var yii\web\View $this */
@@ -12,7 +12,7 @@ use kartik\sortinput\SortableInput;
 ?>
 
 <div class="auth-item-form">
-    <? $form = AddEditForm::begin() ?>
+    <? $form = AddOrEditForm::begin() ?>
         <?= $form->field($model, 'name')->textInput(['maxlength' => 96]) ?>
         <?= $form->field($model, 'description')->textInput(['maxlength' => 192]) ?>
         <div class="form-group row">
@@ -66,5 +66,5 @@ use kartik\sortinput\SortableInput;
             </div>
         </div>
         <?= $form->buttons($model) ?>
-    <? AddEditForm::end() ?>
+    <? AddOrEditForm::end() ?>
 </div>

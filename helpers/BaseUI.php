@@ -120,7 +120,7 @@ class BaseUI
      * @param mixed $model
      * @return string
      */
-    public static function buttonsForAddEditForm($model)
+    public static function buttonsForAddOrEditForm($model)
     {
         return
             '<div class="form-group row">'

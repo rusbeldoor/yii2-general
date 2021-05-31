@@ -2,14 +2,78 @@
 
 namespace rusbeldoor\yii2General\widgets;
 
+use yii\base\InvalidConfigException;
 use yii\helpers\html;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 
 /**
  * ...
  */
-class ActiveField extends \kartik\form\ActiveField
+class ActiveField extends \yii\bootstrap4\ActiveField
 {
+    use AppendPrepend;
+
+    /**
+     * @var array
+     * prepend (array) the prepend addon configuration
+     *  content (string|array) the prepend addon content
+     *  asButton (boolean) whether the addon is a button or button group. Defaults to false.
+     *  options (array) the HTML attributes to be added to the container.
+     * append (array) the append addon configuration
+     *  content (string|array) the append addon content
+     *  asButton(boolean) whether the addon is a button or button group. Defaults to false.
+     *  options (array) the HTML attributes to be added to the container.
+     * groupOptions (array) HTML options for the input group
+     * contentBefore (string) content placed before addon
+     * contentAfter (string) content placed after addon
+     */
+    public $addon = [];
+
+    /**
+     * @inheritdoc
+     * @throws InvalidConfigException
+     */
+    public function render($content = null)
+    {
+        $this->buildTemplate();
+        return parent::render($content);
+    }
+
+    /**
+     * Builds the final template based on the bootstrap form type, display settings for label, error, and hint, and
+     * content before and after label, input, error, and hint.
+     * @throws InvalidConfigException
+     */
+    protected function buildTemplate()
+    {
+        $newInput = $this->generateAddon();
+        $config = [
+            '{input}' => $newInput,
+        ];
+        $this->template = strtr($this->template, $config);
+    }
+
+    /**
+     * Generates the addon markup
+     *
+     * @return string
+     * @throws InvalidConfigException
+     */
+    protected function generateAddon()
+    {
+        if (empty($this->addon)) { return '{input}'; }
+        $addon = $this->addon;
+        $prepend = $this->getAddonContent('prepend');
+        $append = $this->getAddonContent('append');
+        $content = $prepend . '{input}' . $append;
+        $group = ArrayHelper::getValue($addon, 'groupOptions', []);
+        Html::addCssClass($group, 'input-group');
+        $contentBefore = ArrayHelper::getValue($addon, 'contentBefore', '');
+        $contentAfter = ArrayHelper::getValue($addon, 'contentAfter', '');
+        $content = Html::tag('div', $contentBefore . $content . $contentAfter, $group);
+        return $content;
+    }
+
     /**
      * Текстовое поле для поиска
      *
@@ -116,9 +180,9 @@ class ActiveField extends \kartik\form\ActiveField
                 'item' => function ($index, $label, $name, $checked, $value) {
                     return
                         '<label class="btn btn-light' . ($checked ? ' active' : '') . '">'
-                            . Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
-                            . ' '
-                            . $label
+                        . Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
+                        . ' '
+                        . $label
                         . '</label>';
                 },
             ],

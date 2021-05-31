@@ -7,14 +7,12 @@ use rusbeldoor\yii2General\helpers\BaseUI;
 /**
  * Форма поиска
  */
-class SearchForm extends \rusbeldoor\yii2General\widgets\ActiveForm
+class SearchForm extends ActiveForm
 {
     public $options = [
         'class' => 'panelSearchForm',
         'method' => 'post',
     ];
-
-    public $layout = 'horizontal';
 
     /**
      * Кнопки
