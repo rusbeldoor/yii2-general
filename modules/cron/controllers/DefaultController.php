@@ -92,7 +92,7 @@ class DefaultController extends \backend\components\Controller
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
             if ($model->load($post) && $model->save()) {
-                AppHelper::redirectIndexWithFlash('success', 'Крон #' . $model->id . ' добавлен.');
+                return AppHelper::redirectIndexWithFlash('success', 'Крон #' . $model->id . ' добавлен.');
             }
         } else {
             $model->loadDefaultValues();
@@ -123,7 +123,7 @@ class DefaultController extends \backend\components\Controller
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
             if ($model->load($post) && $model->save()) {
-                AppHelper::redirectIndexWithFlash('success', 'Крон #' . $model->id . ' изменён.');
+                return AppHelper::redirectIndexWithFlash('success', 'Крон #' . $model->id . ' изменён.');
             }
         }
 
