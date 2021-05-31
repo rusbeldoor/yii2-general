@@ -156,18 +156,18 @@ class DefaultController extends \frontend\components\Controller
         $post = Yii::$app->request->post();
         if (
             !isset($post['userId'])
-            || !isset($post['platform'])
+            || !isset($post['platformId'])
             || !isset($post['category'])
             || !isset($post['senderKey'])
-            || !isset($post['action'])
-            || !isset($post['channel'])
+            || !isset($post['actionId'])
+            || !isset($post['channelId'])
             || !isset($post['hash'])
             || !isset($post['active'])
             || !isset($post['redirectUrl'])
         ) { AppHelper::redirectWithFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
 
         // Проверяем хэш
-        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], $post['platform'], $post['category'], $post['senderKey'], $post['action'], $post['channel'])) {
+        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], $post['platformId'], $post['category'], $post['senderKey'], $post['actionId'], $post['channelId'])) {
             AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.');
         }
 
@@ -176,43 +176,50 @@ class DefaultController extends \frontend\components\Controller
         if (!$user) { AppHelper::redirectWithFlash('/', 'danger', 'Пользователь (#' . $post['userId'] . ') не найден.'); }
 
         // Ключ
-        $userSubscriptionKey = UserSubscriptionSender::find()->alias($post['keyAlias'])->one();
-        if (!$userSubscriptionKey) { AppHelper::redirectWithFlash('/', 'danger', 'Ключ подписки (' . $post['keyAlias'] . ') не найден.'); }
+//        $userSubscriptionKey = UserSubscriptionSender::find()->alias($post['keyAlias'])->one();
+//        if (!$userSubscriptionKey) { AppHelper::redirectWithFlash('/', 'danger', 'Ключ подписки (' . $post['keyAlias'] . ') не найден.'); }
 
         // Канал
-        $userSubscriptionChannel = UserSubscriptionChannel::find()->alias($post['channelAlias'])->one();
-        if (!$userSubscriptionChannel) { AppHelper::redirectWithFlash('/', 'danger', 'Канал подписки (#' . $post['channelAlias'] . ') не найден.'); }
+//        $userSubscriptionChannel = UserSubscriptionChannel::find()->alias($post['channelAlias'])->one();
+//        if (!$userSubscriptionChannel) { AppHelper::redirectWithFlash('/', 'danger', 'Канал подписки (#' . $post['channelAlias'] . ') не найден.'); }
 
         // Подписка на рассылки
         $userSubscription =
             UserSubscription::find()
                 ->userId($post['userId'])
-                ->leftJoin([
-                    'sender' => function ($query) { return $query->joinWith(); }
-                ])
-                ->keyId($userSubscriptionKey->id)
-                ->channelId($userSubscriptionChannel->id)
+                ->leftWith([
+                    'sender' => function ($query) use($post) {
+                        $query->leftWith(['category' => function ($query) use($post) {
+                            $query->andWhere(['platform_id' => $post['platformId'], 'alias' => $post['category']]);
+                        }], false);
+                        $query->andWhere(['key' => $post['senderKey']]);
+                    },
+                    'exemptions' => function ($query) use($post) {
+                        $query->andWhere(['action_id' => $post['actionId'], 'channel_id' => $post['channelId']]);
+                    },
+                ], false)
+                ->andWhere("category.id IS NOT NULL")
                 ->one();
         // Если подписка на рассылки существует
-        if ($userSubscription) {
-            if ($post['active']) {
-//                $userSubscriptionExemption = UserSubscriptionExemption::find()->addCondition()
-            } else {
-                // Добавляем активную или не активную подписку на рассылки
-                $userSubscription = new UserSubscriptionExemption();
-                $userSubscription->subscription_id = $userSubscription->id;
-                $userSubscription->channel_id = $userSubscriptionChannel->id;
-                $userSubscription->action_id = $userSubscriptionKey->id;
-                $userSubscription->active = $post['active'];
-                $userSubscription->save();
-            }
-
-            // Изменяем (активируем или деактивируем) подписку на рассылки
-            $userSubscription->active = $post['active'];
-            $userSubscription->update();
-        } else {
-
-        }
+//        if ($userSubscription) {
+//            if ($post['active']) {
+////                $userSubscriptionExemption = UserSubscriptionExemption::find()->addCondition()
+//            } else {
+//                // Добавляем активную или не активную подписку на рассылки
+//                $userSubscription = new UserSubscriptionExemption();
+//                $userSubscription->subscription_id = $userSubscription->id;
+//                $userSubscription->channel_id = $userSubscriptionChannel->id;
+//                $userSubscription->action_id = $userSubscriptionKey->id;
+//                $userSubscription->active = $post['active'];
+//                $userSubscription->save();
+//            }
+//
+//            // Изменяем (активируем или деактивируем) подписку на рассылки
+//            $userSubscription->active = $post['active'];
+//            $userSubscription->update();
+//        } else {
+//
+//        }
 
         // Возвращаемся по переданному адресу
         AppHelper::redirectWithFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['active']) ? 'подписались на' : 'отписались от') . ' "' . $userSubscriptionKey->name . '" (' . $userSubscriptionChannel->name . ').');
