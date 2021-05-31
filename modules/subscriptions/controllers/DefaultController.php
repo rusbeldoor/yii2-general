@@ -184,7 +184,7 @@ class DefaultController extends \frontend\components\Controller
 //        $userSubscriptionChannel = UserSubscriptionChannel::find()->alias($post['channelAlias'])->one();
 //        if (!$userSubscriptionChannel) { AppHelper::redirectWithFlash('/', 'danger', 'Канал подписки (#' . $post['channelAlias'] . ') не найден.'); }
 
-        // Подписка на рассылки
+        /** @var UserSubscription $userSubscription Подписка на рассылки */
         $userSubscription =
             UserSubscription::find()
                 ->userId($post['userId'])
@@ -195,10 +195,12 @@ class DefaultController extends \frontend\components\Controller
                         }], false);
                         $query->andWhere(['key' => $post['senderKey']]);
                     },
+                ])
+                ->with([
                     'exemptions' => function ($query) use($post) {
                         $query->andWhere(['action_id' => $post['actionId'], 'channel_id' => $post['channelId']]);
                     },
-                ], false)
+                ])
                 ->andWhere("category.id IS NOT NULL")
                 ->one();
         // Если подписка на рассылки существует
@@ -223,6 +225,6 @@ class DefaultController extends \frontend\components\Controller
 //        }
 
         // Возвращаемся по переданному адресу
-        AppHelper::redirectWithFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['active']) ? 'подписались на' : 'отписались от') . ' "' . $userSubscriptionKey->name . '" (' . $userSubscriptionChannel->name . ').');
+        AppHelper::redirectWithFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['active']) ? 'подписались на' : 'отписались от') . ' "' . $userSubscription->sender . '" (канал сообщений!!!).');
     }
 }
