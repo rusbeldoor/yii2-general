@@ -5,7 +5,7 @@ namespace rusbeldoor\yii2General\widgets;
 /**
  * DetailView
  */
-class DetailView extends \yii\bootstrap4\DetailView
+class DetailView extends \yii\widgets\DetailView
 {
     // Атрибуты тега table
     public $options = ['class' => 'table table-striped table-hover'];

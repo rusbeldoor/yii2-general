@@ -7,9 +7,25 @@ use yii\web\ForbiddenHttpException;
 
 class AppHelper
 {
-    /**********************************
-     *** *** *** Завершения *** *** ***
-     **********************************/
+    /*****************************************
+     *** *** *** Константы *** *** *** *** ***
+     *****************************************/
+
+    const PLATFORM_ID = 1;
+    const PLATFORM_ALIAS = 'quick-service';
+
+    const ALERT_SUCCESS = 'success';
+    const ALERT_ERROR = 'error';
+    const ALERT_WARNING = 'warning';
+    const ALERT_INFO = 'info';
+
+    const RESULT_SUCCESS = 'success';
+    const RESULT_ERROR = 'error';
+    const RESULT_NOTHING = 'nothing ';
+
+    /*****************************************
+     *** *** *** Завершение работы *** *** ***
+     *****************************************/
 
     /**
      * Завершение, если не ajax запрос
@@ -26,6 +42,22 @@ class AppHelper
      */
     public static function exitIfNotPostRequest()
     { if (!Yii::$app->request->isPost) { exit; } }
+
+    /**
+     * Завершение, если не ajax и не post запрос
+     *
+     * @return void
+     */
+    public static function exitIfNotAjaxAndPostRequest()
+    { self::exitIfNotAjaxRequest(); self::exitIfNotPostRequest(); }
+
+    /**
+     * Завершение, если пользователь не авторизован
+     *
+     * @return void
+     */
+    public static function exitIfUserGuest()
+    { if (Yii::$app->user->isGuest) { exit; } }
 
     /**
      * Завершение с выводом
@@ -54,11 +86,7 @@ class AppHelper
      * @return void
      */
     public static function exitWithJson($data)
-    {
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit;
-    }
+    { header('Content-Type: application/json'); echo json_encode($data); exit; }
 
     /**
      * Завершение с выводом json ['result' => $result, 'data' => $data]
@@ -85,18 +113,50 @@ class AppHelper
     { self::exitWithJsonResultData($result); }
 
     /**
-     * ...
+     * Завершение с выводом json ['result' => 'success', 'data' => $data]
      *
-     * @param string $url
-     * @param string $flasType
-     * @param string $flasahText
-     * @return object
+     * @param mixed $data
+     * @return void
      */
-    public static function redirectWithFlash($url, $flasType, $flasahText)
-    {
-        self::setFlashes([$flasType => $flasahText]);
-        return Yii::$app->controller->redirect($url);
-    }
+    public static function exitWithJsonResultSuccessData($data = null)
+    { self::exitWithJsonResultData('success', $data); }
+
+    /**
+     * Завершение с выводом json ['result' => 'success', 'data' => ['alerts' => $alerts]]
+     *
+     * @param array $alerts
+     * @return void
+     */
+    public static function exitWithJsonResultSuccessDataAlerts($alerts = [])
+    { self::exitWithJsonResultSuccessData(['alerts' => $alerts]); }
+
+    /**
+     * Завершение с выводом json ['result' => 'success', 'data' => ['html' => $html]]
+     *
+     * @param string $html
+     * @return void
+     */
+    public static function exitWithJsonResultSuccessDataHtml($html = '')
+    { self::exitWithJsonResultSuccessData(['html' => $html]); }
+
+    /**
+     * Завершение с выводом json ['result' => 'error', 'data' => $data]
+     *
+     * @param mixed $data
+     * @return void
+     */
+    public static function exitWithJsonResultErrorData($data = null)
+    { self::exitWithJsonResultData('error', $data); }
+
+    /**
+     * Завершение с выводом json ['result' => 'error', 'data' => ['alerts' => $alerts]]
+     *
+     * @param array $alerts
+     * @return void
+     */
+    public static function exitWithJsonResultErrorDataAlerts($alerts = [])
+    { self::exitWithJsonResultErrorData(['alerts' => $alerts]); }
+
 
     /*************************************
      *** *** *** Права доступа *** *** ***
@@ -130,6 +190,52 @@ class AppHelper
             Yii::$app->session->setFlash($key, $text);
         }
     }
+
+    /**
+     * ...
+     *
+     * @param string $url
+     * @param string $flashType
+     * @param string $flashText
+     * @return object
+     */
+    public static function redirectWithFlash($url, $flashType, $flashText)
+    {
+        self::setFlashes([$flashType => $flashText]);
+        return Yii::$app->controller->redirect($url);
+    }
+
+    /**
+     * ...
+     *
+     * @param string $url
+     * @param array $flashes
+     * @return void
+     */
+    public static function redirectWithFlashes($url, $flashes)
+    {
+        foreach ($flashes as $flash) { self::setFlashes([$flash['type'] => $flash['text']]); }
+        return Yii::$app->controller->redirect($url);
+    }
+
+    /**
+     * ...
+     *
+     * @param string $flashType
+     * @param string $flashText
+     * @return void
+     */
+    public static function redirectIndexWithFlash($flashType, $flashText)
+    { self::redirectWithFlash(['index'], $flashType, $flashText); }
+
+    /**
+     * ...
+     *
+     * @param array $flashes
+     * @return void
+     */
+    public static function redirectIndexWithFlashes($flashes)
+    { self::redirectWithFlashes(['index'], $flashes); }
 
     /****************************************
      *** *** *** Работа с файлами *** *** ***
