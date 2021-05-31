@@ -13,7 +13,7 @@ class UserSubscriptionSenderCategoryActionQuery extends ActiveQuery
      * ...
      *
      * @param int $platformId
-     * @return UserSubscriptionSenderCategoryActionQuery
+     * @return self
      */
     public function platformId($platformId)
     {
@@ -25,7 +25,7 @@ class UserSubscriptionSenderCategoryActionQuery extends ActiveQuery
      * ...
      *
      * @param string|null $alias
-     * @return UserSubscriptionSenderCategoryActionQuery
+     * @return self
      */
     public function allChildren($alias)
     {
