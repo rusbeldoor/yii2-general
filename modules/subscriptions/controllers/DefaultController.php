@@ -71,7 +71,7 @@ class DefaultController extends \frontend\components\Controller
 
         /** @var UserSubscriptionChannel[] $channels Способы доставки уведомлений */
         $channelsQuery = UserSubscriptionChannel::find()->indexBy('id')->active();
-        if ($params['channels']) { $channelsQuery->andWhere(['alias' => $params['channels']]); }
+        if ($params['channels']) { $channelsQuery->alias($params['channels']); }
         $channels = $channelsQuery->all();
 
         $senderCategoriesActions = [];
