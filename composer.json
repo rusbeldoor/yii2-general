@@ -3,6 +3,8 @@
     "type": "library",
     "require": {
         "php": ">=5.6.0",
+        "yiisoft/yii2": "~2.0.14",
+        "yiisoft/yii2-bootstrap4": "~2.0.6",
         "thomaspark/bootswatch": "^4",
         "fortawesome/font-awesome": "^5.14.0",
         "kartik-v/yii2-nav-x": "@dev",
@@ -19,6 +21,9 @@
         "process-timeout": 1800,
         "fxp-asset": {"enabled": false}
     },
+    "repositories": [
+        {"type": "composer", "url": "https://asset-packagist.org"}
+    ],
     "autoload": {
         "psr-4": {
             "rusbeldoor\\yii2General\\": ""
