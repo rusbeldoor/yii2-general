@@ -42,7 +42,7 @@ class DefaultController extends \frontend\components\Controller
         };
 
         // Обработка параметров
-        $params = ['platforms' => null, 'category' => null, 'senders' => null, 'channels' => null, 'actions' => null];
+        $params = ['platforms' => null, 'category' => null, 'keys' => null, 'channels' => null, 'actions' => null];
         foreach ($params as $key => $param) { $params[$key] = $getParam($key); }
 
         // Проверка hash`a
@@ -51,7 +51,7 @@ class DefaultController extends \frontend\components\Controller
 //        }
 
         // Параметры, которые необходимо преобразовать
-//        $arrayKeys = ['platforms', 'senders', 'channels', 'actions'];
+//        $arrayKeys = ['platforms', 'keys', 'channels', 'actions'];
 //        foreach ($arrayKeys as $key) {
 //            if ($params[$key]) { $params[$key] = explode(',', $params[$key]); }
 //        }
@@ -60,13 +60,13 @@ class DefaultController extends \frontend\components\Controller
         $senderCategoriesQuery = UserSubscriptionSenderCategory::find()->indexBy('id');
         if ($params['platforms']) {
             $senderCategoriesQuery->joinWith('platform')->andWhere(['platform.alias' => $params['platforms']]);
-            if ($params['category']) { $senderCategoriesQuery->alias($params['category']); }
+            if ($params['category']) { $senderCategoriesQuery->andWhere($params['category']); }
         }
         $senderCategories = $senderCategoriesQuery->all();
 
         /** @var UserSubscriptionSender[] $senders Отправители */
         $sendersQuery = UserSubscriptionSender::find()->andWhere(['category_id' => array_keys($senderCategories)])->indexBy('id')->active();
-        if ($params['senders']) { $sendersQuery->andWhere(['sender_id' => $params['senders']]); }
+        if ($params['keys']) { $sendersQuery->andWhere(['sender_id' => $params['keys']]); }
         $senders = $sendersQuery->all();
 
         /** @var UserSubscriptionChannel[] $channels Способы доставки уведомлений */
