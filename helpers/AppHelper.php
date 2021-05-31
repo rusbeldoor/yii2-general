@@ -226,7 +226,7 @@ class AppHelper
      * @return void
      */
     public static function redirectIndexWithFlash($flashType, $flashText)
-    { self::redirectWithFlash(['index'], $flashType, $flashText); }
+    { return self::redirectWithFlash(['index'], $flashType, $flashText); }
 
     /**
      * ...
@@ -235,7 +235,7 @@ class AppHelper
      * @return void
      */
     public static function redirectIndexWithFlashes($flashes)
-    { self::redirectWithFlashes(['index'], $flashes); }
+    { return self::redirectWithFlashes(['index'], $flashes); }
 
     /****************************************
      *** *** *** Работа с файлами *** *** ***
