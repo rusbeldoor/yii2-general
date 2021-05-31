@@ -13,7 +13,7 @@ class UserSubscriptionSenderCategoryQuery extends ActiveQuery
      * ...
      *
      * @param int $platformId
-     * @return UserSubscriptionSenderCategoryQuery
+     * @return self
      */
     public function platformId($platformId)
     {

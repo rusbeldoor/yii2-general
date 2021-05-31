@@ -11,7 +11,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
      * Алиас
      *
      * @param string $alias
-     * @return AuthItemQuery
+     * @return self
      */
     public function alias($alias)
     { return $this->andWhere([$this->getPrimaryTableName() . '.alias' => $alias]); }
@@ -20,7 +20,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
      * Тип
      *
      * @param mixed $type
-     * @return AuthItemQuery
+     * @return self
      */
     public function type($type)
     { return $this->andWhere([$this->getPrimaryTableName() . '.type' => $type]); }
@@ -29,7 +29,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
      * Статус
      *
      * @param mixed $status
-     * @return CronQuery
+     * @return self
      */
     public function status($status)
     { return $this->andWhere([$this->getPrimaryTableName() . '.status' => $status]); }
@@ -37,7 +37,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Архивный
      *
-     * @return ActiveQuery
+     * @return self
      */
     public function archive()
     { return $this->andWhere([$this->getPrimaryTableName() . '.archive' => 1]); }
@@ -47,7 +47,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
      *
      * @param int|null $fieldValue
      * @param string $fieldName
-     * @return ActiveQuery
+     * @return self
      */
     public function notArchive($fieldValue = null, $fieldName = 'id')
     { return $this->andWhere($this->getPrimaryTableName() . ".archive=0" . (($fieldValue !== null) ? " OR " . $this->getPrimaryTableName() . ".$fieldName=" . ((is_string($fieldValue)) ? "\"$fieldValue\"" : $fieldValue) : "")); }
@@ -55,7 +55,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Активный
      *
-     * @return ActiveQuery
+     * @return self
      */
     public function active()
     { return $this->andWhere([$this->getPrimaryTableName() . '.active' => 1]); }
@@ -63,7 +63,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Не активный
      *
-     * @return ActiveQuery
+     * @return self
      */
     public function notActive()
     { return $this->andWhere([$this->getPrimaryTableName() . '.active' => 0]); }

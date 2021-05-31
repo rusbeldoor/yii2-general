@@ -46,9 +46,9 @@ class DefaultController extends \frontend\components\Controller
         foreach ($params as $key => $param) { $params[$key] = $getParam($key); }
 
         // Проверка hash`a
-//        if ($hash != UserSubscriptionHelper::hash($userId, $params)) {
-//            return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целостность запроса.');
-//        }
+        if ($hash != UserSubscriptionHelper::hash($userId, $params['platforms'], $params['category'], $params['senderKeys'], $params['channels'], $params['actions'])) {
+            return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целостность запроса.');
+        }
 
         // Параметры, которые необходимо преобразовать
         $arrayKeys = ['platforms', 'senderKeys', 'channels', 'actions'];
@@ -82,17 +82,17 @@ class DefaultController extends \frontend\components\Controller
             $senderCategoriesActions = $senderCategoriesActionsQuery->all();
         }
 
-        /** @var UserSubscription[] $userSubscriptions Подписки */
-        $userSubscriptions = [];
         $result = [];
         if (count($senderCategoriesActions) && count($channels)) {
+            /** @var UserSubscription[] $userSubscriptions Подписки */
             $userSubscriptions = UserSubscription::find()
                 ->userId($userId)
                 ->andWhere(['sender_id' => array_keys($senders)])
+                ->joinWith('sender', false)
                 ->with(['exemptions' => function ($query) use($senderCategoriesActions, $channels) {
                     $query->andWhere(['sender_category_action_id' => array_keys($senderCategoriesActions), 'channel_id' => array_keys($channels)]);
                 }])
-//                ->orderBy('key')
+                ->orderBy('sender.platform_id, sender.key')
                 ->all();
 
             if (count($userSubscriptions)) {

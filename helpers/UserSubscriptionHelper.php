@@ -10,21 +10,25 @@ class UserSubscriptionHelper
      * Хэш
      *
      * @param int $userId
-     * @param array $params
+     * @param string $platform
+     * @param string $category
+     * @param string $senderKey
+     * @param string $action
+     * @param string $channel
      * @return string
      */
-    public static function hash($userId, $params)
+    public static function hash($userId, $platform = '', $category = '', $senderKey = '', $action = '', $channel = '')
     {
         return hash(
             'sha256',
             hash(
                 'sha256',
                 $userId
-                . ((isset($params['platform'])) ? $params['platform'] : '')
-                . ((isset($params['key'])) ? $params['key'] : '')
-                . ((isset($params['category'])) ? $params['category'] : '')
-                . ((isset($params['actions'])) ? $params['actions'] : '')
-                . ((isset($params['channels'])) ? $params['channels'] : '')
+                . $platform
+                . $category
+                . $senderKey
+                . $action
+                . $channel
             )
             . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']
         ); }
@@ -33,10 +37,14 @@ class UserSubscriptionHelper
      * Ссылка
      *
      * @param int $userId
-     * @param array $params
+     * @param string $platform
+     * @param string $category
+     * @param string $senderKey
+     * @param string $action
+     * @param string $channel
      * @return string
      */
-    public static function link($userId, $params)
+    public static function link($userId, $platform = '', $category = '', $senderKey = '', $action = '', $channel = '')
     {
         return '/subscriptions?userId=' . $userId
             . ((isset($params['platform'])) ? '&platform=' . $params['platform'] : '')
@@ -44,7 +52,7 @@ class UserSubscriptionHelper
             . ((isset($params['category'])) ? '&category=' . $params['category'] : '')
             . ((isset($params['actions'])) ? '&actions=' . $params['actions'] : '')
             . ((isset($params['channels'])) ? '&channels=' . $params['channels'] : '')
-            . '&hash=' . self::hash($userId, $params);
+            . '&hash=' . self::hash($userId, $platform, $category, $senderKey, $action, $channel);
     }
 
     /**
