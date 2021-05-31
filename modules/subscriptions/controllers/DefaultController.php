@@ -165,110 +165,93 @@ class DefaultController extends \frontend\components\Controller
 
         // Проверка hash`a
         if ($hash != UserSubscriptionHelper::hash($userId, $params)) {
-            return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.');
+            return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целостность запроса.');
         }
 
         // Параметры, которые необходимо преобразовать
-        $arrayKeys = ['platforms', 'senders', 'channels', 'actions'];
-        foreach ($arrayKeys as $key) { $params[$key] = explode(',', $params[$key]); }
+//        $arrayKeys = ['platforms', 'senders', 'channels', 'actions'];
+//        foreach ($arrayKeys as $key) {
+//            if ($params[$key]) { $params[$key] = explode(',', $params[$key]); }
+//        }
 
         /** @var UserSubscriptionSenderCategory[] $senderCategories Категории отправителей и их действия */
         $senderCategoriesQuery = UserSubscriptionSenderCategory::find()->indexBy('id')->platformAlias($params['platforms']);
         if ($params['category']) { $senderCategoriesQuery->where(['alias' => $params['category']]); }
-        $senderCategories = $senderCategoriesQuery->with('actions')->all();
-
-        // todo Закончил здесь!!
-        /** @var UserSubscriptionSenderCategoryAction[] $senderCategoriesActions Категории отправителей и их действия */
-        $senderCategoriesActionsQuery = UserSubscriptionSenderCategoryAction::find()->indexBy('id')->where([$params['platforms']]);
-        if ($params['category']) { $senderCategoriesActionsQuery->where(['alias' => $params['category']]); }
-        $senderCategoriesActions = $senderCategoriesActionsQuery->with('actions')->all();
+        $senderCategories = $senderCategoriesQuery->all();
 
         /** @var UserSubscriptionSender[] $senders Отправители */
         $sendersQuery = UserSubscriptionSender::find()->where(['category_id' => array_keys($senderCategories)])->indexBy('id')->active();
-        if ($params['keys']) { $sendersQuery->where(['key' => $params['keys']]); }
+        if ($params['sender']) { $sendersQuery->where(['sender_id' => $params['sender_id']]); }
         $senders = $senders->all();
 
-        // Получаем подписки...
-        $userSubscriptions = [];
+        /** @var UserSubscriptionChannel[] $channels Способы доставки уведомлений */
+        $channelsQuery = UserSubscriptionChannel::find()->indexBy('id');
+        if ($params['channels']) { $channelsQuery->where(['alias' => $params['channels']]); }
+        $channels = $channelsQuery->all();
+
+        $senderCategoriesActions = [];
         if (count($senders)) {
+            /** @var UserSubscriptionSenderCategoryAction[] $senderCategoriesActions Категории отправителей и их действия */
+            $senderCategoriesActionsQuery = UserSubscriptionSenderCategoryAction::find()->indexBy('id')->where(['category_id' => $senderCategories]);
+            if ($params['actions']) { $senderCategoriesActionsQuery->where(['alias' => $params['actions']]); }
+            $senderCategoriesActions = $senderCategoriesActionsQuery->all();
+        }
+
+        /** @var UserSubscription[] $userSubscriptions Подписки */
+        $userSubscriptions = [];
+        $result = [];
+        if (count($senderCategoriesActions) && count($channels)) {
             $userSubscriptions = UserSubscription::find()
                 ->userId($userId)
                 ->where(['sender_id' => array_keys($senders)])
-                ->with(['exemptions' => function ($query) {
-                    $query->andWhere(['sender_category_action_id' => array_keys($senderCategoriesActions), 'channel_id' => array_keys($userSubscriptionChannels)]);
+                ->with(['exemptions' => function ($query) use($senderCategoriesActions, $channels) {
+                    $query->andWhere(['sender_category_action_id' => array_keys($senderCategoriesActions), 'channel_id' => array_keys($channels)]);
                 }])
                 ->orderBy('key_id')
                 ->all();
-        }
 
-        // Получения подписок по параметрам
-        /** @var UserSubscription[] $userSubscriptions Подписки */
-        $userSubscriptions = UserSubscription::getAllByParams($params);
-
-        /** @var UserSubscriptionSender[] $userSubscriptionKeys Ключи */
-        $userSubscriptionKeys = UserSubscriptionSender::find()->categoryId($getPlatform)->allChildren($getKeyAlias)->indexBy('id')->active()->all();
-
-        /** @var UserSubscriptionChannel[] $userSubscriptionChannels Каналы */
-        $userSubscriptionChannels = UserSubscriptionChannel::find()->aliases($channelsAliases)->active()->indexBy('id')->all();
-        $channels = [];
-        // Обрабатываем каналы
-        foreach ($userSubscriptionChannels as $userSubscriptionChannel) {
-            $channels[$userSubscriptionChannel->id] = [
-                'id' => $userSubscriptionChannel->id,
-                'alias' => $userSubscriptionChannel->alias,
-                'name' => $userSubscriptionChannel->name,
-                'active' => true,
-            ];
-        }
-
-        /** @var UserSubscriptionSenderCategoryAction[] $userSubscriptionActions Действия */
-        $userSubscriptionActions = UserSubscriptionSenderCategoryAction::find()->platformId($getPlatform)->active()->indexBy('id')->all();
-        $actionsByKeyId = [];
-        // Перебираем ключи
-        foreach ($userSubscriptionKeys as $userSubscriptionKey) {
-            $actionsByKeyId[$userSubscriptionKey->id] = [];
-
-            // Перебираем действия
-            foreach ($userSubscriptionActions as $userSubscriptionAction) {
-                // Если начало строки соответствует
-                if (strpos($userSubscriptionKey->alias, $userSubscriptionAction->part_key_alias) === 0) {
-                    $actionsByKeyId[$userSubscriptionKey->id][$userSubscriptionAction->id] = [
-                        'id' => $userSubscriptionAction->id,
-                        'name' => $userSubscriptionAction->name,
-                        'channels' => $channels,
+            if (count($userSubscriptions)) {
+                // Обрабатываем каналы
+                $channelsArray = [];
+                foreach ($channels as $channel) {
+                    $channelsArray[$channel->id] = [
+                        'id' => $channel->id,
+                        'alias' => $channel->alias,
+                        'name' => $channel->name,
                         'active' => true,
                     ];
                 }
-            }
-        }
 
-        $result = [];
-        // Перебираем подписки
-        foreach ($userSubscriptions as $userSubscription) {
-            // Подписка
-            $result[$userSubscription->id] = [
-                'id' => $userSubscription->id,
-                'key_id' => $userSubscription->sender_id,
-                'platform_id' => $userSubscriptionKeys[$userSubscription->sender_id]->platform_id,
-                'alias' => $userSubscriptionKeys[$userSubscription->sender_id]->alias,
-                'name' => $userSubscriptionKeys[$userSubscription->sender_id]->name,
-                'actions' => $actionsByKeyId[$userSubscription->sender_id],
-                'channels' => $channels,
-                'active' => true,
-            ];
+                // Перебираем подписки
+                foreach ($userSubscriptions as $userSubscription) {
+                    $category = $senderCategories[$senders[$userSubscription->sender_id]->category_id];
+                    $result[$userSubscription->id] = [
+                        'id' => $userSubscription->id,
+                        'send' => $category->platform_id,
+                        'key' => $userSubscription->sender_id,
+                        'alias' => $senders[$userSubscription->sender_id]->alias,
+                        'name' => $senders[$userSubscription->sender_id]->name,
+                        'actions' => [],
+                        'active' => true,
+                    ];
 
-            // Обрабатываем исключения
-            foreach ($userSubscription->exemptions as $exemption) {
-                if (isset($exemption->action_id)) {
-                    if (isset($exemption->channel_id)) {
-                        $result[$userSubscription->id]['actions'][$exemption->action_id]['channels'][$exemption->channel_id]['active'] = false;
-                    } else {
-                        $result[$userSubscription->id]['actions'][$exemption->action_id]['active'] = false;
+                    // Перебираем действия
+                    foreach ($senderCategoriesActions as $senderCategoriesAction) {
+                        // Если начало строки соответствует
+                        if ($category->id === $senderCategoriesAction->category_id) {
+                            $result[$userSubscription->id]['actions'][$senderCategoriesAction->id] = [
+                                'id' => $senderCategoriesAction->id,
+                                'name' => $senderCategoriesAction->name,
+                                'channels' => $channels,
+                                'active' => true,
+                            ];
+                        }
                     }
-                } elseif (isset($exemption->channel_id)) {
-                    $result[$userSubscription->id]['channels'][$exemption->channel_id]['active'] = false;
-                } else {
-                    $result[$userSubscription->id]['active'] = false;
+
+                    // Обрабатываем исключения
+                    foreach ($userSubscription->exemptions as $exemption) {
+                        $result[$userSubscription->id]['actions'][$exemption->sender_category_action_id]['channels'][$exemption->channel_id]['active'] = false;
+                    }
                 }
             }
         }

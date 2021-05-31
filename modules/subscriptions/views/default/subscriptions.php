@@ -60,23 +60,26 @@ else {
         ?><div class="card" style="float: left; margin: 0 10px 10px 0;">
         <div class="card-body">
             <h5 class="card-title"><?= $subscript['name'] ?></h5><?
-            $buttons = [];
-            foreach ($subscript['channels'] as $channel) {
-                $channelIcon = UserSubscriptionHelper::channelIcon($channel['alias']);
-                $buttons[] =
-                    Html::beginForm('/subscriptions/default/change', 'post', ['style' => ['padding-top' => '5px;']])
-                            . Html::input('hidden', 'userId', $userId)
-                            . Html::input('hidden', 'platformId', $subscript['platform_id'])
-                            . Html::input('hidden', 'keyAlias', $subscript['alias'])
-                            . Html::input('hidden', 'channelAlias', $channel['alias'])
-                            . Html::input('hidden', 'hash', UserSubscriptionHelper::hash($userId, $subscript['platform_id'], $subscript['key_id'], $channel['alias']))
-                            . Html::input('hidden', 'active', (($channel['active']) ? '0' : '1'))
-                            . Html::input('hidden', 'redirectUrl', Yii::$app->request->url)
-                            . '<button type="button" class="btn btn-' . (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') . ' " data-key-name="' . $subscript['name'] . '" data-channel-name="' . $channel['name'] . '">' . (($channelIcon) ? $channelIcon . '&nbsp;' : '') . ' ' . $channel['name'] . ' — ' . (($channel['active']) ? 'отписаться' : 'подписаться') . '</button>'
+            foreach ($subscript['actions'] as $action) {
+                echo $action['name'] . '<br>';
+
+                $buttons = [];
+                foreach ($action['channels'] as $channel) {
+                    $channelIcon = UserSubscriptionHelper::channelIcon($channel['alias']);
+                    $buttons[] =
+                        Html::beginForm('/subscriptions/default/change', 'post', ['style' => ['padding-top' => '5px;']])
+//                            . Html::input('hidden', 'userId', $userId)
+//                            . Html::input('hidden', 'categoryId', $subscript['alias'])
+//                            . Html::input('hidden', 'key', $subscript['alias'])
+//                            . Html::input('hidden', 'channelAlias', $channel['alias'])
+//                            . Html::input('hidden', 'hash', UserSubscriptionHelper::hash($userId, $subscript['platform_id'], $subscript['key_id'], $channel['alias']))
+//                            . Html::input('hidden', 'active', (($channel['active']) ? '0' : '1'))
+//                            . Html::input('hidden', 'redirectUrl', Yii::$app->request->url)
+                        . '<button type="button" class="btn btn-' . (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') . ' " data-key-name="' . $subscript['name'] . '" data-channel-name="' . $channel['name'] . '">' . (($channelIcon) ? $channelIcon . '&nbsp;' : '') . ' ' . $channel['name'] . ' — ' . (($channel['active']) ? 'отписаться' : 'подписаться') . '</button>'
                         . Html::endForm();
+                }
+                echo implode('', $buttons);
             }
-            echo implode('', $buttons);
-            foreach ($subscript['actions'] as $action) { echo $action['name']; }
             ?></div>
         </div><?
     }

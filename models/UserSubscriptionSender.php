@@ -6,6 +6,7 @@ namespace rusbeldoor\yii2General\models;
  * User_subscription_sender (ActiveRecord)
  *
  * @property int $id
+ * @property int $category_id
  * @property string $key
  * @property string $name
  * @property int $active
