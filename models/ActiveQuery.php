@@ -14,7 +14,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
      * @return AuthItemQuery
      */
     public function alias($alias)
-    { return $this->andWhere("alias=:alias", [':alias' => $alias]); }
+    { return $this->andWhere(['alias' => $alias]); }
 
     /**
      * Тип

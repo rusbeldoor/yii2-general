@@ -58,24 +58,24 @@ class DefaultController extends \frontend\components\Controller
 
         /** @var UserSubscriptionSenderCategory[] $senderCategories Категории отправителей и их действия */
         $senderCategoriesQuery = UserSubscriptionSenderCategory::find()->indexBy('id')->platformAlias($params['platforms']);
-        if ($params['category']) { $senderCategoriesQuery->where(['alias' => $params['category']]); }
+        if ($params['category']) { $senderCategoriesQuery->alias($params['category']); }
         $senderCategories = $senderCategoriesQuery->all();
 
         /** @var UserSubscriptionSender[] $senders Отправители */
-        $sendersQuery = UserSubscriptionSender::find()->where(['category_id' => array_keys($senderCategories)])->indexBy('id')->active();
-        if ($params['senders']) { $sendersQuery->where(['sender_id' => $params['senders']]); }
-        $senders = $senders->all();
+        $sendersQuery = UserSubscriptionSender::find()->andWhere(['category_id' => array_keys($senderCategories)])->indexBy('id')->active();
+        if ($params['senders']) { $sendersQuery->andWhere(['sender_id' => $params['senders']]); }
+        $senders = $sendersQuery->all();
 
         /** @var UserSubscriptionChannel[] $channels Способы доставки уведомлений */
-        $channelsQuery = UserSubscriptionChannel::find()->indexBy('id');
-        if ($params['channels']) { $channelsQuery->where(['alias' => $params['channels']]); }
+        $channelsQuery = UserSubscriptionChannel::find()->indexBy('id')->active();
+        if ($params['channels']) { $channelsQuery->andWhere(['alias' => $params['channels']]); }
         $channels = $channelsQuery->all();
 
         $senderCategoriesActions = [];
         if (count($senders)) {
             /** @var UserSubscriptionSenderCategoryAction[] $senderCategoriesActions Категории отправителей и их действия */
-            $senderCategoriesActionsQuery = UserSubscriptionSenderCategoryAction::find()->indexBy('id')->where(['category_id' => $senderCategories]);
-            if ($params['actions']) { $senderCategoriesActionsQuery->where(['alias' => $params['actions']]); }
+            $senderCategoriesActionsQuery = UserSubscriptionSenderCategoryAction::find()->indexBy('id')->andWhere(['category_id' => array_keys($senderCategories)]);
+            if ($params['actions']) { $senderCategoriesActionsQuery->andWhere(['alias' => $params['actions']]); }
             $senderCategoriesActions = $senderCategoriesActionsQuery->all();
         }
 
@@ -85,11 +85,11 @@ class DefaultController extends \frontend\components\Controller
         if (count($senderCategoriesActions) && count($channels)) {
             $userSubscriptions = UserSubscription::find()
                 ->userId($userId)
-                ->where(['sender_id' => array_keys($senders)])
+                ->andWhere(['sender_id' => array_keys($senders)])
                 ->with(['exemptions' => function ($query) use($senderCategoriesActions, $channels) {
                     $query->andWhere(['sender_category_action_id' => array_keys($senderCategoriesActions), 'channel_id' => array_keys($channels)]);
                 }])
-                ->orderBy('key_id')
+//                ->orderBy('key')
                 ->all();
 
             if (count($userSubscriptions)) {
@@ -111,7 +111,6 @@ class DefaultController extends \frontend\components\Controller
                         'id' => $userSubscription->id,
                         'send' => $category->platform_id,
                         'key' => $userSubscription->sender_id,
-                        'alias' => $senders[$userSubscription->sender_id]->alias,
                         'name' => $senders[$userSubscription->sender_id]->name,
                         'actions' => [],
                         'active' => true,
