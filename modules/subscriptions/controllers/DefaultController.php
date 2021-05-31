@@ -46,7 +46,7 @@ class DefaultController extends \frontend\components\Controller
         foreach ($params as $key => $param) { $params[$key] = $getParam($key); }
 
         // Проверка hash`a
-        if ($hash != UserSubscriptionHelper::hash($userId, $params['platforms'], $params['category'], $params['senderKeys'], $params['channels'], $params['actions'])) {
+        if ($hash != UserSubscriptionHelper::hash($userId, $params['platforms'], $params['category'], $params['senderKeys'], $params['actions'], $params['channels'])) {
             return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целостность запроса.');
         }
 
@@ -59,7 +59,7 @@ class DefaultController extends \frontend\components\Controller
         /** @var UserSubscriptionSenderCategory[] $senderCategories Категории отправителей и их действия */
         $senderCategoriesQuery = UserSubscriptionSenderCategory::find()->indexBy('id');
         if ($params['platforms']) {
-            $senderCategoriesQuery->joinWith('platform')->andWhere(['platform.alias' => $params['platforms']]);
+            $senderCategoriesQuery->joinWith('platform', false)->andWhere(['platform.alias' => $params['platforms']]);
             if ($params['category']) { $senderCategoriesQuery->alias($params['category']); }
         }
         $senderCategories = $senderCategoriesQuery->all();
@@ -88,11 +88,11 @@ class DefaultController extends \frontend\components\Controller
             $userSubscriptions = UserSubscription::find()
                 ->userId($userId)
                 ->andWhere(['sender_id' => array_keys($senders)])
-                ->joinWith('sender', false)
+                ->joinWith(['sender' => function ($query) { return $query->joinWith('category', false); }], false)
                 ->with(['exemptions' => function ($query) use($senderCategoriesActions, $channels) {
                     $query->andWhere(['sender_category_action_id' => array_keys($senderCategoriesActions), 'channel_id' => array_keys($channels)]);
                 }])
-                ->orderBy('sender.platform_id, sender.key')
+                ->orderBy('user_subscription_sender_category.platform_id, user_subscription_sender.key')
                 ->all();
 
             if (count($userSubscriptions)) {
@@ -156,31 +156,43 @@ class DefaultController extends \frontend\components\Controller
         $post = Yii::$app->request->post();
         if (
             !isset($post['userId'])
-            || !isset($post['platformId'])
-            || !isset($post['keyAlias'])
-            || !isset($post['channelAlias'])
+            || !isset($post['platform'])
+            || !isset($post['category'])
+            || !isset($post['senderKey'])
+            || !isset($post['action'])
+            || !isset($post['channel'])
             || !isset($post['hash'])
             || !isset($post['active'])
             || !isset($post['redirectUrl'])
-        ) { return AppHelper::redirectWithFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
+        ) { AppHelper::redirectWithFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
 
         // Проверяем хэш
-        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], $post['platformId'], $post['keyAlias'], $post['channelAlias'])) { return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.'); }
+        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], $post['platform'], $post['category'], $post['senderKey'], $post['action'], $post['channel'])) {
+            AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.');
+        }
 
         // Пользователь
         $user = User::find($post['userId'])->one();
-        if (!$user) { return AppHelper::redirectWithFlash('/', 'danger', 'Пользователь (#' . $post['userId'] . ') не найден.'); }
+        if (!$user) { AppHelper::redirectWithFlash('/', 'danger', 'Пользователь (#' . $post['userId'] . ') не найден.'); }
 
         // Ключ
         $userSubscriptionKey = UserSubscriptionSender::find()->alias($post['keyAlias'])->one();
-        if (!$userSubscriptionKey) { return AppHelper::redirectWithFlash('/', 'danger', 'Ключ подписки (' . $post['keyAlias'] . ') не найден.'); }
+        if (!$userSubscriptionKey) { AppHelper::redirectWithFlash('/', 'danger', 'Ключ подписки (' . $post['keyAlias'] . ') не найден.'); }
 
         // Канал
         $userSubscriptionChannel = UserSubscriptionChannel::find()->alias($post['channelAlias'])->one();
-        if (!$userSubscriptionChannel) { return AppHelper::redirectWithFlash('/', 'danger', 'Канал подписки (#' . $post['channelAlias'] . ') не найден.'); }
+        if (!$userSubscriptionChannel) { AppHelper::redirectWithFlash('/', 'danger', 'Канал подписки (#' . $post['channelAlias'] . ') не найден.'); }
 
         // Подписка на рассылки
-        $userSubscription = UserSubscription::find()->userId($post['userId'])->keyId($userSubscriptionKey->id)->channelId($userSubscriptionChannel->id)->one();
+        $userSubscription =
+            UserSubscription::find()
+                ->userId($post['userId'])
+                ->leftJoin([
+                    'sender' => function ($query) { return $query->joinWith(); }
+                ])
+                ->keyId($userSubscriptionKey->id)
+                ->channelId($userSubscriptionChannel->id)
+                ->one();
         // Если подписка на рассылки существует
         if ($userSubscription) {
             if ($post['active']) {

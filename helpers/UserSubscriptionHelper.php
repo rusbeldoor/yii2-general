@@ -23,12 +23,7 @@ class UserSubscriptionHelper
             'sha256',
             hash(
                 'sha256',
-                $userId
-                . $platform
-                . $category
-                . $senderKey
-                . $action
-                . $channel
+                implode(',', [$userId, $platform, $category, $senderKey, $action, $channel])
             )
             . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']
         ); }
@@ -47,11 +42,11 @@ class UserSubscriptionHelper
     public static function link($userId, $platform = '', $category = '', $senderKey = '', $action = '', $channel = '')
     {
         return '/subscriptions?userId=' . $userId
-            . ((isset($params['platform'])) ? '&platform=' . $params['platform'] : '')
-            . ((isset($params['key'])) ? '&key=' . $params['key'] : '')
-            . ((isset($params['category'])) ? '&category=' . $params['category'] : '')
-            . ((isset($params['actions'])) ? '&actions=' . $params['actions'] : '')
-            . ((isset($params['channels'])) ? '&channels=' . $params['channels'] : '')
+            . (($platform) ? '&platforms=' . $platform : '')
+            . (($category) ? '&category=' . $category : '')
+            . (($senderKey) ? '&senderKeys=' . $senderKey : '')
+            . (($action) ? '&actions=' . $action : '')
+            . (($channel) ? '&channels=' . $channel : '')
             . '&hash=' . self::hash($userId, $platform, $category, $senderKey, $action, $channel);
     }
 
