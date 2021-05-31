@@ -26,124 +26,6 @@ class DefaultController extends \frontend\components\Controller
      * @param string $hash
      * @return string
      */
-    public function actionIndex2($userId, $hash)
-    {
-        // Get Параметры
-        $get = Yii::$app->request->get();
-        // Post параметры
-        $post = Yii::$app->request->post();
-        $getParam = function ($param) use($get, $post) {
-            return
-                // Если существует GET параметр
-                ((isset($get[$param])) ?
-                    $get[$param]
-                    // Если существует Post параметр
-                    : ((isset($post[$param])) ? $post[$param] : false));
-        };
-
-        // Обработка параметров
-        $params = ['platforms' => null, 'category' => null, 'keys' => null, 'channels' => null, 'actions' => null];
-        foreach ($params as $key => $param) { $params['key'] = $getParam($key); }
-
-        // Проверка hash`a
-        if ($hash != UserSubscriptionHelper::hash($userId, $params)) {
-            return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целосность запроса.');
-        }
-
-        /** @var UserSubscriptionSender[] $userSubscriptionKeys Ключи */
-        $userSubscriptionKeys = UserSubscriptionSender::find()->categoryId($getPlatform)->allChildren($getKeyAlias)->indexBy('id')->active()->all();
-
-        /** @var UserSubscriptionSender[] $userSubscriptionKeys Ключи */
-        $userSubscriptionKeys = UserSubscriptionSender::find()->categoryId($getPlatform)->allChildren($getKeyAlias)->indexBy('id')->active()->all();
-
-        /** @var UserSubscriptionChannel[] $userSubscriptionChannels Каналы */
-        $userSubscriptionChannels = UserSubscriptionChannel::find()->aliases($channelsAliases)->active()->indexBy('id')->all();
-        $channels = [];
-        // Обрабатываем каналы
-        foreach ($userSubscriptionChannels as $userSubscriptionChannel) {
-            $channels[$userSubscriptionChannel->id] = [
-                'id' => $userSubscriptionChannel->id,
-                'alias' => $userSubscriptionChannel->alias,
-                'name' => $userSubscriptionChannel->name,
-                'active' => true,
-            ];
-        }
-
-        /** @var UserSubscriptionSenderCategoryAction[] $userSubscriptionActions Действия */
-        $userSubscriptionActions = UserSubscriptionSenderCategoryAction::find()->platformId($getPlatform)->active()->indexBy('id')->all();
-        $actionsByKeyId = [];
-        // Перебираем ключи
-        foreach ($userSubscriptionKeys as $userSubscriptionKey) {
-            $actionsByKeyId[$userSubscriptionKey->id] = [];
-
-            // Перебираем действия
-            foreach ($userSubscriptionActions as $userSubscriptionAction) {
-                // Если начало строки соответствует
-                if (strpos($userSubscriptionKey->alias, $userSubscriptionAction->part_key_alias) === 0) {
-                    $actionsByKeyId[$userSubscriptionKey->id][$userSubscriptionAction->id] = [
-                        'id' => $userSubscriptionAction->id,
-                        'name' => $userSubscriptionAction->name,
-                        'channels' => $channels,
-                        'active' => true,
-                    ];
-                }
-            }
-        }
-
-        /** @var UserSubscription[] $userSubscriptions Подписки */
-        $userSubscriptions = [];
-        if (count($userSubscriptionKeys)) {
-            $userSubscriptions = UserSubscription::find()
-                ->userId($userId)
-                ->keysIds(array_keys($userSubscriptionKeys))
-                ->with(['exemptions' => function ($query) use($userSubscriptionActions, $userSubscriptionChannels) {
-                    $query->andWhere(['action_id' => array_keys($userSubscriptionActions), 'channel_id' => array_keys($userSubscriptionChannels)]);
-                }])
-                ->orderBy('sender_id')
-                ->all();
-        }
-
-        $result = [];
-        // Перебираем подписки
-        foreach ($userSubscriptions as $userSubscription) {
-            // Подписка
-            $result[$userSubscription->id] = [
-                'id' => $userSubscription->id,
-                'key_id' => $userSubscription->sender_id,
-                'platform_id' => $userSubscriptionKeys[$userSubscription->sender_id]->platform_id,
-                'alias' => $userSubscriptionKeys[$userSubscription->sender_id]->alias,
-                'name' => $userSubscriptionKeys[$userSubscription->sender_id]->name,
-                'actions' => $actionsByKeyId[$userSubscription->sender_id],
-                'channels' => $channels,
-                'active' => true,
-            ];
-
-            // Обрабатываем исключения
-            foreach ($userSubscription->exemptions as $exemption) {
-                if (isset($exemption->action_id)) {
-                    if (isset($exemption->channel_id)) {
-                        $result[$userSubscription->id]['actions'][$exemption->action_id]['channels'][$exemption->channel_id]['active'] = false;
-                    } else {
-                        $result[$userSubscription->id]['actions'][$exemption->action_id]['active'] = false;
-                    }
-                } elseif (isset($exemption->channel_id)) {
-                    $result[$userSubscription->id]['channels'][$exemption->channel_id]['active'] = false;
-                } else {
-                    $result[$userSubscription->id]['active'] = false;
-                }
-            }
-        }
-
-        return $this->render('subscriptions', ['userId' => $userId, 'result' => $result]);
-    }
-
-    /**
-     * Подписки на рассылки
-     *
-     * @param int $userId
-     * @param string $hash
-     * @return string
-     */
     public function actionIndex($userId, $hash)
     {
         // Get Параметры
@@ -164,9 +46,9 @@ class DefaultController extends \frontend\components\Controller
         foreach ($params as $key => $param) { $params[$key] = $getParam($key); }
 
         // Проверка hash`a
-        if ($hash != UserSubscriptionHelper::hash($userId, $params)) {
-            return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целостность запроса.');
-        }
+//        if ($hash != UserSubscriptionHelper::hash($userId, $params)) {
+//            return AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целостность запроса.');
+//        }
 
         // Параметры, которые необходимо преобразовать
 //        $arrayKeys = ['platforms', 'senders', 'channels', 'actions'];
