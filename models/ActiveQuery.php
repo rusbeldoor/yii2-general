@@ -23,7 +23,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
      * @return AuthItemQuery
      */
     public function type($type)
-    { return $this->andWhere("type=:type", [':type' => $type]); }
+    { return $this->andWhere([$this->getPrimaryTableName() . '.type' => $type]); }
 
     /**
      * Статус
@@ -32,7 +32,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
      * @return CronQuery
      */
     public function status($status)
-    { return $this->andWhere("active=:status", [':status' => $status]); }
+    { return $this->andWhere([$this->getPrimaryTableName() . '.status' => $status]); }
 
     /**
      * Архивный
@@ -40,7 +40,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
      * @return ActiveQuery
      */
     public function archive()
-    { return $this->andWhere("archive=1"); }
+    { return $this->andWhere([$this->getPrimaryTableName() . '.archive' => 1]); }
 
     /**
      * Не архивный
@@ -50,7 +50,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
      * @return ActiveQuery
      */
     public function notArchive($fieldValue = null, $fieldName = 'id')
-    { return $this->andWhere("archive=0" . (($fieldValue !== null) ? " OR " . $fieldName . "=" . ((is_string($fieldValue)) ? "\"" . $fieldValue . "\"" : $fieldValue) : "")); }
+    { return $this->andWhere($this->getPrimaryTableName() . ".archive=0" . (($fieldValue !== null) ? " OR " . $this->getPrimaryTableName() . ".$fieldName=" . ((is_string($fieldValue)) ? "\"$fieldValue\"" : $fieldValue) : "")); }
 
     /**
      * Активный
@@ -58,7 +58,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
      * @return ActiveQuery
      */
     public function active()
-    { return $this->andWhere("active=1"); }
+    { return $this->andWhere([$this->getPrimaryTableName() . '.active' => 1]); }
 
     /**
      * Не активный
@@ -66,5 +66,5 @@ class ActiveQuery extends \yii\db\ActiveQuery
      * @return ActiveQuery
      */
     public function notActive()
-    { return $this->andWhere("active=0"); }
+    { return $this->andWhere([$this->getPrimaryTableName() . '.active' => 0]); }
 }

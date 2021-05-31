@@ -51,16 +51,16 @@ class DefaultController extends \frontend\components\Controller
 //        }
 
         // Параметры, которые необходимо преобразовать
-//        $arrayKeys = ['platforms', 'keys', 'channels', 'actions'];
-//        foreach ($arrayKeys as $key) {
-//            if ($params[$key]) { $params[$key] = explode(',', $params[$key]); }
-//        }
+        $arrayKeys = ['platforms', 'senderKeys', 'channels', 'actions'];
+        foreach ($arrayKeys as $key) {
+            if ($params[$key]) { $params[$key] = explode(',', $params[$key]); }
+        }
 
         /** @var UserSubscriptionSenderCategory[] $senderCategories Категории отправителей и их действия */
         $senderCategoriesQuery = UserSubscriptionSenderCategory::find()->indexBy('id');
         if ($params['platforms']) {
             $senderCategoriesQuery->joinWith('platform')->andWhere(['platform.alias' => $params['platforms']]);
-            if ($params['category']) { $senderCategoriesQuery->andWhere($params['category']); }
+            if ($params['category']) { $senderCategoriesQuery->alias($params['category']); }
         }
         $senderCategories = $senderCategoriesQuery->all();
 
