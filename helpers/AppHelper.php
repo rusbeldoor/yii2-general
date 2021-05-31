@@ -7,9 +7,12 @@ use yii\web\ForbiddenHttpException;
 
 class AppHelper
 {
-    /**********************************
-     *** *** *** Завершения *** *** ***
-     **********************************/
+    const PLATFORM_ID = 1;
+    const PLATFORM_ALIAS = 'quick-service';
+
+    /*****************************************
+     *** *** *** Завершение работы *** *** ***
+     *****************************************/
 
     /**
      * Завершение, если не ajax запрос
@@ -84,20 +87,6 @@ class AppHelper
     public static function exitWithJsonResult($result)
     { self::exitWithJsonResultData($result); }
 
-    /**
-     * ...
-     *
-     * @param string $url
-     * @param string $flasType
-     * @param string $flasahText
-     * @return object
-     */
-    public static function redirectWithFlash($url, $flasType, $flasahText)
-    {
-        self::setFlashes([$flasType => $flasahText]);
-        return Yii::$app->controller->redirect($url);
-    }
-
     /*************************************
      *** *** *** Права доступа *** *** ***
      *************************************/
@@ -130,6 +119,52 @@ class AppHelper
             Yii::$app->session->setFlash($key, $text);
         }
     }
+
+    /**
+     * ...
+     *
+     * @param string $url
+     * @param string $flashType
+     * @param string $flashText
+     * @return object
+     */
+    public static function redirectWithFlash($url, $flashType, $flashText)
+    {
+        self::setFlashes([$flashType => $flashText]);
+        return Yii::$app->controller->redirect($url);
+    }
+
+    /**
+     * ...
+     *
+     * @param string $url
+     * @param array $flashes
+     * @return void
+     */
+    public static function redirectWithFlashes($url, $flashes)
+    {
+        foreach ($flashes as $flash) { self::setFlashes([$flash['type'] => $flash['text']]); }
+        return Yii::$app->controller->redirect($url);
+    }
+
+    /**
+     * ...
+     *
+     * @param string $flashType
+     * @param string $flashText
+     * @return void
+     */
+    public static function redirectIndexWithFlash($flashType, $flashText)
+    { self::redirectWithFlash(['index'], $flashType, $flashText); }
+
+    /**
+     * ...
+     *
+     * @param array $flashes
+     * @return void
+     */
+    public static function redirectIndexWithFlashes($flashes)
+    { self::redirectWithFlashes(['index'], $flashes); }
 
     /****************************************
      *** *** *** Работа с файлами *** *** ***
