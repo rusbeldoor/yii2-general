@@ -203,6 +203,7 @@ class DefaultController extends \frontend\components\Controller
                 ])
                 ->andWhere("category.id IS NOT NULL")
                 ->one();
+
         // Если подписка на рассылки существует
 //        if ($userSubscription) {
 //            if ($post['active']) {
