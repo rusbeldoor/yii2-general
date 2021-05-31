@@ -74,7 +74,7 @@ else {
                             . Html::input('hidden', 'senderKey', $subscript['senderKey'])
                             . Html::input('hidden', 'actionId', $action['id'])
                             . Html::input('hidden', 'channelId', $channel['id'])
-                            . Html::input('hidden', 'hash', UserSubscriptionHelper::hash($userId, $subscript['platform'], $subscript['category'], $subscript['senderKey'], $action['alias'], $channel['alias']))
+                            . Html::input('hidden', 'hash', UserSubscriptionHelper::hash($userId, $subscript['platformId'], $subscript['category'], $subscript['senderKey'], $action['alias'], $channel['alias']))
                             . Html::input('hidden', 'active', (($channel['active']) ? '0' : '1'))
                             . Html::input('hidden', 'redirectUrl', Yii::$app->request->url)
                         . '<button type="button" class="btn btn-' . (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') . ' " data-key-name="' . $subscript['name'] . '" data-channel-name="' . $channel['name'] . '">' . (($channelIcon) ? $channelIcon . '&nbsp;' : '') . ' ' . $channel['name'] . ' — ' . (($channel['active']) ? 'отписаться' : 'подписаться') . '</button>'

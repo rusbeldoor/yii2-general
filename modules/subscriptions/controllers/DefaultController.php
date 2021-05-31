@@ -126,6 +126,7 @@ class DefaultController extends \frontend\components\Controller
                         if ($category->id === $senderCategoriesAction->category_id) {
                             $result[$userSubscription->id]['actions'][$senderCategoriesAction->id] = [
                                 'id' => $senderCategoriesAction->id,
+                                'alias' => $senderCategoriesAction->alias,
                                 'name' => $senderCategoriesAction->name,
                                 'channels' => $channels,
                                 'active' => true,
@@ -188,9 +189,9 @@ class DefaultController extends \frontend\components\Controller
         $userSubscription =
             UserSubscription::find()
                 ->userId($post['userId'])
-                ->leftWith([
+                ->joinWith([
                     'sender' => function ($query) use($post) {
-                        $query->leftWith(['category' => function ($query) use($post) {
+                        $query->joinWith(['category' => function ($query) use($post) {
                             $query->andWhere(['platform_id' => $post['platformId'], 'alias' => $post['category']]);
                         }], false);
                         $query->andWhere(['key' => $post['senderKey']]);
@@ -201,7 +202,7 @@ class DefaultController extends \frontend\components\Controller
                         $query->andWhere(['action_id' => $post['actionId'], 'channel_id' => $post['channelId']]);
                     },
                 ])
-                ->andWhere("category.id IS NOT NULL")
+                ->andWhere("user_subscription_sender_category.id IS NOT NULL")
                 ->one();
 
         // Если подписка на рассылки существует
