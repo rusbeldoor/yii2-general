@@ -40,7 +40,9 @@ http://panel.yii2.local/administrator/cron
 
 ### Настройка кронов
 
-```0 0 */6 * * php /home/user/yii2/yii removing-outdated-data > /dev/null```
+```
+0 0 */6 * * php /home/user/yii2/yii removing-outdated-data > /dev/null
+```
 
 ## Подписки
 
@@ -68,4 +70,6 @@ Backend. Модуль реализующий работу с Яндекс.Дир
 
 ### Настройка кронов
 
-```0 0 */6 * * php /home/user/yii2/yii yandex-direct > /dev/null```
+```
+0 0 */6 * * php /home/user/yii2/yii yandex-direct > /dev/null
+```
