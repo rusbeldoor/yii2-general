@@ -26,7 +26,8 @@ class UserSubscriptionHelper
                 implode(',', [$userId, $platform, $category, $senderKey, $action, $channel])
             )
             . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']
-        ); }
+        );
+    }
 
     /**
      * Ссылка
