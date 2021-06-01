@@ -7,10 +7,20 @@ namespace rusbeldoor\yii2General\models;
  */
 class ActiveQuery extends \yii\db\ActiveQuery
 {
+
     /**
      * Алиас
      *
-     * @param string $alias
+     * @param string|array $id
+     * @return self
+     */
+    public function id($id)
+    { return $this->andWhere([$this->getPrimaryTableName() . '.id' => $id]); }
+
+    /**
+     * Алиас
+     *
+     * @param string|array $alias
      * @return self
      */
     public function alias($alias)
@@ -19,7 +29,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Тип
      *
-     * @param mixed $type
+     * @param string|array $type
      * @return self
      */
     public function type($type)
@@ -28,7 +38,7 @@ class ActiveQuery extends \yii\db\ActiveQuery
     /**
      * Статус
      *
-     * @param mixed $status
+     * @param string|array $status
      * @return self
      */
     public function status($status)

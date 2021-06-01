@@ -176,20 +176,20 @@ class DefaultController extends \frontend\components\Controller
         $userSubscription =
             UserSubscription::find()
                 ->userId($post['userId'])
-                ->where(['id' => $post['subscriptId']])
+                ->id($post['subscriptId'])
                 ->joinWith('sender')
                 ->one();
         if (!$userSubscription) { AppHelper::redirectWithFlash('/', 'danger', 'Подписка (#' . $post['subscriptId'] . ') не найден.'); }
 
         $senderCategoryAction =
             UserSubscriptionSenderCategoryAction::find()
-                ->where(['id' => $post['channelId']])
+                ->id($post['channelId'])
                 ->one();
         if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Действие (#' .  $post['channelId'] . ') не найдено.'); }
 
         $channel =
             UserSubscriptionChannel::find()
-                ->where(['id' => $post['channelId']])
+                ->id($post['channelId'])
                 ->one();
         if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Способ доставки сообщений (#' .  $post['channelId'] . ') не найден.'); }
 
