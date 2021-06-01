@@ -69,7 +69,7 @@ else {
                     $buttons[] =
                         Html::beginForm('/subscriptions/default/change', 'post', ['style' => ['padding-top' => '5px;']])
                             . Html::input('hidden', 'userId', $userId)
-                            . Html::input('hidden', 'subscriptId', $subscript['subscriptId'])
+                            . Html::input('hidden', 'subscriptId', $subscript['id'])
                             . Html::input('hidden', 'actionId', $action['id'])
                             . Html::input('hidden', 'channelId', $channel['id'])
                             . Html::input('hidden', 'hash', UserSubscriptionHelper::hash($userId, '', '', $subscript['subscriptId'], $action['id'], $channel['id']))

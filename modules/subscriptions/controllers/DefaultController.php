@@ -112,9 +112,6 @@ class DefaultController extends \frontend\components\Controller
                     $category = $senderCategories[$senders[$userSubscription->sender_id]->category_id];
                     $result[$userSubscription->id] = [
                         'id' => $userSubscription->id,
-                        'platformId' => $category->platform_id,
-                        'category' => $category->alias,
-                        'senderKey' => $senders[$userSubscription->sender_id]->key,
                         'name' => $senders[$userSubscription->sender_id]->name,
                         'actions' => [],
                         'active' => true,
