@@ -29,7 +29,7 @@ http://panel.yii2.local/administrator/platform
 
 ### Настройка
 
-1. Добавить хотябы 1 платформу.
+1. Добавить хотя бы 1 платформу (таблица `platform`).
 
 ## RBAC
 
