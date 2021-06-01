@@ -10,11 +10,11 @@ php yii migrate --migrationPath=@vendor/rusbeldoor/yii2-general/console/migratio
 3. Создайте платформы (как минимум текущего проекта).
 
 4. Создайте кроны и настройте их запуск.
-- `\console\controllers\RemoveOutdatedDataController` (родитель `\rusbeldoor\yii2General\console\controllers\RemoveOutdatedDataController`, рекомендуется запуск раз в сутки).
+- `\console\controllers\RemoveOutdatedDataController` (родитель `\rusbeldoor\yii2General\console\controllers\RemoveOutdatedDataController`, рекомендуется запуск не чаще, чем раз в 2 суток).
 ```
-0 0 */6 * * php /home/user/yii2/yii removing-outdated-data > /dev/null
+0 0 */2 * * php /home/user/yii2/yii removing-outdated-data > /dev/null
 ```
-- `\console\controllers\YandexDirectController` (родитель `\rusbeldoor\yii2General\console\controllers\YandexDirectController`, рекомендуется запуск раз в 2 часа).
+- `\console\controllers\YandexDirectController` (родитель `\rusbeldoor\yii2General\console\controllers\YandexDirectController`, рекомендуется запуск не чаще, чем раз в 2 часа).
 ```
 0 0 */6 * * php /home/user/yii2/yii yandex-direct > /dev/null
 ```
@@ -59,9 +59,9 @@ Frontend-backend. Модуль реализующий подписную сис�
 
 ### Настройка
 
-1. Добавить хотя-бы 1 категорию.
-1. Добавить хотя-бы 1 отправителя сообщений.
-1. Добавить хотя-бы 1 действие категории.
+1. Добавить хотябы 1 категорию.
+1. Добавить хотябы 1 отрпавителя сообщений.
+1. Добавить хотябы 1 действие категории.
 1. Связать пользователя с отправителем.
 
 ## Яндекс.Директ
