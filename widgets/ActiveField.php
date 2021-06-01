@@ -355,14 +355,11 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     { return self::masked([
         'mask' => 'h',
         'definitions' => [
-            'h' => [
-                'validator' =>  '^[a-zA-z0-9\-]+',
-                'cardinality' => 8,
-            ]
+            'h' => ['validator' =>  '^[a-zA-z0-9\-]+']
         ],
         'clientOptions' => [
-            //'repeat' => 3,
-            //'greedy' => false,
+            'repeat' => 3,
+            'greedy' => false,
         ]
     ]); }
 }
