@@ -162,6 +162,10 @@ class ActiveField extends \yii\bootstrap4\ActiveField
         return self::numberInputAppendSeconds($options);
     }
 
+    /******************************************
+     *** *** *** Радиогруппа кнопок *** *** ***
+     ******************************************/
+
     /**
      * Радиогруппа кнопок
      *
@@ -208,6 +212,10 @@ class ActiveField extends \yii\bootstrap4\ActiveField
      */
     public function searchNumberYesNo($options = [])
     { return self::radioButtonsList(['' => 'Не важно', '1' => 'Да', '0' => 'Нет'], $options); }
+
+    /************************************
+     *** *** *** Дата и время *** *** ***
+     ************************************/
 
     /**
      * Общий выбор даты и времени
@@ -269,6 +277,10 @@ class ActiveField extends \yii\bootstrap4\ActiveField
         ]);
     }
 
+    /*****************************************
+     *** *** *** Выпадающий список *** *** ***
+     *****************************************/
+
     /**
      * Выпадающие список
      *
@@ -321,12 +333,53 @@ class ActiveField extends \yii\bootstrap4\ActiveField
         return self::searchSelect($elems, $options);
     }
 
+    /***************************************
+     *** *** *** Маска для ввода *** *** ***
+     ***************************************/
+
     /**
-     * ...
+     * Поле для ввода с маской
      *
      * @param array $options
      * @return ActiveField
      */
     public function masked($options = [])
     { return $this->widget('\yii\widgets\MaskedInput', $options); }
+
+    /**
+     * Поле для ввода с маской алиаса
+     *
+     * @param array $options
+     * @return ActiveField
+     */
+    public function maskedAlias($options = [])
+    {
+        if (!isset($options['maxLength'])) { $options['maxLength'] = 16; }
+        if (!isset($options['greedy'])) { $options['greedy'] = false; }
+
+        return self::masked([
+            'mask' => 'z',
+            'definitions' => ['z' => ['validator' =>  '^[a-zA-z0-9\-]+']],
+            'clientOptions' => ['repeat' => $options['maxLength'], 'greedy' => $options['greedy']]
+        ]);
+    }
+
+    /*****************************
+     *** *** *** Алиас *** *** ***
+     *****************************/
+
+    /**
+     * Алиас
+     *
+     * @param array $options
+     * @return ActiveField
+     */
+    public function alias($options = [])
+    {
+        if (!isset($options['maxLength'])) { $options['maxLength'] = 16; }
+        if (!isset($options['maskedOptions'])) { $options['maskedOptions'] = []; }
+        if (!isset($options['maskedOptions']['maxLength'])) { $options['maskedOptions']['maxLength'] =  $options['maxLength']; }
+
+        return self::textInput($options)->maskedAlias($options['maskedOptions']);
+    }
 }
