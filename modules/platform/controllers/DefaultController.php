@@ -82,7 +82,9 @@ class DefaultController extends \backend\components\Controller
 
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            if ($model->load($post) && $model->save()) { return $this->redirect(['view', 'id' => $model->id]); }
+            if ($model->load($post) && $model->save()) {
+                return AppHelper::redirectIndexWithFlash('success', 'Платформа #' . $model->id . ' добавлена.');
+            }
         } else {
             $model->loadDefaultValues();
         }
@@ -111,7 +113,9 @@ class DefaultController extends \backend\components\Controller
 
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            if ($model->load($post) && $model->save()) { return $this->redirect(['view', 'id' => $model->id]); }
+            if ($model->load($post) && $model->save()) {
+                return AppHelper::redirectIndexWithFlash('success', 'Платформа #' . $model->id . ' изменена.');
+            }
         }
 
         return $this->render('update', ['model' => $model]);

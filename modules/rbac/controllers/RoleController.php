@@ -97,7 +97,7 @@ class RoleController extends \backend\components\Controller
                 $model->deleteAllChildren();
                 $model->addChildren($post['child-roles-names']);
                 $model->addChildren($post['child-permissions-names']);
-                return $this->redirect(['view', 'id' => $model->id]);
+                return AppHelper::redirectIndexWithFlash('success', 'Роль #' . $model->id . ' добавлена.');
             }
         } else {
             $model->loadDefaultValues();
@@ -147,7 +147,7 @@ class RoleController extends \backend\components\Controller
                 $model->deleteAllChildren();
                 $model->addChildren($post['child-roles-names']);
                 $model->addChildren($post['child-permissions-names']);
-                return $this->redirect(['view', 'id' => $model->id]);
+                return AppHelper::redirectIndexWithFlash('success', 'Роль #' . $model->id . ' изменена.');
             }
         }
 
