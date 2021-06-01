@@ -345,4 +345,21 @@ class ActiveField extends \yii\bootstrap4\ActiveField
      */
     public function masked($options = [])
     { return $this->widget('\yii\widgets\MaskedInput', $options); }
+
+    /**
+     * ...
+     *
+     * @param array $options
+     * @return ActiveField
+     */
+    public function maskedAlias()
+    { return self::masked([
+        'mask' => 'h',
+        'definitions' => [
+            'h' => [
+                'validator' =>  '^[a-zA-z0-9\-]+',
+                //'cardinality' => 50,
+            ]
+        ]
+    ]); }
 }
