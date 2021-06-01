@@ -338,7 +338,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
      ***************************************/
 
     /**
-     * ...
+     * Поле для ввода с маской
      *
      * @param array $options
      * @return ActiveField
@@ -347,19 +347,15 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     { return $this->widget('\yii\widgets\MaskedInput', $options); }
 
     /**
-     * ...
+     * Поле для ввода с маской алиаса
      *
+     * @param int $max
      * @return ActiveField
      */
-    public function maskedAlias()
+    public function maskedAlias($max)
     { return self::masked([
-        'mask' => 'h',
-        'definitions' => [
-            'h' => ['validator' =>  '^[a-zA-z0-9\-]+']
-        ],
-        'clientOptions' => [
-            'repeat' => 3,
-            'greedy' => false,
-        ]
+        'mask' => 'z',
+        'definitions' => ['z' => ['validator' =>  '^[a-zA-z0-9\-]+']],
+        'clientOptions' => ['repeat' => $max, 'greedy' => false]
     ]); }
 }
