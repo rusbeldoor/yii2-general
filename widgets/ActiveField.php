@@ -162,6 +162,10 @@ class ActiveField extends \yii\bootstrap4\ActiveField
         return self::numberInputAppendSeconds($options);
     }
 
+    /******************************************
+     *** *** *** Радиогруппа кнопок *** *** ***
+     ******************************************/
+
     /**
      * Радиогруппа кнопок
      *
@@ -208,6 +212,10 @@ class ActiveField extends \yii\bootstrap4\ActiveField
      */
     public function searchNumberYesNo($options = [])
     { return self::radioButtonsList(['' => 'Не важно', '1' => 'Да', '0' => 'Нет'], $options); }
+
+    /************************************
+     *** *** *** Дата и время *** *** ***
+     ************************************/
 
     /**
      * Общий выбор даты и времени
@@ -269,6 +277,10 @@ class ActiveField extends \yii\bootstrap4\ActiveField
         ]);
     }
 
+    /*****************************************
+     *** *** *** Выпадающий список *** *** ***
+     *****************************************/
+
     /**
      * Выпадающие список
      *
@@ -320,6 +332,10 @@ class ActiveField extends \yii\bootstrap4\ActiveField
         $options = ArrayHelper::merge(['pluginOptions' => ['multiple' => true]], $options);
         return self::searchSelect($elems, $options);
     }
+
+    /***************************************
+     *** *** *** Маска для ввода *** *** ***
+     ***************************************/
 
     /**
      * ...
