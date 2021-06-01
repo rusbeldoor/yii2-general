@@ -18,13 +18,6 @@ $(document).ready(function() {
     $.fn.radioButtonsListValue = function() {
         return $(this).children('label.active').children('input').val();
     };
-
-    /***************************************
-     *** *** *** Маски для ввода *** *** ***
-     ***************************************/
-
-    $.mask.definitions['~']='[+-]';
-    $.mask.definitions['h']='[a-fA-F0-9]';
 });
 
 /**

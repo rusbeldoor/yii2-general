@@ -349,7 +349,6 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     /**
      * ...
      *
-     * @param array $options
      * @return ActiveField
      */
     public function maskedAlias()
@@ -358,7 +357,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
         'definitions' => [
             'h' => [
                 'validator' =>  '^[a-zA-z0-9\-]+',
-                //'cardinality' => 50,
+                'cardinality' => 50,
             ]
         ]
     ]); }
