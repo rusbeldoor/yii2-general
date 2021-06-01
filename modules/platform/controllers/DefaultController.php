@@ -55,12 +55,7 @@ class DefaultController extends \backend\components\Controller
     {
         $model = $this->findModel($id);
 
-        return $this->render(
-            'view',
-            [
-                'model' => $model,
-            ]
-        );
+        return $this->render('view', ['model' => $model]);
     }
 
     /**
