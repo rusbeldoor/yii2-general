@@ -204,7 +204,7 @@ class DefaultController extends \frontend\components\Controller
                 $exemption = new UserSubscriptionExemption();
                 $exemption->subscription_id = $userSubscription->id;
                 $exemption->sender_category_action_id = $senderCategoryAction->id;
-                $exemption->channel_id = $post['channelId'];
+                $exemption->channel_id = $channel->id;
                 $exemption->save();
             }
         }
