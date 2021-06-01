@@ -23,8 +23,8 @@ class UserSubscriptionExemption extends ActiveRecord
     public function rules()
     {
         return [
-            [['subscription_id, sender_category_action_id, channel_id'], 'required'],
-            [['subscription_id, sender_category_action_id, channel_id'], 'integer'],
+            [['subscription_id', 'sender_category_action_id', 'channel_id'], 'required'],
+            [['subscription_id', 'sender_category_action_id', 'channel_id'], 'integer'],
         ];
     }
 
