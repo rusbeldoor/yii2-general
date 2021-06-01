@@ -7,13 +7,8 @@ use yii\bootstrap4\Html;
 use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;
 
 $this->registerCss(
-'.card .card-body .channels {
-    margin-bottom: 5px;
-}
-
-.card .card-body .channels form + form {
-    margin-top: 5px;
-}'
+'.card .card-body .channels { margin-bottom: 5px; }
+.card .card-body .channels form + form { margin-top: 5px; }'
 );
 $this->registerJs(
 '$(document).ready(function () {
