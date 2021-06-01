@@ -63,7 +63,7 @@ class WebController extends \yii\web\Controller
 
         // Если есть удалённые элементы
         if (count($deletedIds)) {
-            $flashs['success'] = 'Элементы #' . implode(', #', $deletedIds) . ' успешно удалены.';
+            $flashs['success'] = 'Элементы #' . implode(', #', $deletedIds) . ' удалены.';
         }
 
         // Если есть не удалённые элементы
