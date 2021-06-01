@@ -183,7 +183,7 @@ class DefaultController extends \frontend\components\Controller
 
         $senderCategoryAction =
             UserSubscriptionSenderCategoryAction::find()
-                ->id($post['channelId'])
+                ->id($post['actionId'])
                 ->one();
         if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Действие (#' .  $post['channelId'] . ') не найдено.'); }
 
