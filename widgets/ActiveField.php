@@ -162,33 +162,6 @@ class ActiveField extends \yii\bootstrap4\ActiveField
         return self::numberInputAppendSeconds($options);
     }
 
-    /**************************************
-     *** *** *** Текстовое поле *** *** ***
-     **************************************/
-
-    /**
-     * Текстовое поле
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    public function textInput($options = [])
-    {
-        $hint = null;
-        if (isset($options['minLength']) && isset($options['maxLength'])) { $hint = 'От ' . $options['minLength'] . ' до ' . $options['maxLength'] . ' символов.'; }
-        elseif (!isset($options['minLength']) && isset($options['maxLength'])) { $hint = 'До ' . $options['maxLength'] . ' символов.'; }
-        elseif (isset($options['minLength']) && !isset($options['maxLength'])) { $hint = 'От ' . $options['minLength'] . ' символов.'; }
-
-        if ($hint !== null) {
-            if (!isset($options['hint'])) { $options['hint'] = $hint; }
-            else { $options['hint'] .= '<br>' . $hint; }
-
-            return self::textInput($options)->hint($options['hint']);
-        } else {
-            return self::textInput($options);
-        }
-    }
-
     /******************************************
      *** *** *** Радиогруппа кнопок *** *** ***
      ******************************************/
