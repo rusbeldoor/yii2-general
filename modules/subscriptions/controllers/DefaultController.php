@@ -194,7 +194,7 @@ class DefaultController extends \frontend\components\Controller
         if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Способ доставки сообщений (#' .  $post['channelId'] . ') не найден.'); }
 
         $exemption = UserSubscriptionExemption::find()
-            ->where(['subscript_id' => $userSubscription->id, 'sender_category_action_id' => $post['actionId'], 'channel_id' => $post['channelId']])
+            ->where(['subscription_id' => $userSubscription->id, 'sender_category_action_id' => $post['actionId'], 'channel_id' => $post['channelId']])
             ->one();
 
         if ($post['active']) {
