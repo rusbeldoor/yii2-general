@@ -183,7 +183,7 @@ class DefaultController extends \frontend\components\Controller
 
         $senderCategoryAction =
             UserSubscriptionSenderCategoryAction::find()
-                ->id($post['channelId'])
+                ->id($post['actionId'])
                 ->one();
         if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Действие (#' .  $post['channelId'] . ') не найдено.'); }
 
@@ -194,7 +194,7 @@ class DefaultController extends \frontend\components\Controller
         if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Способ доставки сообщений (#' .  $post['channelId'] . ') не найден.'); }
 
         $exemption = UserSubscriptionExemption::find()
-            ->where(['subscript_id' => $userSubscription->id, 'sender_category_action_id' => $post['actionId'], 'channel_id' => $post['channelId']])
+            ->where(['subscription_id' => $userSubscription->id, 'sender_category_action_id' => $post['actionId'], 'channel_id' => $post['channelId']])
             ->one();
 
         if ($post['active']) {
@@ -204,7 +204,7 @@ class DefaultController extends \frontend\components\Controller
                 $exemption = new UserSubscriptionExemption();
                 $exemption->subscription_id = $userSubscription->id;
                 $exemption->sender_category_action_id = $senderCategoryAction->id;
-                $exemption->channel_id = $post['channelId'];
+                $exemption->channel_id = $channel->id;
                 $exemption->save();
             }
         }
