@@ -357,11 +357,11 @@ class ActiveField extends \yii\bootstrap4\ActiveField
         'definitions' => [
             'h' => [
                 'validator' =>  '^[a-zA-z0-9\-]+',
-                //'cardinality' => 8,
+                'cardinality' => 8,
             ]
         ],
         'clientOptions' => [
-            'repeat' => 3,
+            //'repeat' => 3,
             //'greedy' => false,
         ]
     ]); }
