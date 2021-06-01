@@ -11,7 +11,13 @@ php yii migrate --migrationPath=@vendor/rusbeldoor/yii2-general/console/migratio
 
 4. Создайте кроны и настройте их запуск.
 - `\console\controllers\RemoveOutdatedDataController` (родитель `\rusbeldoor\yii2General\console\controllers\RemoveOutdatedDataController`, рекомендуется запуск раз в сутки).
+```
+0 0 */6 * * php /home/user/yii2/yii removing-outdated-data > /dev/null
+```
 - `\console\controllers\YandexDirectController` (родитель `\rusbeldoor\yii2General\console\controllers\YandexDirectController`, рекомендуется запуск раз в 2 часа).
+```
+0 0 */6 * * php /home/user/yii2/yii yandex-direct > /dev/null
+```
 
 # Модули
 
@@ -38,12 +44,6 @@ Backend. Модуль реализующий работу и управлени�
 
 http://panel.yii2.local/administrator/cron
 
-### Настройка кронов
-
-```
-0 0 */6 * * php /home/user/yii2/yii removing-outdated-data > /dev/null
-```
-
 ## Подписки
 
 Frontend-backend. Модуль реализующий подписную систему (систему уведомлений по каналам связи).
@@ -67,9 +67,3 @@ Frontend-backend. Модуль реализующий подписную сис�
 ## Яндекс.Директ
 
 Backend. Модуль реализующий работу с Яндекс.Директ.
-
-### Настройка кронов
-
-```
-0 0 */6 * * php /home/user/yii2/yii yandex-direct > /dev/null
-```
