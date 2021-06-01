@@ -125,7 +125,7 @@ class DefaultController extends \frontend\components\Controller
                                 'id' => $senderCategoriesAction->id,
                                 'alias' => $senderCategoriesAction->alias,
                                 'name' => $senderCategoriesAction->name,
-                                'channels' => $channels,
+                                'channels' => $channelsArray,
                                 'active' => true,
                             ];
                         }
