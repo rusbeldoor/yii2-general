@@ -30,7 +30,7 @@ else {
                 foreach ($action['channels'] as $channel) {
                     $channelIcon = UserSubscriptionHelper::channelIcon($channel['alias']);
                     $buttons[] =
-                        Html::beginForm('/subscriptions/default/change', 'post', ['style' => ['padding-top' => '5px;']])
+                        Html::beginForm('/subscriptions/default/change', 'post')
                             . Html::input('hidden', 'userId', $userId)
                             . Html::input('hidden', 'subscriptId', $subscript['id'])
                             . Html::input('hidden', 'actionId', $action['id'])
