@@ -180,9 +180,21 @@ class DefaultController extends \frontend\components\Controller
             UserSubscription::find()
                 ->userId($post['userId'])
                 ->where(['id' => $post['subscriptId']])
+                ->joinWith('sender')
                 ->one();
-
         if (!$userSubscription) { AppHelper::redirectWithFlash('/', 'danger', 'Подписка (#' . $post['subscriptId'] . ') не найден.'); }
+
+        $senderCategoryAction =
+            UserSubscriptionSenderCategoryAction::find()
+                ->where(['id' => $post['channelId']])
+                ->one();
+        if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Действие (#' .  $post['channelId'] . ') не найдено.'); }
+
+        $channel =
+            UserSubscriptionChannel::find()
+                ->where(['id' => $post['channelId']])
+                ->one();
+        if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Способ доставки сообщений (#' .  $post['channelId'] . ') не найден.'); }
 
         $exemption = UserSubscriptionExemption::find()
             ->where(['subscript_id' => $userSubscription->id, 'sender_category_action_id' => $post['actionId'], 'channel_id' => $post['channelId']])
@@ -194,12 +206,13 @@ class DefaultController extends \frontend\components\Controller
             if (!$exemption) {
                 $exemption = new UserSubscriptionExemption();
                 $exemption->subscription_id = $userSubscription->id;
-                $exemption->sender_category_action_id = $post['actionId'];
+                $exemption->sender_category_action_id = $senderCategoryAction->id;
                 $exemption->channel_id = $post['channelId'];
+                $exemption->save();
             }
         }
 
         // Возвращаемся по переданному адресу
-        AppHelper::redirectWithFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['active']) ? 'подписались на' : 'отписались от') . ' "' . $userSubscription->sender . '" (канал сообщений!!!).');
+        AppHelper::redirectWithFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['active']) ? 'подписались на' : 'отписались от') . ' "' . $userSubscription->sender->name . '" действия "' . $senderCategoryAction->name . '" (' . $channel->name . ').');
     }
 }
