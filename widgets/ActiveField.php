@@ -349,13 +349,37 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     /**
      * Поле для ввода с маской алиаса
      *
-     * @param int $max
+     * @param array $options
      * @return ActiveField
      */
-    public function maskedAlias($max)
-    { return self::masked([
-        'mask' => 'z',
-        'definitions' => ['z' => ['validator' =>  '^[a-zA-z0-9\-]+']],
-        'clientOptions' => ['repeat' => $max, 'greedy' => false]
-    ]); }
+    public function maskedAlias($options = [])
+    {
+        if (!isset($options['maxLength'])) { $options['maxLength'] = 16; }
+        if (!isset($options['greedy'])) { $options['greedy'] = false; }
+
+        return self::masked([
+            'mask' => 'z',
+            'definitions' => ['z' => ['validator' =>  '^[a-zA-z0-9\-]+']],
+            'clientOptions' => ['repeat' => $options['maxLength'], 'greedy' => $options['greedy']]
+        ]);
+    }
+
+    /*****************************
+     *** *** *** Алиас *** *** ***
+     *****************************/
+
+    /**
+     * Алиас
+     *
+     * @param array $options
+     * @return ActiveField
+     */
+    public function alias($options = [])
+    {
+        if (!isset($options['maxLength'])) { $options['maxLength'] = 16; }
+        if (!isset($options['maskedOptions'])) { $options['maskedOptions'] = []; }
+        if (!isset($options['maskedOptions']['maxLength'])) { $options['maskedOptions']['maxLength'] =  $options['maxLength']; }
+
+        return self::textInput($options)->maskedAlias($options['maskedOptions']);
+    }
 }
