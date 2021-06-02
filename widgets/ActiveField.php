@@ -378,7 +378,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     {
         if (!isset($options['maxLength'])) { $options['maxLength'] = 16; }
         if (!isset($options['maskedOptions'])) { $options['maskedOptions'] = []; }
-        if (!isset($options['maskedOptions']['maxLength'])) { $options['maskedOptions']['maxLength'] =  $options['maxLength']; }
+        if (!isset($options['maskedOptions']['maxLength'])) { $options['maskedOptions']['maxLength'] = $options['maxLength']; }
 
         return self::textInput($options)->maskedAlias($options['maskedOptions']);
     }
