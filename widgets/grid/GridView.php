@@ -18,7 +18,7 @@ class GridView extends \yii\grid\GridView
     // Id Pjax контейнера
     public $pjaxId = 'panelPjaxGrid';
     // Id контейнера откуда берутся данные
-    public $fragmentId = 'panelPjaxFragment';
+//    public $fragmentId = 'panelPjaxFragment';
 
     // Шаблон вывода GridView
     public $layout = '<div class="grid-view-header clearfix">{summary}</div>{items}<div class="grid-view-footer clearfix">{pager}</div>';
@@ -41,7 +41,7 @@ class GridView extends \yii\grid\GridView
 
         self::$number++;
         $this->pjaxId .= self::$number;
-        $this->fragmentId .= self::$number;
+//        $this->fragmentId .= self::$number;
     }
 
     /**
@@ -51,18 +51,18 @@ class GridView extends \yii\grid\GridView
     {
         if (!parent::beforeRun()) { return false; }
 
-        // Pjax обновлениие
+        // Pjax обновление
         // Отправка формы
         // Сброс формы (отправка формы по умолчанию)
         // Реакция на успешное Pjax обновление (переход к таблице)
         // Обработка отправки форм bulkActionForm
+//   todo после type: \'POST\',     fragment: \'#' . $this->fragmentId . '\',
         $this->getView()->registerJs(
 '$(document).ready(function() {
     function pjaxReload(data) {
         $.pjax.reload({
             container: \'#' . $this->pjaxId . '\', 
             type: \'POST\', 
-            fragment: \'#' . $this->fragmentId . '\', 
             data: data
         });
     }
@@ -76,11 +76,11 @@ class GridView extends \yii\grid\GridView
     $(document).on("pjax:success", "#' . $this->pjaxId . '",  function(event) { 
         window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'});
     });
-    $(document).on(\'change\', \'.BulkActionColumnCheckbox\', function() {
-        $(\'.bulkActionFormButton\').prop(\'disabled\', (($(\'#' . $this->fragmentId . ' .grid-view\').find(\'.BulkActionColumnCheckbox:checked\').length) ? false : true));
+    $(document).on(\'change\', \'.bulkActionColumnCheckbox\', function() {
+        $(\'.bulkActionFormButton\').prop(\'disabled\', (($(\'#' . $this->pjaxId . ' .grid-view\').find(\'.bulkActionColumnCheckbox:checked\').length) ? false : true));
     });
     $(document).on(\'submit\', \'.bulkActionForm\', function() {
-        var keys = $(\'#' . $this->fragmentId . ' .grid-view\').yiiGridView(\'getSelectedRows\');
+        var keys = $(\'#' . $this->pjaxId . ' .grid-view\').yiiGridView(\'getSelectedRows\');
         $(this).children(\'input[name="items"]\').val(keys);
     });
 });'
@@ -92,7 +92,7 @@ class GridView extends \yii\grid\GridView
         ]);
 
         // Открываем контейнер-фрагмент для копирования из него при pjax загрузке
-        echo '<div id="' . $this->fragmentId  . '">';
+//        echo '<div id="' . $this->fragmentId  . '">';
 
         return true;
     }
@@ -106,6 +106,7 @@ class GridView extends \yii\grid\GridView
 
         Pjax::end();
 
-        return $result . '</div>';
+        return $result;
+//        return $result . '</div>';
     }
 }

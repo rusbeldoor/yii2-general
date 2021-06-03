@@ -42,10 +42,10 @@ class DefaultController extends \backend\components\Controller
         $searchModel->active = '';
         $dataProvider = $searchModel->search(Yii::$app->request->post());
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render(
+            'index',
+            ['searchModel' => $searchModel, 'dataProvider' => $dataProvider]
+        );
     }
 
     /**
@@ -65,10 +65,7 @@ class DefaultController extends \backend\components\Controller
 
         return $this->render(
             'view',
-            [
-                'model' => $model,
-                'cronLogDataProvider' => $cronLogDataProvider,
-            ]
+            ['model' => $model, 'cronLogDataProvider' => $cronLogDataProvider]
         );
     }
 

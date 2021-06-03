@@ -210,6 +210,6 @@ class DefaultController extends \frontend\components\Controller
         }
 
         // Возвращаемся по переданному адресу
-        AppHelper::redirectWithFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['active']) ? 'подписались на' : 'отписались от') . ' "' . $userSubscription->sender->name . '" действия "' . $senderCategoryAction->name . '" (' . $channel->name . ').');
+        AppHelper::redirectWithFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['active']) ? 'добавили' : 'убрали') . ' рассылку от "' . $userSubscription->sender->name . '" на "' . $senderCategoryAction->name . '" (' . $channel->name . ').');
     }
 }
