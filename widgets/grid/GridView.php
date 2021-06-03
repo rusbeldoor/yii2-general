@@ -90,6 +90,12 @@ class GridView extends \yii\grid\GridView
         pjaxReload($(\'' . $this->searchFormSelector . '\').serialize(), $(this).attr(\'href\'));
         return false;
     });
+    $(document).on(\'click\', \'#' . $this->pjaxId . ' .grid-view table thead tr th a\', function(e) {
+        e.preventDefault();
+        const href = $(this).attr(\'href\');
+        if (href) { pjaxReload($(\'' . $this->searchFormSelector . '\').serialize(), href); }
+        return false;
+    });
 });'
         );
 
