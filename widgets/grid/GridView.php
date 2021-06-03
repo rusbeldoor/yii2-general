@@ -59,15 +59,17 @@ class GridView extends \yii\grid\GridView
 //   todo после type: \'POST\',     fragment: \'#' . $this->fragmentId . '\',
         $this->getView()->registerJs(
 '$(document).ready(function() {
-    function pjaxReload(data) {
+    function pjaxReload(data, url) {
+        console.log(data);
         $.pjax.reload({
-            container: \'#' . $this->pjaxId . '\', 
-            type: \'POST\', 
+            url: url,
+            container: \'#' . $this->pjaxId . '\',
+            type: \'POST\',
             data: data
         });
     }
     $(document).on(\'submit\', \'' . $this->searchFormSelector . '\', function() {
-        pjaxReload($(this).serialize());
+        pjaxReload($(this).serialize(), window.location.href);
         return false;
     });
     $(document).on(\'reset\', \'' . $this->searchFormSelector . '\', function() {
@@ -82,6 +84,11 @@ class GridView extends \yii\grid\GridView
     $(document).on(\'submit\', \'.bulkActionForm\', function() {
         var keys = $(\'#' . $this->pjaxId . ' .grid-view\').yiiGridView(\'getSelectedRows\');
         $(this).children(\'input[name="items"]\').val(keys);
+    });
+    $(document).on(\'click\', \'.page-link\', function(e) {
+        e.preventDefault();
+        pjaxReload($(\'' . $this->searchFormSelector . '\').serialize(), $(this).attr(\'href\'));
+        return false;
     });
 });'
         );
