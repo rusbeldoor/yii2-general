@@ -45,7 +45,7 @@ else {
                             . Html::input('hidden', 'hash', UserSubscriptionHelper::hash($userId, '', '', $subscript['id'], $action['id'], $channel['id']))
                             . Html::input('hidden', 'active', (($channel['active']) ? '0' : '1'))
                             . Html::input('hidden', 'redirectUrl', Yii::$app->request->url)
-                        . '<button type="button" class="btn btn-' . (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') . ' " data-sender-name="' . $subscript['name'] . ' " data-action-name="' . $action['name'] . '" data-channel-name="' . $channel['name'] . '">' . (($channelIcon) ? $channelIcon . '&nbsp;' : '') . ' ' . $channel['name'] . ' — ' . (($channel['active']) ? 'отписаться' : 'подписаться') . '</button>'
+                        . '<button type="button" class="btn btn-' . (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') . ' " data-sender-name="' . $subscript['name'] . '" data-action-name="' . $action['name'] . '" data-channel-name="' . $channel['name'] . '">' . (($channelIcon) ? $channelIcon . '&nbsp;' : '') . ' ' . $channel['name'] . ' — ' . (($channel['active']) ? 'отписаться' : 'подписаться') . '</button>'
                         . Html::endForm();
                 }
                 echo '<div class="channels" style="">' . implode('', $buttons) . '</div>';
