@@ -16,7 +16,7 @@ $this->registerJs(
 '$(document).ready(function () {
     $(\'.unsubscribe\').click(function () {
         confirmDialog({
-            text: \'Вы уверены, что хотите отписаться от "\' + $(this).data(\'key-name\') + \'" (\' + $(this).data(\'channel-name\') + \')? <i class="far fa-frown"></i>\',
+            text: \'Вы уверены, что хотите убрать рассылку от "\' + $(this).data(\'sender-name\') + \'" на "\' + $(this).data(\'action-name\') + \'" (\' + $(this).data(\'channel-name\') + \')? <i class="far fa-frown"></i>\',
             confirmCallback: () => { $(this).closest(\'form\').submit(); }
         });
     });
@@ -45,7 +45,7 @@ else {
                             . Html::input('hidden', 'hash', UserSubscriptionHelper::hash($userId, '', '', $subscript['id'], $action['id'], $channel['id']))
                             . Html::input('hidden', 'active', (($channel['active']) ? '0' : '1'))
                             . Html::input('hidden', 'redirectUrl', Yii::$app->request->url)
-                        . '<button type="button" class="btn btn-' . (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') . ' " data-key-name="' . $subscript['name'] . '" data-channel-name="' . $channel['name'] . '">' . (($channelIcon) ? $channelIcon . '&nbsp;' : '') . ' ' . $channel['name'] . ' — ' . (($channel['active']) ? 'отписаться' : 'подписаться') . '</button>'
+                        . '<button type="button" class="btn btn-' . (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') . ' " data-sender-name="' . $subscript['name'] . ' " data-action-name="' . $action['name'] . '" data-channel-name="' . $channel['name'] . '">' . (($channelIcon) ? $channelIcon . '&nbsp;' : '') . ' ' . $channel['name'] . ' — ' . (($channel['active']) ? 'отписаться' : 'подписаться') . '</button>'
                         . Html::endForm();
                 }
                 echo '<div class="channels" style="">' . implode('', $buttons) . '</div>';
