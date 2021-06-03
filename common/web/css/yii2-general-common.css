@@ -52,6 +52,20 @@ a.desc:after { content: "\f160"; }
 .sort-ordinal a.asc:after { content: "\f15e"; }
 .sort-ordinal a.desc:after { content: "\f15d"; }
 
+/* Убираем стрелочки для целочисленных полей ввода */
+/* Для Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+/* Для Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 /***********************************
  *** *** *** bootstrap 4 *** *** ***
  ***********************************/
