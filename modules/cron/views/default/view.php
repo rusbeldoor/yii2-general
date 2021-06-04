@@ -7,7 +7,7 @@
 use rusbeldoor\yii2General\widgets\DetailView;
 use rusbeldoor\yii2General\widgets\grid\GridView;
 use rusbeldoor\yii2General\helpers\BaseUI;
-use kartik\tabs\TabsX;
+use rusbeldoor\yii2General\widgets\tabs\Tabs;
 
 $this->title = $model->alias;
 $this->params['breadcrumbs'][] = ['label' => 'Кроны', 'url' => ['/administrator/cron']];
@@ -21,7 +21,8 @@ if (Yii::$app->controller->module->onlyMigrations) {
 }
 ?>
 <div class="auth-item-view">
-    <?= TabsX::widget([
+    <?= Tabs::widget([
+        'navType' => 'nav-pills',
         'items' => [
             [
                 'label' => '<i class="fas fa-bars"></i> Основное',
@@ -55,8 +56,6 @@ if (Yii::$app->controller->module->onlyMigrations) {
                 ]),
             ],
         ],
-        'position' => TabsX::POS_ABOVE,
-        'enableStickyTabs' => true,
         'encodeLabels' => false,
     ]) ?>
 </div>
