@@ -1,6 +1,6 @@
 <?php
 
-namespace rusbeldoor\yii2General\widgets\grid;
+namespace rusbeldoor\yii2General\widgets\tabs;
 
 use yii\bootstrap4;
 
