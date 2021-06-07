@@ -2,33 +2,22 @@
 
 namespace rusbeldoor\yii2General\widgets;
 
-use Exception;
-use rusbeldoor\yii2General\helpers\ArrayHelper;
-use kartik\helpers\Html;
-
 /**
  * ...
  */
-class Range extends \kartik\field\FieldRange
+class Range extends Widget
 {
-    public $required = false;
-
-    /**
-     * @var boolean whether it the form is of bootstrap horizontal layout style.
-     */
-    private $_isHorizontalForm = false;
-
     /**
      * @inheritdoc
      */
     public function init()
     {
         parent::init();
-        $this->container['class'][] = 'row';
-        $this->labelOptions['class'][] = 'col-2';
-        if ($this->required) { $this->labelOptions['class'][] = 'has-star'; }
-        $this->widgetContainer['class'][] = 'col-10';
-        $this->separator = '<i class="fas fa-long-arrow-alt-left"></i>&nbsp;<i class="fas fa-long-arrow-alt-right"></i>';
+        //$this->container['class'][] = 'row';
+        //$this->labelOptions['class'][] = 'col-2';
+        //if ($this->required) { $this->labelOptions['class'][] = 'has-star'; }
+        //$this->widgetContainer['class'][] = 'col-10';
+        //$this->separator = '<i class="fas fa-long-arrow-alt-left"></i>&nbsp;<i class="fas fa-long-arrow-alt-right"></i>';
     }
 
     /**
@@ -38,6 +27,8 @@ class Range extends \kartik\field\FieldRange
      */
     protected function renderWidget()
     {
+        echo '123';
+        /*
         Html::addCssClass($this->options, 'kv-field-range');
         Html::addCssClass($this->container, 'kv-field-range-container');
         $isBs4 = $this->isBs4();
@@ -82,5 +73,6 @@ class Range extends \kartik\field\FieldRange
             '{error}' => $error,
         ];
         echo Html::tag('div', strtr($this->template, $replaceTokens), $this->container);
+        */
     }
 }
