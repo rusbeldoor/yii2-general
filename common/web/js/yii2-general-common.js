@@ -5,7 +5,7 @@ $(document).ready(function() {
 
     /**
      * Фикс ошибки (если список выводится в скрытом элементе у него ширина расчитывается как 0, что не верно и placeholder может обрезаться)
-     * В версии 4.1.* ошибка решена, но версия не стабильная и пакет kartik-v/yii2-widget-select2 использет пока только стабильную версию
+     * В версии 4.1.* ошибка решена, но версия не стабильная и пакет kartik-v/yii2-widget-select2 использует пока только стабильную версию
      */
     setTimeout(function() {
         $('.select2 .select2-selection__rendered .select2-search.select2-search--inline .select2-search__field').css("width", "100%");

@@ -172,7 +172,6 @@ class ActiveField extends \yii\bootstrap4\ActiveField
      * @param array $items
      * @param array $options
      * @return ActiveField
-     *
      */
     public function radioButtonsList($items, $options = [])
     {
@@ -183,10 +182,10 @@ class ActiveField extends \yii\bootstrap4\ActiveField
                 'unselect' => null,
                 'item' => function ($index, $label, $name, $checked, $value) {
                     return
-                        '<label class="btn btn-light' . ($checked ? ' active' : '') . '">'
-                        . Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
-                        . ' '
-                        . $label
+                        '<label class="btn btn-light' . (($checked) ? ' active' : '') . '">'
+                            . Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
+                            . ' '
+                            . $label
                         . '</label>';
                 },
             ],
