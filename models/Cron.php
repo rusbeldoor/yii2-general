@@ -5,14 +5,14 @@ namespace rusbeldoor\yii2General\models;
 /**
  * Cron (ActiveRecord)
  *
- * @property $id int
- * @property $alias string
- * @property $description string
- * @property $status string
- * @property $max_duration int|null
- * @property $kill_process int
- * @property $restart int
- * @property $active int
+ * @property int $id
+ * @property string $alias
+ * @property string $description
+ * @property string $status
+ * @property int|null $max_duration
+ * @property int $kill_process
+ * @property int $restart
+ * @property int $active
  */
 class Cron extends ActiveRecord
 {

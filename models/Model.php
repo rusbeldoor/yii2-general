@@ -32,6 +32,16 @@ class Model extends \yii\base\Model
     public function getFieldDescription($fieldName)
     { return static::$fieldsDescriptions[$fieldName][$this->$fieldName]; }
 
+
+    /**
+     * Описание по значению
+     *
+     * @param string $fieldName
+     * @return array
+     */
+    public function getKeysFieldsDescriptions($fieldName)
+    { return array_keys(static::$fieldsDescriptions[$fieldName]); }
+
     /*********************************
      *** *** *** Валидация *** *** ***
      *********************************/
