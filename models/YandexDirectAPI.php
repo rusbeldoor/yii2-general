@@ -121,14 +121,18 @@ class YandexDirectAPI extends Model
      * @return mixed
      */
     public function getCampaigns($selectionCriteria = [])
-    { return $this->request(
-        'campaigns',
-        'get',
-        [
-            'SelectionCriteria' => (object)$selectionCriteria,
-            'FieldNames' => ['Id', 'Name', 'Status', 'State'],
-        ]
-    )->Campaigns; }
+    {
+        $result = $this->request(
+            'campaigns',
+            'get',
+            [
+                'SelectionCriteria' => (object)$selectionCriteria,
+                'FieldNames' => ['Id', 'Name', 'Status', 'State'],
+            ]
+        );
+        if (empty($result)) { return []; }
+        return $result->Campaigns;
+    }
 
     /**
      * Получение групп объявлений
@@ -137,14 +141,18 @@ class YandexDirectAPI extends Model
      * @return mixed
      */
     public function getAdgroups($selectionCriteria = [])
-    { return $this->request(
-        'adgroups',
-        'get',
-        [
-            'SelectionCriteria' => (object)$selectionCriteria,
-            'FieldNames' => ['Id', 'CampaignId', 'Name', 'Status'],
-        ]
-    )->AdGroups; }
+    {
+        $result = $this->request(
+            'adgroups',
+            'get',
+            [
+                'SelectionCriteria' => (object)$selectionCriteria,
+                'FieldNames' => ['Id', 'CampaignId', 'Name', 'Status'],
+            ]
+        );
+        if (empty($result)) { return []; }
+        return $result->AdGroups;
+    }
 
     /**
      * Получение объявления
@@ -153,15 +161,19 @@ class YandexDirectAPI extends Model
      * @return mixed
      */
     public function getAds($selectionCriteria = [])
-    { return $this->request(
-        'ads',
-        'get',
-        [
-            'SelectionCriteria' => (object)$selectionCriteria,
-            'FieldNames' => ['Id', 'CampaignId', 'AdGroupId', 'Status', 'State'],
-            'TextAdFieldNames' => ['Title', 'Text', 'Href'],
-        ]
-    )->Ads; }
+    {
+        $result = $this->request(
+            'ads',
+            'get',
+            [
+                'SelectionCriteria' => (object)$selectionCriteria,
+                'FieldNames' => ['Id', 'CampaignId', 'AdGroupId', 'Status', 'State'],
+                'TextAdFieldNames' => ['Title', 'Text', 'Href'],
+            ]
+        );
+        if (empty($result)) { return []; }
+        return $result->Ads;
+    }
 
     /**
      * Архивация объявлений

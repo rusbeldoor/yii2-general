@@ -30,7 +30,7 @@ class YandexDirectController extends \rusbeldoor\yii2General\components\CronCont
         foreach ($yandexDirectAccounts as $yandexDirectAccount) {
             $yandexDirectAPI = new YandexDirectAPI($yandexDirectAccount->url, $yandexDirectAccount->login, $yandexDirectAccount->token);
 
-            // Компании Яндекс.Директ аккаунта
+            // Компании
             $apiCampaingsIds = [];
             $apiCampaings = $yandexDirectAPI->getCampaigns();
             for ($i = 0; $i < count($apiCampaings); $i++) {
@@ -52,8 +52,9 @@ class YandexDirectController extends \rusbeldoor\yii2General\components\CronCont
                 $campaign->save();
             }
 
+            // Перебираем компании
             foreach ($apiCampaingsIds as $apiCampaingsId) {
-                // Группы объявлений Яндекс.Директ аккаунта
+                // Группы объявлений
                 $apiAdgroupsIds = [];
                 $apiAdgroups = $yandexDirectAPI->getAdgroups(['CampaignIds' => [$apiCampaingsId]]);
                 for ($i = 0; $i < count($apiAdgroups); $i++) {
@@ -78,28 +79,31 @@ class YandexDirectController extends \rusbeldoor\yii2General\components\CronCont
 
                 // Объявления Яндекс.Директ аккаунта
                 $apiAdsIds = [];
-                $apiAds = $yandexDirectAPI->getAds(['AdGroupIds' => $apiAdgroupsIds]);
-                for ($i = 0; $i < count($apiAds); $i++) {
-                    $apiAd = $apiAds[$i];
-                    $apiAd->Id = (string)$apiAd->Id;
-                    $apiAd->CampaignId = (string)$apiAd->CampaignId;
-                    $apiAd->AdGroupId = (string)$apiAd->AdGroupId;
+                // Если группы есть
+                if (count($apiAdgroupsIds)) {
+                    $apiAds = $yandexDirectAPI->getAds(['AdGroupIds' => $apiAdgroupsIds]);
+                    for ($i = 0; $i < count($apiAds); $i++) {
+                        $apiAd = $apiAds[$i];
+                        $apiAd->Id = (string)$apiAd->Id;
+                        $apiAd->CampaignId = (string)$apiAd->CampaignId;
+                        $apiAd->AdGroupId = (string)$apiAd->AdGroupId;
 
-                    $apiAdsIds[] = $apiAd->Id;
+                        $apiAdsIds[] = $apiAd->Id;
 
-                    $ad = YandexDirectAd::findOne($apiAd->Id);
-                    if (!$ad) {
-                        $ad = new YandexDirectAd();
-                        $ad->id = $apiAd->Id;
-                        $ad->account_id = $yandexDirectAccount->id;
-                        $ad->campaign_id = $apiAd->CampaignId;
-                        $ad->adgroup_id = $apiAd->AdGroupId;
+                        $ad = YandexDirectAd::findOne($apiAd->Id);
+                        if (!$ad) {
+                            $ad = new YandexDirectAd();
+                            $ad->id = $apiAd->Id;
+                            $ad->account_id = $yandexDirectAccount->id;
+                            $ad->campaign_id = $apiAd->CampaignId;
+                            $ad->adgroup_id = $apiAd->AdGroupId;
+                        }
+
+                        $ad->title = ((isset($apiAd->TextAd)) ? $apiAd->TextAd->Title : '');
+                        $ad->status = $apiAd->Status;
+                        $ad->state = $apiAd->State;
+                        $ad->save();
                     }
-
-                    $ad->title = ((isset($apiAd->TextAd)) ? $apiAd->TextAd->Title : '');
-                    $ad->status = $apiAd->Status;
-                    $ad->state = $apiAd->State;
-                    $ad->save();
                 }
             }
         }
