@@ -130,7 +130,7 @@ class YandexDirectAPI extends Model
                 'FieldNames' => ['Id', 'Name', 'Status', 'State'],
             ]
         );
-        if (empty($result)) { return []; }
+        if (empty($result->Campaigns)) { return []; }
         return $result->Campaigns;
     }
 
@@ -150,7 +150,7 @@ class YandexDirectAPI extends Model
                 'FieldNames' => ['Id', 'CampaignId', 'Name', 'Status'],
             ]
         );
-        if (empty($result)) { return []; }
+        if (empty($result->AdGroups)) { return []; }
         return $result->AdGroups;
     }
 
@@ -171,7 +171,7 @@ class YandexDirectAPI extends Model
                 'TextAdFieldNames' => ['Title', 'Text', 'Href'],
             ]
         );
-        if (empty($result)) { return []; }
+        if (empty($result->Ads)) { return []; }
         return $result->Ads;
     }
 
