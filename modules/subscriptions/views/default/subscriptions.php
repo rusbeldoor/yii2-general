@@ -9,7 +9,8 @@ use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;
 $this->title = 'Подписки';
 
 $this->registerCss(
-'.card .card-body .channels { margin-bottom: 5px; }
+'.card { margin: 0 10px 10px 0; }
+.card .card-body .channels { margin-bottom: 5px; }
 .card .card-body .channels form + form { margin-top: 5px; }'
 );
 $this->registerJs(
@@ -27,7 +28,7 @@ $this->registerJs(
 if (!count($result)) { echo '<p>У Вас нет указанных подписок на рассылки.</p>'; }
 else {
     foreach ($result as $subscript) {
-        ?><div class="card" style="float: left; margin: 0 10px 10px 0;">
+        ?><div class="card">
         <div class="card-body">
             <h5 class="card-title"><?= $subscript['name'] ?></h5><?
             foreach ($subscript['actions'] as $action) {
@@ -48,7 +49,7 @@ else {
                         . '<button type="button" class="btn btn-' . (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') . ' " data-sender-name="' . $subscript['name'] . '" data-action-name="' . $action['name'] . '" data-channel-name="' . $channel['name'] . '">' . (($channelIcon) ? $channelIcon . '&nbsp;' : '') . ' ' . $channel['name'] . ' — ' . (($channel['active']) ? 'отписаться' : 'подписаться') . '</button>'
                         . Html::endForm();
                 }
-                echo '<div class="channels" style="">' . implode('', $buttons) . '</div>';
+                echo '<div class="channels">' . implode('', $buttons) . '</div>';
             }
             ?></div>
         </div><?
