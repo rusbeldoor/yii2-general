@@ -19,13 +19,9 @@ class UserSubscriptionHelper
      */
     public static function hash($userId, $platform = '', $category = '', $senderKey = '', $action = '', $channel = '')
     {
-        return hash(
-            'sha256',
-            hash(
-                'sha256',
-                implode(';', [$userId, $platform, $category, $senderKey, $action, $channel])
-            )
-            . Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']
+        return HashHelper::hash(
+            implode(';', [$userId, $platform, $category, $senderKey, $action, $channel]),
+            Yii::$app->params['rusbeldoor']['yii2General']['subscriptions']['salt']
         );
     }
 
