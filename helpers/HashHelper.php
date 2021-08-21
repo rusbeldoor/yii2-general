@@ -18,7 +18,8 @@ class HashHelper
      */
     public static function hash($data, $salt, $algo = 'sha256')
     {
-        $data = (string)$data;
+        if (is_array($data)) { $data = implode(';', $data); }
+        if (!is_string($data)) { $data = (string)$data; }
         return hash($algo, hash($algo, $data) . $salt);
     }
 }
