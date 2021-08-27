@@ -149,16 +149,4 @@ class Formatter extends \yii\i18n\Formatter
             default: return '';
         }
     }
-
-    /**
-     * Значение или тире
-     *
-     * @param $value mixed
-     * @return string
-     */
-    public function asValueOrDash($value)
-    {
-        if ($value === null) { return $this->nullDisplay; }
-        return (($value) ? $value : '-');
-    }
 }
