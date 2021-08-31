@@ -6,17 +6,17 @@ class CodeHelper
 {
     public static $abc = [
         'numbers' => '0123456789',
-        'numbers_safe' => '23456789',
-        'latin_lowercase' => 'abcdefghijklmnopqrstuvwxyz',
-        'latin_lowercase_safe' => 'abcdefghkmnpqrstuvwxyz',
-        'latin_uppercase' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-        'latin_uppercase_safe' => 'ABCDEFGHKMNPQRSTUVWXYZ',
-        'cyrillic_lowercase' => 'абвгдеёжзийклмнопрстуфхцчшщьыъэюя',
-        'cyrillic_lowercase_safe' => 'абвгдежзиклмнпрстуфхцчшщыэюя',
-        'cyrillic_uppercase' => 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ',
-        'cyrillic_uppercase_safe' => 'АБВГДЕЖЗИКЛМНПРСТУФХЦЧШЩЫЭЮЯ',
-        'special_symbols' => '+-*/()[]{}<>|!?@#$%^&:;., ',
-        'special_symbols_safe' => '+-*/()[]{}<>?@#$%^&:;.,',
+        'numbersSafe' => '23456789',
+        'latinLowercase' => 'abcdefghijklmnopqrstuvwxyz',
+        'latinLowercaseSafe' => 'abcdefghkmnpqrstuvwxyz',
+        'latinUppercase' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+        'latinUppercaseSafe' => 'ABCDEFGHKMNPQRSTUVWXYZ',
+        'cyrillicLowercase' => 'абвгдеёжзийклмнопрстуфхцчшщьыъэюя',
+        'cyrillicLowercaseSafe' => 'абвгдежзиклмнпрстуфхцчшщыэюя',
+        'cyrillicUppercase' => 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ',
+        'cyrillicUppercaseSafe' => 'АБВГДЕЖЗИКЛМНПРСТУФХЦЧШЩЫЭЮЯ',
+        'specialSymbols' => '+-*/()[]{}<>|!?@#$%^&:;., ',
+        'specialSymbolsSafe' => '+-*/()[]{}<>?@#$%^&:;.,',
         'secret' => 'YZRD3XkaQ1Cbce2mnSTopqwW9izEuvUVlstA8JG60B4IfF5H7ghOPxydKLjMNr',
     ];
 
@@ -77,7 +77,7 @@ class CodeHelper
      * @return string
      */
     public static function generatePassword($length)
-    { return self::generate($length, ['numbers_safe', 'latin_lowercase_safe']); }
+    { return self::generate($length, ['numbersSafe', 'latinLowercaseSafe']); }
 
     /**
      * Генерация системного пароля
@@ -86,7 +86,7 @@ class CodeHelper
      * @return string
      */
     public static function generateSystemPassword($length)
-    { return self::generate($length, ['numbers', 'latin_lowercase', 'latin_uppercase', 'special_symbols']); }
+    { return self::generate($length, ['numbers', 'latinLowercase', 'latinUppercase', 'specialSymbols']); }
 
     /**
      * Проверка безопасности пароля
@@ -99,8 +99,8 @@ class CodeHelper
         $problems = [];
         if (mb_strlen($password) < 8) { $problems[] = 'Пароль должен быть 8 или более символов.'; }
         if (!(bool)preg_match('/[' . self::$abc['numbers'] . ']+/', $password)) { $problems[] = 'Пароль должен содержать хотябы одну цифру.'; }
-        if (!(bool)preg_match('/[' . self::$abc['latin_uppercase'] . self::$abc['cyrillic_uppercase'] . ']+/u', $password)) { $problems[] = 'Пароль должен содержать хотябы одну заглавную букву.'; }
-        if (!(bool)preg_match('/[' . self::$abc['latin_lowercase'] . self::$abc['cyrillic_lowercase'] . ']+/u', $password)) { $problems[] = 'Пароль должен содержать хотябы одну строчную (не заглавную) букву.'; }
+        if (!(bool)preg_match('/[' . self::$abc['latinUppercase'] . self::$abc['cyrillicUppercase'] . ']+/u', $password)) { $problems[] = 'Пароль должен содержать хотябы одну заглавную букву.'; }
+        if (!(bool)preg_match('/[' . self::$abc['latinLowercase'] . self::$abc['cyrillicLowercase'] . ']+/u', $password)) { $problems[] = 'Пароль должен содержать хотябы одну строчную (не заглавную) букву.'; }
         return $problems;
     }
 }
