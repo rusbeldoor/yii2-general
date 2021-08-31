@@ -20,47 +20,58 @@ class CodeHelper
         'secret' => 'YZRD3XkaQ1Cbce2mnSTopqwW9izEuvUVlstA8JG60B4IfF5H7ghOPxydKLjMNr',
     ];
 
+
     /**
      * Генерация уникального кода
      *
      * @param int $length
-     * @param array $abcNames
+     * @param string $abc
      * @param array $params
      * @return string
      */
-    public static function generate($length, $abcNames, $params = [])
+    public static function generate($length, $abc, $params = [])
     {
-        $result = '';
+        // Параметры
+        if (!isset($params['notFirstZero'])) { $params['notFirstZero'] = false; }
+        if (!isset($params['notFirstAndLastSpace'])) { $params['notFirstAndLastSpace'] = false; }
 
         // Алфавит
-        $abc = '';
-        foreach ($abcNames as $abcName) { $abc .= self::$abc[$abcName]; }
         $abc = preg_split('/(?<!^)(?!$)/u', $abc);
         $abc = array_unique($abc);
         $abcLength = count($abc);
+
+        $result = '';
 
         // Генерируем необходимое количество символов
         for ($i = 1; $i <= $length; $i++) {
             // Генерируем новый символ
             $char = $abc[mt_rand(0, ($abcLength - 1))];
 
-            // Если это первый символ
+            // Если первый символ
             if ($i == 1) {
-                // Если символ пробела
-                if ($char == ' ') { $i--; continue; }
+                if (
+                    // Если символ пробела
+                    ($char == ' ')
+                    // Если первый и последний пробел запрещены
+                    && $params['notFirstAndLastSpace']
+                ) { $i--; continue; }
 
                 if (
                     // Если символ 0 (ноль)
                     ($char == '0')
-                    // Если первый символ не может быть нулём
-                    && (isset($params['not_first_zero']))
+                    // Если первый ноль запрещён
+                    && ($params['notFirstZero'])
                 ) { $i--; continue; }
             }
 
-            // Если это последний символ
+            // Если последний символ
             if ($i == $length) {
-                // Если символ пробела
-                if ($char == ' ') { $i--; continue; }
+                if (
+                    // Если символ пробела
+                    ($char == ' ')
+                    // Если первый и последний пробел запрещены
+                    && $params['notFirstAndLastSpace']
+                ) { $i--; continue; }
             }
 
             // Добавляем новый символ
@@ -71,13 +82,30 @@ class CodeHelper
     }
 
     /**
+     * Генерация уникального кода
+     *
+     * @param int $length
+     * @param array $abcNames
+     * @param array $params
+     * @return string
+     */
+    public static function generateByAbcNames($length, $abcNames, $params = [])
+    {
+        // Алфавит
+        $abc = '';
+        foreach ($abcNames as $abcName) { $abc .= self::$abc[$abcName]; }
+
+        return self::generate($length, $abc, $params);
+    }
+
+    /**
      * Генерация пароля
      *
      * @param int $length
      * @return string
      */
     public static function generatePassword($length)
-    { return self::generate($length, ['numbersSafe', 'latinLowercaseSafe']); }
+    { return self::generateByAbcNames($length, ['numbersSafe', 'latinLowercaseSafe']); }
 
     /**
      * Генерация системного пароля
@@ -86,7 +114,7 @@ class CodeHelper
      * @return string
      */
     public static function generateSystemPassword($length)
-    { return self::generate($length, ['numbers', 'latinLowercase', 'latinUppercase', 'specialSymbols']); }
+    { return self::generateByAbcNames($length, ['numbers', 'latinLowercase', 'latinUppercase', 'specialSymbols']); }
 
     /**
      * Проверка безопасности пароля
