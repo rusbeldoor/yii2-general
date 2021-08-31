@@ -2,7 +2,8 @@
 
 namespace rusbeldoor\yii2General\helpers;
 
-class CodeHelper {
+class CodeHelper
+{
     public static $chars = [
         'numbers' => '0123456789',
         'numbers_safe' => '23456789',
@@ -23,24 +24,25 @@ class CodeHelper {
      * Генерация уникального кода
      *
      * @param int $length
-     * @param array $chars_names
+     * @param array $charsNames
      * @param array $params
      * @return string
      */
-    public static function generate($length, $chars_names, $params = [])
+    public static function generate($length, $charsNames, $params = [])
     {
-        if (isset($chars_names['numbers']) && isset($chars_names['numbers_safe'])) { unset($chars_names['numbers']); }
-        if (isset($chars_names['latin_lowercase']) && isset($chars_names['latin_lowercase_safe'])) { unset($chars_names['latin_lowercase_safe']); }
-        if (isset($chars_names['latin_uppercase']) && isset($chars_names['latin_uppercase_safe'])) { unset($chars_names['latin_uppercase_safe']); }
+        if (isset($charsNames['numbers']) && isset($charsNames['numbers_safe'])) { unset($charsNames['numbers']); }
+        if (isset($charsNames['latin_lowercase']) && isset($charsNames['latin_lowercase_safe'])) { unset($charsNames['latin_lowercase_safe']); }
+        if (isset($charsNames['latin_uppercase']) && isset($charsNames['latin_uppercase_safe'])) { unset($charsNames['latin_uppercase_safe']); }
 
         $result = '';
 
         $chars = '';
-        foreach ($chars_names as $chars_name) { $chars .= self::$chars[$chars_name]; }
-        $chars_length = mb_strlen($chars);
+        foreach ($charsNames as $chars_name) { $chars .= self::$chars[$chars_name]; }
+        $chars = preg_split('/(?<!^)(?!$)/u', $chars);
+        $charsLength = count($chars);
 
         for ($i = 1; $i <= $length; $i++) {
-            $char = $chars[mt_rand(0, ($chars_length - 1))];
+            $char = $chars[mt_rand(0, ($charsLength - 1))];
 
             // Если это первый символ
             if ($i == 1) {
