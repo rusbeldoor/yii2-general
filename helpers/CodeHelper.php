@@ -36,6 +36,7 @@ class CodeHelper
 
         // Алфавит
         $abcArray = array_unique($abcArray);
+        $abcArray = array_values($abcArray);
         $abcArrayLength = count($abcArray);
 
         $result = '';
