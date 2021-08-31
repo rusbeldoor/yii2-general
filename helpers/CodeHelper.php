@@ -4,7 +4,7 @@ namespace rusbeldoor\yii2General\helpers;
 
 class CodeHelper
 {
-    public static $chars = [
+    public static $abc = [
         'numbers' => '0123456789',
         'numbers_safe' => '23456789',
         'latin_lowercase' => 'abcdefghijklmnopqrstuvwxyz',
@@ -24,25 +24,25 @@ class CodeHelper
      * Генерация уникального кода
      *
      * @param int $length
-     * @param array $charsNames
+     * @param array $abcNames
      * @param array $params
      * @return string
      */
-    public static function generate($length, $charsNames, $params = [])
+    public static function generate($length, $abcNames, $params = [])
     {
-        if (isset($charsNames['numbers']) && isset($charsNames['numbers_safe'])) { unset($charsNames['numbers']); }
-        if (isset($charsNames['latin_lowercase']) && isset($charsNames['latin_lowercase_safe'])) { unset($charsNames['latin_lowercase_safe']); }
-        if (isset($charsNames['latin_uppercase']) && isset($charsNames['latin_uppercase_safe'])) { unset($charsNames['latin_uppercase_safe']); }
-
         $result = '';
 
-        $chars = '';
-        foreach ($charsNames as $chars_name) { $chars .= self::$chars[$chars_name]; }
-        $chars = preg_split('/(?<!^)(?!$)/u', $chars);
-        $charsLength = count($chars);
+        // Алфавит
+        $abc = '';
+        foreach ($abcNames as $abcName) { $abc .= self::$abc[$abcName]; }
+        $abc = preg_split('/(?<!^)(?!$)/u', $abc);
+        $abc = array_unique($abc);
+        $abcLength = count($abc);
 
+        // Генерируем необходимое количество символов
         for ($i = 1; $i <= $length; $i++) {
-            $char = $chars[mt_rand(0, ($charsLength - 1))];
+            // Генерируем новый символ
+            $char = $abc[mt_rand(0, ($abcLength - 1))];
 
             // Если это первый символ
             if ($i == 1) {
@@ -63,6 +63,7 @@ class CodeHelper
                 if ($char == ' ') { $i--; continue; }
             }
 
+            // Добавляем новый символ
             $result .= $char;
         }
 
@@ -97,9 +98,9 @@ class CodeHelper
     {
         $problems = [];
         if (mb_strlen($password) < 8) { $problems[] = 'Пароль должен быть 8 или более символов.'; }
-        if (!(bool)preg_match('/[' . self::$chars['numbers'] . ']+/', $password)) { $problems[] = 'Пароль должен содержать хотябы одну цифру.'; }
-        if (!(bool)preg_match('/[' . self::$chars['latin_uppercase'] . self::$chars['cyrillic_uppercase'] . ']+/u', $password)) { $problems[] = 'Пароль должен содержать хотябы одну заглавную букву.'; }
-        if (!(bool)preg_match('/[' . self::$chars['latin_lowercase'] . self::$chars['cyrillic_lowercase'] . ']+/u', $password)) { $problems[] = 'Пароль должен содержать хотябы одну строчную (не заглавную) букву.'; }
+        if (!(bool)preg_match('/[' . self::$abc['numbers'] . ']+/', $password)) { $problems[] = 'Пароль должен содержать хотябы одну цифру.'; }
+        if (!(bool)preg_match('/[' . self::$abc['latin_uppercase'] . self::$abc['cyrillic_uppercase'] . ']+/u', $password)) { $problems[] = 'Пароль должен содержать хотябы одну заглавную букву.'; }
+        if (!(bool)preg_match('/[' . self::$abc['latin_lowercase'] . self::$abc['cyrillic_lowercase'] . ']+/u', $password)) { $problems[] = 'Пароль должен содержать хотябы одну строчную (не заглавную) букву.'; }
         return $problems;
     }
 }
