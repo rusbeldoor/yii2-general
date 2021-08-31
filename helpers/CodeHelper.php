@@ -6,17 +6,17 @@ class CodeHelper
 {
     public static $abc = [
         'numbers' => '0123456789',
-        'numbersSafe' => '23456789',
+        'numbersSafe' => '2456789', // без: 0, 1, 3
         'latinLowercase' => 'abcdefghijklmnopqrstuvwxyz',
-        'latinLowercaseSafe' => 'abcdefghkmnpqrstuvwxyz',
+        'latinLowercaseSafe' => 'abcdefghkmnpqrstuvwxyz', // без: i, j, l, o
         'latinUppercase' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-        'latinUppercaseSafe' => 'ABCDEFGHKMNPQRSTUVWXYZ',
+        'latinUppercaseSafe' => 'ABCDEFGHKMNPQRSTUVWXYZ', // без: I, J, L, O
         'cyrillicLowercase' => 'абвгдеёжзийклмнопрстуфхцчшщьыъэюя',
-        'cyrillicLowercaseSafe' => 'абвгдежзиклмнпрстуфхцчшщыэюя',
+        'cyrillicLowercaseSafe' => 'абвгдежиклмнпрстуфхцчшщыэюя', // без: ё, з, й, о
         'cyrillicUppercase' => 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ',
-        'cyrillicUppercaseSafe' => 'АБВГДЕЖЗИКЛМНПРСТУФХЦЧШЩЫЭЮЯ',
+        'cyrillicUppercaseSafe' => 'АБВГДЕЖИКЛМНПРСТУФХЦЧШЩЫЭЮЯ', // без: Ё, З, Й, О
         'specialSymbols' => '+-*/()[]{}<>|!?@#$%^&:;., ',
-        'specialSymbolsSafe' => '+-*/()[]{}<>?@#$%^&:;.,',
+        'specialSymbolsSafe' => '+-*/()[]{}<>?@#$%^&:;.,', // без: |, !, пробел
         'secret' => 'YZRD3XkaQ1Cbce2mnSTopqwW9izEuvUVlstA8JG60B4IfF5H7ghOPxydKLjMNr',
     ];
 
