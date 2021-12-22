@@ -10,12 +10,6 @@ use rusbeldoor\yii2General\models\CronLog;
  */
 class RemovingOutdatedDataController extends \rusbeldoor\yii2General\components\CronController
 {
-    // Время устаревания
-    public $time = [
-        'CronLog' => 60 * 60 * 24 * 30 * 12,
-        'YandexDirectLog' => 60 * 60 * 24 * 30 * 12,
-    ];
-
     /**
      * ...
      */
@@ -24,9 +18,7 @@ class RemovingOutdatedDataController extends \rusbeldoor\yii2General\components\
         // Логи по кронам
         CronLog::deleteAll(
             "datetime_start<:datetime_start",
-            [':datetime_start' => DatetimeHelper::formatYearMonthDayHourMinuteSecond(time() - $this->time['CronLog'])]
+            [':datetime_start' => DatetimeHelper::formatYearMonthDayHourMinuteSecond(time() - 60 * 60 * 24 * 30 * 12)]
         );
-
-
     }
 }
