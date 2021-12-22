@@ -169,7 +169,7 @@ class DefaultController extends \frontend\components\Controller
         }
 
         // Пользователь
-        $user = User::find($post['userId'])->one();
+        $user = User::find()->id($post['userId'])->limit(1)->one();
         if (!$user) { AppHelper::redirectWithFlash('/', 'danger', 'Пользователь (#' . $post['userId'] . ') не найден.'); }
 
         /** @var UserSubscription $userSubscription Подписка на рассылки */
@@ -178,23 +178,27 @@ class DefaultController extends \frontend\components\Controller
                 ->userId($post['userId'])
                 ->id($post['subscriptId'])
                 ->joinWith('sender')
+                ->limit(1)
                 ->one();
         if (!$userSubscription) { AppHelper::redirectWithFlash('/', 'danger', 'Подписка (#' . $post['subscriptId'] . ') не найден.'); }
 
         $senderCategoryAction =
             UserSubscriptionSenderCategoryAction::find()
                 ->id($post['actionId'])
+                ->limit(1)
                 ->one();
         if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Действие (#' .  $post['channelId'] . ') не найдено.'); }
 
         $channel =
             UserSubscriptionChannel::find()
                 ->id($post['channelId'])
+                ->limit(1)
                 ->one();
         if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Способ доставки сообщений (#' .  $post['channelId'] . ') не найден.'); }
 
         $exemption = UserSubscriptionExemption::find()
             ->where(['subscription_id' => $userSubscription->id, 'sender_category_action_id' => $post['actionId'], 'channel_id' => $post['channelId']])
+            ->limit(1)
             ->one();
 
         if ($post['active']) {
