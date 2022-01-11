@@ -20,7 +20,7 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
             'name' => $this->string(128)->notNull(),
         ]);
         $this->createIndex('unique', 'user_subscription_sender_category', ['platform_id', 'alias'], true);
-        $this->addForeignKey('fk-user_subscription_sender-platform_id', 'user_subscription_sender_category', 'platform_id', 'platform', 'id');
+        $this->addForeignKey('fk-platform_id', 'user_subscription_sender_category', 'platform_id', 'platform', 'id');
 
         // Таблица отправителей
         $this->createTable('user_subscription_sender', [
@@ -30,7 +30,7 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
             'name' => $this->string(128)->notNull(),
             'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
         ]);
-        $this->addForeignKey('fk-user_subscription_sender_category-category_id', 'user_subscription_sender', 'category_id', 'user_subscription_sender_category', 'id');
+        $this->addForeignKey('fk-category_id', 'user_subscription_sender', 'category_id', 'user_subscription_sender_category', 'id');
 
         // Таблица способов доставки сообщений
         $this->createTable('user_subscription_channel', [
@@ -59,7 +59,7 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
             'name' => $this->string(128)->notNull(),
             'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
         ]);
-        $this->addForeignKey('fk-user_subscription_sender_category_action-category_id', 'user_subscription_sender_category_action', 'category_id', 'user_subscription_sender_category', 'id');
+        $this->addForeignKey('fk-category_id', 'user_subscription_sender_category_action', 'category_id', 'user_subscription_sender_category', 'id');
 
         // Таблица связей пользователей с отправителями
         $this->createTable('user_subscription', [
@@ -68,8 +68,8 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
             'sender_id' =>'mediumint(8) UNSIGNED NOT NULL',
         ]);
         $this->createIndex('unique', 'user_subscription', ['user_id', 'sender_id'], true);
-        $this->addForeignKey('fk-user_subscription-user_id', 'user_subscription', 'user_id', 'user', 'id'); // Закомментировать, если таблица user лежит не в той же БД или имеет другое название
-        $this->addForeignKey('fk-user_subscription-sender_id', 'user_subscription', 'sender_id', 'user_subscription_sender', 'id');
+        $this->addForeignKey('fk-user_id', 'user_subscription', 'user_id', 'user', 'id'); // Закомментировать, если таблица user лежит не в той же БД или имеет другое название
+        $this->addForeignKey('fk-sender_id', 'user_subscription', 'sender_id', 'user_subscription_sender', 'id');
 
         // Таблица исключений (отписок) пользователей
         $this->createTable('user_subscription_exception', [
@@ -79,9 +79,9 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
             'channel_id' =>'smallint(8) UNSIGNED NOT NULL',
         ]);
         $this->createIndex('unique', 'user_subscription_exception', ['subscription_id', 'sender_category_action_id', 'channel_id'], true);
-        $this->addForeignKey('fk-user_subscription_exception-subscription_id', 'user_subscription_exception', 'subscription_id', 'user_subscription', 'id');
-        $this->addForeignKey('fk-user_subscription_exception-sender_category_action_id', 'user_subscription_exception', 'sender_category_action_id', 'user_subscription_sender_category_action', 'id');
-        $this->addForeignKey('fk-user_subscription_exception-channel_id', 'user_subscription_exception', 'channel_id', 'user_subscription_channel', 'id');
+        $this->addForeignKey('fk-subscription_id', 'user_subscription_exception', 'subscription_id', 'user_subscription', 'id');
+        $this->addForeignKey('fk-sender_category_action_id', 'user_subscription_exception', 'sender_category_action_id', 'user_subscription_sender_category_action', 'id');
+        $this->addForeignKey('fk-channel_id', 'user_subscription_exception', 'channel_id', 'user_subscription_channel', 'id');
     }
 
     /**

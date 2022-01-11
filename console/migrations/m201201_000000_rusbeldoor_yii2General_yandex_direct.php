@@ -29,7 +29,7 @@ class m201201_000000_rusbeldoor_yii2General_yandex_direct extends Migration
             'status' => $this->string(16)->notNull(),
             'state' => $this->string(16)->notNull(),
         ]);
-        $this->addForeignKey('fk-yandex_direct_campaign-account_id', 'yandex_direct_campaign', 'account_id', 'yandex_direct_account', 'id');
+        $this->addForeignKey('fk-account_id', 'yandex_direct_campaign', 'account_id', 'yandex_direct_account', 'id');
 
         // Таблица групп объявлений Яндекс.Директ
         $this->createTable('yandex_direct_adgroup', [
@@ -39,8 +39,8 @@ class m201201_000000_rusbeldoor_yii2General_yandex_direct extends Migration
             'name' => $this->string(128)->notNull(),
             'status' => $this->string(16)->notNull(),
         ]);
-        $this->addForeignKey('fk-yandex_direct_adgroup-account_id', 'yandex_direct_adgroup', 'account_id', 'yandex_direct_account', 'id');
-        $this->addForeignKey('fk-yandex_direct_adgroup-campaign_id', 'yandex_direct_adgroup', 'campaign_id', 'yandex_direct_campaign', 'id');
+        $this->addForeignKey('fk-account_id', 'yandex_direct_adgroup', 'account_id', 'yandex_direct_account', 'id');
+        $this->addForeignKey('fk-campaign_id', 'yandex_direct_adgroup', 'campaign_id', 'yandex_direct_campaign', 'id');
 
         // Таблица объявлений Яндекс.Директ
         $this->createTable('yandex_direct_ad', [
@@ -52,9 +52,9 @@ class m201201_000000_rusbeldoor_yii2General_yandex_direct extends Migration
             'status' => $this->string(16)->notNull(),
             'state' => $this->string(16)->notNull(),
         ]);
-        $this->addForeignKey('fk-yandex_direct_ad-account_id', 'yandex_direct_ad', 'account_id', 'yandex_direct_account', 'id');
-        $this->addForeignKey('fk-yandex_direct_ad-campaign_id', 'yandex_direct_ad', 'campaign_id', 'yandex_direct_campaign', 'id');
-        $this->addForeignKey('fk-yandex_direct_ad-adgroup_id', 'yandex_direct_ad', 'adgroup_id', 'yandex_direct_adgroup', 'id');
+        $this->addForeignKey('fk-account_id', 'yandex_direct_ad', 'account_id', 'yandex_direct_account', 'id');
+        $this->addForeignKey('fk-campaign_id', 'yandex_direct_ad', 'campaign_id', 'yandex_direct_campaign', 'id');
+        $this->addForeignKey('fk-adgroup_id', 'yandex_direct_ad', 'adgroup_id', 'yandex_direct_adgroup', 'id');
 
         // Таблица логов Яндекс.Директ
         $this->createTable('yandex_direct_log', [
@@ -65,7 +65,7 @@ class m201201_000000_rusbeldoor_yii2General_yandex_direct extends Migration
             'datetime' => $this->datetime()->notNull(),
             'action' => $this->string(32)->notNull(),
         ]);
-        $this->addForeignKey('fk-yandex_direct_log-user_id', 'yandex_direct_log', 'user_id', 'user', 'id'); // Закомментировать, если таблица user лежит не в той же БД или имеет другое название
+        $this->addForeignKey('fk-user_id', 'yandex_direct_log', 'user_id', 'user', 'id'); // Закомментировать, если таблица user лежит не в той же БД или имеет другое название
 
         // Крон
         $this->insert('cron', ['alias' => 'yandex-direct', 'description' => 'Яндекс.Директ', 'status' => 'wait', 'max_duration' => 600, 'kill_process' => 1, 'restart' => 1, 'active' => 1]);

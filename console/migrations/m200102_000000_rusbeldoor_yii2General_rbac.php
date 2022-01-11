@@ -30,7 +30,7 @@ class m200102_000000_rusbeldoor_yii2General_rbac extends Migration
             'created_at' => $this->integer(11)->defaultValue(null),
             'updated_at' => $this->integer(11)->defaultValue(null),
         ]);
-        $this->addForeignKey('fk-auth_item-auth_rule', 'auth_item', 'rule_name', 'auth_rule', 'name', null, 'CASCADE');
+        $this->addForeignKey('fk-rule_name', 'auth_item', 'rule_name', 'auth_rule', 'name', null, 'CASCADE');
 
         // Таблица соответсвия ролей и операций
         $this->createTable('auth_item_child', [
@@ -39,8 +39,8 @@ class m200102_000000_rusbeldoor_yii2General_rbac extends Migration
             'child' => $this->string(96)->notNull(),
         ]);
         $this->createIndex('unique-parent-child', 'auth_item_child', ['parent', 'child'], true);
-        $this->addForeignKey('fk-auth_assignment-parent', 'auth_item_child', 'parent', 'auth_item', 'name', null, 'CASCADE');
-        $this->addForeignKey('fk-auth_assignment-child', 'auth_item_child', 'child', 'auth_item', 'name', null, 'CASCADE');
+        $this->addForeignKey('fk-parent', 'auth_item_child', 'parent', 'auth_item', 'name', null, 'CASCADE');
+        $this->addForeignKey('fk-child', 'auth_item_child', 'child', 'auth_item', 'name', null, 'CASCADE');
 
         // Таблица соответсвия ролей, операций и пользователей
         $this->createTable('auth_assignment', [
@@ -50,8 +50,8 @@ class m200102_000000_rusbeldoor_yii2General_rbac extends Migration
             'created_at' => $this->integer(11)->defaultValue(null),
         ]);
         $this->createIndex('unique-item_name-user_id', 'auth_assignment', ['item_name', 'user_id'], true);
-        $this->addForeignKey('fk-auth_assignment-item_name', 'auth_assignment', 'item_name', 'auth_item', 'name', null, 'CASCADE');
-        $this->addForeignKey('fk-auth_assignment-user_id', 'auth_assignment', 'user_id', 'user', 'id'); // Закомментировать, если таблица user лежит не в той же БД или имеет другое название
+        $this->addForeignKey('fk-item_name', 'auth_assignment', 'item_name', 'auth_item', 'name', null, 'CASCADE');
+        $this->addForeignKey('fk-user_id', 'auth_assignment', 'user_id', 'user', 'id'); // Закомментировать, если таблица user лежит не в той же БД или имеет другое название
 
         // Создание ролей, операций
         $this->insert('auth_item', ['name' => 'administrator', 'type' => 1, 'description' => 'Адинистратор']);

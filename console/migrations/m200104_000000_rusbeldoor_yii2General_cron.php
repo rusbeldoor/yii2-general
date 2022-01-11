@@ -34,7 +34,7 @@ class m200104_000000_rusbeldoor_yii2General_cron extends Migration
             'datetime_complete' => $this->datetime()->defaultValue(null),
             'pid' => $this->string(32)->defaultValue(null),
         ]);
-        $this->addForeignKey('fk-cron-cron_log', 'cron_log', 'cron_id', 'cron', 'id');
+        $this->addForeignKey('fk-cron_id', 'cron_log', 'cron_id', 'cron', 'id');
 
         // Крон
         $this->insert('cron', ['alias' => 'remove-outdated-data', 'description' => 'Удаление устаревших данных', 'status' => 'wait', 'max_duration' => 3600, 'kill_process' => 1, 'restart' => 1, 'active' => 1]);
