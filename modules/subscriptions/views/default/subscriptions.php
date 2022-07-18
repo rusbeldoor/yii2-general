@@ -3,7 +3,7 @@
 /* @var int $userId */
 /* @var array $result */
 
-use yii\bootstrap4\Html;
+use yii\bootstrap5\Html;
 use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;
 
 $this->title = 'Подписки';

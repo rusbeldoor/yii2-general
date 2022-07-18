@@ -9,7 +9,7 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
 /**
  * ...
  */
-class ActiveField extends \yii\bootstrap4\ActiveField
+class ActiveField extends \yii\bootstrap5\ActiveField
 {
     use AppendPrepend;
 

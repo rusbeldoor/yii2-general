@@ -28,7 +28,7 @@ class GridView extends \yii\grid\GridView
 
     // Навигация по страницам
     public $pager = [
-        'class' => 'yii\bootstrap4\LinkPager',
+        'class' => 'yii\bootstrap5\LinkPager',
         'firstPageLabel' => 'Первая',
         'lastPageLabel'  => 'Последняя',
     ];

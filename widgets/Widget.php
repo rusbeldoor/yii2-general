@@ -5,6 +5,6 @@ namespace rusbeldoor\yii2General\widgets;
 /**
  * ...
  */
-class Widget extends \yii\bootstrap4\Widget
+class Widget extends \yii\bootstrap5\Widget
 {
 }
