@@ -3,9 +3,9 @@
 namespace rusbeldoor\yii2General\components;
 
 /**
- * ...
+ * Контроллер
  */
-class View extends \yii\web\View
+class Controller extends \yii\console\Controller
 {
     /**
      * Добавление хлебной крошки
@@ -16,6 +16,6 @@ class View extends \yii\web\View
      */
     public function addBreadcrumb(string $label, array $url)
     {
-        $this->params['breadcrumbs'][] = ['label' => $label, 'url' => $url];
+        $this->view->params['breadcrumbs'][] = ['label' => $label, 'url' => $url];
     }
 }

@@ -8,7 +8,7 @@ use rusbeldoor\yii2General\helpers\AppHelper;
 /**
  * Контроллер
  */
-class WebController extends \yii\web\Controller
+class WebController extends Controller
 {
     /**
      * Инициализация
