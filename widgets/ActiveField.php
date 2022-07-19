@@ -33,7 +33,7 @@ class ActiveField extends \yii\bootstrap5\ActiveField
      * @inheritdoc
      * @throws InvalidConfigException
      */
-    public function render($content = null)
+    public function render($content = null): string
     {
         $this->buildTemplate();
         return parent::render($content);
