@@ -13,7 +13,7 @@ class AddOrEditForm extends ActiveForm
      * {@inheritDoc}
      * @return AddOrEditForm
      */
-    public static function begin($config = []): AddOrEditForm
+    public static function begin($config = [])
     { return paretm::begin(); }
 
     /**
