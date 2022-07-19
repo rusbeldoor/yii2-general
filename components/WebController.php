@@ -8,7 +8,7 @@ use rusbeldoor\yii2General\helpers\AppHelper;
 /**
  * Контроллер
  */
-class WebController extends Controller
+class WebController extends \yii\web\Controller
 {
     /**
      * Инициализация
@@ -105,7 +105,19 @@ class WebController extends Controller
      *** *** *** Свои методы *** *** ***
      ***********************************/
 
-
+    /**
+     * Добавление хлебной крошки
+     *
+     * @param string $label
+     * @param ?array $url
+     * @return void
+     */
+    public function addBreadcrumb(string $label, array $url = null)
+    {
+        $array = ['label' => $label];
+        if ($url !== null) { $array['url'] = $url; }
+        $this->view->params['breadcrumbs'][] = $array;
+    }
 
     /******************************************************
      *** *** *** Изменение родителських методов *** *** ***
