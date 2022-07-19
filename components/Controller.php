@@ -11,11 +11,13 @@ class Controller extends \yii\console\Controller
      * Добавление хлебной крошки
      *
      * @param string $label
-     * @param array $url
+     * @param ?array $url
      * @return void
      */
-    public function addBreadcrumb(string $label, array $url)
+    public function addBreadcrumb(string $label, array $url = null)
     {
-        $this->view->params['breadcrumbs'][] = ['label' => $label, 'url' => $url];
+        $array = ['label' => $label];
+        if ($url !== null) { $array['url'] = $url; }
+        $this->view->params['breadcrumbs'][] = $array;
     }
 }
