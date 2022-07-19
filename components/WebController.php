@@ -119,20 +119,4 @@ class WebController extends \yii\web\Controller
     {
         return ((($this->action !== null) && ($this->action->id !== 'index')) ? $this->action->getUniqueId() : $this->getUniqueId());
     }
-
-    /**
-     * Returns the view object that can be used to render views or view files.
-     * The [[render()]], [[renderPartial()]] and [[renderFile()]] methods will use
-     * this view object to implement the actual view rendering.
-     * If not set, it will default to the "view" application component.
-     * @return View|\yii\web\View the view object that can be used to render views or view files.
-     */
-    public function getView()
-    {
-        if ($this->_view === null) {
-            $this->_view = new View();
-        }
-
-        return $this->_view;
-    }
 }
