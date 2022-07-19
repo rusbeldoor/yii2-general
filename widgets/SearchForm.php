@@ -15,6 +15,13 @@ class SearchForm extends ActiveForm
     ];
 
     /**
+     * {@inheritDoc}
+     * @return SearchForm
+     */
+    public static function begin($config = []): SearchForm
+    { return parent::begin($config); }
+
+    /**
      * Кнопки
      *
      * @return string

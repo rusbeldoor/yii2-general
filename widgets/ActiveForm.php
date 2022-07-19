@@ -13,4 +13,11 @@ class ActiveForm extends \yii\bootstrap5\ActiveForm
     public $fieldClass = 'rusbeldoor\yii2General\widgets\ActiveField';
 
     public $layout = self::TYPE_HORIZONTAL;
+
+    /**
+     * {@inheritDoc}
+     * @return ActiveForm
+     */
+    public static function begin($config = []): ActiveForm
+    { return parent::begin($config); }
 }
