@@ -1,8 +1,9 @@
 <?php
-
-/* @var yii\web\View $this */
-/* @var backend\modules\administrator\modules\rbac\models\AuthItem $model */
-/* @var ActiveDataProvider $cronLogDataProvider */
+/**
+ * @var yii\web\View $this
+ * @var backend\modules\administrator\modules\rbac\models\AuthItem $model
+ * @var ActiveDataProvider $cronLogDataProvider
+ */
 
 use rusbeldoor\yii2General\widgets\DetailView;
 use rusbeldoor\yii2General\widgets\grid\GridView;
@@ -20,6 +21,7 @@ if (Yii::$app->controller->module->onlyMigrations) {
     unset($buttonsForViewPage[array_search('delete', $buttonsForViewPage)]);
 }
 ?>
+
 <div class="auth-item-view">
     <?= Tabs::widget([
         'navType' => 'nav-pills',

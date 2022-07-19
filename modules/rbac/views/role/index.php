@@ -1,11 +1,12 @@
 <?php
+/**
+ * @var yii\web\View $this
+ * @var backend\modules\administrator\modules\rbac\models\AuthItemSearch $searchModel
+ * @var yii\data\ActiveDataProvider $dataProvider
+ */
 
 use rusbeldoor\yii2General\widgets\grid\GridView;
 use rusbeldoor\yii2General\helpers\BaseUI;
-
-/* @var yii\web\View $this */
-/* @var backend\modules\administrator\modules\rbac\models\AuthItemSearch $searchModel */
-/* @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Роли';
 $this->params['breadcrumbs'][] = $this->title;
@@ -27,6 +28,7 @@ if (Yii::$app->controller->module->onlyMigrations) {
     $gridViewColumns[] = $actionColumn;
 }
 ?>
+
 <div class="auth-item-index">
     <?= BaseUI::buttonsForIndexPage($buttonsForIndexPage) ?>
 

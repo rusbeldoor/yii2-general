@@ -19,6 +19,6 @@ class SearchForm extends ActiveForm
      *
      * @return string
      */
-    public function buttons()
+    public function buttons(): string
     { return BaseUI::buttonsForSearchForm(); }
 }

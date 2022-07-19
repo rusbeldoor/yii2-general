@@ -1,7 +1,9 @@
 <?php
-/* @var yii\web\View $this */
-/* @var int $userId */
-/* @var array $result */
+/**
+ * @var yii\web\View $this
+ * @var int $userId
+ * @var array $result
+ */
 
 use yii\bootstrap5\Html;
 use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;

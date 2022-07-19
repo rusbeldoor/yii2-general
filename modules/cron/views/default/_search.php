@@ -1,11 +1,11 @@
 <?php
+/**
+ * @var yii\web\View $this
+ * @var backend\modules\administrator\modules\rbac\models\AuthItemSearch $model
+ */
 
-use yii\helpers\html;
 use rusbeldoor\yii2General\models\Cron;
 use rusbeldoor\yii2General\widgets\SearchForm;
-
-/* @var yii\web\View $this */
-/* @var backend\modules\administrator\modules\rbac\models\AuthItemSearch $model */
 ?>
 
 <div class="auth-item-search panelSearchFormContainer">

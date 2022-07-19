@@ -1,7 +1,8 @@
 <?php
-
-/* @var yii\web\View $this */
-/* @var backend\modules\administrator\modules\rbac\models\AuthItem $model */
+/**
+ * @var yii\web\View $this
+ * @var backend\modules\administrator\modules\rbac\models\AuthItem $model
+ */
 
 use rusbeldoor\yii2General\widgets\AddOrEditForm;
 ?>

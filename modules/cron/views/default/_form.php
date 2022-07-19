@@ -1,9 +1,10 @@
 <?php
+/**
+ * @var yii\web\View $this
+ * @var backend\modules\administrator\modules\rbac\models\AuthItem $model
+ */
 
 use rusbeldoor\yii2General\widgets\AddOrEditForm;
-
-/* @var yii\web\View $this */
-/* @var backend\modules\administrator\modules\rbac\models\AuthItem $model */
 ?>
 
 <div class="auth-item-form">

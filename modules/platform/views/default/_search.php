@@ -1,10 +1,9 @@
 <?php
+/**
+ * @var yii\web\View $this
+ * @var backend\modules\administrator\modules\rbac\models\AuthItemSearch $model
+ */
 
-/* @var yii\web\View $this */
-/* @var backend\modules\administrator\modules\rbac\models\AuthItemSearch $model */
-
-use yii\helpers\html;
-use rusbeldoor\yii2General\models\Platform;
 use rusbeldoor\yii2General\widgets\SearchForm;
 ?>
 
