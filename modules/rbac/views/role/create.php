@@ -9,8 +9,8 @@
  */
 
 $this->title = 'Добавление';
-$this->params['breadcrumbs'][] = ['label' => 'Роли', 'url' => ['/administrator/rbac/role']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->context->addBreadcrumb('Роли', ['/administrator/rbac/role']);
+$this->context->addBreadcrumb('Добавление');
 ?>
 
 <div class="auth-item-create">

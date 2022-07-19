@@ -5,9 +5,9 @@
  */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Операции', 'url' => ['/administrator/rbac/permission']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Изменение';
+$this->context->addBreadcrumb('Операции', ['/administrator/rbac/permission']);
+$this->context->addBreadcrumb($model->name, ['view', 'id' => $model->id]);
+$this->context->addBreadcrumb('Изменение');
 ?>
 
 <div class="auth-item-update">

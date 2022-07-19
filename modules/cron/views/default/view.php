@@ -11,8 +11,8 @@ use rusbeldoor\yii2General\helpers\BaseUI;
 use rusbeldoor\yii2General\widgets\tabs\Tabs;
 
 $this->title = $model->alias;
-$this->params['breadcrumbs'][] = ['label' => 'Кроны', 'url' => ['/administrator/cron']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->context->addBreadcrumb('Кроны', ['/administrator/cron']);
+$this->context->addBreadcrumb($model->alias);
 \yii\web\YiiAsset::register($this);
 
 $buttonsForViewPage = ['add', 'delete'];

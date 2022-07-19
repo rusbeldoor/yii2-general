@@ -9,8 +9,8 @@ use rusbeldoor\yii2General\helpers\BaseUI;
 use kartik\tabs\TabsX;
 
 $this->title = $model->alias;
-$this->params['breadcrumbs'][] = ['label' => 'Платформы', 'url' => ['/administrator/platform']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->context->addBreadcrumb('Платформы', ['/administrator/platform']);
+$this->context->addBreadcrumb($model->alias);
 \yii\web\YiiAsset::register($this);
 
 $buttonsForViewPage = ['add', 'delete'];

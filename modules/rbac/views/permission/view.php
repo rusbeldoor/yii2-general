@@ -8,8 +8,8 @@ use rusbeldoor\yii2General\widgets\DetailView;
 use rusbeldoor\yii2General\helpers\BaseUI;
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Операции', 'url' => ['/administrator/rbac/permission']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->context->addBreadcrumb('Операции', ['/administrator/rbac/permission']);
+$this->context->addBreadcrumb($model->name);
 \yii\web\YiiAsset::register($this);
 
 $buttonsForViewPage = ['add', 'delete'];

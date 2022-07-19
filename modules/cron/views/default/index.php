@@ -9,7 +9,7 @@ use rusbeldoor\yii2General\widgets\grid\GridView;
 use rusbeldoor\yii2General\helpers\BaseUI;
 
 $this->title = 'Кроны';
-$this->params['breadcrumbs'][] = $this->title;
+$this->context->addBreadcrumb('Кроны');
 
 $buttonsForIndexPage = ['filter', 'add', 'delete'];
 $gridViewColumns = [

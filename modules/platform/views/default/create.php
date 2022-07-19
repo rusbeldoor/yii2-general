@@ -5,9 +5,10 @@
  */
 
 $this->title = 'Добавление';
-$this->params['breadcrumbs'][] = ['label' => 'Платформы', 'url' => ['/administrator/platform']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->context->addBreadcrumb('Платформы', ['/administrator/platform']);
+$this->context->addBreadcrumb('Добавление');
 ?>
+
 <div class="auth-item-create">
     <?= $this->render('_form', ['model' => $model]) ?>
 </div>

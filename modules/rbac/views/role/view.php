@@ -11,8 +11,8 @@ use rusbeldoor\yii2General\helpers\BaseUI;
 use kartik\sortinput\SortableInput;
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Роли', 'url' => ['/administrator/rbac/role']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->context->addBreadcrumb('Роли', ['/administrator/rbac/role']);
+$this->context->addBreadcrumb($model->name);
 \yii\web\YiiAsset::register($this);
 
 $buttonsForViewPage = ['add', 'delete'];
