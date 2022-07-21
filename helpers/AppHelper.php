@@ -177,12 +177,21 @@ class AppHelper
     /**
      * ...
      *
-     * @param string $url
+     * @param string|array $url
+     * @return object
+     */
+    public static function redirect(string|array $url)
+    { return Yii::$app->controller->redirect($url); }
+
+    /**
+     * ...
+     *
+     * @param string|array $url
      * @param string $flashType
      * @param string $flashText
      * @return object
      */
-    public static function redirectWithFlash(string $url, string $flashType, string $flashText)
+    public static function redirectWithFlash(string|array $url, string $flashType, string $flashText)
     {
         self::setFlashes([$flashType => $flashText]);
         return Yii::$app->controller->redirect($url);
@@ -191,11 +200,11 @@ class AppHelper
     /**
      * ...
      *
-     * @param string $url
+     * @param string|array $url
      * @param array $flashes
      * @return void
      */
-    public static function redirectWithFlashes(string $url, array $flashes)
+    public static function redirectWithFlashes(string|array $url, array $flashes)
     {
         foreach ($flashes as $flash) { self::setFlashes([$flash['type'] => $flash['text']]); }
         return Yii::$app->controller->redirect($url);
