@@ -7,12 +7,7 @@ use yii\web\ForbiddenHttpException;
 
 class AppHelper
 {
-    /*****************************************
-     *** *** *** Константы *** *** *** *** ***
-     *****************************************/
-
-    const PLATFORM_ID = 1;
-    const PLATFORM_ALIAS = 'quick-service';
+    /*** Константы ***/
 
     const ALERT_SUCCESS = 'success';
     const ALERT_ERROR = 'error';
@@ -23,9 +18,7 @@ class AppHelper
     const RESULT_ERROR = 'error';
     const RESULT_NOTHING = 'nothing ';
 
-    /*****************************************
-     *** *** *** Завершение работы *** *** ***
-     *****************************************/
+    /*** Завершение работы ***/
 
     /**
      * Завершение, если не ajax запрос
@@ -65,7 +58,7 @@ class AppHelper
      * @param string $string
      * @return void
      */
-    public static function exitWithEcho($string)
+    public static function exitWithEcho(string $string)
     { echo $string; exit; }
 
     /**
@@ -76,7 +69,7 @@ class AppHelper
      * @param bool $close
      * @return void
      */
-    public static function exitWithEchoMessage($type, $text, $close = false)
+    public static function exitWithEchoMessage(string $type, string $text, bool $close = false)
     { self::exitWithEcho(AlertHelper::alert($type, $text, $close)); }
 
     /**
@@ -85,7 +78,7 @@ class AppHelper
      * @param array $data
      * @return void
      */
-    public static function exitWithJson($data)
+    public static function exitWithJson(array $data)
     { header('Content-Type: application/json'); echo json_encode($data); exit; }
 
     /**
@@ -127,7 +120,7 @@ class AppHelper
      * @param array $alerts
      * @return void
      */
-    public static function exitWithJsonResultSuccessDataAlerts($alerts = [])
+    public static function exitWithJsonResultSuccessDataAlerts(array $alerts = [])
     { self::exitWithJsonResultSuccessData(['alerts' => $alerts]); }
 
     /**
@@ -136,7 +129,7 @@ class AppHelper
      * @param string $html
      * @return void
      */
-    public static function exitWithJsonResultSuccessDataHtml($html = '')
+    public static function exitWithJsonResultSuccessDataHtml(string $html = '')
     { self::exitWithJsonResultSuccessData(['html' => $html]); }
 
     /**
@@ -154,29 +147,21 @@ class AppHelper
      * @param array $alerts
      * @return void
      */
-    public static function exitWithJsonResultErrorDataAlerts($alerts = [])
+    public static function exitWithJsonResultErrorDataAlerts(array $alerts = [])
     { self::exitWithJsonResultErrorData(['alerts' => $alerts]); }
 
 
-    /*************************************
-     *** *** *** Права доступа *** *** ***
-     *************************************/
+    /*** Права доступа ***/
 
     /**
      * Проверка права доступа
      *
      * @param string $itemName
      */
-    public static function forbiddenExceptionIfNotHavePermission($itemName)
-    {
-        if (!Yii::$app->user->can($itemName)) {
-            throw new ForbiddenHttpException('Доступ запрещён.');
-        }
-    }
+    public static function forbiddenExceptionIfNotHavePermission(string $itemName)
+    { if (!Yii::$app->user->can($itemName)) { throw new ForbiddenHttpException('Доступ запрещён.'); } }
 
-    /*******************************
-     *** *** *** Flashes *** *** ***
-     *******************************/
+    /*** Flashes ***/
 
     /**
      * Установка сообщений
@@ -184,12 +169,10 @@ class AppHelper
      * @param array $flashs
      * @return void
      */
-    public static function setFlashes($flashs)
-    {
-        foreach($flashs as $key => $text) {
-            Yii::$app->session->setFlash($key, $text);
-        }
-    }
+    public static function setFlashes(array $flashs)
+    { foreach($flashs as $key => $text) { Yii::$app->session->setFlash($key, $text); } }
+
+    /*** Перенаправления ***/
 
     /**
      * ...
@@ -199,7 +182,7 @@ class AppHelper
      * @param string $flashText
      * @return object
      */
-    public static function redirectWithFlash($url, $flashType, $flashText)
+    public static function redirectWithFlash(string $url, string $flashType, string $flashText)
     {
         self::setFlashes([$flashType => $flashText]);
         return Yii::$app->controller->redirect($url);
@@ -212,7 +195,7 @@ class AppHelper
      * @param array $flashes
      * @return void
      */
-    public static function redirectWithFlashes($url, $flashes)
+    public static function redirectWithFlashes(string $url, array $flashes)
     {
         foreach ($flashes as $flash) { self::setFlashes([$flash['type'] => $flash['text']]); }
         return Yii::$app->controller->redirect($url);
@@ -225,7 +208,7 @@ class AppHelper
      * @param string $flashText
      * @return void
      */
-    public static function redirectIndexWithFlash($flashType, $flashText)
+    public static function redirectIndexWithFlash(string $flashType, string $flashText)
     { return self::redirectWithFlash(['index'], $flashType, $flashText); }
 
     /**
@@ -234,24 +217,23 @@ class AppHelper
      * @param array $flashes
      * @return void
      */
-    public static function redirectIndexWithFlashes($flashes)
+    public static function redirectIndexWithFlashes(array $flashes)
     { return self::redirectWithFlashes(['index'], $flashes); }
 
-    /****************************************
-     *** *** *** Работа с файлами *** *** ***
-     ****************************************/
+    /*** Работа с файлами ***/
 
     /**
      * Логирование данных в файл
      *
      * @param string $file
      * @param string $string
+     * @param bool $n
      * @return void
      */
-    public static function log($file, $string, $n = true)
+    public static function log(string $file, string $string, bool $n = true)
     {
         $filename = '@runtime/' . $file . '.log';
-        @error_log('[' . date('H:i:s d.m.Y') . ']    ' . $string . ($n ? "\n" : ''), 3, $filename);
+        @error_log('[' . date('H:i:s d.m.Y') . ']    ' . $string . (($n) ? "\n" : ''), 3, $filename);
         @chmod($filename, 0777);
     }
 }
