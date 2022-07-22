@@ -21,8 +21,8 @@ class Formatter extends \yii\i18n\Formatter
     { return '#' . $value; }
 
     /** Статус */
-    public function formatStatus(string $value): string
-    { return match($value) { 'wait' => 'Ожидает', 'process' => 'Выполняется', 'complete' => 'Выполнено' }; }
+    public function formatStatus(string $value): ?string
+    { return match($value) {'wait' => 'Ожидает', 'process' => 'Выполняется', 'complete' => 'Выполнено', default => null}; }
 
     /** Да/Нет */
     public function formatYesNo(int|string|bool $value): string
