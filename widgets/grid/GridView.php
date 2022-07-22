@@ -17,8 +17,6 @@ class GridView extends \yii\grid\GridView
     public $searchFormSelector = '.panelSearchForm';
     // Id Pjax контейнера
     public $pjaxId = 'panelPjaxGrid';
-    // Id контейнера откуда берутся данные
-//    public $fragmentId = 'panelPjaxFragment';
 
     // Шаблон вывода GridView
     public $layout = '<div class="grid-view-header clearfix">{summary}</div>{items}<div class="grid-view-footer clearfix">{pager}</div>';
@@ -41,7 +39,6 @@ class GridView extends \yii\grid\GridView
 
         self::$number++;
         $this->pjaxId .= self::$number;
-//        $this->fragmentId .= self::$number;
     }
 
     /**
@@ -56,56 +53,51 @@ class GridView extends \yii\grid\GridView
         // Сброс формы (отправка формы по умолчанию)
         // Реакция на успешное Pjax обновление (переход к таблице)
         // Обработка отправки форм bulkActionForm
-//   todo после type: \'POST\',     fragment: \'#' . $this->fragmentId . '\',
-        $this->getView()->registerJs(
-'$(document).ready(function() {
+        $this->getView()->registerJs(<<< JS
+$(document).ready(function() {
     function pjaxReload(data, url) {
-        console.log(data);
         $.pjax.reload({
             url: url,
-            container: \'#' . $this->pjaxId . '\',
-            type: \'POST\',
+            container: '#{$this->pjaxId}',
+            type: 'POST',
             data: data
         });
     }
-    $(document).on(\'submit\', \'' . $this->searchFormSelector . '\', function() {
+    $(document).on('submit', '{$this->searchFormSelector}', function() {
         pjaxReload($(this).serialize(), window.location.href);
         return false;
     });
-    $(document).on(\'reset\', \'' . $this->searchFormSelector . '\', function() {
+    $(document).on('reset', '{$this->searchFormSelector}', function() {
         setTimeout(function() { pjaxReload($(this).serialize()); }, 1);
     });
-    $(document).on("pjax:success", "#' . $this->pjaxId . '",  function(event) { 
-        window.scrollTo({top: $(\'#' . $this->pjaxId . '\').offset().top, behavior: \'smooth\'});
+    $(document).on("pjax:success", "#{$this->pjaxId}",  function(event) { 
+        window.scrollTo({top: $('#{$this->pjaxId}').offset().top, behavior: 'smooth'});
     });
-    $(document).on(\'change\', \'.bulkActionColumnCheckbox\', function() {
-        $(\'.bulkActionFormButton\').prop(\'disabled\', (($(\'#' . $this->pjaxId . ' .grid-view\').find(\'.bulkActionColumnCheckbox:checked\').length) ? false : true));
+    $(document).on('change', '.bulkActionColumnCheckbox', function() {
+        $('.bulkActionFormButton').prop('disabled', (($('#{$this->pjaxId} .grid-view').find('.bulkActionColumnCheckbox:checked').length) ? false : true));
     });
-    $(document).on(\'submit\', \'.bulkActionForm\', function() {
-        var keys = $(\'#' . $this->pjaxId . ' .grid-view\').yiiGridView(\'getSelectedRows\');
-        $(this).children(\'input[name="items"]\').val(keys);
+    $(document).on('submit', '.bulkActionForm', function() {
+        var keys = $('#{$this->pjaxId} .grid-view').yiiGridView('getSelectedRows');
+        $(this).children('input[name="items"]').val(keys);
     });
-    $(document).on(\'click\', \'.page-link\', function(e) {
+    $(document).on('click', '.page-link', function(e) {
         e.preventDefault();
-        pjaxReload($(\'' . $this->searchFormSelector . '\').serialize(), $(this).attr(\'href\'));
+        pjaxReload($('{$this->searchFormSelector}').serialize(), $(this).attr('href'));
         return false;
     });
-    $(document).on(\'click\', \'#' . $this->pjaxId . ' .grid-view table thead tr th a\', function(e) {
+    $(document).on('click', '#{$this->pjaxId} .grid-view table thead tr th a', function(e) {
         e.preventDefault();
-        const href = $(this).attr(\'href\');
-        if (href) { pjaxReload($(\'' . $this->searchFormSelector . '\').serialize(), href); }
+        const href = $(this).attr('href');
+        if (href) { pjaxReload($('{$this->searchFormSelector}').serialize(), href); }
         return false;
     });
-});'
-        );
+});
+        JS);
 
         Pjax::begin([
             'id' => $this->pjaxId,
             'linkSelector' => 'pjax-link',
         ]);
-
-        // Открываем контейнер-фрагмент для копирования из него при pjax загрузке
-//        echo '<div id="' . $this->fragmentId  . '">';
 
         return true;
     }
