@@ -5,7 +5,7 @@
         "php": ">=8.0.0",
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap5": "*",
-        "thomaspark/bootswatch": "^4",
+        "thomaspark/bootswatch": "^5",
         "fortawesome/font-awesome": "^5.14.0",
         "kartik-v/yii2-bootstrap5-dropdown": "@dev",
         "kartik-v/yii2-widget-activeform": "@dev",
