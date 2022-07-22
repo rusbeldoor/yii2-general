@@ -6,6 +6,16 @@ use rusbeldoor\yii2General\helpers\DatetimeHelper;
 
 class Formatter extends \yii\i18n\Formatter
 {
+    public $nullDisplay = '<span class="not-set">(не задано)</span>';
+
+    /**
+     * {@inheritdoc}
+     * @param mixed $value
+     * @param string $type
+     */
+    public function format($value, $type): string
+    { return (($value === null) ? $this->nullDisplay : parent::format($value, $type)); }
+
     /** Ид (идентификатор) */
     public function asId(int|string $value): string
     {
