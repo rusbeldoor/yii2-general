@@ -194,7 +194,7 @@ class AppHelper
     public static function redirectWithFlash(string|array $url, string $flashType, string $flashText)
     {
         self::setFlashes([$flashType => $flashText]);
-        return Yii::$app->controller->redirect($url);
+        return self::redirect($url);
     }
 
     /**
@@ -207,7 +207,7 @@ class AppHelper
     public static function redirectWithFlashes(string|array $url, array $flashes)
     {
         foreach ($flashes as $flash) { self::setFlashes([$flash['type'] => $flash['text']]); }
-        return Yii::$app->controller->redirect($url);
+        return self::redirect($url);
     }
 
     /**
