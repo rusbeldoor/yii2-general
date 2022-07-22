@@ -1,7 +1,5 @@
 $(document).ready(function() {
-    /*******************************
-     *** *** *** Select2 *** *** ***
-     *******************************/
+    /*** Select2 ***/
 
     /**
      * Фикс ошибки (если список выводится в скрытом элементе у него ширина расчитывается как 0, что не верно и placeholder может обрезаться)
@@ -11,9 +9,7 @@ $(document).ready(function() {
         $('.select2 .select2-selection__rendered .select2-search.select2-search--inline .select2-search__field').css("width", "100%");
     }, 1000);
 
-    /*******************************
-     *** *** *** Widgets *** *** ***
-     *******************************/
+    /*** Widgets ***/
 
     $.fn.radioButtonsListValue = function() {
         return $(this).children('label.active').children('input').val();

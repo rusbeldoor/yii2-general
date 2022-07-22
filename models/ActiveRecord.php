@@ -62,9 +62,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
     public static function getNotArchiveListByType($type, $id = null, $valueFieldName = 'name', $keyFieldName = 'id')
     { return array_column(self::find()->type($type)->notArchive()->asArray($id)->all(), $valueFieldName, $keyFieldName); }
 
-    /****************************
-     *** *** *** Поля *** *** ***
-     ****************************/
+    /*** Поля ***/
 
     // Описание полей
     public static $fieldsDescriptions = [];
@@ -78,9 +76,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
     public function getFieldDescription($fieldName)
     { return static::$fieldsDescriptions[$fieldName][$this->$fieldName]; }
 
-    /********************************
-     *** *** *** Проверки *** *** ***
-     ********************************/
+    /*** Проверки ***/
 
     /**
      * Проверка на возможность удаления
@@ -94,9 +90,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
         return ['result' => true];
     }
 
-    /*********************************
-     *** *** *** Валидация *** *** ***
-     *********************************/
+    /*** Валидация ***/
 
     /**
      * Правило валидации регулярным выражением

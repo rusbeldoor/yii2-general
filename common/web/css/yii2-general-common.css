@@ -1,17 +1,22 @@
-/********************************
- *** *** *** Основное *** *** ***
- ********************************/
+/*** Основное ***/
 
 .width1px { width: 1px; }
 .width100 { width: 100%; }
 
-.noMargin { margin: 0 !important; }
+.marginLeft0 { margin-left: 0 !important; }
+.marginLeft1 { margin-left: 0.25rem !important; }
+.marginLeft2 { margin-left: 0.5rem !important; }
+.marginLeft3 { margin-left: 1rem !important; }
+.marginLeft4 { margin-left: 1.5rem !important; }
+.marginLeft5 { margin-left: 3rem !important; }
+.marginRight0 { margin-right: 0 !important; }
+.marginRight1 { margin-right: 0.25rem !important; }
+.marginRight2 { margin-right: 0.5rem !important; }
+.marginRight3 { margin-right: 1rem !important; }
+.marginRight4 { margin-right: 1.5rem !important; }
+.marginRight5 { margin-right: 3rem !important; }
 
-.noPadding { padding: 0 !important; }
 .padding0375rem075rem { padding: 0.375rem 0.75rem; }
-
-.floatLeft { float: left; }
-.floatRight { float: right; }
 
 .displayNone { display: none !important; }
 
@@ -51,17 +56,13 @@ a.desc:after { content: "\f160"; }
 .sort-ordinal a.asc:after { content: "\f15e"; }
 .sort-ordinal a.desc:after { content: "\f15d"; }
 
-/***********************************
- *** *** *** bootstrap 4 *** *** ***
- ***********************************/
+/*** bootstrap 4 ***/
 
-.alert ul, alert ol { margin-bottom: 0; }
+/*.alert ul, alert ol { margin-bottom: 0; }*/
 
-.form-group .col-form-label { text-align: right; }
+/*.form-group .col-form-label { text-align: right; }*/
 
-/**************************************
- *** *** *** yii 2, widgets *** *** ***
- **************************************/
+/*** yii 2, widgets ***/
 
 .grid-view .summary { text-align: right; }
 .grid-view table thead tr th { border-top: 0; }
@@ -70,9 +71,7 @@ a.desc:after { content: "\f160"; }
 .grid-view a.actionColumnButton i, .grid-view i.actionColumnButton { font-size: 1.35em; }
 .grid-view i.actionColumnButton { cursor: pointer; }
 
-/********************************
- *** *** *** select 2 *** *** ***
- ********************************/
+/*** select 2 ***/
 
 .select2 { display: inline-block; }
 .select2 .select2-selection__clear, .select2 .select2-selection__arrow { display: none !important; }
@@ -86,22 +85,16 @@ a.desc:after { content: "\f160"; }
     float: right;
 }
 
-/********************************
- *** *** *** sortable *** *** ***
- ********************************/
+/*** sortable ***/
 
 .sortable { min-height: 52px; }
 
-/********************************
- *** *** *** kartik-v *** *** ***
- ********************************/
+/*** kartik-v ***/
 
 .tabs-x {}
 .tabs-x .tab-content { margin-top: 15px; }
 
-/*********************************
- *** *** *** Интерфейс *** *** ***
- *********************************/
+/*** Интерфейс ***/
 
 .panelButtonsGroup { margin: 0 0 15px 0; }
 .panelSearchFormToggle {}

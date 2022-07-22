@@ -51,7 +51,7 @@ class BaseUI
         return
             '<div class="panelButtonsGroup clearfix">'
                 . ((in_array('filter', $buttons)) ? Html::button('<i class="fas fa-filter"></i>&nbsp;&nbsp;Фильтр', ['class' => 'btn btn-light panelSearchFormToggle']) : '')
-                . '<div class="floatRight">'
+                . '<div class="float-end">'
                     . implode('&nbsp;&nbsp;&nbsp;', $result)
                 . '</div>'
             . '</div>';
@@ -90,7 +90,7 @@ class BaseUI
 
         return
             '<div class="panelButtonsGroup clearfix">'
-                . '<div class="floatRight">'
+                . '<div class="float-end">'
                     . implode('&nbsp;&nbsp;&nbsp;', $result)
                 . '</div>'
             . '</div>';

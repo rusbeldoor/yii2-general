@@ -16,9 +16,7 @@ class Model extends \yii\base\Model
     public function __get($name)
     { return ((property_exists($this, $name)) ? $this->$name : parent::__get($name)); }
 
-    /****************************
-     *** *** *** Поля *** *** ***
-     ****************************/
+    /*** Поля ***/
 
     // Описание полей
     public static $fieldsDescriptions = [];
@@ -42,9 +40,7 @@ class Model extends \yii\base\Model
     public function getKeysFieldsDescriptions($fieldName)
     { return array_keys(static::$fieldsDescriptions[$fieldName]); }
 
-    /*********************************
-     *** *** *** Валидация *** *** ***
-     *********************************/
+    /*** Валидация ***/
 
     /**
      * Правило валидации регулярным выражением
