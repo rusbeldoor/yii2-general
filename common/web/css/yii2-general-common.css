@@ -4,17 +4,13 @@
 .width100 { width: 100%; }
 
 .marginLeft0 { margin-left: 0 !important; }
-.marginLeft1 { margin-left: 0.25rem !important; }
-.marginLeft2 { margin-left: 0.5rem !important; }
-.marginLeft3 { margin-left: 1rem !important; }
-.marginLeft4 { margin-left: 1.5rem !important; }
-.marginLeft5 { margin-left: 3rem !important; }
+.marginLeft025rem { margin-left: 0.25rem !important; }
+.marginLeft05rem { margin-left: 0.5rem !important; }
+.marginLeft1rem { margin-left: 1rem !important; }
 .marginRight0 { margin-right: 0 !important; }
-.marginRight1 { margin-right: 0.25rem !important; }
-.marginRight2 { margin-right: 0.5rem !important; }
-.marginRight3 { margin-right: 1rem !important; }
-.marginRight4 { margin-right: 1.5rem !important; }
-.marginRight5 { margin-right: 3rem !important; }
+.marginRight025rem { margin-right: 0.25rem !important; }
+.marginRight05rem { margin-right: 0.5rem !important; }
+.marginRight1rem { margin-right: 1rem !important; }
 
 .padding0375rem075rem { padding: 0.375rem 0.75rem; }
 
