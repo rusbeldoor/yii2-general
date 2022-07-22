@@ -2,6 +2,7 @@
 
 .width1px { width: 1px; }
 .width100 { width: 100%; }
+.minHeight200px { min-height: 200px; }
 
 .marginLeft0 { margin-left: 0 !important; }
 .marginLeft025rem { margin-left: 0.25rem !important; }
