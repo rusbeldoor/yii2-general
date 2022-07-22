@@ -3,7 +3,7 @@
 namespace rusbeldoor\yii2General\helpers;
 
 use yii;
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 /**
  * Базовый интерфейс
