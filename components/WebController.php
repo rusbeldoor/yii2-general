@@ -10,7 +10,7 @@ use rusbeldoor\yii2General\helpers\AppHelper;
  */
 class WebController extends \yii\web\Controller
 {
-    public Application $YiiApp;
+    public \yii\web\Application $YiiApp;
 
     /**
      * Инициализация
@@ -21,7 +21,7 @@ class WebController extends \yii\web\Controller
     {
         parent::init();
 
-        $this->YiiApp = &Yii::$app;
+        $this->YiiApp = Yii::$app;
 
         // Объявлении версии bootstrap для kartik-v вендора
         Yii::$app->params['bsVersion'] = '5.x';
