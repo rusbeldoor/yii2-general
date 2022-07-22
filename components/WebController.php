@@ -24,7 +24,7 @@ class WebController extends \yii\web\Controller
         //$this->YiiApp = Yii::$app;
 
         // Объявлении версии bootstrap для kartik-v вендора
-        Yii::$app->params['bsVersion'] = '4.x';
+        Yii::$app->params['bsVersion'] = '5.x';
     }
 
     /**************************************
