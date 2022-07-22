@@ -6,13 +6,8 @@ use rusbeldoor\yii2General\helpers\DatetimeHelper;
 
 class Formatter extends \yii\i18n\Formatter
 {
-    /**
-     * Ид
-     *
-     * @param mixed $value
-     * @return string
-     */
-    public function asId($value)
+    /** Ид (идентификатор) */
+    public function asId(int|string $value): string
     {
         if ($value === null) { return $this->nullDisplay; }
         return '#' . $value;

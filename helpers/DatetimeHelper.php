@@ -26,15 +26,15 @@ class DatetimeHelper
     public static function formatHourMinuteDayMonthYear(int|string $value): string
     { return self::date('H:i d.m.Y', $value); }
 
-    /** Пример: 29.11.2020 18:42 */
-    public static function formatDayMonthYearHourMinute(int|string $value): string
-    { return self::date('d.m.Y H:i', $value); }
-
     /** Пример: 18:42:01 29.11.2020 */
     public static function formatHourMinuteSecondDayMonthYear(int|string $value): string
     { return self::date('H:i:s d.m.Y', $value); }
 
-    /** Пример: 18:42:01 29.11.2020 */
+    /** Пример: 29.11.2020 18:42 */
+    public static function formatDayMonthYearHourMinute(int|string $value): string
+    { return self::date('d.m.Y H:i', $value); }
+
+    /** Пример: 29.11.2020 18:42:01 */
     public static function formatDayMonthYearHourMinuteSecond(int|string $value): string
     { return self::date('d.m.Y H:i:s', $value); }
 
@@ -156,27 +156,27 @@ class DatetimeHelper
         return $classDateTime->getTimestamp();
     }
 
-    /** Получить начало */
+    /** Получить начало текущей минуты/часа/... */
     public static function getStartTime(int $time, int $dec, ?int $addCount = null): int
     { return ($time - ($time % $dec)) + ($addCount * $dec); }
 
-    /** Получить начала минуты */
+    /** Получить начало текущей минуты */
     public static function getStartTimeMinute(int $time, ?int $addCount = null): int
     { return self::getStartTime($time, self::SECONDS_IN_MINUTE, $addCount); }
 
-    /** Получить начала часа */
+    /** Получить начало текущего часа */
     public static function getStartTimeHour(int $time, ?int $addCount = null): int
     { return self::getStartTime($time, self::SECONDS_IN_HOUR, $addCount); }
 
-    /** Получить начала дня */
+    /** Получить начало текущего дня */
     public static function getStartTimeDay(int $time, ?int $addCount = null): int
     { return self::getStartTime($time, self::SECONDS_IN_DAY, $addCount); }
 
-    /** Получить начала недели */
+    /** Получить начало текущей недели */
     public static function getStartTimeWeek(int $time, ?int $addCount = null): int
     { return self::getStartTime($time, self::SECONDS_IN_WEEK, $addCount); }
 
-    /** Получить начала недели */
+    /** Получить начало текущего месяца */
     public static function getStartTimeMonth(int $time, ?int $addCount = null): int
     {
         $time = strtotime(date('Y-m-01 00:00:00', $time));
