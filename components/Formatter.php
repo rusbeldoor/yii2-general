@@ -17,7 +17,7 @@ class Formatter extends \yii\i18n\Formatter
     { return (($value === null) ? $this->nullDisplay : parent::format($value, $type)); }
 
     /** Ид (идентификатор) */
-    public function adId(int|string $value): string
+    public function asId(int|string $value): string
     { return '#' . $value; }
 
     /** Статус */
