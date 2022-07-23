@@ -7,110 +7,79 @@ use yii\web\ForbiddenHttpException;
 
 class AppHelper
 {
-    /*** Константы ***/
+    // Режимы работы
+    const PRODUCTION_MODE = 0;
+    const DEVELOP_MODE = 1;
+    const LOCAL_MODE = 2;
 
+    // Типы оповещений
     const ALERT_SUCCESS = 'success';
-    const ALERT_ERROR = 'error';
+    const ALERT_ERROR = 'danger';
     const ALERT_WARNING = 'warning';
     const ALERT_INFO = 'info';
 
+    // Типы результатов
     const RESULT_SUCCESS = 'success';
     const RESULT_ERROR = 'error';
     const RESULT_NOTHING = 'nothing ';
 
+    /*** Режим работы ***/
+
+    /** Если production режим работы */
+    public static function isProduction(): bool
+    { return (Yii::$app->params['mode'] === self::PRODUCTION_MODE); }
+
+    /** Если develop режим работы */
+    public static function isDevelop(): bool
+    { return (Yii::$app->params['mode'] === self::DEVELOP_MODE); }
+
+    /** Если local режим работы */
+    public static function isLocal(): bool
+    { return (Yii::$app->params['mode'] === self::LOCAL_MODE); }
+
     /*** Завершение работы ***/
 
-    /**
-     * Завершение, если не ajax запрос
-     *
-     * @return void
-     */
-    public static function exitIfNotAjaxRequest()
+    /** Завершение, если не ajax запрос */
+    public static function exitIfNotAjaxRequest(): void
     { if (!Yii::$app->request->isAjax) { exit; } }
 
-    /**
-     * Завершение, если не post запрос
-     *
-     * @return void
-     */
-    public static function exitIfNotPostRequest()
+    /** Завершение, если не post запрос */
+    public static function exitIfNotPostRequest() : void
     { if (!Yii::$app->request->isPost) { exit; } }
 
-    /**
-     * Завершение, если не ajax и не post запрос
-     *
-     * @return void
-     */
-    public static function exitIfNotAjaxAndPostRequest()
+    /** Завершение, если не ajax и не post запрос*/
+    public static function exitIfNotAjaxAndPostRequest(): void
     { self::exitIfNotAjaxRequest(); self::exitIfNotPostRequest(); }
 
-    /**
-     * Завершение, если пользователь не авторизован
-     *
-     * @return void
-     */
-    public static function exitIfUserGuest()
+    /** Завершение, если пользователь не авторизован */
+    public static function exitIfUserGuest(): void
     { if (Yii::$app->user->isGuest) { exit; } }
 
-    /**
-     * Завершение с выводом
-     *
-     * @param string $string
-     * @return void
-     */
-    public static function exitWithEcho(string $string)
-    { echo $string; exit; }
+    /** Завершение с выводом */
+    public static function exitWithEcho(int|float|string $text): void
+    { echo $text; exit; }
 
-    /**
-     * Завершение с выводом сообщения
-     *
-     * @param string $type
-     * @param string $text
-     * @param bool $close
-     * @return void
-     */
-    public static function exitWithEchoMessage(string $type, string $text, bool $close = false)
-    { self::exitWithEcho(AlertHelper::alert($type, $text, $close)); }
+    /** Завершение с выводом сообщения*/
+    public static function exitWithEchoMessage(string $type, string $text, bool $close = false): void
+    { self::exitWithEcho(HtmlHelper::alert($type, $text, $close)); }
 
-    /**
-     * Завершение с выводом json
-     *
-     * @param array $data
-     * @return void
-     */
-    public static function exitWithJson(array $data)
+    /** Завершение с выводом json */
+    public static function exitWithJson(array $data): void
     { header('Content-Type: application/json'); echo json_encode($data); exit; }
 
-    /**
-     * Завершение с выводом json ['result' => $result, 'data' => $data]
-     *
-     * @param mixed $result
-     * @param mixed $data
-     * @return void
-     */
-    public static function exitWithJsonResultData($result, $data = null)
+    /** Завершение с выводом json ['result' => $result, 'data' => $data] */
+    public static function exitWithJsonResultData(int|string $result, mixed $data = null): void
     {
-        $array = [];
-        $array['result'] = $result;
+        $array = ['result' => $result];
         if ($data) { $array['data'] = $data; }
         self::exitWithJson($array);
     }
 
-    /**
-     * Завершение с выводом json ['result' => $result]
-     *
-     * @param mixed $result
-     * @return void
-     */
-    public static function exitWithJsonResult($result)
+    /** Завершение с выводом json ['result' => $result] */
+    public static function exitWithJsonResult(int|string $result)
     { self::exitWithJsonResultData($result); }
 
-    /**
-     * Завершение с выводом json ['result' => 'success', 'data' => $data]
-     *
-     * @param mixed $data
-     * @return void
-     */
+    /** Завершение с выводом json ['result' => 'success', 'data' => $data]*/
     public static function exitWithJsonResultSuccessData($data = null)
     { self::exitWithJsonResultData('success', $data); }
 
