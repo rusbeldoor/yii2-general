@@ -76,39 +76,28 @@ class AppHelper
     }
 
     /** Завершение с выводом json ['result' => $result] */
-    public static function exitWithJsonResult(int|string $result)
+    public static function exitWithJsonResult(int|string $result): void
     { self::exitWithJsonResultData($result); }
 
     /** Завершение с выводом json ['result' => 'success', 'data' => $data]*/
-    public static function exitWithJsonResultSuccessData($data = null)
+    public static function exitWithJsonResultSuccessData(mixed $data = null): void
     { self::exitWithJsonResultData('success', $data); }
 
-    /**
-     * Завершение с выводом json ['result' => 'success', 'data' => ['alerts' => $alerts]]
-     *
-     * @param array $alerts
-     * @return void
-     */
-    public static function exitWithJsonResultSuccessDataAlerts(array $alerts = [])
+    /** Завершение с выводом json ['result' => 'success', 'data' => ['alerts' => $alerts]] */
+    public static function exitWithJsonResultSuccessDataAlerts(array $alerts = []): void
     { self::exitWithJsonResultSuccessData(['alerts' => $alerts]); }
 
-    /**
-     * Завершение с выводом json ['result' => 'success', 'data' => ['html' => $html]]
-     *
-     * @param string $html
-     * @return void
-     */
-    public static function exitWithJsonResultSuccessDataHtml(string $html = '')
+    /** Завершение с выводом json ['result' => 'success', 'data' => ['html' => $html]] */
+    public static function exitWithJsonResultSuccessDataHtml(string $html = ''): void
     { self::exitWithJsonResultSuccessData(['html' => $html]); }
 
-    /**
-     * Завершение с выводом json ['result' => 'error', 'data' => $data]
-     *
-     * @param mixed $data
-     * @return void
-     */
-    public static function exitWithJsonResultErrorData($data = null)
+    /** Завершение с выводом json ['result' => 'error', 'data' => $data] */
+    public static function exitWithJsonResultErrorData(mixed $data = null): void
     { self::exitWithJsonResultData('error', $data); }
+
+
+
+
 
     /**
      * Завершение с выводом json ['result' => 'error', 'data' => ['alerts' => $alerts]]
