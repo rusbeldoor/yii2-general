@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\widgets;
 
-use yii;
+use Yii;
 use yii\bootstrap5\Html;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 

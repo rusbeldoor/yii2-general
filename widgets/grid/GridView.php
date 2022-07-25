@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\widgets\grid;
 
-use yii;
+use Yii;
 use yii\widgets\Pjax;
 
 /**

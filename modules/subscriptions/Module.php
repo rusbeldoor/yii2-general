@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\modules\subscriptions;
 
-use yii;
+use Yii;
 
 /**
  * rbac module definition class

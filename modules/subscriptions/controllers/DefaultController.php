@@ -3,7 +3,7 @@
 namespace rusbeldoor\yii2General\modules\subscriptions\controllers;
 
 use rusbeldoor\yii2General\models\UserSubscriptionSenderCategory;
-use yii;
+use Yii;
 use common\models\User;
 use rusbeldoor\yii2General\models\UserSubscription;
 use rusbeldoor\yii2General\models\UserSubscriptionSender;

@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\models;
 
-use yii;
+use Yii;
 
 /**
  * This is the model class for table "platform".

@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\helpers;
 
-use yii;
+use Yii;
 use yii\web\Response;
 use yii\web\View;
 

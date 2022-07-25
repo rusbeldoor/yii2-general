@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\modules\rbac\controllers;
 
-use yii;
+use Yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use rusbeldoor\yii2General\models\AuthItem;

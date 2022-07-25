@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\modules\cron\controllers;
 
-use yii;
+use Yii;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
