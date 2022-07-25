@@ -98,7 +98,7 @@ class CodeHelper
     }
 
     /** Генерация уникального кода по названиям алфавитов */
-    public static function generateByAbcNames(int $length, string $abcNames, array $params = []): string
+    public static function generateByAbcNames(int $length, array $abcNames, array $params = []): string
     {
         // Алфавит
         $abc = '';

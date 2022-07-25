@@ -6,11 +6,11 @@ class PasswordHelper
 {
     /** Генерация пароля */
     public static function generate(int $length): string
-    { return self::generate($length, ['numbersSafe', 'latinLowercaseSafe']); }
+    { return CodeHelper::generateByAbcNames($length, ['numbersSafe', 'latinLowercaseSafe']); }
 
     /** Генерация системного пароля */
     public static function generateSystem(int $length): string
-    { return self::generate($length, ['numbers', 'latinLowercase', 'latinUppercase', 'specialSymbols']); }
+    { return CodeHelper::generateByAbcNames($length, ['numbers', 'latinLowercase', 'latinUppercase', 'specialSymbols']); }
 
     /** Проверка безопасности пароля */
     public static function checkSecurity(string $password): array
