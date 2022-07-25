@@ -72,7 +72,7 @@ class EmailHelper
             $arrayEmail[1] = preg_replace('/(\.ru){2,}$/', '$1', $arrayEmail[1]); // Исправляем .ru.ru на .ru
 
             // Каталог неккоректных доменов
-            include_once Yii::getAlias('@vendor/rusbeldoor/yii2-general/catalogs/EmailCatalog');
+            include_once Yii::getAlias('@vendor/rusbeldoor/yii2-general/catalogs/EmailCatalog.php');
             if (isset(EmailCatalog::$invalidDomain[$arrayEmail[1]])) { $arrayEmail[1] = EmailCatalog::$invalidDomain[$arrayEmail[1]]; }
 
             // Объединяем почту
