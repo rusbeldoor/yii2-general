@@ -1,5 +1,7 @@
 <?php
 
+namespace rusbeldoor\yii2General\catalogs;
+
 class FirstnameCatalog
 {
     // Корректные
