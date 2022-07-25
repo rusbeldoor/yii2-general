@@ -77,22 +77,20 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
      *
      * Примеры:
      *
-     * [0 => ['id' => 1, 'name' = 'aaa'], 2 => ['id' => 5, 'name' = 'bbb']]
+     * [0 => ['id' => 1, 'name' = 'aaa'], 2 => ['id' => 5, 'name' = 'bbb']], 'name', 'id'
      * --> ['1' => 'aaa', '5' => 'bbb']
      *
-     * [0 => ['id' => 1, 'name' = 'aaa'], 2 => ['id' => 5, 'name' = 'bbb']]
+     * [0 => ['id' => 1, 'name' = 'aaa'], 2 => ['id' => 5, 'name' = 'bbb']], 'name', 'id'
      * --> [0 => 'aaa', 1 => 'bbb']
      *
-     * ['a' => {id: 1, name: 'aaa'}, 'b' => {id: 5, name: 'bbb'}]
+     * ['a' => {id: 1, name: 'aaa'}, 'b' => {id: 5, name: 'bbb'}], 'name', 'id'
      * --> ['1' => 'aaa', '5' => 'bbb']
      *
-     * ['a' => {id: 1, name: 'aaa'}, 'b' => {id: 5, name: 'bbb'}]
+     * ['a' => {id: 1, name: 'aaa'}, 'b' => {id: 5, name: 'bbb'}], 'name', 'id'
      * --> [0 => 'aaa', 1 => 'bbb']
      */
     public static function arrayValuesByField(array $array, string $fieldValue, string $fieldKey = null): ?array
     {
-        if (!is_array($array)) { return null; }
-
         $result = [];
         foreach ($array as $item) {
             $value = (string)((is_object($item)) ? $item->$fieldValue : $item[$fieldValue]);
@@ -109,15 +107,14 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
      *
      * Примеры:
      *
-     * [0 => '1', 1 => '11bb', 2 => '111', 'z' => '111bb'], ['111', 'bb']
-     * --> [0 => '11bb', 1 => '111', 2 => '111bb']
+     * ['1', '11bb', '111', 'z' => '111bb'], ['111', 'bb']
+     * --> ['11bb', '111', '111bb']
      *
      * ['1', '11bb', '111', '111bb'], ['111', 'bb'], true
      * --> [1 => '11bb', 2 => '111', 'z' => '111bb']
      */
     public static function arrayWithStrings(array $array, string|array $strings, bool $safeKeys = false): array
     {
-        if (!is_array($array)) { return []; }
         if (!is_array($strings)) { $strings = [$strings]; }
 
         $result = [];
@@ -126,12 +123,15 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
             // Если элемент массива не строка, прпоускаем его
             if (!is_string($item)) { continue; }
 
-            // Ищем хотябы одну из подстрок
-            $flag = false;
-            foreach ($strings as $string) { $flag = ((mb_strpos($item, $string) !== false) ? true : $flag); }
+            // Перебираем искомые подстроки
+            $add = false;
+            foreach ($strings as $string) {
+                // Если хотябы одна из подстрок найдена, элемент массива будет добавлен
+                $add = ((mb_strpos($item, $string) !== false) ? true : $add);
+            }
 
             // Если элемент массива содержит искомую строку
-            if ($flag) {
+            if ($add) {
                 // Записываем элемент массива в результат
                 if ($safeKeys) { $result[$key] = $item; }
                 else { $result[] = $item; }
@@ -142,65 +142,31 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     }
 
     /**
-     * Массив элементов содержащих передаваемые подстроки в одном из полей
+     * Получение массива, не содержащего элементы с указанными подстроками
      *
      * Примеры:
      *
-     * ...
-     */
-    public static function arrayWithStringsInField(array $array, string|array $strings, string $field, bool $safeKeys = false): array
-    {
-        if (!is_array($array)) { return []; }
-
-        if (!is_array($strings)) { $strings = [$strings]; }
-
-        $result = [];
-        foreach ($array as $key => $item) {
-            if (
-                // Если поле в элементе не существует
-                !isset($item[$field])
-                // Если поле не строка
-                || !is_string($item[$field])
-            ) { continue; }
-
-            // Ищем хотябы одну из подстрок
-            $flag = false;
-            foreach ($strings as $string) { $flag = ((mb_strpos($item[$field], $string) !== false) ? true : $flag); }
-
-            // Если элемент массива содержит одну из искомых подстрок
-            if ($flag) {
-                // Записываем элемент массива в результат
-                if ($safeKeys) { $result[$key] = $item; }
-                else { $result[] = $item; }
-            }
-        }
-        return $result;
-    }
-
-    /**
-     * Массив строк не содержащих все передаваемые строки
+     * ['1', '11bb', '111', 'z' => 'bbb'], ['1']
+     * --> ['111bb']
      *
-     * Примеры:
-     *
-     * ...
+     * ['1', '11bb', '111', 'z' => 'bbb'], ['1'], true
+     * --> ['z' => '111bb']
      */
     public static function arrayWithoutStrings(array $array, string|array $strings, bool $safeKeys = false): array
     {
-        if (!is_array($array)) { return []; }
-
         if (!is_array($strings)) { $strings = [$strings]; }
 
         $result = [];
-        foreach ($array as $key => $item) {
-            $add = true;
 
-            // Если элемент массива строка
-            if (is_string($item)) {
-                // Перебираем искомые подстроки
-                foreach ($strings as $string) {
-                    // Если хотябы одна из подстрок найдена, элемент массива не будет добавлен
-                    $add = ((mb_strpos($item, $string) !== false) ? false : $add);
-                }
+        foreach ($array as $key => $item) {
+            // Если элемент массива не строка, прпоускаем его
+            if (!is_string($item)) { continue; }
+
+            // Перебираем искомые подстроки
+            $add = true;
+            foreach ($strings as $string) {
+                // Если хотябы одна из подстрок найдена, элемент массива не будет добавлен
+                $add = ((mb_strpos($item, $string) !== false) ? false : $add);
             }
 
             // Если элемент массива нужно добавить
@@ -214,33 +180,80 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     }
 
     /**
-     * Массив элементов не содержащих все передаваемые подстроки в одном из полей
+     * Получение массива, содержащего элементы (массивы или объекты), содержащие в значении по ключу (массив) или поле (объект) одну из указанных подстрок
      *
      * Примеры:
      *
-     * ...
+     * [['id' => 1, 'name' => '1'], ['id' => 2, 'name' => '11bb'], ['id' => 3, 'name' => '111'], 'z' => ['id' => 4, 'name' => '111bb']], ['111', 'bb'], 'name'
+     * --> [['id' => 2, 'name' => '11bb'],['id' => 3, 'name' => '111'], ['id' => 4, 'name' => '111bb']]
+     *
+     * [['id' => 1, 'name' => '1'], ['id' => 2, 'name' => '11bb'], ['id' => 3, 'name' => '111'], 'z' => ['id' => 4, 'name' => '111bb']], ['111', 'bb'], 'name', true
+     * --> [1 => ['id' => 2, 'name' => '11bb'], 2 => ['id' => 3, 'name' => '111'], 'z' => ['id' => 4, 'name' => '111bb']]
      */
-    public static function arrayWithoutStringsInField(array $array, string|array $strings, string $field, bool $safeKeys = false): array
+    public static function arrayWithStringsInField(array $array, string|array $strings, string $fieldName, bool $safeKeys = false): array
     {
-        if (!is_array($array)) { return []; }
-
         if (!is_array($strings)) { $strings = [$strings]; }
 
         $result = [];
-        foreach ($array as $key => $item) {
-            $add = true;
 
-            if (
-                // Если поле в элементе массива существует
-                isset($item[$field])
-                // Если поле в элементе массива строка
-                && is_string($item[$field])
-            ) {
-                // Перебираем искомые подстроки
-                foreach ($strings as $string) {
-                    // Если хотябы одна из подстрок найдена, элемент массива не будет добавлен
-                    $add = ((mb_strpos($item[$field], $string) !== false) ? false : $add);
-                }
+        foreach ($array as $key => $item) {
+            if (is_object($item)) {
+                // Если поле в объекте не существует или значение в этом поле не является строкой
+                if (!isset($item->$fieldName) || !is_string($item->$fieldName)) { continue; }
+            } else {
+                // Если ключ в массиве не существует или значение по этому ключу не является строкой
+                if (!isset($item[$fieldName]) || !is_string($item[$fieldName])) { continue; }
+            }
+
+            // Перебираем искомые подстроки
+            $add = false;
+            foreach ($strings as $string) {
+                // Если хотябы одна из подстрок найдена, элемент массива будет добавлен
+                $add = ((mb_strpos(((is_object($item)) ? $item->$fieldName : $item[$fieldName]), $string) !== false) ? true : $add);
+            }
+
+            // Если элемент массива содержит одну из искомых подстрок
+            if ($add) {
+                // Записываем элемент массива в результат
+                if ($safeKeys) { $result[$key] = $item; }
+                else { $result[] = $item; }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Получение массива, содержащего элементы (массивы или объекты), содержащие в значении по ключу (массив) или поле (объект) одну из указанных подстрок
+     *
+     * Примеры:
+     *
+     * [['id' => 1, 'name' => '1'], ['id' => 2, 'name' => '11bb'], ['id' => 3, 'name' => '111'], 'z' => ['id' => 4, 'name' => 'bb']], ['1'], 'name'
+     * --> [['id' => 4, 'name' => 'bb']]
+     *
+     * [['id' => 1, 'name' => '1'], ['id' => 2, 'name' => '11bb'], ['id' => 3, 'name' => '111'], 'z' => ['id' => 4, 'name' => 'bb']], ['1'], 'name', true
+     * --> ['z' => ['id' => 4, 'name' => 'bb']]
+     */
+    public static function arrayWithoutStringsInField(array $array, string|array $strings, string $fieldName, bool $safeKeys = false): array
+    {
+        if (!is_array($strings)) { $strings = [$strings]; }
+
+        $result = [];
+
+        foreach ($array as $key => $item) {
+            if (is_object($item)) {
+                // Если поле в объекте не существует или значение в этом поле не является строкой
+                if (!isset($item->$fieldName) || !is_string($item->$fieldName)) { continue; }
+            } else {
+                // Если ключ в массиве не существует или значение по этому ключу не является строкой
+                if (!isset($item[$fieldName]) || !is_string($item[$fieldName])) { continue; }
+            }
+
+            // Перебираем искомые подстроки
+            $add = true;
+            foreach ($strings as $string) {
+                // Если хотябы одна из подстрок найдена, элемент массива не будет добавлен
+                $add = ((mb_strpos($item[$fieldName], $string) !== false) ? false : $add);
             }
 
             // Если элемент массива нужно добавить
@@ -250,6 +263,7 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
                 else { $result[] = $item; }
             }
         }
+
         return $result;
     }
 }
