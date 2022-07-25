@@ -17,12 +17,13 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
     }
 
     /** Сортировка двумерного массива по полю */
-    public static function sortByField(array &$array, string $field, string $order = 'asc'): void
+    public static function sortByField(array $array, string $field, string $order = 'asc'): array
     {
         uasort($array, function($a, $b) use($field, $order) {
             if ($order == 'desc') { return (($a[$field] < $b[$field]) ? 1 : -1); }
             else { return (($a[$field] > $b[$field]) ? 1 : -1); }
         });
+        return $array;
     }
 
     /**
@@ -265,5 +266,82 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
         }
 
         return $result;
+    }
+
+    /**
+     * Получить уникальные значения по ключу
+     *
+     * Примеры:
+     *
+     * [0 => ['a' => '111'], 1 => ['a' => '111'], 2 => ['a' => '222']], 'a'
+     * --> ['111' => '111', '222' => '222']
+     */
+    public static function getUniqueValuesByKey(array $elems, string $key): array
+    {
+        $values = [];
+        // Перебираем элементы
+        foreach ($elems as $elem) {
+            $value = ((is_object($elem)) ? $elem->$key : $elem[$key]);
+            if (!isset($values[$value])) { $values[$value] = $value; }
+        }
+
+        // Возвращаем одинаковое значение
+        return $values;
+    }
+
+    /*** Соединение массивов ***/
+
+    /**
+     * Сложение значений ключей массивов
+     *
+     * Примеры:
+     * ['a' => 10, 'b' => 20], ['a' => 5, 'c' => 5]
+     * --> ['a' => 15, 'b' => 20]
+     */
+    public static function leftJoinSum(array $array1, array $array2): array
+    {
+        // Перебираем элементы первого массива
+        foreach ($array1 as $key => $x) {
+            // Если в втором массиве нет такого элемента
+            if (!isset($array2[$key])) { continue; }
+
+            // Если значение элемента первого массива и соотвествующее ему значение элемента второго массива являются массивами
+            // Расчитываем рекурсивно их сложение
+            if (is_array($x) && is_array($array2[$key])) { $array1[$key] = self::leftJoinSum($x, $array2[$key]); }
+            elseif (
+                // Если значение элемента первого массива это число
+                is_numeric($x)
+                // Если соотвествующее значение элемента второго массива это число
+                && is_numeric($array2[$key])
+            ) { $array1[$key] = $x + $array2[$key]; }
+        }
+
+        return $array1;
+    }
+
+    /*** Другое ***/
+
+    /**
+     * Единое значение во всех элементах массива
+     * Возвращает значение, если оно едино для всех элементов, иначе $default
+     */
+    public static function sameValueByKey(array $elems, string $key, mixed $default = null): mixed
+    {
+        // Первый элемент
+        $firstElem = current($elems);
+        // Значение в первом элементе
+        $firstElemValue = ((is_object($firstElem)) ? $firstElem->$key : $firstElem[$key]);
+
+        // Перебираем элементы
+        foreach ($elems as $elem) {
+            // Если значение в очередном элементе отличается от знаачения в первом элементе
+            if (((is_object($elem)) ? $elem->$key : $elem[$key]) !== $firstElemValue) {
+                // Возвращаем значение по умолчанию
+                return $default;
+            }
+        }
+
+        // Возвращаем одинаковое значение
+        return $firstElemValue;
     }
 }
