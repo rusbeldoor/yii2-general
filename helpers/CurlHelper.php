@@ -4,59 +4,71 @@ namespace rusbeldoor\yii2General\helpers;
 
 class CurlHelper
 {
-    /**
-     * Запрос
-     *
-     * @param string $type
-     * @param array $params
-     * @return bool|mixed
-     */
-    private static function request($type, $params = [])
+    /** Запрос */
+    private static function request(string $type, array $params = []): array
     {
         $ch = curl_init($params['url']);
 
-        curl_setopt($ch, CURLOPT_HEADER, false); // Выводить заголовки в результате
-        if (isset($params['headers'])) { curl_setopt($ch, CURLOPT_HTTPHEADER, $params['headers']); } // Параметры заголовка
-        if (isset($params['fields'])) { curl_setopt($ch, CURLOPT_POSTFIELDS, ((is_array($params['fields'])) ? json_encode($params['fields']) : $params['fields'])); } // Параметры для запроса
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Необходимость возвращать результат
-
+        // Определяем тип запроса
         switch ($type) {
             case 'get': curl_setopt($ch, CURLOPT_POST, false); break;
             case 'post': curl_setopt($ch, CURLOPT_POST, true); break;
             case 'put': curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT'); break;
-            default: false;
+            case 'delete': curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE'); break;
+            default: curl_close($ch); return ['status' => 'error', 'data' => 'Указан не реализованный тип запроса.'];
         }
+
+        // Параметры по умолчанию
+        // true для следования любому заголовку "Location: ", отправленному сервером в своём ответе. Смотрите также CURLOPT_MAXREDIRS.
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        // true для возврата результата передачи в качестве строки из curl_exec() вместо прямого вывода в браузер.
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Выводить заголовки в результате
+        curl_setopt($ch, CURLOPT_HEADER, false);
+
+        // Опциональные параметры
+        if (isset($params['headers'])) { curl_setopt($ch, CURLOPT_HTTPHEADER, $params['headers']); } // Параметры заголовка
+        if (isset($params['fields'])) { curl_setopt($ch, CURLOPT_POSTFIELDS, $params['fields']); } // Параметры для запроса
+        if (isset($params['ssl_verifypeer'])) { curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $params['ssl_verifypeer']); }
+        if (isset($params['referer'])) { curl_setopt($ch, CURLOPT_REFERER, $params['referer']); }
 
         $result = curl_exec($ch);
 
+        // Логирование результата (в консоль и файл)
+        //echo 'url: '; print_r($params['url']); echo "\r\n";
+        //if (isset($params['headers'])) { echo 'headers: '; print_r($params['headers']); echo "\r\n"; }
+        //if (isset($params['fields'])) { echo 'fields: '; print_r($params['fields']); echo "\r\n"; }
+        //echo 'curlInfo: '; print_r(curl_getinfo($ch)); echo "\r\n";
+        //echo 'curlError: '; print_r(curl_error($ch)); echo "\r\n";
+        //echo 'result: '; print_r($result); echo "\r\n";
+        //AppHelper::log('curl', 'url: ' . $params['url']);
+        //if (isset($params['headers'])) { AppHelper::log('curl', 'headers: ' . print_r($params['headers'], true)); }
+        //if (isset($params['fields'])) { AppHelper::log('curl', 'fields: ' . print_r($params['fields'], true)); }
+        //AppHelper::log('curl', 'curlInfo: ' . print_r(curl_getinfo($ch), true));
+        //AppHelper::log('curl', 'curlError: ' . print_r(curl_error($ch), true));
+        //AppHelper::log('curl', 'result: ' . print_r($result, true));
+
+        if ($result === false) { $result = ['status' => 'error', 'data' => curl_error($ch), 'dataOriginal' => curl_error($ch)]; }
+        else { $result = ['status' => 'success', 'data' => @json_decode($result, true), 'dataOriginal' => $result]; }
+
         curl_close($ch);
 
-        if ($result === false) { return false; }
-
-        return @json_decode($result,true);
+        return $result;
     }
 
-    /**
-     * Запрос get
-     *
-     * @param array $params
-     * @return bool|array
-     */
-    public static function get($params = []) { return self::request('get', $params); }
+    /** Запрос get */
+    public static function get(array $params = []): array
+    { return self::request('get', $params); }
 
-    /**
-     * Запрос post
-     *
-     * @param array $params
-     * @return bool|mixed
-     */
-    public static function post($params = []) { return self::request('post', $params); }
+    /** Запрос post */
+    public static function post(array $params = []): array
+    { return self::request('post', $params); }
 
-    /**
-     * Запрос put
-     *
-     * @param array $params
-     * @return bool|mixed
-     */
-    public static function put($params = []) { return self::request('put', $params); }
+    /** Запрос put */
+    public static function put(array $params = []): array
+    { return self::request('put', $params); }
+
+    /** Запрос delete */
+    public static function delete(array $params = []): array
+    { return self::request('delete', $params); }
 }
