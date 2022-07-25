@@ -109,8 +109,11 @@ class ArrayHelper extends \yii\helpers\ArrayHelper
      *
      * Примеры:
      *
-     * ['0' => '1', '2' => '11bb', '3' => '111', '4' => '111bb'], ['111', 'bb']
-     * --> ['2' => 'aaa', '5' => 'bbb']
+     * [0 => '1', 1 => '11bb', 2 => '111', 'z' => '111bb'], ['111', 'bb']
+     * --> [0 => '11bb', 1 => '111', 2 => '111bb']
+     *
+     * ['1', '11bb', '111', '111bb'], ['111', 'bb'], true
+     * --> [1 => '11bb', 2 => '111', 'z' => '111bb']
      */
     public static function arrayWithStrings(array $array, string|array $strings, bool $safeKeys = false): array
     {
