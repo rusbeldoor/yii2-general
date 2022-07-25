@@ -6,29 +6,37 @@ class CodeHelper
 {
     public static $abc = [
         'numbers' => '0123456789',
-        'numbersSafe' => '2456789', // без: 0, 1, 3
+        'numbersSafe' => '2456789', // Без: 0, 1, 3
         'latinLowercase' => 'abcdefghijklmnopqrstuvwxyz',
-        'latinLowercaseSafe' => 'abcdefghkmnpqrstuvwxyz', // без: i, j, l, o
+        'latinLowercaseSafe' => 'abcdefghkmnpqrstuvwxyz', // Без: i, j, l, o
         'latinUppercase' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-        'latinUppercaseSafe' => 'ABCDEFGHKMNPQRSTUVWXYZ', // без: I, J, L, O
+        'latinUppercaseSafe' => 'ABCDEFGHKMNPQRSTUVWXYZ', // Без: I, J, L, O
         'cyrillicLowercase' => 'абвгдеёжзийклмнопрстуфхцчшщьыъэюя',
-        'cyrillicLowercaseSafe' => 'абвгдежиклмнпрстуфхцчшщыэюя', // без: ё, з, й, о
+        'cyrillicLowercaseSafe' => 'абвгдежзиклмнпрстуфхцчшщыэюя', // Без: ё, з, й, о
         'cyrillicUppercase' => 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ',
-        'cyrillicUppercaseSafe' => 'АБВГДЕЖИКЛМНПРСТУФХЦЧШЩЫЭЮЯ', // без: Ё, З, Й, О
-        'specialSymbols' => '+-*/()[]{}<>|!?@#$%^&:;., ',
-        'specialSymbolsSafe' => '+-*/()[]{}<>?@#$%^&:;.,', // без: |, !, пробел
+        'cyrillicUppercaseSafe' => 'АБВГДЕЖЗИКЛМНПРСТУФХЦЧШЩЫЭЮЯ', // Без: Ё, З, Й, О
+        'specialSymbols' =>     '+-*/()[]{}<>|!?@#$%^&:;., ',
+        'specialSymbolsSafe' => '+-*()[]{}<>?@#$%^&:;.,', // Без /, |, !, пробел
         'secret' => 'YZRD3XkaQ1Cbce2mnSTopqwW9izEuvUVlstA8JG60B4IfF5H7ghOPxydKLjMNr',
     ];
 
-    /**
-     * Генерация уникального кода по массиву
-     *
-     * @param int $length
-     * @param array $abcArray
-     * @param array $params
-     * @return string
-     */
-    public static function generateByArray($length, $abcArray, $params = [])
+    /** Проверка кода по названиям алфавитов */
+    public static function checkByAbcNames(string $code, array $abcNames): bool
+    {
+        $chars = '';
+        foreach ($abcNames as $abcName) { $chars .= ((isset(self::$abc[$abcName])) ? self::$abc[$abcName] : $abcName); }
+        $chars = array_unique(mb_str_split($chars));
+
+        $codeChars = array_unique(mb_str_split($code));
+        foreach ($codeChars as $codeChar) {
+            if (!in_array($codeChar, $chars)) { return false; }
+        }
+
+        return true;
+    }
+
+    /** Генерация уникального кода по массиву символов */
+    public static function generateBySymbolsArray(int $length, array $abcArray, array $params = []): string
     {
         // Параметры
         if (!isset($params['notFirstZero'])) { $params['notFirstZero'] = false; }
@@ -80,70 +88,22 @@ class CodeHelper
         return $result;
     }
 
-    /**
-     * Генерация уникального кода по строке
-     *
-     * @param int $length
-     * @param string $abcString
-     * @param array $params
-     * @return string
-     */
-    public static function generateByString($length, $abcString, $params = [])
+    /** Генерация уникального кода по строке */
+    public static function generateByString(int $length, string $abcString, array $params = []): string
     {
         // Алфавит
         $abcArray = preg_split('/(?<!^)(?!$)/u', $abcString);
 
-        return self::generateByArray($length, $abcArray, $params);
+        return self::generateBySymbolsArray($length, $abcArray, $params);
     }
 
-    /**
-     * Генерация уникального кода по названиям алфавитов
-     *
-     * @param int $length
-     * @param array $abcNames
-     * @param array $params
-     * @return string
-     */
-    public static function generateByAbcNames($length, $abcNames, $params = [])
+    /** Генерация уникального кода по названиям алфавитов */
+    public static function generateByAbcNames(int $length, string $abcNames, array $params = []): string
     {
         // Алфавит
         $abc = '';
         foreach ($abcNames as $abcName) { $abc .= self::$abc[$abcName]; }
 
         return self::generateByString($length, $abc, $params);
-    }
-
-    /**
-     * Генерация пароля
-     *
-     * @param int $length
-     * @return string
-     */
-    public static function generatePassword($length)
-    { return self::generateByAbcNames($length, ['numbersSafe', 'latinLowercaseSafe']); }
-
-    /**
-     * Генерация системного пароля
-     *
-     * @param int $length
-     * @return string
-     */
-    public static function generateSystemPassword($length)
-    { return self::generateByAbcNames($length, ['numbers', 'latinLowercase', 'latinUppercase', 'specialSymbols']); }
-
-    /**
-     * Проверка безопасности пароля
-     *
-     * @param string $password
-     * @return string
-     */
-    public static function checkPasswordSecurity($password)
-    {
-        $problems = [];
-        if (mb_strlen($password) < 8) { $problems[] = 'Пароль должен быть 8 или более символов.'; }
-        if (!(bool)preg_match('/[' . self::$abc['numbers'] . ']+/', $password)) { $problems[] = 'Пароль должен содержать хотябы одну цифру.'; }
-        if (!(bool)preg_match('/[' . self::$abc['latinUppercase'] . self::$abc['cyrillicUppercase'] . ']+/u', $password)) { $problems[] = 'Пароль должен содержать хотябы одну заглавную букву.'; }
-        if (!(bool)preg_match('/[' . self::$abc['latinLowercase'] . self::$abc['cyrillicLowercase'] . ']+/u', $password)) { $problems[] = 'Пароль должен содержать хотябы одну строчную (не заглавную) букву.'; }
-        return $problems;
     }
 }
