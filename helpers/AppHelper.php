@@ -3,7 +3,8 @@
 namespace rusbeldoor\yii2General\helpers;
 
 use yii;
-use yii\web\ForbiddenHttpException;
+use yii\web\Response;
+use yii\web\View;
 
 class AppHelper
 {
@@ -95,112 +96,91 @@ class AppHelper
     public static function exitWithJsonResultErrorData(mixed $data = null): void
     { self::exitWithJsonResultData('error', $data); }
 
-
-
-
-
-    /**
-     * Завершение с выводом json ['result' => 'error', 'data' => ['alerts' => $alerts]]
-     *
-     * @param array $alerts
-     * @return void
-     */
-    public static function exitWithJsonResultErrorDataAlerts(array $alerts = [])
+    /** Завершение с выводом json ['result' => 'error', 'data' => ['alerts' => $alerts]] */
+    public static function exitWithJsonResultErrorDataAlerts(array $alerts = []): void
     { self::exitWithJsonResultErrorData(['alerts' => $alerts]); }
 
-
-    /*** Права доступа ***/
-
-    /**
-     * Проверка права доступа
-     *
-     * @param string $itemName
-     */
-    public static function forbiddenExceptionIfNotHavePermission(string $itemName)
-    { if (!Yii::$app->user->can($itemName)) { throw new ForbiddenHttpException('Доступ запрещён.'); } }
+    /** Завершение с выводом json ['result' => 'error', 'data' => ['html' => $html]] */
+    public static function exitWithJsonResultErrorDataHtml(string $html = ''): void
+    { self::exitWithJsonResultErrorData(['html' => $html]); }
 
     /*** Flashes ***/
 
-    /**
-     * Установка сообщений
-     *
-     * @param array $flashs
-     * @return void
-     */
-    public static function setFlashes(array $flashs)
-    { foreach($flashs as $key => $text) { Yii::$app->session->setFlash($key, $text); } }
+    /** Задание flashes */
+    public static function setFlashes(array $flashs): void
+    { foreach($flashs as $type => $text) { Yii::$app->session->setFlash($type, $text); } }
 
     /*** Перенаправления ***/
 
-    /**
-     * ...
-     *
-     * @param string|array $url
-     * @return object
-     */
-    public static function redirect(string|array $url)
+    /** Перенаправление */
+    public static function redirect(string|array $url): Response
     { return Yii::$app->controller->redirect($url); }
 
-    /**
-     * ...
-     *
-     * @param string|array $url
-     * @param string $flashType
-     * @param string $flashText
-     * @return object
-     */
-    public static function redirectWithFlash(string|array $url, string $flashType, string $flashText)
+    /** ... */
+    public static function redirectWithFlash(string|array $url, string $flashType, string $flashText): void
     {
         self::setFlashes([$flashType => $flashText]);
-        return self::redirect($url);
+        self::redirect($url);
     }
 
-    /**
-     * ...
-     *
-     * @param string|array $url
-     * @param array $flashes
-     * @return void
-     */
-    public static function redirectWithFlashes(string|array $url, array $flashes)
+    /** ... */
+    public static function redirectWithFlashes(string|array $url, array $flashes): void
     {
         foreach ($flashes as $flash) { self::setFlashes([$flash['type'] => $flash['text']]); }
-        return self::redirect($url);
+        self::redirect($url);
     }
 
-    /**
-     * ...
-     *
-     * @param string $flashType
-     * @param string $flashText
-     * @return void
-     */
-    public static function redirectIndexWithFlash(string $flashType, string $flashText)
-    { return self::redirectWithFlash(['index'], $flashType, $flashText); }
+    /** ... */
+    public static function redirectIndexWithFlash(string $flashType, string $flashText): void
+    { self::redirectWithFlash(['index'], $flashType, $flashText); }
 
-    /**
-     * ...
-     *
-     * @param array $flashes
-     * @return void
-     */
-    public static function redirectIndexWithFlashes(array $flashes)
-    { return self::redirectWithFlashes(['index'], $flashes); }
+    /** ... */
+    public static function redirectIndexWithFlashes(array $flashes): void
+    { self::redirectWithFlashes(['index'], $flashes); }
 
-    /*** Работа с файлами ***/
+    /*** CSS ***/
 
-    /**
-     * Логирование данных в файл
-     *
-     * @param string $file
-     * @param string $string
-     * @param bool $n
-     * @return void
-     */
-    public static function log(string $file, string $string, bool $n = true)
+    /** Регистарция css файлов */
+    public static function registerCssFile(View $view, string $path, array $options = [], string $key): void
+    {
+        //$view->registerCss($path . ((self::isLocal()) ? '.css' : '.min.css') . '?v=' . Yii::$app->params['projectVersion'], $options, $key);
+        $view->registerCssFile($path . '.css' . '?v=' . Yii::$app->params['projectVersion'], $options, $key);
+    }
+
+    /*** JS ***/
+
+    /** Регистарция js файлов */
+    public static function registerScriptFile(View $view, string $path, array $options = [], string $key): void
+    {
+        //$view->registerScriptFile($path . ((self::isLocal()) ? '.js' : '.min.js') . '?v=' . Yii::$app->params['projectVersion'], $options, $key);
+        $view->registerJSFile($path . '.js' . '?v=' . Yii::$app->params['projectVersion'], $options, $key);
+    }
+
+    /*** Логи ***/
+
+    /** Логирование данных в файл*/
+    public static function log(string $file, string $string, bool $n = true): void
     {
         $filename = '@runtime/' . $file . '.log';
         @error_log('[' . date('H:i:s d.m.Y') . ']    ' . $string . (($n) ? "\n" : ''), 3, $filename);
         @chmod($filename, 0777);
     }
+
+    /*** Запросы ***/
+
+    /** ... */
+    public static function getRequestHeaders(): array|bool
+    {
+        if (!function_exists('getallheaders')) {
+            $headers = [];
+            foreach ($_SERVER as $name => $value) {
+                if (substr($name, 0, 5) == 'HTTP_') {
+                    $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+                }
+            }
+            return $headers;
+        } else { return getallheaders(); }
+    }
+
+    /*** Другое ***/
 }
