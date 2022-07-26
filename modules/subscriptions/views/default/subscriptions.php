@@ -5,7 +5,7 @@
  * @var array $result
  */
 
-use yii\bootstrap5\Html;
+use rusbeldoor\yii2General\helpers\HtmlHelper;
 use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;
 
 $this->title = 'Подписки';
@@ -40,16 +40,16 @@ else {
                 foreach ($action['channels'] as $channel) {
                     $channelIcon = UserSubscriptionHelper::channelIcon($channel['alias']);
                     $buttons[] =
-                        Html::beginForm('/subscriptions/default/change', 'post')
-                            . Html::input('hidden', 'userId', $userId)
-                            . Html::input('hidden', 'subscriptId', $subscript['id'])
-                            . Html::input('hidden', 'actionId', $action['id'])
-                            . Html::input('hidden', 'channelId', $channel['id'])
-                            . Html::input('hidden', 'hash', UserSubscriptionHelper::hash($userId, '', '', $subscript['id'], $action['id'], $channel['id']))
-                            . Html::input('hidden', 'active', (($channel['active']) ? '0' : '1'))
-                            . Html::input('hidden', 'redirectUrl', Yii::$app->request->url)
+                        HtmlHelper::beginForm('/subscriptions/default/change', 'post')
+                            . HtmlHelper::input('hidden', 'userId', $userId)
+                            . HtmlHelper::input('hidden', 'subscriptId', $subscript['id'])
+                            . HtmlHelper::input('hidden', 'actionId', $action['id'])
+                            . HtmlHelper::input('hidden', 'channelId', $channel['id'])
+                            . HtmlHelper::input('hidden', 'hash', UserSubscriptionHelper::hash($userId, '', '', $subscript['id'], $action['id'], $channel['id']))
+                            . HtmlHelper::input('hidden', 'active', (($channel['active']) ? '0' : '1'))
+                            . HtmlHelper::input('hidden', 'redirectUrl', Yii::$app->request->url)
                         . '<button type="button" class="btn btn-' . (($channel['active']) ? 'light unsubscribe' : 'primary subscribe') . ' " data-sender-name="' . $subscript['name'] . '" data-action-name="' . $action['name'] . '" data-channel-name="' . $channel['name'] . '">' . (($channelIcon) ? $channelIcon . '&nbsp;' : '') . ' ' . $channel['name'] . ' — ' . (($channel['active']) ? 'отписаться' : 'подписаться') . '</button>'
-                        . Html::endForm();
+                        . HtmlHelper::endForm();
                 }
                 echo '<div class="channels">' . implode('', $buttons) . '</div>';
             }

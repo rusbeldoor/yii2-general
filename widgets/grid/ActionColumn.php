@@ -3,7 +3,7 @@
 namespace rusbeldoor\yii2General\widgets\grid;
 
 use Yii;
-use yii\bootstrap5\Html;
+use rusbeldoor\yii2General\helpers\HtmlHelper;
 
 /**
  * ...
@@ -65,8 +65,8 @@ class ActionColumn extends \yii\grid\ActionColumn
                 $options = array_merge([
                     'title' => $title,
                 ], $additionalOptions, $this->buttonOptions);
-                $icon = Html::tag('i', '', ['class' => $iconName . ' ' . $class]);
-                return Html::a($icon, $url, $options);
+                $icon = HtmlHelper::tag('i', '', ['class' => $iconName . ' ' . $class]);
+                return HtmlHelper::a($icon, $url, $options);
             };
         }
     }

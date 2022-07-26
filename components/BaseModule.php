@@ -3,7 +3,7 @@
 namespace rusbeldoor\yii2General\components;
 
 use Yii;
-use yii\bootstrap5\Html;
+use rusbeldoor\yii2General\helpers\HtmlHelper;
 
 /**
  * ...
@@ -21,7 +21,7 @@ class BaseModule extends \yii\base\Module
         if (Yii::$app->user->isGuest) {
             $menuItems[] = ['label' => 'Вход', 'url' => ['/site/login']];
         } else {
-            $menuItems[] = '<li class="nav-item">' . Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Выход (' . Yii::$app->user->identity->username . ')', ['class' => 'btn nav-link']) . Html::endForm() . '</li>';
+            $menuItems[] = '<li class="nav-item">' . HtmlHelper::beginForm(['/site/logout'], 'post') . HtmlHelper::submitButton('Выход (' . Yii::$app->user->identity->username . ')', ['class' => 'btn nav-link']) . HtmlHelper::endForm() . '</li>';
         }
         return $menuItems;
     }

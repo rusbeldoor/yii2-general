@@ -3,7 +3,7 @@
 namespace rusbeldoor\yii2General\components;
 
 use Yii;
-use yii\bootstrap5\Html;
+use rusbeldoor\yii2General\helpers\HtmlHelper;
 
 /**
  * Меню
@@ -61,7 +61,7 @@ class Menu
             if ($params['logout']) {
                 $this->menu[] =
                     '<li class="nav-item">'
-                    . Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Выход (' . Yii::$app->user->identity->username . ')', ['class' => 'btn nav-link']) . Html::endForm()
+                    . HtmlHelper::beginForm(['/site/logout'], 'post') . HtmlHelper::submitButton('Выход (' . Yii::$app->user->identity->username . ')', ['class' => 'btn nav-link']) . HtmlHelper::endForm()
                     . '</li>';
             }
         }

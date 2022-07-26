@@ -2,7 +2,7 @@
 
 namespace rusbeldoor\yii2General\widgets;
 
-use yii\bootstrap5\Html;
+use rusbeldoor\yii2General\helpers\HtmlHelper;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 
 /**
@@ -31,7 +31,7 @@ trait AppendPrepend
             }
         }
         $pos = (($type === 'append') ? 'append' : 'prepend');
-        return Html::tag('div', $out, ['class' => "input-group-{$pos}"]);
+        return HtmlHelper::tag('div', $out, ['class' => "input-group-{$pos}"]);
     }
 
     /**
@@ -46,7 +46,7 @@ trait AppendPrepend
         $options = ArrayHelper::getValue($config, 'options', []);
         $asButton = ArrayHelper::getValue($config, 'asButton', false);
         if ($asButton) { return $content; }
-        Html::addCssClass($options, 'input-group-text');
-        return Html::tag('span', $content, $options);
+        HtmlHelper::addCssClass($options, 'input-group-text');
+        return HtmlHelper::tag('span', $content, $options);
     }
 }

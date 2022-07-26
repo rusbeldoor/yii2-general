@@ -3,7 +3,7 @@
 namespace rusbeldoor\yii2General\widgets;
 
 use Yii;
-use yii\bootstrap5\Html;
+use rusbeldoor\yii2General\helpers\HtmlHelper;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 
 /**
@@ -44,7 +44,7 @@ class Select2 extends \kartik\select2\select2
             $buttonsCount = 3;
 
             $buttonsHtml .=
-                Html::button(
+                HtmlHelper::button(
                     '<i class="fas fa-retweet"></i>',
                     [
                         'type'=> 'button',
@@ -53,7 +53,7 @@ class Select2 extends \kartik\select2\select2
                         'disabled' => false,
                     ]
                 )
-                . Html::button(
+                . HtmlHelper::button(
                     '<i class="fas fa-check"></i>',
                     [
                         'type'=> 'button',
@@ -66,7 +66,7 @@ class Select2 extends \kartik\select2\select2
 
         $this->pluginOptions['width'] = 'calc(100% - ' . ($buttonsCount * (46 + 5)) . 'px)';
         $buttonsHtml .=
-            Html::button(
+            HtmlHelper::button(
                 '<i class="fas fa-wind"></i>',
                 [
                     'type'=> 'button',

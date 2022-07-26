@@ -3,7 +3,7 @@
 namespace rusbeldoor\yii2General\widgets\grid;
 
 use Yii;
-use yii\bootstrap5\Html;
+use rusbeldoor\yii2General\helpers\HtmlHelper;
 
 /**
  *
@@ -80,7 +80,7 @@ class ArchiveColumn extends \yii\grid\ActionColumn
                         $archiveClass = self::NOT_ARCHIVE_CLASS;
                         $title = 'Архивировать (не в архиве)';
                 }
-                return Html::tag(
+                return HtmlHelper::tag(
                     'i',
                     '',
                     [

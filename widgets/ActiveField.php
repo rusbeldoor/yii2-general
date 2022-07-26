@@ -3,7 +3,7 @@
 namespace rusbeldoor\yii2General\widgets;
 
 use yii\base\InvalidConfigException;
-use yii\bootstrap5\Html;
+use rusbeldoor\yii2General\helpers\HtmlHelper;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 
 /**
@@ -67,10 +67,10 @@ class ActiveField extends \yii\bootstrap5\ActiveField
         $append = $this->getAddonContent('append');
         $content = $prepend . '{input}' . $append;
         $group = ArrayHelper::getValue($addon, 'groupOptions', []);
-        Html::addCssClass($group, 'input-group');
+        HtmlHelper::addCssClass($group, 'input-group');
         $contentBefore = ArrayHelper::getValue($addon, 'contentBefore', '');
         $contentAfter = ArrayHelper::getValue($addon, 'contentAfter', '');
-        $content = Html::tag('div', $contentBefore . $content . $contentAfter, $group);
+        $content = HtmlHelper::tag('div', $contentBefore . $content . $contentAfter, $group);
         return $content;
     }
 
@@ -181,7 +181,7 @@ class ActiveField extends \yii\bootstrap5\ActiveField
                 'item' => function ($index, $label, $name, $checked, $value) {
                     return
                         '<label class="btn btn-light' . (($checked) ? ' active' : '') . '">'
-                            . Html::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
+                            . HtmlHelper::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
                             . ' '
                             . $label
                         . '</label>';
