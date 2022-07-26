@@ -12,7 +12,7 @@ $(document).ready(function() {
     /*** Widgets ***/
 
     $.fn.radioButtonsListValue = function() {
-        return $(this).children('label.active').children('input').val();
+        return $(this).children('button.active').children('input').val();
     };
 });
 
