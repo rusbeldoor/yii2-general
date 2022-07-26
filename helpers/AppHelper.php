@@ -141,7 +141,7 @@ class AppHelper
     /*** CSS ***/
 
     /** Регистарция css файлов */
-    public static function registerCssFile(View $view, string $path, array $options = [], string $key): void
+    public static function registerCssFile(View $view, string $path, array $options = [], string $key = null): void
     {
         //$view->registerCss($path . ((self::isLocal()) ? '.css' : '.min.css') . '?v=' . Yii::$app->params['projectVersion'], $options, $key);
         $view->registerCssFile($path . '.css' . '?v=' . Yii::$app->params['projectVersion'], $options, $key);
@@ -150,7 +150,7 @@ class AppHelper
     /*** JS ***/
 
     /** Регистарция js файлов */
-    public static function registerScriptFile(View $view, string $path, array $options = [], string $key): void
+    public static function registerScriptFile(View $view, string $path, array $options = [], string $key = null): void
     {
         //$view->registerScriptFile($path . ((self::isLocal()) ? '.js' : '.min.js') . '?v=' . Yii::$app->params['projectVersion'], $options, $key);
         $view->registerJSFile($path . '.js' . '?v=' . Yii::$app->params['projectVersion'], $options, $key);
