@@ -74,89 +74,48 @@ class ActiveField extends \yii\bootstrap5\ActiveField
         return $content;
     }
 
-    /**
-     * Текстовое поле для поиска
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    public function searchTextInput($options = [])
+    /** Текстовое поле для поиска */
+    public function searchTextInput(array $options = []): ActiveField
     {
         $options = ArrayHelper::merge(['placeholder' => 'Не важно'], $options);
         return self::textInput($options);
     }
 
-    /**
-     * Числовое поле
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    public function numberInput($options = [])
+    /** Числовое поле */
+    public function numberInput(array $options = []): ActiveField
     { return self::input('number', $options); }
 
-    /**
-     * Числовое поле для поиска
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    public function searchNumberInput($options = [])
+    /** Числовое поле для поиска */
+    public function searchNumberInput(array $options = []): ActiveField
     {
         $options = ArrayHelper::merge(['placeholder' => 'Не важно'], $options);
         return self::numberInput($options);
     }
 
-    /**
-     * Числовое поле с статичным текстом после
-     *
-     * @param array $options
-     * @param string|null $append
-     * @return ActiveField
-     */
-    public function numberInputAppend($options = [], $append = null)
+    /** Числовое поле с статичным текстом после */
+    public function numberInputAppend(array $options = [], ?string $append = null): ActiveField
     {
         if (is_string($append)) { $this->addon['append'] = ['content' => $append]; }
         return self::input('number', $options);
     }
 
-    /**
-     * Числовое поле с статичным текстом после "шт."
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    public function numberInputAppendCount($options = [])
+    /** Числовое поле с статичным текстом после "шт." */
+    public function numberInputAppendCount(array $options = []): ActiveField
     { return self::numberInputAppend($options, 'шт.'); }
 
-    /**
-     * Числовое поле с статичным текстом после "шт." для поиска
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    public function searchNumberInputAppendCount($options = [])
+    /** Числовое поле с статичным текстом после "шт." для поиска */
+    public function searchNumberInputAppendCount(array $options = []): ActiveField
     {
         $options = ArrayHelper::merge(['placeholder' => 'Не важно'], $options);
         return self::numberInputAppendCount($options);
     }
 
-    /**
-     * Числовое поле с статичным текстом после "сек."
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    public function numberInputAppendSeconds($options = [])
+    /** Числовое поле с статичным текстом после "сек." */
+    public function numberInputAppendSeconds(array $options = []): ActiveField
     { return self::numberInputAppend($options, 'сек.'); }
 
-    /**
-     * Числовое поле с статичным текстом после "сек." для поиска
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    public function searchNumberInputAppendSeconds($options = [])
+    /** Числовое поле с статичным текстом после "сек." для поиска */
+    public function searchNumberInputAppendSeconds(array $options = []): ActiveField
     {
         $options = ArrayHelper::merge(['placeholder' => 'Не важно'], $options);
         return self::numberInputAppendSeconds($options);
@@ -166,63 +125,41 @@ class ActiveField extends \yii\bootstrap5\ActiveField
 
     /**
      * Радиогруппа кнопок
-     *
-     * @param array $items
-     * @param array $options
-     * @return ActiveField
+     * todo: требует реализации
      */
-    public function radioButtonsList($items, $options = [])
+    public function radioButtonsList(array $items, array $options = []): ActiveField
     {
-        $options = ArrayHelper::merge(
-            [
-                'class' => 'btn-group',
-                'data-toggle' => 'buttons',
-                'unselect' => null,
-                'item' => function ($index, $label, $name, $checked, $value) {
-                    return HtmlHelper::button(
-                        HtmlHelper::radio($name, $checked, ['value' => $value]) . '&nbsp;&nbsp;' . $label,
-                        ['class' => 'btn btn-light' . (($checked) ? ' active' : '')]
-                    );
+//        $options = ArrayHelper::merge(
+//            [
+//                'class' => 'btn-group',
+//                'data-toggle' => 'buttons',
+//                'unselect' => null,
+//                'item' => function ($index, $label, $name, $checked, $value) {
 //                    return
 //                        '<label class="btn btn-light' . (($checked) ? ' active' : '') . '">'
 //                            . HtmlHelper::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
 //                            . ' '
 //                            . $label
 //                        . '</label>';
-                },
-            ],
-            $options
-        );
+//                },
+//            ],
+//            $options
+//        );
         return self::radioList($items, $options);
     }
 
-    /**
-     * Радоигруппа кнопок Да/Нет с значениме в виде числа
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    public function numberYesNo($options = [])
+    /** Радоигруппа кнопок Да/Нет с значениме в виде числа */
+    public function numberYesNo(array $options = []): ActiveField
     { return self::radioButtonsList(['1' => 'Да', '0' => 'Нет'], $options); }
 
-    /**
-     * Радоигруппа кнопок Не важно/Да/Нет с значениме в виде числа для поиска
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    public function searchNumberYesNo($options = [])
+    /** Радоигруппа кнопок Не важно/Да/Нет с значениме в виде числа для поиска */
+    public function searchNumberYesNo(array $options = []): ActiveField
     { return self::radioButtonsList(['' => 'Не важно', '1' => 'Да', '0' => 'Нет'], $options); }
 
     /*** Дата и время ***/
 
-    /**
-     * Общий выбор даты и времени
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    private function dateTimePicker($options = [])
+    /** Общий выбор даты и времени */
+    private function dateTimePicker(array $options = []): ActiveField
     {
         $this->addon['prepend'] = ['content' => '<i class="fas fa-calendar-alt"></i>'];
         return $this->widget(
@@ -241,12 +178,8 @@ class ActiveField extends \yii\bootstrap5\ActiveField
         );
     }
 
-    /**
-     * Выюор даты и времени
-     *
-     * @return ActiveField
-     */
-    public function dateTime()
+    /** Выбор даты и времени */
+    public function dateTime(): ActiveField
     {
         $this->addon['groupOptions'] = ['class' => 'widthDateTime'];
         return self::dateTimePicker([
@@ -259,12 +192,8 @@ class ActiveField extends \yii\bootstrap5\ActiveField
         ]);
     }
 
-    /**
-     * Выбор даты
-     *
-     * @return ActiveField
-     */
-    public function date()
+    /** Выбор даты */
+    public function date(): ActiveField
     {
         $this->addon['groupOptions'] = ['class' => 'widthDate'];
         return self::dateTimePicker([
@@ -278,53 +207,29 @@ class ActiveField extends \yii\bootstrap5\ActiveField
 
     /*** Выпадающий список ***/
 
-    /**
-     * Выпадающие список
-     *
-     * @param array $elems
-     * @param array $options
-     * @return ActiveField
-     */
-    public function select($elems, $options = [])
+    /** Выпадающие список */
+    public function select(array $elems, array $options = []): ActiveField
     {
         $options = ArrayHelper::merge(['data' => $elems, 'pluginOptions' => ['allowClear' => true]], $options);
         return $this->widget('rusbeldoor\yii2General\widgets\select2', $options);
     }
 
-    /**
-     * Выпадающий список для поиска
-     *
-     * @param array $elems
-     * @param array $options
-     * @return ActiveField
-     */
-    public function searchSelect($elems, $options = [])
+    /** Выпадающий список для поиска */
+    public function searchSelect(array $elems, array $options = []): ActiveField
     {
         $options = ArrayHelper::merge(['options' => ['placeholder' => 'Не важно']], $options);
         return self::select($elems, $options);
     }
 
-    /**
-     * Выпадающий список с множественным выбором
-     *
-     * @param array $elems
-     * @param array $options
-     * @return ActiveField
-     */
-    public function multipleSelect($elems, $options = [])
+    /** Выпадающий список с множественным выбором */
+    public function multipleSelect(array $elems, array $options = []): ActiveField
     {
         $options = ArrayHelper::merge(['pluginOptions' => ['multiple' => true]], $options);
         return self::select($elems, $options);
     }
 
-    /**
-     * Выпадающий список с множественным выбором для поиска
-     *
-     * @param array $elems
-     * @param array $options
-     * @return ActiveField
-     */
-    public function searchMultipleSelect($elems, $options = [])
+    /** Выпадающий список с множественным выбором для поиска */
+    public function searchMultipleSelect(array $elems, array $options = []): ActiveField
     {
         $options = ArrayHelper::merge(['pluginOptions' => ['multiple' => true]], $options);
         return self::searchSelect($elems, $options);
@@ -332,22 +237,24 @@ class ActiveField extends \yii\bootstrap5\ActiveField
 
     /*** Маска для ввода ***/
 
-    /**
-     * Поле для ввода с маской
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    public function masked($options = [])
+    /** Поле для ввода с маской */
+    public function masked(array $options = []): ActiveField
     { return $this->widget('\yii\widgets\MaskedInput', $options); }
 
-    /**
-     * Поле для ввода с маской алиаса
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    public function maskedAlias($options = [])
+    /*** Алиас ***/
+
+    /** Алиас */
+    public function alias(array $options = []): ActiveField
+    {
+        if (!isset($options['maxLength'])) { $options['maxLength'] = 16; }
+        if (!isset($options['maskedOptions'])) { $options['maskedOptions'] = []; }
+        if (!isset($options['maskedOptions']['maxLength'])) { $options['maskedOptions']['maxLength'] = $options['maxLength']; }
+
+        return self::textInput($options)->maskedAlias($options['maskedOptions']);
+    }
+
+    /** Алиас с маской для ввода */
+    public function maskedAlias(array $options = []): ActiveField
     {
         if (!isset($options['maxLength'])) { $options['maxLength'] = 16; }
         if (!isset($options['greedy'])) { $options['greedy'] = false; }
@@ -357,22 +264,5 @@ class ActiveField extends \yii\bootstrap5\ActiveField
             'definitions' => ['z' => ['validator' =>  '^[a-zA-z0-9\-]+']],
             'clientOptions' => ['repeat' => $options['maxLength'], 'greedy' => $options['greedy']]
         ]);
-    }
-
-    /*** Алиас ***/
-
-    /**
-     * Алиас
-     *
-     * @param array $options
-     * @return ActiveField
-     */
-    public function alias($options = [])
-    {
-        if (!isset($options['maxLength'])) { $options['maxLength'] = 16; }
-        if (!isset($options['maskedOptions'])) { $options['maskedOptions'] = []; }
-        if (!isset($options['maskedOptions']['maxLength'])) { $options['maskedOptions']['maxLength'] = $options['maxLength']; }
-
-        return self::textInput($options)->maskedAlias($options['maskedOptions']);
     }
 }
