@@ -19,13 +19,11 @@ class YandexDirectAccount extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['name', 'url', 'login', 'token'], 'required'],
-            [['name', 'login', 'token'], 'string', 'max' => 64],
-            [['url'], 'string', 'max' => 96],
-        ];
-    }
+    { return [
+        [['name', 'url', 'login', 'token'], 'required'],
+        [['name', 'login', 'token'], 'string', 'max' => 64],
+        [['url'], 'string', 'max' => 96],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

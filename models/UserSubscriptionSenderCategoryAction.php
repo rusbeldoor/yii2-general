@@ -19,15 +19,13 @@ class UserSubscriptionSenderCategoryAction extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['category_id', 'alias', 'name'], 'required'],
-            [['category_id', 'active'], 'integer'],
-            [['alias', 'part_key_alias', 'name'], 'string', 'max' => 128],
-            [['alias'], 'unique'],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionSenderCategory::className(), 'targetAttribute' => ['category_id' => 'id']],
-        ];
-    }
+    { return [
+        [['category_id', 'alias', 'name'], 'required'],
+        [['category_id', 'active'], 'integer'],
+        [['alias', 'part_key_alias', 'name'], 'string', 'max' => 128],
+        [['alias'], 'unique'],
+        [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionSenderCategory::className(), 'targetAttribute' => ['category_id' => 'id']],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

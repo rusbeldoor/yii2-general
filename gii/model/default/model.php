@@ -75,9 +75,9 @@ class <?= $className ?> extends \rusbeldoor\yii2General\models\ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [<?= empty($rules) ? '' : ("\n            " . implode(",\n            ", $rules) . ",\n        ") ?>];
-    }
+    { return [
+        <?= empty($rules) ? '' : ("\n            " . implode(",\n            ", $rules) . ",\n        ") ?>
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

@@ -21,14 +21,12 @@ class Platform extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['alias', 'name'], 'required'],
-            [['alias'], 'string', 'max' => 16],
-            [['name'], 'string', 'max' => 32],
-            [['alias'], 'unique'],
-        ];
-    }
+    { return [
+        [['alias', 'name'], 'required'],
+        [['alias'], 'string', 'max' => 16],
+        [['name'], 'string', 'max' => 32],
+        [['alias'], 'unique'],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

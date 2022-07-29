@@ -47,15 +47,13 @@ class Cron extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['alias', 'description'], 'required'],
-            [['description', 'status'], 'string'],
-            [['max_duration', 'restart', 'kill_process', 'active'], 'integer'],
-            [['alias'], 'string', 'max' => 96],
-            [['alias'], 'unique'],
-        ];
-    }
+    { return [
+        [['alias', 'description'], 'required'],
+        [['description', 'status'], 'string'],
+        [['max_duration', 'restart', 'kill_process', 'active'], 'integer'],
+        [['alias'], 'string', 'max' => 96],
+        [['alias'], 'unique'],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

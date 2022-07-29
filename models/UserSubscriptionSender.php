@@ -19,15 +19,13 @@ class UserSubscriptionSender extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['category_id', 'name', 'active'], 'required'],
-            [['category_id', 'active'], 'integer'],
-            [['name'], 'string', 'max' => 128],
-            [['key'], 'string', 'max' => 16],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionSenderCategory::className(), 'targetAttribute' => ['category_id' => 'id']],
-        ];
-    }
+    { return [
+        [['category_id', 'name', 'active'], 'required'],
+        [['category_id', 'active'], 'integer'],
+        [['name'], 'string', 'max' => 128],
+        [['key'], 'string', 'max' => 16],
+        [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionSenderCategory::className(), 'targetAttribute' => ['category_id' => 'id']],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

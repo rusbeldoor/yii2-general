@@ -17,15 +17,13 @@ class AuthRule extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['name'], 'required'],
-            [['data'], 'string'],
-            self::getRuleString(['name'], ['max' => 96]),
-            self::getRuleMatchAlias(['name']),
-            [['name'], 'unique'],
-        ];
-    }
+    { return [
+        [['name'], 'required'],
+        [['data'], 'string'],
+        self::getRuleString(['name'], ['max' => 96]),
+        self::getRuleMatchAlias(['name']),
+        [['name'], 'unique'],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

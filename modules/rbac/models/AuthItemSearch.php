@@ -13,12 +13,10 @@ class AuthItemSearch extends AuthItem
 {
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['id', 'name', 'description', 'rule_name', 'data'], 'safe'],
-            [['type'], 'integer'],
-        ];
-    }
+    { return [
+        [['id', 'name', 'description', 'rule_name', 'data'], 'safe'],
+        [['type'], 'integer'],
+    ]; }
 
     /** {@inheritdoc} */
     public function scenarios()

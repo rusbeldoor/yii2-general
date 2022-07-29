@@ -20,14 +20,12 @@ class UserSubscription extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['user_id', 'sender_id'], 'required'],
-            [['user_id', 'sender_id'], 'integer'],
-            [['user_id', 'sender_id'], 'unique', 'targetAttribute' => ['user_id', 'sender_id']],
-            [['sender_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionSender::className(), 'targetAttribute' => ['sender_id' => 'id']],
-        ];
-    }
+    { return [
+        [['user_id', 'sender_id'], 'required'],
+        [['user_id', 'sender_id'], 'integer'],
+        [['user_id', 'sender_id'], 'unique', 'targetAttribute' => ['user_id', 'sender_id']],
+        [['sender_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionSender::className(), 'targetAttribute' => ['sender_id' => 'id']],
+    ]; }
 
     /** {@inheritdoc} */
     public function getSender()

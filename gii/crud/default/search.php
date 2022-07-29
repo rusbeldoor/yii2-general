@@ -51,11 +51,9 @@ if ($echo) { echo "\n"; }
 ?>
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            <?= implode(",\n            ", $rules) ?>,
-        ];
-    }
+    { return [
+        <?= implode(",\n            ", $rules) ?>,
+    ]; }
 
     /** {@inheritdoc} */
     public function scenarios()

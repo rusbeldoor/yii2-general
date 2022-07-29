@@ -17,15 +17,13 @@ class AuthAssignment extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['item_name', 'user_id'], 'required'],
-            self::getRuleString(['item_name'], ['max' => 96]),
-            self::getRuleMatchAlias(['item_name']),
-            [['item_name', 'user_id'], 'unique', 'targetAttribute' => ['item_name', 'user_id']],
-            [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::className(), 'targetAttribute' => ['item_name' => 'name']],
-        ];
-    }
+    { return [
+        [['item_name', 'user_id'], 'required'],
+        self::getRuleString(['item_name'], ['max' => 96]),
+        self::getRuleMatchAlias(['item_name']),
+        [['item_name', 'user_id'], 'unique', 'targetAttribute' => ['item_name', 'user_id']],
+        [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::className(), 'targetAttribute' => ['item_name' => 'name']],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

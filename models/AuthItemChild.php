@@ -17,16 +17,14 @@ class AuthItemChild extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['parent', 'child'], 'required'],
-            self::getRuleString(['parent', 'child'], ['max' => 96]),
-            self::getRuleMatchAlias(['parent', 'child']),
-            [['parent', 'child'], 'unique', 'targetAttribute' => ['parent', 'child']],
-            [['parent'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::className(), 'targetAttribute' => ['parent' => 'name']],
-            [['child'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::className(), 'targetAttribute' => ['child' => 'name']],
-        ];
-    }
+    { return [
+        [['parent', 'child'], 'required'],
+        self::getRuleString(['parent', 'child'], ['max' => 96]),
+        self::getRuleMatchAlias(['parent', 'child']),
+        [['parent', 'child'], 'unique', 'targetAttribute' => ['parent', 'child']],
+        [['parent'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::className(), 'targetAttribute' => ['parent' => 'name']],
+        [['child'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::className(), 'targetAttribute' => ['child' => 'name']],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

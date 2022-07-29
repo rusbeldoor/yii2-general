@@ -20,13 +20,11 @@ class UserSubscriptionSenderCategory extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['platform_id, alias, name'], 'required'],
-            [['platform_id'], 'integer'],
-            [['platform_id'], 'exist', 'skipOnError' => true, 'targetClass' => Platform::className(), 'targetAttribute' => ['platform_id' => 'id']],
-        ];
-    }
+    { return [
+        [['platform_id, alias, name'], 'required'],
+        [['platform_id'], 'integer'],
+        [['platform_id'], 'exist', 'skipOnError' => true, 'targetClass' => Platform::className(), 'targetAttribute' => ['platform_id' => 'id']],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

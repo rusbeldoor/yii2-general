@@ -18,14 +18,12 @@ class UserSubscriptionChannel extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['alias', 'name'], 'required'],
-            [['active'], 'integer'],
-            [['alias', 'name'], 'string', 'max' => 32],
-            [['alias'], 'unique'],
-        ];
-    }
+    { return [
+        [['alias', 'name'], 'required'],
+        [['active'], 'integer'],
+        [['alias', 'name'], 'string', 'max' => 32],
+        [['alias'], 'unique'],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

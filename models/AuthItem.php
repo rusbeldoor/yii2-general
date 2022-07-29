@@ -28,17 +28,15 @@ class AuthItem extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['name', 'type'], 'required'],
-            [['type'], 'integer'],
-            [['description', 'data'], 'string'],
-            self::getRuleString(['name', 'rule_name'], ['max' => 96]),
-            self::getRuleMatchAlias(['name', 'rule_name']),
-            [['name'], 'unique'],
-            [['rule_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthRule::className(), 'targetAttribute' => ['rule_name' => 'name']],
-        ];
-    }
+    { return [
+        [['name', 'type'], 'required'],
+        [['type'], 'integer'],
+        [['description', 'data'], 'string'],
+        self::getRuleString(['name', 'rule_name'], ['max' => 96]),
+        self::getRuleMatchAlias(['name', 'rule_name']),
+        [['name'], 'unique'],
+        [['rule_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthRule::className(), 'targetAttribute' => ['rule_name' => 'name']],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

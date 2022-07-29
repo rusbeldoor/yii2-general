@@ -30,17 +30,15 @@ class YandexDirectLog extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['user_id'], 'integer'],
-            [['elem_type', 'elem_id', 'datetime', 'action'], 'required'],
-            [['elem_type'], 'string'],
-            [['datetime'], 'safe'],
-            [['elem_id'], 'string', 'max' => 16],
-            [['action'], 'string', 'max' => 32],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
-        ];
-    }
+    { return [
+        [['user_id'], 'integer'],
+        [['elem_type', 'elem_id', 'datetime', 'action'], 'required'],
+        [['elem_type'], 'string'],
+        [['datetime'], 'safe'],
+        [['elem_id'], 'string', 'max' => 16],
+        [['action'], 'string', 'max' => 32],
+        [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

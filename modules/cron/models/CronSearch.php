@@ -13,12 +13,10 @@ class CronSearch extends Cron
 {
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['id', 'max_duration', 'restart', 'kill_process', 'active'], 'integer'],
-            [['alias', 'description', 'status'], 'safe'],
-        ];
-    }
+    { return [
+        [['id', 'max_duration', 'restart', 'kill_process', 'active'], 'integer'],
+        [['alias', 'description', 'status'], 'safe'],
+    ]; }
 
     /** {@inheritdoc} */
     public function scenarios()

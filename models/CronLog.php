@@ -22,15 +22,13 @@ class CronLog extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['cron_id', 'datetime_start'], 'required'],
-            [['cron_id', 'duration'], 'integer'],
-            [['datetime_start', 'datetime_complete'], 'safe'],
-            [['pid'], 'string', 'max' => 32],
-            [['cron_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cron::className(), 'targetAttribute' => ['cron_id' => 'id']],
-        ];
-    }
+    { return [
+        [['cron_id', 'datetime_start'], 'required'],
+        [['cron_id', 'duration'], 'integer'],
+        [['datetime_start', 'datetime_complete'], 'safe'],
+        [['pid'], 'string', 'max' => 32],
+        [['cron_id'], 'exist', 'skipOnError' => true, 'targetClass' => Cron::className(), 'targetAttribute' => ['cron_id' => 'id']],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

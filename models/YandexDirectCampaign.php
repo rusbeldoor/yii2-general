@@ -19,16 +19,14 @@ class YandexDirectCampaign extends ActiveRecord
 
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['id', 'account_id', 'name', 'status', 'state'], 'required'],
-            [['account_id'], 'integer'],
-            [['id', 'status', 'state'], 'string', 'max' => 16],
-            [['name'], 'string', 'max' => 128],
-            [['id'], 'unique'],
-            [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => YandexDirectAccount::className(), 'targetAttribute' => ['account_id' => 'id']],
-        ];
-    }
+    { return [
+        [['id', 'account_id', 'name', 'status', 'state'], 'required'],
+        [['account_id'], 'integer'],
+        [['id', 'status', 'state'], 'string', 'max' => 16],
+        [['name'], 'string', 'max' => 128],
+        [['id'], 'unique'],
+        [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => YandexDirectAccount::className(), 'targetAttribute' => ['account_id' => 'id']],
+    ]; }
 
     /** {@inheritdoc} */
     public function attributeLabels()

@@ -13,12 +13,10 @@ class PlatformSearch extends Platform
 {
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['id'], 'integer'],
-            [['alias', 'name'], 'safe'],
-        ];
-    }
+    { return [
+        [['id'], 'integer'],
+        [['alias', 'name'], 'safe'],
+    ]; }
 
     /** {@inheritdoc} */
     public function scenarios()

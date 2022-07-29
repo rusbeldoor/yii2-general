@@ -13,12 +13,10 @@ class CronLogSearch extends CronLog
 {
     /** {@inheritdoc} */
     public function rules()
-    {
-        return [
-            [['id', 'cron_id', 'duration'], 'integer'],
-            [['datetime_start', 'datetime_complete', 'pid'], 'safe'],
-        ];
-    }
+    { return [
+        [['id', 'cron_id', 'duration'], 'integer'],
+        [['datetime_start', 'datetime_complete', 'pid'], 'safe'],
+    ]; }
 
     /** {@inheritdoc} */
     public function scenarios()
