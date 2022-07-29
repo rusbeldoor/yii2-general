@@ -17,7 +17,7 @@ class UserSubscriptionChannel extends ActiveRecord
     { return 'user_subscription_channel'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['alias', 'name'], 'required'],
         [['active'], 'integer'],
@@ -26,15 +26,13 @@ class UserSubscriptionChannel extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'alias' => 'Алиас',
-            'name' => 'Название',
-            'active' => 'Активный',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'alias' => 'Алиас',
+        'name' => 'Название',
+        'active' => 'Активный',
+    ]; }
 
     /**
      * {@inheritdoc}

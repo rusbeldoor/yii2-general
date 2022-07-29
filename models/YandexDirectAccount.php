@@ -18,7 +18,7 @@ class YandexDirectAccount extends ActiveRecord
     { return 'yandex_direct_account'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['name', 'url', 'login', 'token'], 'required'],
         [['name', 'login', 'token'], 'string', 'max' => 64],
@@ -26,16 +26,14 @@ class YandexDirectAccount extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'name' => 'Название',
-            'url' => 'Адрес',
-            'login' => 'Логин',
-            'token' => 'Токен',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'name' => 'Название',
+        'url' => 'Адрес',
+        'login' => 'Логин',
+        'token' => 'Токен',
+    ]; }
 
     /**
      * {@inheritdoc}

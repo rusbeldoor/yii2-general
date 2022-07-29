@@ -16,22 +16,20 @@ class UserSubscriptionExemption extends ActiveRecord
     public static function tableName() { return 'user_subscription_exception'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['subscription_id', 'sender_category_action_id', 'channel_id'], 'required'],
         [['subscription_id', 'sender_category_action_id', 'channel_id'], 'integer'],
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'subscription_id' => 'Подписка',
-            'sender_category_action_id' => 'Действие отправителя',
-            'channel_id' => 'Канал',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'subscription_id' => 'Подписка',
+        'sender_category_action_id' => 'Действие отправителя',
+        'channel_id' => 'Канал',
+    ]; }
 
     /** {@inheritdoc} */
     public function getSubscription()

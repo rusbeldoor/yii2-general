@@ -50,7 +50,7 @@ foreach ($labels as $attribute => $label) {
 if ($echo) { echo "\n"; }
 ?>
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         <?= implode(",\n            ", $rules) ?>,
     ]; }

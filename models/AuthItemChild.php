@@ -16,7 +16,7 @@ class AuthItemChild extends ActiveRecord
     { return 'auth_item_child'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['parent', 'child'], 'required'],
         self::getRuleString(['parent', 'child'], ['max' => 96]),
@@ -27,14 +27,12 @@ class AuthItemChild extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'parent' => 'Родительская роль',
-            'child' => 'Дочерняя роль/операция',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'parent' => 'Родительская роль',
+        'child' => 'Дочерняя роль/операция',
+    ]; }
 
     /**
      * {@inheritdoc}

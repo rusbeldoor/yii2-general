@@ -16,7 +16,7 @@ class AuthRule extends ActiveRecord
     { return 'auth_rule'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['name'], 'required'],
         [['data'], 'string'],
@@ -26,14 +26,12 @@ class AuthRule extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'name' => 'Алиас',
-            'data' => 'Data',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'name' => 'Алиас',
+        'data' => 'Data',
+    ]; }
 
     /**
      * {@inheritdoc}

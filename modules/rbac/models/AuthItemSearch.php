@@ -12,7 +12,7 @@ use rusbeldoor\yii2General\models\AuthItem;
 class AuthItemSearch extends AuthItem
 {
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['id', 'name', 'description', 'rule_name', 'data'], 'safe'],
         [['type'], 'integer'],

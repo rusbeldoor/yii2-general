@@ -27,7 +27,7 @@ class AuthItem extends ActiveRecord
     { return 'auth_item'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['name', 'type'], 'required'],
         [['type'], 'integer'],
@@ -39,17 +39,15 @@ class AuthItem extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'name' => 'Алиас',
-            'type' => 'Тип',
-            'description' => 'Описание',
-            'rule_name' => 'Rule Name',
-            'data' => 'Data',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'name' => 'Алиас',
+        'type' => 'Тип',
+        'description' => 'Описание',
+        'rule_name' => 'Rule Name',
+        'data' => 'Data',
+    ]; }
 
     /**
      * {@inheritdoc}

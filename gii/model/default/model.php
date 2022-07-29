@@ -74,22 +74,20 @@ class <?= $className ?> extends \rusbeldoor\yii2General\models\ActiveRecord
 <?php endif; ?>
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         <?= empty($rules) ? '' : ("\n            " . implode(",\n            ", $rules) . ",\n        ") ?>
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
+    public function attributeLabels(): array
+    { return [
 <?php foreach ($labels as $name => $label) {
     echo "            ";
     echo ((isset($attributeLabels[$name])) ? "'$name' => '" . $attributeLabels[$name] . "'" : "'" . $name . "' => " . $generator->generateString($label));
     echo ",\n";
 } ?>
-        ];
-    }
+    ]; }
 <?php if ($queryClassName): ?>
 <?php
     $queryClassFullName = ($generator->ns === $generator->queryNs) ? $queryClassName : '\\' . $generator->queryNs . '\\' . $queryClassName;

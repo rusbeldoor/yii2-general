@@ -12,7 +12,7 @@ use rusbeldoor\yii2General\models\Cron;
 class CronSearch extends Cron
 {
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['id', 'max_duration', 'restart', 'kill_process', 'active'], 'integer'],
         [['alias', 'description', 'status'], 'safe'],

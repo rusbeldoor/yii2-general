@@ -18,7 +18,7 @@ class YandexDirectAdgroup extends ActiveRecord
     { return 'yandex_direct_adgroup'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['id', 'account_id', 'campaign_id', 'name', 'status'], 'required'],
         [['account_id'], 'integer'],
@@ -30,16 +30,14 @@ class YandexDirectAdgroup extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'account_id' => 'Аккаунт',
-            'campaign_id' => 'Компания',
-            'name' => 'Название',
-            'status' => 'Статус',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'account_id' => 'Аккаунт',
+        'campaign_id' => 'Компания',
+        'name' => 'Название',
+        'status' => 'Статус',
+    ]; }
 
     /**
      * {@inheritdoc}

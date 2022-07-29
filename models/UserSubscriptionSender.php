@@ -18,7 +18,7 @@ class UserSubscriptionSender extends ActiveRecord
     { return 'user_subscription_sender'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['category_id', 'name', 'active'], 'required'],
         [['category_id', 'active'], 'integer'],
@@ -28,16 +28,14 @@ class UserSubscriptionSender extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'category_id' => 'Категория',
-            'key' => 'Ключ',
-            'name' => 'Название',
-            'active' => 'Активный',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'category_id' => 'Категория',
+        'key' => 'Ключ',
+        'name' => 'Название',
+        'active' => 'Активный',
+    ]; }
 
     /** {@inheritdoc} */
     public function getCategory()

@@ -19,7 +19,7 @@ class UserSubscription extends ActiveRecord
     { return 'user_subscription'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['user_id', 'sender_id'], 'required'],
         [['user_id', 'sender_id'], 'integer'],
@@ -36,14 +36,12 @@ class UserSubscription extends ActiveRecord
     { return $this->hasMany(UserSubscriptionExemption::class, ['subscription_id' => 'id']); }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'user_id' => 'Пользователь',
-            'sender_id' => 'Отправитель',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'user_id' => 'Пользователь',
+        'sender_id' => 'Отправитель',
+    ]; }
 
     /**
      * {@inheritdoc}

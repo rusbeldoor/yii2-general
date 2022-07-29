@@ -12,7 +12,7 @@ use rusbeldoor\yii2General\models\CronLog;
 class CronLogSearch extends CronLog
 {
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['id', 'cron_id', 'duration'], 'integer'],
         [['datetime_start', 'datetime_complete', 'pid'], 'safe'],

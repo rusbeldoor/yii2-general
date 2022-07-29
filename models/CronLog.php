@@ -21,7 +21,7 @@ class CronLog extends ActiveRecord
     { return 'cron_log'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['cron_id', 'datetime_start'], 'required'],
         [['cron_id', 'duration'], 'integer'],
@@ -31,17 +31,15 @@ class CronLog extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'cron_id' => 'Крон',
-            'duration' => 'Продолжительность',
-            'datetime_start' => 'Дата и время начала',
-            'datetime_complete' => 'Дата и время завершения',
-            'pid' => 'Ид процесса',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'cron_id' => 'Крон',
+        'duration' => 'Продолжительность',
+        'datetime_start' => 'Дата и время начала',
+        'datetime_complete' => 'Дата и время завершения',
+        'pid' => 'Ид процесса',
+    ]; }
 
     /**
      * {@inheritdoc}

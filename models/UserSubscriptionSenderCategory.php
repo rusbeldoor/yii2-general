@@ -19,7 +19,7 @@ class UserSubscriptionSenderCategory extends ActiveRecord
     public static function tableName() { return 'user_subscription_sender_category'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['platform_id, alias, name'], 'required'],
         [['platform_id'], 'integer'],
@@ -27,15 +27,13 @@ class UserSubscriptionSenderCategory extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'platform_id' => 'Платформа',
-            'alias' => 'Алиас',
-            'name' => 'Действие',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'platform_id' => 'Платформа',
+        'alias' => 'Алиас',
+        'name' => 'Действие',
+    ]; }
 
     /** {@inheritdoc} */
     public function getPlatform()

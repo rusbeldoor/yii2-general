@@ -29,7 +29,7 @@ class YandexDirectLog extends ActiveRecord
     { return 'yandex_direct_log'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['user_id'], 'integer'],
         [['elem_type', 'elem_id', 'datetime', 'action'], 'required'],
@@ -41,17 +41,15 @@ class YandexDirectLog extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'user_id' => 'Пользователь',
-            'elem_type' => 'Тип элемента',
-            'elem_id' => 'Элемент',
-            'datetime' => 'Дата и время',
-            'action' => 'Действие',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'user_id' => 'Пользователь',
+        'elem_type' => 'Тип элемента',
+        'elem_id' => 'Элемент',
+        'datetime' => 'Дата и время',
+        'action' => 'Действие',
+    ]; }
 
     /**
      * {@inheritdoc}

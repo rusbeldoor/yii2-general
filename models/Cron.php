@@ -46,7 +46,7 @@ class Cron extends ActiveRecord
     { return 'cron'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['alias', 'description'], 'required'],
         [['description', 'status'], 'string'],
@@ -56,19 +56,17 @@ class Cron extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'alias' => 'Алиас',
-            'description' => 'Описание',
-            'status' => 'Статус',
-            'max_duration' => 'Максимальная продолжительность',
-            'restart' => 'Перезапускать после превышения максимальной продолжительности',
-            'kill_process' => 'Уничтожать предыдущий процесс после превышения максимальной продолжительности',
-            'active' => 'Активный',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'alias' => 'Алиас',
+        'description' => 'Описание',
+        'status' => 'Статус',
+        'max_duration' => 'Максимальная продолжительность',
+        'restart' => 'Перезапускать после превышения максимальной продолжительности',
+        'kill_process' => 'Уничтожать предыдущий процесс после превышения максимальной продолжительности',
+        'active' => 'Активный',
+    ]; }
 
     /**
      * {@inheritdoc}

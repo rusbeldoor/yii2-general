@@ -18,7 +18,7 @@ class UserSubscriptionSenderCategoryAction extends ActiveRecord
     { return 'user_subscription_sender_category_action'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['category_id', 'alias', 'name'], 'required'],
         [['category_id', 'active'], 'integer'],
@@ -28,17 +28,15 @@ class UserSubscriptionSenderCategoryAction extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'platform_id' => 'Платформа',
-            'alias' => 'Алиас',
-            'part_key_alias' => 'Часть алиаса ключа',
-            'name' => 'Название',
-            'active' => 'Активный',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'platform_id' => 'Платформа',
+        'alias' => 'Алиас',
+        'part_key_alias' => 'Часть алиаса ключа',
+        'name' => 'Название',
+        'active' => 'Активный',
+    ]; }
 
     /**
      * {@inheritdoc}

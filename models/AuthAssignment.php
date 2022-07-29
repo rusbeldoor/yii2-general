@@ -16,7 +16,7 @@ class AuthAssignment extends ActiveRecord
     { return 'auth_assignment'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['item_name', 'user_id'], 'required'],
         self::getRuleString(['item_name'], ['max' => 96]),
@@ -26,14 +26,12 @@ class AuthAssignment extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'item_name' => 'Операция/роль',
-            'user_id' => 'Пользователь',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'item_name' => 'Операция/роль',
+        'user_id' => 'Пользователь',
+    ]; }
 
     /**
      * {@inheritdoc}

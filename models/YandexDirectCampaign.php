@@ -18,7 +18,7 @@ class YandexDirectCampaign extends ActiveRecord
     { return 'yandex_direct_campaign'; }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['id', 'account_id', 'name', 'status', 'state'], 'required'],
         [['account_id'], 'integer'],
@@ -29,16 +29,14 @@ class YandexDirectCampaign extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'account_id' => 'Аккаунт',
-            'name' => 'Название',
-            'status' => 'Статус',
-            'state' => 'Состояние',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'account_id' => 'Аккаунт',
+        'name' => 'Название',
+        'status' => 'Статус',
+        'state' => 'Состояние',
+    ]; }
 
     /**
      * {@inheritdoc}

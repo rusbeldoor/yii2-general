@@ -12,7 +12,7 @@ use rusbeldoor\yii2General\models\Platform;
 class PlatformSearch extends Platform
 {
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['id'], 'integer'],
         [['alias', 'name'], 'safe'],

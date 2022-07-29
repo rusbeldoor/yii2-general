@@ -20,7 +20,7 @@ class Platform extends ActiveRecord
     }
 
     /** {@inheritdoc} */
-    public function rules()
+    public function rules(): array
     { return [
         [['alias', 'name'], 'required'],
         [['alias'], 'string', 'max' => 16],
@@ -29,12 +29,10 @@ class Platform extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'Ид',
-            'alias' => 'Алиас',
-            'name' => 'Название',
-        ];
-    }
+    public function attributeLabels(): array
+    { return [
+        'id' => 'Ид',
+        'alias' => 'Алиас',
+        'name' => 'Название',
+    ]; }
 }
