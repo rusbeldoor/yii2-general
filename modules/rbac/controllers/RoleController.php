@@ -15,9 +15,7 @@ use QuickService\general\common\models\QTOrganisation;
  */
 class RoleController extends \backend\components\Controller
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function behaviors()
     {
         return [

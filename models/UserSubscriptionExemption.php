@@ -12,14 +12,10 @@ namespace rusbeldoor\yii2General\models;
  */
 class UserSubscriptionExemption extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public static function tableName() { return 'user_subscription_exception'; }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function rules()
     {
         return [
@@ -28,9 +24,7 @@ class UserSubscriptionExemption extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function attributeLabels()
     {
         return [
@@ -41,21 +35,15 @@ class UserSubscriptionExemption extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function getSubscription()
     { return $this->hasOne(UserSubscription::class, ['id' => 'subscription_id']); }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function getSubscriptionChannel()
     { return $this->hasOne(UserSubscriptionChannel::class, ['id' => 'channel_id']); }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function getSubscriptionAction()
     { return $this->hasOne(UserSubscriptionSenderCategoryAction::class, ['id' => 'sender_category_action_id']); }
 

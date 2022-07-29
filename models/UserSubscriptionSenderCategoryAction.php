@@ -13,15 +13,11 @@ namespace rusbeldoor\yii2General\models;
  */
 class UserSubscriptionSenderCategoryAction extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public static function tableName()
     { return 'user_subscription_sender_category_action'; }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function rules()
     {
         return [
@@ -33,9 +29,7 @@ class UserSubscriptionSenderCategoryAction extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function attributeLabels()
     {
         return [

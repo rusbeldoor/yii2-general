@@ -41,15 +41,11 @@ class Cron extends ActiveRecord
         return parent::__get($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public static function tableName()
     { return 'cron'; }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function rules()
     {
         return [
@@ -61,9 +57,7 @@ class Cron extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function attributeLabels()
     {
         return [

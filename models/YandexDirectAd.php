@@ -15,15 +15,11 @@ namespace rusbeldoor\yii2General\models;
  */
 class YandexDirectAd extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public static function tableName()
     { return 'yandex_direct_ad'; }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function rules()
     {
         return [
@@ -38,9 +34,7 @@ class YandexDirectAd extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function attributeLabels()
     {
         return [

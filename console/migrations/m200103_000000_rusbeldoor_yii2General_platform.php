@@ -7,9 +7,7 @@ use yii\db\Migration;
  */
 class m200103_000000_rusbeldoor_yii2General_platform extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function safeUp()
     {
         // Таблица платформ
@@ -25,9 +23,7 @@ class m200103_000000_rusbeldoor_yii2General_platform extends Migration
         $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'platform']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function safeDown()
     {
         echo "m200103_000000_rusbeldoor_yii2General_platform cannot be reverted.\n";

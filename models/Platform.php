@@ -13,17 +13,13 @@ use Yii;
  */
 class Platform extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public static function tableName()
     {
         return 'platform';
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function rules()
     {
         return [
@@ -34,9 +30,7 @@ class Platform extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function attributeLabels()
     {
         return [

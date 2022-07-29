@@ -51,9 +51,7 @@ use <?= ltrim($generator->modelClass, '\\') ?>;
  */
 class <?= $controllerClass ?> extends <?= $baseClass . "\n" ?>
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function behaviors()
     {
         return [

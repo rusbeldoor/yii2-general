@@ -16,9 +16,7 @@ use rusbeldoor\yii2General\helpers\AppHelper;
  */
 class DefaultController extends \backend\components\Controller
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function behaviors()
     {
         return [

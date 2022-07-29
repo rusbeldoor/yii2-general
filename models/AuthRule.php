@@ -11,15 +11,11 @@ namespace rusbeldoor\yii2General\models;
  */
 class AuthRule extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public static function tableName()
     { return 'auth_rule'; }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function rules()
     {
         return [
@@ -31,9 +27,7 @@ class AuthRule extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function attributeLabels()
     {
         return [

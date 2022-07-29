@@ -15,14 +15,10 @@ namespace rusbeldoor\yii2General\models;
  */
 class UserSubscriptionSenderCategory extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public static function tableName() { return 'user_subscription_sender_category'; }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function rules()
     {
         return [
@@ -32,9 +28,7 @@ class UserSubscriptionSenderCategory extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function attributeLabels()
     {
         return [
@@ -45,15 +39,11 @@ class UserSubscriptionSenderCategory extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function getPlatform()
     { return $this->hasOne(Platform::class, ['id' => 'platform_id']); }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function getActions()
     { return $this->hasMany(UserSubscriptionSenderCategoryAction::class, ['category_id' => 'id']); }
 

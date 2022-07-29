@@ -12,15 +12,11 @@ namespace rusbeldoor\yii2General\models;
  */
 class UserSubscriptionChannel extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public static function tableName()
     { return 'user_subscription_channel'; }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function rules()
     {
         return [
@@ -31,9 +27,7 @@ class UserSubscriptionChannel extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function attributeLabels()
     {
         return [

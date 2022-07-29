@@ -14,9 +14,7 @@ use rusbeldoor\yii2General\helpers\AppHelper;
  */
 class PermissionController extends \backend\components\Controller
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function behaviors()
     {
         return [

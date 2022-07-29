@@ -28,14 +28,10 @@ namespace <?= $ns ?>;
  */
 class <?= $className ?> extends <?= $baseClass . "\n" ?>
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public $controllerNamespace = '<?= $generator->getControllerNamespace() ?>';
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function init()
     {
         parent::init();

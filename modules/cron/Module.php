@@ -14,9 +14,7 @@ class Module extends \backend\components\Module
 
     public $onlyMigrations = true; // Изменение только через миграции
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function init()
     {
         parent::init();

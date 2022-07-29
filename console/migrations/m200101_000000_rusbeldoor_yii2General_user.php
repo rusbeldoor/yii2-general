@@ -7,9 +7,7 @@ use yii\db\Migration;
  */
 class m200101_000000_rusbeldoor_yii2General_user extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function safeUp()
     {
         // Таблица пользователей
@@ -27,9 +25,7 @@ class m200101_000000_rusbeldoor_yii2General_user extends Migration
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function safeDown()
     {
         echo "m200101_000000_rusbeldoor_yii2General_user cannot be reverted.\n";

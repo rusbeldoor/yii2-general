@@ -11,9 +11,7 @@ use rusbeldoor\yii2General\models\CronLog;
  */
 class CronLogSearch extends CronLog
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function rules()
     {
         return [
@@ -22,9 +20,7 @@ class CronLogSearch extends CronLog
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class

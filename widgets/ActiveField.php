@@ -125,7 +125,7 @@ class ActiveField extends \yii\bootstrap5\ActiveField
 
     /**
      * Радиогруппа кнопок
-     * todo: требует реализации
+     * todo: требует реализации, старая реализация под bs4 не работает
      */
     public function radioButtonsList(array $items, array $options = []): ActiveField
     {

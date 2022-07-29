@@ -7,9 +7,7 @@ use yii\db\Migration;
  */
 class m200104_000000_rusbeldoor_yii2General_cron extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function safeUp()
     {
         // Таблица кронов
@@ -44,9 +42,7 @@ class m200104_000000_rusbeldoor_yii2General_cron extends Migration
         $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'cron']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function safeDown()
     {
         echo "m200104_000000_rusbeldoor_yii2General_rbac cannot be reverted.\n";

@@ -49,9 +49,7 @@ foreach ($labels as $attribute => $label) {
 }
 if ($echo) { echo "\n"; }
 ?>
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function rules()
     {
         return [
@@ -59,9 +57,7 @@ if ($echo) { echo "\n"; }
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class

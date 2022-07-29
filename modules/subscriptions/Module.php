@@ -13,9 +13,7 @@ class Module extends \frontend\components\Module
 
     public $salt = null; // Соль для хэша
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function init()
     { parent::init(); }
 }

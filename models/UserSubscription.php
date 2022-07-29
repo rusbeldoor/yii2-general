@@ -14,15 +14,11 @@ namespace rusbeldoor\yii2General\models;
  */
 class UserSubscription extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public static function tableName()
     { return 'user_subscription'; }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function rules()
     {
         return [
@@ -33,21 +29,15 @@ class UserSubscription extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function getSender()
     { return $this->hasOne(UserSubscriptionSender::class, ['id' => 'sender_id']); }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function getExemptions()
     { return $this->hasMany(UserSubscriptionExemption::class, ['subscription_id' => 'id']); }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function attributeLabels()
     {
         return [

@@ -7,9 +7,7 @@ use yii\db\Migration;
  */
 class m201201_000000_rusbeldoor_yii2General_yandex_direct extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function safeUp()
     {
         // Таблица аккаунтов Яндекс.Директ
@@ -75,9 +73,7 @@ class m201201_000000_rusbeldoor_yii2General_yandex_direct extends Migration
         $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'yandex-direct']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function safeDown()
     {
         echo "m201201_000000_rusbeldoor_yii2General_yandex_direct cannot be reverted.\n";

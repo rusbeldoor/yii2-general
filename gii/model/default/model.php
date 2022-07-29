@@ -61,9 +61,7 @@ use yii;
  */
 class <?= $className ?> extends \rusbeldoor\yii2General\models\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public static function tableName()
     { return '<?= $generator->generateTableName($tableName) ?>'; }
 <?php if ($generator->db !== 'db'): ?>
@@ -75,17 +73,13 @@ class <?= $className ?> extends \rusbeldoor\yii2General\models\ActiveRecord
     { return Yii::$app->get('<?= $generator->db ?>'); }
 <?php endif; ?>
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function rules()
     {
         return [<?= empty($rules) ? '' : ("\n            " . implode(",\n            ", $rules) . ",\n        ") ?>];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function attributeLabels()
     {
         return [

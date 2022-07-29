@@ -7,9 +7,7 @@ use yii\db\Migration;
  */
 class m200102_000000_rusbeldoor_yii2General_rbac extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function safeUp()
     {
         // Таблица правил
@@ -59,9 +57,7 @@ class m200102_000000_rusbeldoor_yii2General_rbac extends Migration
         $this->insert('auth_item_child', ['parent' => 'administrator', 'child' => 'rbac']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function safeDown()
     {
         echo "m200102_000000_rusbeldoor_yii2General_rbac cannot be reverted.\n";

@@ -7,9 +7,7 @@ use yii\db\Migration;
  */
 class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function safeUp()
     {
         // Таблица категорий отправителей
@@ -84,9 +82,7 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->addForeignKey('fk-channel_id', 'user_subscription_exception', 'channel_id', 'user_subscription_channel', 'id');
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function safeDown()
     {
         echo "m200105_000000_rusbeldoor_yii2General_user_subscription cannot be reverted.\n";
