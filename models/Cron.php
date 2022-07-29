@@ -17,7 +17,7 @@ namespace rusbeldoor\yii2General\models;
 class Cron extends ActiveRecord
 {
     // Описание полей
-    public static $fieldsDescriptions = [
+    public static array $fieldsDescriptions = [
         'status' => [
             'wait' => 'Ожидает',
             'process' => 'Выполняется',

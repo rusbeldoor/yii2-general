@@ -65,7 +65,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /*** Поля ***/
 
     // Описание полей
-    public static $fieldsDescriptions = [];
+    public static array $fieldsDescriptions = [];
 
     /**
      * Описание по значению

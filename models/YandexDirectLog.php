@@ -15,7 +15,7 @@ namespace rusbeldoor\yii2General\models;
 class YandexDirectLog extends ActiveRecord
 {
     // Описание полей
-    public static $fieldsDescriptions = [
+    public static array $fieldsDescriptions = [
         'action' => [
             'resume' => 'Запуск',
             'suspend' => 'Остановка',

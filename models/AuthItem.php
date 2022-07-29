@@ -15,7 +15,7 @@ namespace rusbeldoor\yii2General\models;
 class AuthItem extends ActiveRecord
 {
     // Описание полей
-    public static $fieldsDescriptions = [
+    public static array $fieldsDescriptions = [
         'type' => [
             1 => 'Роль',
             2 => 'Операция',

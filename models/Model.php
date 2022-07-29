@@ -19,7 +19,7 @@ class Model extends \yii\base\Model
     /*** Поля ***/
 
     // Описание полей
-    public static $fieldsDescriptions = [];
+    public static array $fieldsDescriptions = [];
 
     /**
      * Описание по значению
