@@ -11,7 +11,7 @@ use rusbeldoor\yii2General\helpers\ArrayHelper;
  */
 class ActiveField extends \yii\bootstrap5\ActiveField
 {
-    use AppendPrepend;
+    use \rusbeldoor\yii2General\widgets\trait\AppendPrepend;
 
     /**
      * @var array
