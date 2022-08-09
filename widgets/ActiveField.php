@@ -2,7 +2,6 @@
 
 namespace rusbeldoor\yii2General\widgets;
 
-use yii\base\InvalidConfigException;
 use rusbeldoor\yii2General\helpers\HtmlHelper;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 
@@ -13,38 +12,17 @@ class ActiveField extends \yii\bootstrap5\ActiveField
 {
     use \rusbeldoor\yii2General\widgets\trait\AppendPrepend;
 
-    /**
-     * @var array
-     * prepend (array) the prepend addon configuration
-     *  content (string|array) the prepend addon content
-     *  asButton (boolean) whether the addon is a button or button group. Defaults to false.
-     *  options (array) the HTML attributes to be added to the container.
-     * append (array) the append addon configuration
-     *  content (string|array) the append addon content
-     *  asButton(boolean) whether the addon is a button or button group. Defaults to false.
-     *  options (array) the HTML attributes to be added to the container.
-     * groupOptions (array) HTML options for the input group
-     * contentBefore (string) content placed before addon
-     * contentAfter (string) content placed after addon
-     */
     public $addon = [];
 
-    /**
-     * @inheritdoc
-     * @throws InvalidConfigException
-     */
+    /** @inheritdoc */
     public function render($content = null): string
     {
         $this->buildTemplate();
         return parent::render($content);
     }
 
-    /**
-     * Builds the final template based on the bootstrap form type, display settings for label, error, and hint, and
-     * content before and after label, input, error, and hint.
-     * @throws InvalidConfigException
-     */
-    protected function buildTemplate()
+    /** @inheritdoc */
+    protected function buildTemplate(): void
     {
         $newInput = $this->generateAddon();
         $config = [
@@ -53,13 +31,8 @@ class ActiveField extends \yii\bootstrap5\ActiveField
         $this->template = strtr($this->template, $config);
     }
 
-    /**
-     * Generates the addon markup
-     *
-     * @return string
-     * @throws InvalidConfigException
-     */
-    protected function generateAddon()
+    /** @inheritdoc */
+    protected function generateAddon(): string
     {
         if (empty($this->addon)) { return '{input}'; }
         $addon = $this->addon;
