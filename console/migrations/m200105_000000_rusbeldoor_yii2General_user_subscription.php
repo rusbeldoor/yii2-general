@@ -13,7 +13,7 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
         // Таблица категорий отправителей
         $this->createTable('user_subscription_sender_category', [
             'id' => 'mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
-            'platform_id' => 'mediumint(6) UNSIGNED NOT NULL',
+            'platform_id' => 'smallint(6) UNSIGNED NOT NULL',
             'alias' => $this->string(128)->notNull(),
             'name' => $this->string(128)->notNull(),
         ]);
