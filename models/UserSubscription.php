@@ -8,7 +8,7 @@ namespace rusbeldoor\yii2General\models;
  * @property int $id
  * @property int $user_id
  * @property int $sender_id
- * @property string $date
+ * @property int $active
  *
  * @property UserSubscriptionSender $sender
  * @property UserSubscriptionExemption[] $exemptions
@@ -23,9 +23,8 @@ class UserSubscription extends ActiveRecord
     public function rules(): array
     { return [
         [['user_id', 'sender_id'], 'required'],
-        [['user_id', 'sender_id'], 'integer'],
+        [['user_id', 'sender_id', 'active'], 'integer', 'min' => 0],
         [['user_id', 'sender_id'], 'unique', 'targetAttribute' => ['user_id', 'sender_id']],
-        [['date'], 'default', 'value' => null],
         [['sender_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionSender::className(), 'targetAttribute' => ['sender_id' => 'id']],
     ]; }
 
@@ -43,7 +42,7 @@ class UserSubscription extends ActiveRecord
         'id' => 'Ид',
         'user_id' => 'Пользователь',
         'sender_id' => 'Отправитель',
-        'date' => 'Данные',
+        'active' => 'Активный',
     ]; }
 
     /**

@@ -64,7 +64,7 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
             'id' => $this->primaryKey(11)->unsigned(),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
             'sender_id' => 'mediumint(8) UNSIGNED NOT NULL',
-            'data' => 'text DEFAULT NULL',
+            'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
         ]);
         $this->createIndex('unique', 'user_subscription', ['user_id', 'sender_id'], true);
         $this->addForeignKey('fk-user_id', 'user_subscription', 'user_id', 'user', 'id'); // Закомментировать, если таблица user лежит не в той же БД или имеет другое название
@@ -74,13 +74,29 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->createTable('user_subscription_exception', [
             'id' => $this->primaryKey(11)->unsigned(),
             'subscription_id' => $this->integer(11)->unsigned()->notNull(),
-            'sender_category_action_id' =>'mediumint(8) UNSIGNED NOT NULL',
-            'channel_id' =>'smallint(8) UNSIGNED NOT NULL',
+            'sender_category_action_id' => 'mediumint(8) UNSIGNED NOT NULL',
+            'channel_id' => 'smallint(8) UNSIGNED NOT NULL',
         ]);
         $this->createIndex('unique', 'user_subscription_exception', ['subscription_id', 'sender_category_action_id', 'channel_id'], true);
         $this->addForeignKey('fk-subscription_id', 'user_subscription_exception', 'subscription_id', 'user_subscription', 'id');
         $this->addForeignKey('fk-sender_category_action_id', 'user_subscription_exception', 'sender_category_action_id', 'user_subscription_sender_category_action', 'id');
         $this->addForeignKey('fk-channel_id', 'user_subscription_exception', 'channel_id', 'user_subscription_channel', 'id');
+
+        // Таблица связей пользователей с отправителями
+        $this->createTable('user_subscription_log', [
+            'id' => $this->primaryKey(11)->unsigned(),
+            'subscription_id' => $this->integer(11)->unsigned()->notNull(),
+            'time_add' => $this->integer(11)->unsigned()->notNull(),
+            'data' => $this->text()->defaultValue(null),
+        ]);
+
+        // Таблица связей пользователей с отправителями
+        $this->createTable('user_subscription_exception_log', [
+            'id' => $this->primaryKey(11)->unsigned(),
+            'exception_id' => $this->integer(11)->unsigned()->notNull(),
+            'time_add' => $this->integer(11)->unsigned()->notNull(),
+            'data' => $this->text()->defaultValue(null),
+        ]);
     }
 
     /** {@inheritdoc} */
