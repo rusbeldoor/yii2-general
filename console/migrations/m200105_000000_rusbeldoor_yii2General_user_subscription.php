@@ -63,7 +63,8 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->createTable('user_subscription', [
             'id' => $this->primaryKey(11)->unsigned(),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
-            'sender_id' =>'mediumint(8) UNSIGNED NOT NULL',
+            'sender_id' => 'mediumint(8) UNSIGNED NOT NULL',
+            'data' => 'text DEFAULT NULL',
         ]);
         $this->createIndex('unique', 'user_subscription', ['user_id', 'sender_id'], true);
         $this->addForeignKey('fk-user_id', 'user_subscription', 'user_id', 'user', 'id'); // Закомментировать, если таблица user лежит не в той же БД или имеет другое название
