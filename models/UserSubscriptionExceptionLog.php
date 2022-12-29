@@ -8,7 +8,9 @@ namespace rusbeldoor\yii2General\models;
  * @property int $id
  * @property int $exception_id
  * @property int $time
- * @property string $date
+ * @property int $user_id
+ * @property string $action
+ * @property string $data
  *
  * @property UserSubscriptionSender $subscription
  */
@@ -16,14 +18,15 @@ class UserSubscriptionExemptionLog extends ActiveRecord
 {
     /** {@inheritdoc} */
     public static function tableName()
-    { return 'user_subscription_log'; }
+    { return 'user_subscription_exception_log'; }
 
     /** {@inheritdoc} */
     public function rules(): array
     { return [
-        [['exception_id', 'time'], 'required'],
-        [['exception_id', 'time'], 'integer', 'min' => 0],
-        [['date'], 'default', 'value' => null],
+        [['exception_id', 'time', 'action'], 'required'],
+        [['exception_id', 'time', 'user_id'], 'integer', 'min' => 0],
+        [['data', 'user_id'], 'default', 'value' => null],
+        [['action'], 'in', 'range' => ['add', 'activate', 'deactivate']],
         [['exception_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionExemption::className(), 'targetAttribute' => ['exception_id' => 'id']],
     ]; }
 
@@ -35,9 +38,11 @@ class UserSubscriptionExemptionLog extends ActiveRecord
     public function attributeLabels(): array
     { return [
         'id' => 'Ид',
+        'exception_id' => 'Исключение из подписки',
+        'time' => 'Дата и время',
         'user_id' => 'Пользователь',
-        'sender_id' => 'Отправитель',
-        'date' => 'Данные',
+        'action' => 'Действие',
+        'data' => 'Данные',
     ]; }
 
     /**

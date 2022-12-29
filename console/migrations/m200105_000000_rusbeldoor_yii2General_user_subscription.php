@@ -76,6 +76,7 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
             'subscription_id' => $this->integer(11)->unsigned()->notNull(),
             'sender_category_action_id' => 'mediumint(8) UNSIGNED NOT NULL',
             'channel_id' => 'smallint(8) UNSIGNED NOT NULL',
+            'active' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1),
         ]);
         $this->createIndex('unique', 'user_subscription_exception', ['subscription_id', 'sender_category_action_id', 'channel_id'], true);
         $this->addForeignKey('fk-subscription_id', 'user_subscription_exception', 'subscription_id', 'user_subscription', 'id');
@@ -86,17 +87,23 @@ class m200105_000000_rusbeldoor_yii2General_user_subscription extends Migration
         $this->createTable('user_subscription_log', [
             'id' => $this->primaryKey(11)->unsigned(),
             'subscription_id' => $this->integer(11)->unsigned()->notNull(),
-            'time_add' => $this->integer(11)->unsigned()->notNull(),
+            'time' => $this->integer(11)->unsigned()->notNull(),
+            'user_id' => $this->integer(11)->unsigned(),
+            'action' => "enum('add', 'activate', 'deactivate') NOT NULL",
             'data' => $this->text()->defaultValue(null),
         ]);
+        $this->addForeignKey('fk-user_subscription_log-subscription_id', 'user_subscription_log', 'subscription_id', 'user_subscription', 'id');
 
         // Таблица связей пользователей с отправителями
         $this->createTable('user_subscription_exception_log', [
             'id' => $this->primaryKey(11)->unsigned(),
             'exception_id' => $this->integer(11)->unsigned()->notNull(),
-            'time_add' => $this->integer(11)->unsigned()->notNull(),
+            'time' => $this->integer(11)->unsigned()->notNull(),
+            'user_id' => $this->integer(11)->unsigned(),
+            'action' => "enum('add', 'activate', 'deactivate') NOT NULL",
             'data' => $this->text()->defaultValue(null),
         ]);
+        $this->addForeignKey('fk-user_subscription_exception_log-exception_id', 'user_subscription_log', 'exception_id', 'user_subscription_exception', 'id');
     }
 
     /** {@inheritdoc} */

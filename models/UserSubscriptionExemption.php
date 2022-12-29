@@ -9,6 +9,7 @@ namespace rusbeldoor\yii2General\models;
  * @property int $subscription_id
  * @property int $sender_category_action_id
  * @property int $channel_id
+ * @property int $active
  */
 class UserSubscriptionExemption extends ActiveRecord
 {
@@ -19,7 +20,7 @@ class UserSubscriptionExemption extends ActiveRecord
     public function rules(): array
     { return [
         [['subscription_id', 'sender_category_action_id', 'channel_id'], 'required'],
-        [['subscription_id', 'sender_category_action_id', 'channel_id'], 'integer'],
+        [['subscription_id', 'sender_category_action_id', 'channel_id', 'active'], 'integer', 'min' => 0],
     ]; }
 
     /** {@inheritdoc} */
@@ -29,6 +30,7 @@ class UserSubscriptionExemption extends ActiveRecord
         'subscription_id' => 'Подписка',
         'sender_category_action_id' => 'Действие отправителя',
         'channel_id' => 'Канал',
+        'active' => 'Активный',
     ]; }
 
     /** {@inheritdoc} */

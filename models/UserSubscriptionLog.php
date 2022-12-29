@@ -8,7 +8,9 @@ namespace rusbeldoor\yii2General\models;
  * @property int $id
  * @property int $subscription_id
  * @property int $time
- * @property string $date
+ * @property int $user_id
+ * @property string $action
+ * @property string $data
  *
  * @property UserSubscriptionSender $subscription
  */
@@ -21,9 +23,10 @@ class UserSubscriptionLog extends ActiveRecord
     /** {@inheritdoc} */
     public function rules(): array
     { return [
-        [['subscription_id', 'time'], 'required'],
-        [['subscription_id', 'time'], 'integer', 'min' => 0],
-        [['date'], 'default', 'value' => null],
+        [['subscription_id', 'time', 'action'], 'required'],
+        [['subscription_id', 'time', 'user_id'], 'integer', 'min' => 0],
+        [['data', 'user_id'], 'default', 'value' => null],
+        [['action'], 'in', 'range' => ['add', 'activate', 'deactivate']],
         [['subscription_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscription::className(), 'targetAttribute' => ['subscription_id' => 'id']],
     ]; }
 
@@ -35,9 +38,11 @@ class UserSubscriptionLog extends ActiveRecord
     public function attributeLabels(): array
     { return [
         'id' => 'Ид',
+        'subscription_id' => 'Подписка',
+        'time' => 'Дата и время',
         'user_id' => 'Пользователь',
-        'sender_id' => 'Отправитель',
-        'date' => 'Данные',
+        'action' => 'Действие',
+        'data' => 'Данные',
     ]; }
 
     /**

@@ -173,8 +173,7 @@ class DefaultController extends \frontend\components\Controller
         if (!$user) { AppHelper::redirectWithFlash('/', 'danger', 'Пользователь (#' . $post['userId'] . ') не найден.'); }
 
         /** @var UserSubscription $userSubscription Подписка на рассылки */
-        $userSubscription =
-            UserSubscription::find()
+        $userSubscription = UserSubscription::find()
                 ->userId($post['userId'])
                 ->id($post['subscriptId'])
                 ->joinWith('sender')
@@ -182,15 +181,13 @@ class DefaultController extends \frontend\components\Controller
                 ->one();
         if (!$userSubscription) { AppHelper::redirectWithFlash('/', 'danger', 'Подписка (#' . $post['subscriptId'] . ') не найден.'); }
 
-        $senderCategoryAction =
-            UserSubscriptionSenderCategoryAction::find()
+        $senderCategoryAction = UserSubscriptionSenderCategoryAction::find()
                 ->id($post['actionId'])
                 ->limit(1)
                 ->one();
         if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Действие (#' .  $post['channelId'] . ') не найдено.'); }
 
-        $channel =
-            UserSubscriptionChannel::find()
+        $channel = UserSubscriptionChannel::find()
                 ->id($post['channelId'])
                 ->limit(1)
                 ->one();
@@ -201,16 +198,45 @@ class DefaultController extends \frontend\components\Controller
             ->limit(1)
             ->one();
 
-        if ($post['active']) {
-            if ($exemption) { $exemption->delete(); }
-        } else {
-            if (!$exemption) {
-                $exemption = new UserSubscriptionExemption();
-                $exemption->subscription_id = $userSubscription->id;
-                $exemption->sender_category_action_id = $senderCategoryAction->id;
-                $exemption->channel_id = $channel->id;
+        if ($exemption) {
+            if ($post['active']) {
+                $exemption->active = 1;
                 $exemption->save();
+
+                $userSubscriptionExceptionLog = new UserSubscriptionExemptionLog();
+                $userSubscriptionExceptionLog->exception_id = $exemption->id;
+                $userSubscriptionExceptionLog->time = time();
+                $userSubscriptionExceptionLog->user_id = null;
+                $userSubscriptionExceptionLog->action = 'activate';
+                $userSubscriptionExceptionLog->data = null;
+                $userSubscriptionExceptionLog->save();
+            } else {
+                $exemption->active = 0;
+                $exemption->save();
+
+                $userSubscriptionExceptionLog = new UserSubscriptionExemptionLog();
+                $userSubscriptionExceptionLog->exception_id = $exemption->id;
+                $userSubscriptionExceptionLog->time = time();
+                $userSubscriptionExceptionLog->user_id = null;
+                $userSubscriptionExceptionLog->action = 'deactivate';
+                $userSubscriptionExceptionLog->data = null;
+                $userSubscriptionExceptionLog->save();
             }
+        } else {
+            $exemption = new UserSubscriptionExemption();
+            $exemption->subscription_id = $userSubscription->id;
+            $exemption->sender_category_action_id = $senderCategoryAction->id;
+            $exemption->channel_id = $channel->id;
+            $exemption->active = 1;
+            $exemption->save();
+
+            $userSubscriptionExceptionLog = new UserSubscriptionExemptionLog();
+            $userSubscriptionExceptionLog->exception_id = $exemption->id;
+            $userSubscriptionExceptionLog->time = time();
+            $userSubscriptionExceptionLog->user_id = null;
+            $userSubscriptionExceptionLog->action = 'activate';
+            $userSubscriptionExceptionLog->data = null;
+            $userSubscriptionExceptionLog->save();
         }
 
         // Возвращаемся по переданному адресу
