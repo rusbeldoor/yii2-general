@@ -3,7 +3,7 @@
 namespace rusbeldoor\yii2General\models;
 
 /**
- * User_subscription_log (ActiveRecord)
+ * User_subscription_exemption_log (ActiveRecord)
  *
  * @property int $id
  * @property int $exception_id
