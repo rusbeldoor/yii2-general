@@ -32,6 +32,7 @@ class DefaultController extends \frontend\components\Controller
         $get = Yii::$app->request->get();
         // Post параметры
         $post = Yii::$app->request->post();
+
         $getParam = function ($param) use($get, $post) {
             return
                 // Если существует GET параметр
@@ -126,14 +127,16 @@ class DefaultController extends \frontend\components\Controller
                                 'alias' => $senderCategoriesAction->alias,
                                 'name' => $senderCategoriesAction->name,
                                 'channels' => $channelsArray,
-                                'active' => true,
+                                'active' => false,
                             ];
                         }
                     }
 
                     // Обрабатываем исключения
                     foreach ($userSubscription->exemptions as $exemption) {
-                        $result[$userSubscription->id]['actions'][$exemption->sender_category_action_id]['channels'][$exemption->channel_id]['active'] = false;
+                        if ($exemption->active) {
+                            $result[$userSubscription->id]['actions'][$exemption->sender_category_action_id]['channels'][$exemption->channel_id]['active'] = false;
+                        }
                     }
                 }
             }
@@ -159,7 +162,7 @@ class DefaultController extends \frontend\components\Controller
             || !isset($post['actionId'])
             || !isset($post['channelId'])
             || !isset($post['hash'])
-            || !isset($post['active'])
+            || !isset($post['action'])
             || !isset($post['redirectUrl'])
         ) { AppHelper::redirectWithFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
 
@@ -174,23 +177,23 @@ class DefaultController extends \frontend\components\Controller
 
         /** @var UserSubscription $userSubscription Подписка на рассылки */
         $userSubscription = UserSubscription::find()
-                ->userId($post['userId'])
-                ->id($post['subscriptId'])
-                ->joinWith('sender')
-                ->limit(1)
-                ->one();
+            ->userId($post['userId'])
+            ->id($post['subscriptId'])
+            ->joinWith('sender')
+            ->limit(1)
+            ->one();
         if (!$userSubscription) { AppHelper::redirectWithFlash('/', 'danger', 'Подписка (#' . $post['subscriptId'] . ') не найден.'); }
 
         $senderCategoryAction = UserSubscriptionSenderCategoryAction::find()
-                ->id($post['actionId'])
-                ->limit(1)
-                ->one();
+            ->id($post['actionId'])
+            ->limit(1)
+            ->one();
         if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Действие (#' .  $post['channelId'] . ') не найдено.'); }
 
         $channel = UserSubscriptionChannel::find()
-                ->id($post['channelId'])
-                ->limit(1)
-                ->one();
+            ->id($post['channelId'])
+            ->limit(1)
+            ->one();
         if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Способ доставки сообщений (#' .  $post['channelId'] . ') не найден.'); }
 
         $exemption = UserSubscriptionExemption::find()
@@ -199,7 +202,7 @@ class DefaultController extends \frontend\components\Controller
             ->one();
 
         if ($exemption) {
-            if ($post['active']) {
+            if ($post['action'] == 'activate') {
                 $exemption->active = 1;
                 $exemption->save();
 
@@ -240,6 +243,6 @@ class DefaultController extends \frontend\components\Controller
         }
 
         // Возвращаемся по переданному адресу
-        AppHelper::redirectWithFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['active']) ? 'добавили' : 'убрали') . ' рассылку от "' . $userSubscription->sender->name . '" на "' . $senderCategoryAction->name . '" (' . $channel->name . ').');
+        AppHelper::redirectWithFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['action'] == 'activate') ? 'добавили' : 'убрали') . ' рассылку от "' . $userSubscription->sender->name . '" на "' . $senderCategoryAction->name . '" (' . $channel->name . ').');
     }
 }
