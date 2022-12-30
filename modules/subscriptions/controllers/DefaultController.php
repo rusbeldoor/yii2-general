@@ -234,7 +234,7 @@ class DefaultController extends \frontend\components\Controller
             $userSubscriptionExceptionLog->exception_id = $exemption->id;
             $userSubscriptionExceptionLog->time = time();
             $userSubscriptionExceptionLog->user_id = null;
-            $userSubscriptionExceptionLog->action = 'activate';
+            $userSubscriptionExceptionLog->action = 'add';
             $userSubscriptionExceptionLog->data = null;
             $userSubscriptionExceptionLog->save();
         }
