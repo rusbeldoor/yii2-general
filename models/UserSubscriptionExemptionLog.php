@@ -25,7 +25,7 @@ class UserSubscriptionExemptionLog extends ActiveRecord
     { return [
         [['exception_id', 'time', 'action'], 'required'],
         [['exception_id', 'time', 'user_id'], 'integer', 'min' => 0],
-        [['data', 'user_id'], 'default', 'value' => null],
+        [['user_id', 'data'], 'default', 'value' => null],
         [['action'], 'in', 'range' => ['add', 'activate', 'deactivate']],
         [['exception_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionExemption::className(), 'targetAttribute' => ['exception_id' => 'id']],
     ]; }

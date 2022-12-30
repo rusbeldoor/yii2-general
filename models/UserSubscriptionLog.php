@@ -25,7 +25,7 @@ class UserSubscriptionLog extends ActiveRecord
     { return [
         [['subscription_id', 'time', 'action'], 'required'],
         [['subscription_id', 'time', 'user_id'], 'integer', 'min' => 0],
-        [['data', 'user_id'], 'default', 'value' => null],
+        [['user_id', 'data'], 'default', 'value' => null],
         [['action'], 'in', 'range' => ['add', 'activate', 'deactivate']],
         [['subscription_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscription::className(), 'targetAttribute' => ['subscription_id' => 'id']],
     ]; }
