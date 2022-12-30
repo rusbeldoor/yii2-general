@@ -90,7 +90,7 @@ class DefaultController extends \frontend\components\Controller
                 ->userId($userId)
                 ->andWhere(['sender_id' => array_keys($senders)])
                 ->joinWith(['sender' => function ($query) { return $query->joinWith('category', false); }], false)
-                ->with(['exemptions' => function ($query) use($senderCategoriesActions, $channels) {
+                ->with(['exceptions' => function ($query) use($senderCategoriesActions, $channels) {
                     $query->andWhere(['sender_category_action_id' => array_keys($senderCategoriesActions), 'channel_id' => array_keys($channels)]);
                 }])
                 ->orderBy('user_subscription_sender_category.platform_id, user_subscription_sender.key')
@@ -133,9 +133,9 @@ class DefaultController extends \frontend\components\Controller
                     }
 
                     // Обрабатываем исключения
-                    foreach ($userSubscription->exemptions as $exemption) {
-                        if ($exemption->active) {
-                            $result[$userSubscription->id]['actions'][$exemption->sender_category_action_id]['channels'][$exemption->channel_id]['active'] = false;
+                    foreach ($userSubscription->exceptions as $exception) {
+                        if ($exception->active) {
+                            $result[$userSubscription->id]['actions'][$exception->sender_category_action_id]['channels'][$exception->channel_id]['active'] = false;
                         }
                     }
                 }
