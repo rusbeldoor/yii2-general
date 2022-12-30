@@ -41,6 +41,15 @@ JS);
 if (!count($result)) { echo '<p>У Вас нет указанных подписок на рассылки.</p>'; }
 else {
     foreach ($result as $subscription) {
+        $titleButton = $subscription['name'];
+        if ($subscription['active']) {
+            $titleButton =
+                '<button'
+                    . ' type="button"'
+                    . ' class="btn btn-' . (($subscription['active']) ? 'light unsubscribeAll' : 'primary subscribeAll') . '"'
+                    . ' data-sender-name="' . $subscription['name'] . '"'
+                . ' >' . $subscription['name'] . ' — ' . (($subscription['active']) ? 'отписаться от всего' : 'подписаться') . '</button>';
+        }
         ?><div class="card">
         <div class="card-body">
             <div class="title">
@@ -50,11 +59,7 @@ else {
                 <?= HtmlHelper::input('hidden', 'hash', UserSubscriptionHelper::hash($userId, '', '', $subscription['id'])) ?>
                 <?= HtmlHelper::input('hidden', 'action', (($subscription['active']) ? 'deactivate' : 'activate')) ?>
                 <?= HtmlHelper::input('hidden', 'redirectUrl', Yii::$app->request->url) ?>
-                <button
-                        type="button"
-                        class="btn btn-<?= (($subscription['active']) ? 'light unsubscribeAll' : 'primary subscribeAll') ?>"
-                        data-sender-name="<?= $subscription['name'] ?>"
-                ><?= $subscription['name'] ?> — <?= (($subscription['active']) ? 'отписаться от всего' : 'подписаться') ?></button>
+                <?= $titleButton ?>
                 <?= HtmlHelper::endForm(); ?>
             </div>
             <?
