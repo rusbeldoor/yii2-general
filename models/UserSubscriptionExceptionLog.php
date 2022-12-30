@@ -12,7 +12,7 @@ namespace rusbeldoor\yii2General\models;
  * @property string $action
  * @property string $data
  *
- * @property UserSubscriptionSender $subscription
+ * @property UserSubscriptionExemption $exception
  */
 class UserSubscriptionExemptionLog extends ActiveRecord
 {
@@ -31,7 +31,7 @@ class UserSubscriptionExemptionLog extends ActiveRecord
     ]; }
 
     /** {@inheritdoc} */
-    public function getSubscription()
+    public function getException()
     { return $this->hasOne(UserSubscriptionExemption::class, ['id' => 'exception_id']); }
 
     /** {@inheritdoc} */
