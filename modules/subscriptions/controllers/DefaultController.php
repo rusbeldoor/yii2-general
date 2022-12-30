@@ -6,6 +6,7 @@ use rusbeldoor\yii2General\models\UserSubscriptionSenderCategory;
 use Yii;
 use common\models\User;
 use rusbeldoor\yii2General\models\UserSubscription;
+use rusbeldoor\yii2General\models\UserSubscriptionLog;
 use rusbeldoor\yii2General\models\UserSubscriptionSender;
 use rusbeldoor\yii2General\models\UserSubscriptionSenderCategoryAction;
 use rusbeldoor\yii2General\models\UserSubscriptionChannel;
@@ -13,6 +14,7 @@ use rusbeldoor\yii2General\models\UserSubscriptionException;
 use rusbeldoor\yii2General\models\UserSubscriptionExceptionLog;
 use rusbeldoor\yii2General\helpers\AppHelper;
 use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;
+use yii\base\BaseObject;
 
 /**
  * Управление подписками на рассылки
@@ -115,7 +117,7 @@ class DefaultController extends \frontend\components\Controller
                         'id' => $userSubscription->id,
                         'name' => $senders[$userSubscription->sender_id]->name,
                         'actions' => [],
-                        'active' => true,
+                        'active' => $userSubscription->active,
                     ];
 
                     // Перебираем действия
@@ -150,7 +152,7 @@ class DefaultController extends \frontend\components\Controller
      *
      * @return void
      */
-    public function actionChange()
+    public function actionChangeAll()
     {
         AppHelper::exitIfNotPostRequest();
 
@@ -158,16 +160,14 @@ class DefaultController extends \frontend\components\Controller
         $post = Yii::$app->request->post();
         if (
             !isset($post['userId'])
-            || !isset($post['subscriptId'])
-            || !isset($post['actionId'])
-            || !isset($post['channelId'])
+            || !isset($post['subscriptionId'])
             || !isset($post['hash'])
             || !isset($post['action'])
             || !isset($post['redirectUrl'])
         ) { AppHelper::redirectWithFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
 
         // Проверяем хэш
-        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], '', '', $post['subscriptId'], $post['actionId'], $post['channelId'])) {
+        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], '', '', $post['subscriptionId'])) {
             AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целостность запроса.');
         }
 
@@ -178,11 +178,85 @@ class DefaultController extends \frontend\components\Controller
         /** @var UserSubscription $userSubscription Подписка на рассылки */
         $userSubscription = UserSubscription::find()
             ->userId($post['userId'])
-            ->id($post['subscriptId'])
+            ->id($post['subscriptionId'])
             ->joinWith('sender')
             ->limit(1)
             ->one();
-        if (!$userSubscription) { AppHelper::redirectWithFlash('/', 'danger', 'Подписка (#' . $post['subscriptId'] . ') не найден.'); }
+        if (!$userSubscription) { AppHelper::redirectWithFlash('/', 'danger', 'Подписка (#' . $post['subscriptionId'] . ') не найден.'); }
+
+
+        if ($post['action'] == 'activate') {
+            $userSubscription->active = 1;
+            $userSubscription->save();
+
+            $userSubscriptionLog = new UserSubscriptionLog();
+            $userSubscriptionLog->subscription_id = $userSubscription->id;
+            $userSubscriptionLog->time = time();
+            $userSubscriptionLog->user_id = null;
+            $userSubscriptionLog->action = 'activate';
+            $userSubscriptionLog->data = null;
+            $userSubscriptionLog->save();
+
+            $userSubscriptionExceptions = UserSubscriptionException::find()->where(['subscription_id' => $userSubscription->id])->all();
+            foreach ($userSubscriptionExceptions as $userSubscriptionException) {
+                $userSubscriptionException->active = 0;
+                $userSubscriptionException->save();
+            }
+        } else {
+            $userSubscription->active = 0;
+            $userSubscription->save();
+
+            $userSubscriptionLog = new UserSubscriptionLog();
+            $userSubscriptionLog->subscription_id = $userSubscription->id;
+            $userSubscriptionLog->time = time();
+            $userSubscriptionLog->user_id = null;
+            $userSubscriptionLog->action = 'deactivate';
+            $userSubscriptionLog->data = null;
+            $userSubscriptionLog->save();
+        }
+
+        // Возвращаемся по переданному адресу
+        AppHelper::redirectWithFlash($post['redirectUrl'], 'success', 'Вы ' . (($post['action'] == 'activate') ? 'добавили' : 'убрали') . ' рассылку от "' . $userSubscription->sender->name . '".');
+    }
+
+    /**
+     * Отписка от подписки
+     *
+     * @return void
+     */
+    public function actionChange()
+    {
+        AppHelper::exitIfNotPostRequest();
+
+        // post данные
+        $post = Yii::$app->request->post();
+        if (
+            !isset($post['userId'])
+            || !isset($post['subscriptionId'])
+            || !isset($post['actionId'])
+            || !isset($post['channelId'])
+            || !isset($post['hash'])
+            || !isset($post['action'])
+            || !isset($post['redirectUrl'])
+        ) { AppHelper::redirectWithFlash('/', 'danger', 'Не указаны некоторые обязательные post параметры.'); }
+
+        // Проверяем хэш
+        if ($post['hash'] != UserSubscriptionHelper::hash($post['userId'], '', '', $post['subscriptionId'], $post['actionId'], $post['channelId'])) {
+            AppHelper::redirectWithFlash('/', 'danger', 'Нарушена целостность запроса.');
+        }
+
+        // Пользователь
+        $user = User::find()->id($post['userId'])->limit(1)->one();
+        if (!$user) { AppHelper::redirectWithFlash('/', 'danger', 'Пользователь (#' . $post['userId'] . ') не найден.'); }
+
+        /** @var UserSubscription $userSubscription Подписка на рассылки */
+        $userSubscription = UserSubscription::find()
+            ->userId($post['userId'])
+            ->id($post['subscriptionId'])
+            ->joinWith('sender')
+            ->limit(1)
+            ->one();
+        if (!$userSubscription) { AppHelper::redirectWithFlash('/', 'danger', 'Подписка (#' . $post['subscriptionId'] . ') не найден.'); }
 
         $senderCategoryAction = UserSubscriptionSenderCategoryAction::find()
             ->id($post['actionId'])
