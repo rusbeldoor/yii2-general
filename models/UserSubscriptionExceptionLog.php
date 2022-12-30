@@ -3,7 +3,7 @@
 namespace rusbeldoor\yii2General\models;
 
 /**
- * User_subscription_exemption_log (ActiveRecord)
+ * User_subscription_exception_log (ActiveRecord)
  *
  * @property int $id
  * @property int $exception_id
@@ -12,9 +12,9 @@ namespace rusbeldoor\yii2General\models;
  * @property string $action
  * @property string $data
  *
- * @property UserSubscriptionExemption $exception
+ * @property UserSubscriptionException $exception
  */
-class UserSubscriptionExemptionLog extends ActiveRecord
+class UserSubscriptionExceptionLog extends ActiveRecord
 {
     /** {@inheritdoc} */
     public static function tableName()
@@ -27,12 +27,12 @@ class UserSubscriptionExemptionLog extends ActiveRecord
         [['exception_id', 'time', 'user_id'], 'integer', 'min' => 0],
         [['user_id', 'data'], 'default', 'value' => null],
         [['action'], 'in', 'range' => ['add', 'activate', 'deactivate']],
-        [['exception_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionExemption::className(), 'targetAttribute' => ['exception_id' => 'id']],
+        [['exception_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserSubscriptionException::className(), 'targetAttribute' => ['exception_id' => 'id']],
     ]; }
 
     /** {@inheritdoc} */
     public function getException()
-    { return $this->hasOne(UserSubscriptionExemption::class, ['id' => 'exception_id']); }
+    { return $this->hasOne(UserSubscriptionException::class, ['id' => 'exception_id']); }
 
     /** {@inheritdoc} */
     public function attributeLabels(): array
@@ -48,10 +48,10 @@ class UserSubscriptionExemptionLog extends ActiveRecord
     /**
      * {@inheritdoc}
      *
-     * @return UserSubscriptionExemptionLogQuery the active query used by this AR class.
+     * @return UserSubscriptionExceptionLogQuery the active query used by this AR class.
      */
     public static function find()
-    { return new UserSubscriptionExemptionLogQuery(get_called_class()); }
+    { return new UserSubscriptionExceptionLogQuery(get_called_class()); }
 
     /**
      * Перед удалением

@@ -11,7 +11,7 @@ namespace rusbeldoor\yii2General\models;
  * @property int $active
  *
  * @property UserSubscriptionSender $sender
- * @property UserSubscriptionExemption[] $exemptions
+ * @property UserSubscriptionException[] $exceptions
  */
 class UserSubscription extends ActiveRecord
 {
@@ -33,8 +33,8 @@ class UserSubscription extends ActiveRecord
     { return $this->hasOne(UserSubscriptionSender::class, ['id' => 'sender_id']); }
 
     /** {@inheritdoc} */
-    public function getExemptions()
-    { return $this->hasMany(UserSubscriptionExemption::class, ['subscription_id' => 'id']); }
+    public function getExceptions()
+    { return $this->hasMany(UserSubscriptionException::class, ['subscription_id' => 'id']); }
 
     /** {@inheritdoc} */
     public function attributeLabels(): array

@@ -9,8 +9,8 @@ use rusbeldoor\yii2General\models\UserSubscription;
 use rusbeldoor\yii2General\models\UserSubscriptionSender;
 use rusbeldoor\yii2General\models\UserSubscriptionSenderCategoryAction;
 use rusbeldoor\yii2General\models\UserSubscriptionChannel;
-use rusbeldoor\yii2General\models\UserSubscriptionExemption;
-use rusbeldoor\yii2General\models\UserSubscriptionExemptionLog;
+use rusbeldoor\yii2General\models\UserSubscriptionException;
+use rusbeldoor\yii2General\models\UserSubscriptionExceptionLog;
 use rusbeldoor\yii2General\helpers\AppHelper;
 use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;
 
@@ -196,7 +196,7 @@ class DefaultController extends \frontend\components\Controller
             ->one();
         if (!$senderCategoryAction) { AppHelper::redirectWithFlash('/', 'danger', 'Способ доставки сообщений (#' .  $post['channelId'] . ') не найден.'); }
 
-        $exemption = UserSubscriptionExemption::find()
+        $exemption = UserSubscriptionException::find()
             ->where(['subscription_id' => $userSubscription->id, 'sender_category_action_id' => $post['actionId'], 'channel_id' => $post['channelId']])
             ->limit(1)
             ->one();
@@ -206,7 +206,7 @@ class DefaultController extends \frontend\components\Controller
                 $exemption->active = 1;
                 $exemption->save();
 
-                $userSubscriptionExceptionLog = new UserSubscriptionExemptionLog();
+                $userSubscriptionExceptionLog = new UserSubscriptionExceptionLog();
                 $userSubscriptionExceptionLog->exception_id = $exemption->id;
                 $userSubscriptionExceptionLog->time = time();
                 $userSubscriptionExceptionLog->user_id = null;
@@ -217,7 +217,7 @@ class DefaultController extends \frontend\components\Controller
                 $exemption->active = 0;
                 $exemption->save();
 
-                $userSubscriptionExceptionLog = new UserSubscriptionExemptionLog();
+                $userSubscriptionExceptionLog = new UserSubscriptionExceptionLog();
                 $userSubscriptionExceptionLog->exception_id = $exemption->id;
                 $userSubscriptionExceptionLog->time = time();
                 $userSubscriptionExceptionLog->user_id = null;
@@ -226,14 +226,14 @@ class DefaultController extends \frontend\components\Controller
                 $userSubscriptionExceptionLog->save();
             }
         } else {
-            $exemption = new UserSubscriptionExemption();
+            $exemption = new UserSubscriptionException();
             $exemption->subscription_id = $userSubscription->id;
             $exemption->sender_category_action_id = $senderCategoryAction->id;
             $exemption->channel_id = $channel->id;
             $exemption->active = 1;
             $exemption->save();
 
-            $userSubscriptionExceptionLog = new UserSubscriptionExemptionLog();
+            $userSubscriptionExceptionLog = new UserSubscriptionExceptionLog();
             $userSubscriptionExceptionLog->exception_id = $exemption->id;
             $userSubscriptionExceptionLog->time = time();
             $userSubscriptionExceptionLog->user_id = null;

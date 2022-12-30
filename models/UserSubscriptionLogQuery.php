@@ -22,7 +22,7 @@ class UserSubscriptionLogQuery extends ActiveQuery
      * ...
      *
      * @param int $userId
-     * @return UserSubscriptionExemptionLogQuery
+     * @return UserSubscriptionExceptionLogQuery
      */
     public function userId($userId)
     { return $this->andWhere("user_id=:userId", [':userId' => $userId]); }
