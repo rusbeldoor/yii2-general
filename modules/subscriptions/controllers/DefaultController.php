@@ -10,7 +10,7 @@ use rusbeldoor\yii2General\models\UserSubscriptionSender;
 use rusbeldoor\yii2General\models\UserSubscriptionSenderCategoryAction;
 use rusbeldoor\yii2General\models\UserSubscriptionChannel;
 use rusbeldoor\yii2General\models\UserSubscriptionExemption;
-use rusbeldoor\yii2General\helpers\ArrayHelper;
+use rusbeldoor\yii2General\models\UserSubscriptionExemptionLog;
 use rusbeldoor\yii2General\helpers\AppHelper;
 use rusbeldoor\yii2General\helpers\UserSubscriptionHelper;
 
