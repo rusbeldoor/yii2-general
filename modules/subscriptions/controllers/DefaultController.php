@@ -185,10 +185,13 @@ class DefaultController extends \frontend\components\Controller
         if (!$userSubscription) { AppHelper::redirectWithFlash('/', 'danger', 'Подписка (#' . $post['subscriptionId'] . ') не найден.'); }
 
 
+        // Если требуется активация
         if ($post['action'] == 'activate') {
+            // Активируем подписку
             $userSubscription->active = 1;
             $userSubscription->save();
 
+            // Записываем лог активации подписки
             $userSubscriptionLog = new UserSubscriptionLog();
             $userSubscriptionLog->subscription_id = $userSubscription->id;
             $userSubscriptionLog->time = time();
@@ -197,15 +200,32 @@ class DefaultController extends \frontend\components\Controller
             $userSubscriptionLog->data = null;
             $userSubscriptionLog->save();
 
+            // Получаем исключения по подписке
             $userSubscriptionExceptions = UserSubscriptionException::find()->where(['subscription_id' => $userSubscription->id])->all();
+            // Перебираем исключения по подписке
             foreach ($userSubscriptionExceptions as $userSubscriptionException) {
+                // Если исключение из подписки уже не активно, пропускаем
+                if ($userSubscriptionException->active == 0) { continue; }
+
+                // Деактивируем исключение из подписки
                 $userSubscriptionException->active = 0;
                 $userSubscriptionException->save();
+
+                // Записываем лог деактивации исключений по подписке
+                $userSubscriptionExceptionLog = new UserSubscriptionExceptionLog();
+                $userSubscriptionExceptionLog->exception_id = $userSubscriptionException->id;
+                $userSubscriptionExceptionLog->time = time();
+                $userSubscriptionExceptionLog->user_id = null;
+                $userSubscriptionExceptionLog->action = 'deactivate';
+                $userSubscriptionExceptionLog->data = null;
+                $userSubscriptionExceptionLog->save();
             }
         } else {
+            // Деактивируем подписку
             $userSubscription->active = 0;
             $userSubscription->save();
 
+            // Записываем лог деактивации подписки
             $userSubscriptionLog = new UserSubscriptionLog();
             $userSubscriptionLog->subscription_id = $userSubscription->id;
             $userSubscriptionLog->time = time();
