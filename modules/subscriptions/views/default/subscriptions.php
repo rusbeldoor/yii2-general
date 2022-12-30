@@ -64,7 +64,8 @@ else {
             </div>
             <?
             foreach ($subscription['actions'] as $action) {
-                if (!$subscription['active']) { continue;}
+                if (!$subscription['active']) { continue; }
+
                 echo '<div class="subtitle">' . $action['name'] . '</div>';
 
                 $buttons = [];
