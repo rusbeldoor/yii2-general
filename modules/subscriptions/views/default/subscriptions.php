@@ -78,7 +78,7 @@ else {
                         . HtmlHelper::input('hidden', 'actionId', $action['id'])
                         . HtmlHelper::input('hidden', 'channelId', $channel['id'])
                         . HtmlHelper::input('hidden', 'hash', UserSubscriptionHelper::hash($userId, '', '', $subscription['id'], $action['id'], $channel['id']))
-                        . HtmlHelper::input('hidden', 'action', (($channel['active']) ? 'activate' : 'deactivate'))
+                        . HtmlHelper::input('hidden', 'action', (($channel['active']) ? 'deactivate' : 'activate'))
                         . HtmlHelper::input('hidden', 'redirectUrl', Yii::$app->request->url)
                         . '<button 
                             type="button" 
