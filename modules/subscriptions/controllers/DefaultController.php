@@ -300,7 +300,7 @@ class DefaultController extends \frontend\components\Controller
 
         if ($exemption) {
             if ($post['action'] == 'activate') {
-                $exemption->active = 1;
+                $exemption->active = 0;
                 $exemption->save();
 
                 $userSubscriptionExceptionLog = new UserSubscriptionExceptionLog();
@@ -311,7 +311,7 @@ class DefaultController extends \frontend\components\Controller
                 $userSubscriptionExceptionLog->data = null;
                 $userSubscriptionExceptionLog->save();
             } else {
-                $exemption->active = 0;
+                $exemption->active = 1;
                 $exemption->save();
 
                 $userSubscriptionExceptionLog = new UserSubscriptionExceptionLog();
