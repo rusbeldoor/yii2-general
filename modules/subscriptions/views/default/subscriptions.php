@@ -41,15 +41,16 @@ JS);
 if (!count($result)) { echo '<p>У Вас нет указанных подписок на рассылки.</p>'; }
 else {
     foreach ($result as $subscription) {
-        $titleButton = $subscription['name'];
-        if ($subscription['active']) {
-            $titleButton =
-                '<button'
-                    . ' type="button"'
-                    . ' class="btn btn-' . (($subscription['active']) ? 'light unsubscribeAll' : 'primary subscribeAll') . '"'
-                    . ' data-sender-name="' . $subscription['name'] . '"'
-                . ' >' . $subscription['name'] . ' — ' . (($subscription['active']) ? 'отписаться от всего' : 'подписаться') . '</button>';
-        }
+        $titleButton =
+            $subscription['name']
+            . (($subscription['active']) ?
+                ' <button'
+                . ' type="button"'
+                . ' class="btn btn-' . (($subscription['active']) ? 'light unsubscribeAll' : 'primary subscribeAll') . '"'
+                . ' data-sender-name="' . $subscription['name'] . '"'
+                . '>Отписаться от всего</button>'
+                : ' — вы не подписаны'
+            );
         ?><div class="card">
         <div class="card-body">
             <div class="title">
@@ -72,7 +73,7 @@ else {
                 foreach ($action['channels'] as $channel) {
                     $channelIcon = UserSubscriptionHelper::channelIcon($channel['alias']);
                     $buttons[] =
-                        HtmlHelper::beginForm('/subscriptions/default/change', 'post')
+                        HtmlHelper::beginForm('/subscriptions/default/change')
                         . HtmlHelper::input('hidden', 'userId', $userId)
                         . HtmlHelper::input('hidden', 'subscriptionId', $subscription['id'])
                         . HtmlHelper::input('hidden', 'actionId', $action['id'])
