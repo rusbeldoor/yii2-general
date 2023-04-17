@@ -236,22 +236,6 @@ class DefaultController extends \frontend\components\Controller
             $userSubscriptionLog->action = 'deactivate';
             $userSubscriptionLog->data = null;
             $userSubscriptionLog->save();
-
-            $userSubscriptionExceptions = UserSubscriptionException::model()->find()->subscriptionId()->all();
-            foreach ($userSubscriptionExceptions as $userSubscriptionException) {
-                if ($userSubscriptionException->active == 0) { continue; }
-
-                $userSubscriptionException->active = 0;
-                $userSubscriptionException->save();
-
-                $userSubscriptionExceptionLog = new UserSubscriptionExceptionLog();
-                $userSubscriptionExceptionLog->exception_id = $userSubscriptionException->id;
-                $userSubscriptionExceptionLog->time = time();
-                $userSubscriptionExceptionLog->user_id = null;
-                $userSubscriptionExceptionLog->action = 'activate';
-                $userSubscriptionExceptionLog->data = null;
-                $userSubscriptionExceptionLog->save();
-            }
         }
 
         // Возвращаемся по переданному адресу
