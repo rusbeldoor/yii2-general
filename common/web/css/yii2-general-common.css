@@ -5,18 +5,18 @@
 .minHeight100px { min-height: 100px !important; }
 .minHeight200px { min-height: 200px !important; }
 
-.marginTop0 { margin-left: 0 !important; }
-.marginTop025rem { margin-left: 0.25rem !important; }
-.marginTop05rem { margin-left: 0.5rem !important; }
-.marginTop1rem { margin-left: 1rem !important; }
+.marginTop0 { margin-top: 0 !important; }
+.marginTop025rem { margin-top: 0.25rem !important; }
+.marginTop05rem { margin-top: 0.5rem !important; }
+.marginTop1rem { margin-top: 1rem !important; }
 .marginRight0 { margin-right: 0 !important; }
 .marginRight025rem { margin-right: 0.25rem !important; }
 .marginRight05rem { margin-right: 0.5rem !important; }
 .marginRight1rem { margin-right: 1rem !important; }
-.marginBottom0 { margin-left: 0 !important; }
-.marginBottom025rem { margin-left: 0.25rem !important; }
-.marginBottom05rem { margin-left: 0.5rem !important; }
-.marginBottom1rem { margin-left: 1rem !important; }
+.marginBottom0 { margin-bottom: 0 !important; }
+.marginBottom025rem { margin-bottom: 0.25rem !important; }
+.marginBottom05rem { margin-bottom: 0.5rem !important; }
+.marginBottom1rem { margin-bottom: 1rem !important; }
 .marginLeft0 { margin-left: 0 !important; }
 .marginLeft025rem { margin-left: 0.25rem !important; }
 .marginLeft05rem { margin-left: 0.5rem !important; }
