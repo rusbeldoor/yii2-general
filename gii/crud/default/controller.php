@@ -53,14 +53,12 @@ class <?= $controllerClass ?> extends <?= $baseClass . "\n" ?>
 {
     /** {@inheritdoc} */
     public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => ['delete' => ['POST']],
-            ],
-        ];
-    }
+    { return [
+        'verbs' => [
+            'class' => VerbFilter::className(),
+            'actions' => ['delete' => ['POST']],
+        ],
+    ]; }
 
     /**
      * Список
