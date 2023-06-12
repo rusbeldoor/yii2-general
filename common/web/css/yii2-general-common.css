@@ -5,14 +5,22 @@
 .minHeight100px { min-height: 100px !important; }
 .minHeight200px { min-height: 200px !important; }
 
-.marginLeft0 { margin-left: 0 !important; }
-.marginLeft025rem { margin-left: 0.25rem !important; }
-.marginLeft05rem { margin-left: 0.5rem !important; }
-.marginLeft1rem { margin-left: 1rem !important; }
+.marginTop0 { margin-left: 0 !important; }
+.marginTop025rem { margin-left: 0.25rem !important; }
+.marginTop05rem { margin-left: 0.5rem !important; }
+.marginTop1rem { margin-left: 1rem !important; }
 .marginRight0 { margin-right: 0 !important; }
 .marginRight025rem { margin-right: 0.25rem !important; }
 .marginRight05rem { margin-right: 0.5rem !important; }
 .marginRight1rem { margin-right: 1rem !important; }
+.marginBottom0 { margin-left: 0 !important; }
+.marginBottom025rem { margin-left: 0.25rem !important; }
+.marginBottom05rem { margin-left: 0.5rem !important; }
+.marginBottom1rem { margin-left: 1rem !important; }
+.marginLeft0 { margin-left: 0 !important; }
+.marginLeft025rem { margin-left: 0.25rem !important; }
+.marginLeft05rem { margin-left: 0.5rem !important; }
+.marginLeft1rem { margin-left: 1rem !important; }
 
 .padding0375rem075rem { padding: 0.375rem 0.75rem !important; }
 
