@@ -62,11 +62,9 @@ a.desc:after { content: "\f160"; }
 .sort-ordinal a.asc:after { content: "\f15e"; }
 .sort-ordinal a.desc:after { content: "\f15d"; }
 
-/*** bootstrap 4 ***/
+/*** bootstrap 5 ***/
 
-/*.alert ul, alert ol { margin-bottom: 0; }*/
-
-/*.form-group .col-form-label { text-align: right; }*/
+label input[type="radio"] { display: none; }
 
 /*** yii 2, widgets ***/
 

@@ -14,6 +14,11 @@ $(document).ready(function() {
     $.fn.radioButtonsListValue = function() {
         return $(this).children('button.active').children('input').val();
     };
+
+    $('input[type="radio"]').change(function() {
+        $(this).parent().parent().find('label').removeClass('active');
+        $(this).parent().addClass('active');
+    });
 });
 
 /**

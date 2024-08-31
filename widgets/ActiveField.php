@@ -108,16 +108,18 @@ class ActiveField extends \yii\bootstrap5\ActiveField
                 'data-toggle' => 'buttons',
                 'unselect' => null,
                 'item' => function ($index, $label, $name, $checked, $value) {
-                    return
-                        '<label class="btn btn-light' . (($checked) ? ' active' : '') . '">'
-                            . HtmlHelper::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
-                            . ' '
-                            . $label
-                        . '</label>';
+                    $input = HtmlHelper::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn']);
+                    $checked = (($checked) ? ' active' : '');
+                    return <<< HTML
+                        <label class="btn btn-light$checked">
+                            $input $label
+                        </label>
+                    HTML;
                 },
             ],
             $options
         );
+
         return self::radioList($items, $options);
     }
 
