@@ -102,22 +102,22 @@ class ActiveField extends \yii\bootstrap5\ActiveField
      */
     public function radioButtonsList(array $items, array $options = []): ActiveField
     {
-//        $options = ArrayHelper::merge(
-//            [
-//                'class' => 'btn-group',
-//                'data-toggle' => 'buttons',
-//                'unselect' => null,
-//                'item' => function ($index, $label, $name, $checked, $value) {
-//                    return
-//                        '<label class="btn btn-light' . (($checked) ? ' active' : '') . '">'
-//                            . HtmlHelper::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
-//                            . ' '
-//                            . $label
-//                        . '</label>';
-//                },
-//            ],
-//            $options
-//        );
+        $options = ArrayHelper::merge(
+            [
+                'class' => 'btn-group',
+                'data-toggle' => 'buttons',
+                'unselect' => null,
+                'item' => function ($index, $label, $name, $checked, $value) {
+                    return
+                        '<label class="btn btn-light' . (($checked) ? ' active' : '') . '">'
+                            . HtmlHelper::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn'])
+                            . ' '
+                            . $label
+                        . '</label>';
+                },
+            ],
+            $options
+        );
         return self::radioList($items, $options);
     }
 
