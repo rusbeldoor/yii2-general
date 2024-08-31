@@ -1,3 +1,9 @@
+// Анимация изменений в радиогруппе кнопок
+$('input[type="radio"]').change(function() {
+    $(this).parent().parent().find('label').removeClass('active');
+    $(this).parent().addClass('active');
+});
+
 $(document).ready(function() {
     /*** Select2 ***/
 
@@ -14,11 +20,6 @@ $(document).ready(function() {
     $.fn.radioButtonsListValue = function() {
         return $(this).children('button.active').children('input').val();
     };
-
-    $('input[type="radio"]').change(function() {
-        $(this).parent().parent().find('label').removeClass('active');
-        $(this).parent().addClass('active');
-    });
 });
 
 /**
