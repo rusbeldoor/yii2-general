@@ -117,3 +117,35 @@ label input[type="radio"] { display: none; }
 
 .widthDateTime { width: 207px; }
 .widthDate { width: 165px; }
+
+/*** ***  Загрузка *** ***/
+
+.loader { position: relative; }
+.circle {
+    position: absolute;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    border-top-color: #000000;
+    -webkit-animation: rotate linear infinite;
+    animation: rotate linear infinite;
+}
+.circle.one {
+    -webkit-animation-duration: 0.85s;
+    animation-duration: 0.85s;
+}
+.circle.two {
+    -webkit-animation-duration: 0.95s;
+    animation-duration: 0.95s;
+}
+.circle.three {
+    -webkit-animation-duration: 1.05s;
+    animation-duration: 1.05s;
+}
+@-webkit-keyframes rotate {
+    from { transform: rotateZ(360deg); }
+    to { transform: rotateZ(0deg); }
+}
+@keyframes rotate {
+    from { transform: rotateZ(360deg); }
+    to { transform: rotateZ(0deg); }
+}
