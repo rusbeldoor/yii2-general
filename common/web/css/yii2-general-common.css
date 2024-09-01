@@ -120,24 +120,23 @@ label input[type="radio"] { display: none; }
 
 /*** ***  Загрузка *** ***/
 
-.loader { position: relative; }
-.circle {
+.spinner { position: relative; }
+.spinner .circle {
     position: absolute;
     border: 3px solid transparent;
     border-radius: 50%;
-    border-top-color: #000000;
     -webkit-animation: rotate linear infinite;
     animation: rotate linear infinite;
 }
-.circle.one {
+.spinner .circle.one {
     -webkit-animation-duration: 0.85s;
     animation-duration: 0.85s;
 }
-.circle.two {
+.spinner .circle.two {
     -webkit-animation-duration: 0.95s;
     animation-duration: 0.95s;
 }
-.circle.three {
+.spinner .circle.three {
     -webkit-animation-duration: 1.05s;
     animation-duration: 1.05s;
 }
