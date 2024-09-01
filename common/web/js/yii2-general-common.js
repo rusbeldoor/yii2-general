@@ -44,12 +44,12 @@ function confirmDialog(params) {
     if (!$confirmModal.length) {
         $('body').append(
             '<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">'
-                + '<div class="modal-dialog" role="document">'
-                    + '<div class="modal-content">'
-                        + '<div class="modal-body"></div>'
-                        + '<div class="modal-footer"></div>'
-                    + '</div>'
-                + '</div>'
+            + '<div class="modal-dialog" role="document">'
+            + '<div class="modal-content">'
+            + '<div class="modal-body"></div>'
+            + '<div class="modal-footer"></div>'
+            + '</div>'
+            + '</div>'
             + '</div>');
 
         $confirmModal = $('#confirmModal');

@@ -5,9 +5,7 @@ namespace rusbeldoor\yii2General\widgets;
 use rusbeldoor\yii2General\helpers\HtmlHelper;
 use rusbeldoor\yii2General\helpers\ArrayHelper;
 
-/**
- * ...
- */
+/** ... */
 class ActiveField extends \yii\bootstrap5\ActiveField
 {
     use \rusbeldoor\yii2General\widgets\trait\AppendPrepend;
@@ -96,18 +94,17 @@ class ActiveField extends \yii\bootstrap5\ActiveField
 
     /*** Радиогруппа кнопок ***/
 
-    /**
-     * Радиогруппа кнопок
-     * todo: требует реализации, старая реализация под bs4 не работает
-     */
+    /** Радиогруппа кнопок */
     public function radioButtonsList(array $items, array $options = []): ActiveField
     {
-        $options = ArrayHelper::merge(
+        $this->options['class']['layout'] = 'mt-3';
+        $this->template = '{label}&nbsp;{input}{error}{hint}';
+
+        return self::radioList($items, ArrayHelper::merge(
             [
                 'class' => 'btn-group',
-                'data-toggle' => 'buttons',
-                'unselect' => null,
-                'item' => function ($index, $label, $name, $checked, $value) {
+                'item' => function (int $index, string $label, string $name, bool $checked, string $value): string
+                {
                     $input = HtmlHelper::radio($name, $checked, ['value' => $value, 'class' => 'project-status-btn']);
                     $checked = (($checked) ? ' active' : '');
                     return <<< HTML
@@ -118,9 +115,7 @@ class ActiveField extends \yii\bootstrap5\ActiveField
                 },
             ],
             $options
-        );
-
-        return self::radioList($items, $options);
+        ));
     }
 
     /** Радоигруппа кнопок Да/Нет с значениме в виде числа */
