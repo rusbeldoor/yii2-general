@@ -26,13 +26,6 @@ class HtmlHelper extends \yii\bootstrap5\Html
         $width3_4 = $width * 3 / 4;
         $height3_4 = $height * 3 / 4;
 
-        return <<< SQL
-            <div class="spinner" style="width: {$width}px; height: {$height}px;">
-                <div class="circle one" style="left: {$width1_4}px; top: {$height1_4}px; width: {$width1_2}px; height: {$height1_2}px; border-top-color: #$color;"></div>
-                <div class="circle two" style="top: {$width1_8}px; left: {$height1_8}px; width: {$width3_4}px; height: {$height3_4}px; border-top-color: #$color;"></div>
-                <div class="circle three" style="height: {$width}px; width: {$height}px; border-top-color: #$color;"></div>
-            </div>
-        SQL;
-
+        return '<div class="spinner" style="width: ' . $width . 'px; height: ' . $height . 'px;"><div class="circle one" style="left: ' . $width1_4 . 'px; top: ' . $height1_4 . 'px; width: ' . $width1_2 . 'px; height: ' . $height1_2 . 'px; border-top-color: #' . $color . ';"></div><div class="circle two" style="top: ' . $width1_8 . 'px; left: ' . $height1_8 . 'px; width: ' . $width3_4 . 'px; height: ' . $height3_4 . 'px; border-top-color: #' . $color . ';"></div><div class="circle three" style="height: ' . $width . 'px; width: ' . $height . 'px; border-top-color: #' . $color . ';"></div></div>';
     }
 }
