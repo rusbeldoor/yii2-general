@@ -9,6 +9,7 @@
 .marginTop025rem { margin-top: 0.25rem !important; }
 .marginTop05rem { margin-top: 0.5rem !important; }
 .marginTop1rem { margin-top: 1rem !important; }
+.marginTopBottom1rem { margin-top: 1rem !important; margin-bottom: 1rem !important; }
 .marginRight0 { margin-right: 0 !important; }
 .marginRight025rem { margin-right: 0.25rem !important; }
 .marginRight05rem { margin-right: 0.5rem !important; }
@@ -33,6 +34,9 @@
 
 table.thTextCenter th { text-align: center !important; }
 table.tdTextCenter td { text-align: center !important; }
+
+.fontSize2rem { font-size: 2rem; }
+.fontSize3rem { font-size: 3rem; }
 
 .colorRemove { color: var(--red); }
 .colorEdit { color: var(--green); }
