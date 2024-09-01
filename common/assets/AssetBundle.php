@@ -22,6 +22,6 @@ class AssetBundle extends \yii\web\AssetBundle
     public $depends = [
         'yii\web\JqueryAsset',
         'yii\bootstrap5\BootstrapAsset',
-        'rusbeldoor\yii2General\common\assets\FontawesomeAssetBundle',
+        'asmoday74\fontawesome6\FontAwesomeAsset',
     ];
 }
