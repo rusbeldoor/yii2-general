@@ -35,6 +35,8 @@
 table.thTextCenter th { text-align: center !important; }
 table.tdTextCenter td { text-align: center !important; }
 
+.textAlinCenter { text-align: center; }
+
 .fontSize2rem { font-size: 2rem; }
 .fontSize3rem { font-size: 3rem; }
 
