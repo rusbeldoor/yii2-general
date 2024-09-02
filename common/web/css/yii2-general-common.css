@@ -1,7 +1,7 @@
 /*** Основное ***/
 
 .width1px { width: 1px !important; }
-.width100 { width: 100% !important; }
+.width100percent { width: 100% !important; }
 .minHeight100px { min-height: 100px !important; }
 .minHeight200px { min-height: 200px !important; }
 
